@@ -1,21 +1,32 @@
-import PageAbout from './index.tsx';
+import PageSettings from './index.tsx';
+import { BookmarksProvider } from '@/contexts/BookmarksContext';
 import { resolveLocaleValue, defineMessages } from '@/.storybook/locale-utils';
 import { MockItemResultsProvider } from '@/.storybook/mock-providers';
 import type { Meta, StoryObj } from '@storybook/react-vite';
 
 /**
- * PageAbout component displays the about page with changelog, enhancers, and credits.
+ * PageSettings component displays the settings page with changelog, enhancers, backup tools, links and credits.
  */
 const meta = {
-  component: PageAbout,
-  title: 'Pages/PageAbout',
+  component: PageSettings,
+  title: 'Pages/PageSettings',
   tags: ['autodocs'],
   parameters: { layout: 'padded' },
+  // Strings come from the locale in each story's render
+  args: {
+    backupTitle: '',
+    backupDescription: '',
+    generateBackupLabel: '',
+    restoreBackupLabel: '',
+    restoreBackupErrorMessage: '',
+  },
   decorators: [
     Story => (
-      <MockItemResultsProvider>
-        <Story />
-      </MockItemResultsProvider>
+      <BookmarksProvider>
+        <MockItemResultsProvider>
+          <Story />
+        </MockItemResultsProvider>
+      </BookmarksProvider>
     ),
   ],
   argTypes: {
@@ -32,7 +43,7 @@ const meta = {
       description: 'Enhancer title lookup by slug (provided by render)',
     },
   },
-} satisfies Meta<typeof PageAbout>;
+} satisfies Meta<typeof PageSettings>;
 
 type Story = StoryObj<typeof meta>;
 
@@ -297,6 +308,71 @@ const changelogMarkdownMessages = defineMessages({
 - แก้ไขบั๊กราคา`,
 });
 
+const backupTitleMessages = defineMessages({
+  'en-US': 'Backup & Restore',
+  'fr-FR': 'Sauvegarde et restauration',
+  'es-ES': 'Copia de seguridad y restauración',
+  'de-DE': 'Sicherung & Wiederherstellung',
+  'pt-BR': 'Backup e restauração',
+  'ru-RU': 'Резервное копирование и восстановление',
+  'zh-CN': '备份与恢复',
+  'ja-JP': 'バックアップと復元',
+  'ko-KR': '백업 및 복원',
+  'th-TH': 'สำรองและกู้คืน',
+});
+
+const backupDescriptionMessages = defineMessages({
+  'en-US': 'Save all your bookmarks to a file, or restore them from one.',
+  'fr-FR': 'Enregistrez tous vos favoris dans un fichier ou restaurez-les depuis un fichier.',
+  'es-ES': 'Guarda todos tus marcadores en un archivo o restáuralos desde uno.',
+  'de-DE': 'Alle Lesezeichen in einer Datei sichern oder aus einer Datei wiederherstellen.',
+  'pt-BR': 'Salve todos os seus favoritos em um arquivo ou restaure-os a partir de um.',
+  'ru-RU': 'Сохраните все закладки в файл или восстановите их из файла.',
+  'zh-CN': '将所有书签保存到文件，或从文件恢复。',
+  'ja-JP': 'すべてのブックマークをファイルに保存、またはファイルから復元します。',
+  'ko-KR': '모든 북마크를 파일로 저장하거나 파일에서 복원합니다.',
+  'th-TH': 'บันทึกบุ๊กมาร์กทั้งหมดลงไฟล์ หรือกู้คืนจากไฟล์',
+});
+
+const generateBackupMessages = defineMessages({
+  'en-US': 'Export Backup',
+  'fr-FR': 'Exporter la sauvegarde',
+  'es-ES': 'Exportar copia',
+  'de-DE': 'Sicherung exportieren',
+  'pt-BR': 'Exportar backup',
+  'ru-RU': 'Экспортировать резервную копию',
+  'zh-CN': '导出备份',
+  'ja-JP': 'バックアップをエクスポート',
+  'ko-KR': '백업 내보내기',
+  'th-TH': 'ส่งออกการสำรอง',
+});
+
+const restoreBackupMessages = defineMessages({
+  'en-US': 'Restore Backup',
+  'fr-FR': 'Restaurer la sauvegarde',
+  'es-ES': 'Restaurar copia',
+  'de-DE': 'Sicherung wiederherstellen',
+  'pt-BR': 'Restaurar backup',
+  'ru-RU': 'Восстановить резервную копию',
+  'zh-CN': '恢复备份',
+  'ja-JP': 'バックアップを復元',
+  'ko-KR': '백업 복원',
+  'th-TH': 'กู้คืนการสำรอง',
+});
+
+const restoreBackupErrorMessages = defineMessages({
+  'en-US': 'Failed to restore backup. The file may be corrupted.',
+  'fr-FR': 'Échec de la restauration de la sauvegarde. Le fichier peut être corrompu.',
+  'es-ES': 'Error al restaurar la copia. El archivo puede estar dañado.',
+  'de-DE': 'Sicherung konnte nicht wiederhergestellt werden. Die Datei ist möglicherweise beschädigt.',
+  'pt-BR': 'Falha ao restaurar backup. O arquivo pode estar corrompido.',
+  'ru-RU': 'Не удалось восстановить резервную копию. Файл может быть поврежден.',
+  'zh-CN': '恢复备份失败。文件可能已损坏。',
+  'ja-JP': 'バックアップの復元に失敗しました。ファイルが破損している可能性があります。',
+  'ko-KR': '백업 복원에 실패했습니다. 파일이 손상되었을 수 있습니다.',
+  'th-TH': 'การกู้คืนการสำรองล้มเหลว ไฟล์อาจเสียหาย',
+});
+
 const getMessages = (locale: string) => ({
   enhancersTitle: resolveLocaleValue(locale, enhancersTitleMessages),
   getEnhancerTitle: (slug: string) =>
@@ -307,6 +383,11 @@ const getMessages = (locale: string) => ({
   creditsTitle: resolveLocaleValue(locale, creditsTitleMessages),
   creditsDescription: resolveLocaleValue(locale, creditsDescriptionMessages),
   disclaimer: resolveLocaleValue(locale, disclaimerMessages),
+  backupTitle: resolveLocaleValue(locale, backupTitleMessages),
+  backupDescription: resolveLocaleValue(locale, backupDescriptionMessages),
+  generateBackupLabel: resolveLocaleValue(locale, generateBackupMessages),
+  restoreBackupLabel: resolveLocaleValue(locale, restoreBackupMessages),
+  restoreBackupErrorMessage: resolveLocaleValue(locale, restoreBackupErrorMessages),
 });
 
 export const Default: Story = {
@@ -327,7 +408,7 @@ export const Default: Story = {
     const messages = getMessages(globals.locale as string);
 
     return (
-      <PageAbout
+      <PageSettings
         appVersion="2.5.3"
         githubUrl="https://github.com/exile-center/better-trading"
         {...messages}
@@ -356,7 +437,7 @@ export const WithChangelog: Story = {
     const changelogMarkdown = resolveLocaleValue(globals.locale as string, changelogMarkdownMessages);
 
     return (
-      <PageAbout
+      <PageSettings
         appVersion="2.5.3"
         githubUrl="https://github.com/exile-center/better-trading"
         currentChangelog={{
@@ -389,7 +470,7 @@ export const Complete: Story = {
     const changelogMarkdown = resolveLocaleValue(globals.locale as string, changelogMarkdownMessages);
 
     return (
-      <PageAbout
+      <PageSettings
         appVersion="2.5.3"
         githubUrl="https://github.com/exile-center/better-trading"
         discordUrl="https://discord.gg/example"

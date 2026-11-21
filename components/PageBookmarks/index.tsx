@@ -3,11 +3,9 @@
 // Responsibilities:
 //  - Display and manage bookmark folders for Path of Exile trade searches
 //  - Handle folder creation, editing, archiving, deletion, and reordering
-//  - Handle backup/restore functionality
 //  - Show applicable folders based on current PoE version
 //  - Toggle between active and archived folders
 
-import Backup from './Backup';
 import Folder from './Folder';
 import FolderEdition from './FolderEdition';
 import FolderExport from './FolderExport';
@@ -65,9 +63,6 @@ interface PageBookmarksProps {
   importFolderLabel: string;
   importPobLabel: string;
   foldersWarningMessage: string;
-  backupTitle: string;
-  generateBackupLabel: string;
-  restoreBackupLabel: string;
   folderModalTitle: string;
   folderTitleLabel: string;
   folderIconLabel: string;
@@ -116,7 +111,6 @@ interface PageBookmarksProps {
   updateFolderSuccessMessage: (title: string) => string;
   importFolderSuccessMessage: (title: string) => string;
   copyTradeSuccessMessage: (title: string) => string;
-  restoreBackupErrorMessage: string;
   genericAlertMessage: string;
   modalCloseLabel: string;
   logoAlt: string;
@@ -130,9 +124,6 @@ const PageBookmarks: React.FC<PageBookmarksProps> = ({
   importFolderLabel,
   importPobLabel,
   foldersWarningMessage,
-  backupTitle,
-  generateBackupLabel,
-  restoreBackupLabel,
   folderModalTitle,
   folderTitleLabel,
   folderIconLabel,
@@ -179,7 +170,6 @@ const PageBookmarks: React.FC<PageBookmarksProps> = ({
   updateFolderSuccessMessage,
   importFolderSuccessMessage,
   copyTradeSuccessMessage,
-  restoreBackupErrorMessage,
   genericAlertMessage,
   modalCloseLabel,
   logoAlt,
@@ -196,7 +186,7 @@ const PageBookmarks: React.FC<PageBookmarksProps> = ({
   const [stagedTrade, setStagedTrade] = useState<StagedTrade | null>(null);
   const [stagedDeletingTrade, setStagedDeletingTrade] = useState<StagedDeletingTrade | null>(null);
 
-  const { refreshFolders, fetchTradesByFolderId, serializeFolder, generateBackup } = bookmarks;
+  const { refreshFolders, fetchTradesByFolderId, serializeFolder } = bookmarks;
 
   // The initial fetch is the LoadingContainer task; afterwards refetch on window focus so that changes made
   // in another tab show up (same as 1.9.1). Depend on the stable function, not on `bookmarks`: it changes
@@ -288,25 +278,6 @@ const PageBookmarks: React.FC<PageBookmarksProps> = ({
       }
     },
     [bookmarks, toggleFolderExpansion, importFolderSuccessMessage, genericAlertMessage, addFlash],
-  );
-
-  const handleGenerateBackup = useCallback(async () => {
-    const dataString = await generateBackup();
-    const blob = new Blob([dataString], { type: 'text/plain' });
-    const linkElement = document.createElement('a');
-    linkElement.download = 'poe-better-trading-backup.txt';
-    linkElement.href = window.URL.createObjectURL(blob);
-    linkElement.click();
-  }, [generateBackup]);
-
-  const handleRestoreBackup = useCallback(
-    async (dataString: string) => {
-      const success = await bookmarks.restoreBackup(dataString).catch(() => false);
-      if (!success) {
-        addFlash(restoreBackupErrorMessage, 'alert');
-      }
-    },
-    [bookmarks, restoreBackupErrorMessage, addFlash],
   );
 
   const handleExportFolder = async (folder: BookmarksFolderStruct & { id: string }) => {
@@ -582,14 +553,6 @@ const PageBookmarks: React.FC<PageBookmarksProps> = ({
       {foldersWarningIsVisible && (
         <AlertMessage className={styles.foldersWarning} type="warning" message={foldersWarningMessage} />
       )}
-
-      <Backup
-        title={backupTitle}
-        generateButtonLabel={generateBackupLabel}
-        restoreButtonLabel={restoreBackupLabel}
-        onGenerateBackup={handleGenerateBackup}
-        onRestoreBackup={handleRestoreBackup}
-      />
 
       {stagedFolder && (
         <FolderEdition

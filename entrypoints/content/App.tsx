@@ -3,10 +3,10 @@ import ChangelogBanner from '@/components/ChangelogBanner';
 import ExpandButton from '@/components/ExpandButton';
 import FlashMessages from '@/components/FlashMessages';
 import Header from '@/components/Header';
-import PageAbout from '@/components/PageAbout';
 import PageBookmarks from '@/components/PageBookmarks';
 import PageHistory from '@/components/PageHistory';
 import PagePinnedItems from '@/components/PagePinnedItems';
+import PageSettings from '@/components/PageSettings';
 import RootPageMenu from '@/components/RootPageMenu';
 import { BookmarksProvider } from '@/contexts/BookmarksContext';
 import { FlashMessagesProvider, useFlashMessagesContext } from '@/contexts/FlashMessagesContext';
@@ -32,7 +32,7 @@ const Shell = () => {
   const messages = useMessages();
   const { flashMessages, dismissFlash } = useFlashMessagesContext();
   const [currentPage, setCurrentPage] = useState<RootPage>(readStoredPage);
-  const [isAboutOpen, setIsAboutOpen] = useState(false);
+  const [isSettingsOpen, setIsSettingsOpen] = useState(false);
   usePageTitle();
 
   const appVersion = browser.runtime.getManifest().version;
@@ -48,16 +48,16 @@ const Shell = () => {
 
       <Header
         {...messages.header}
-        isOnRootRoute={!isAboutOpen}
-        onBrandClick={() => setIsAboutOpen(false)}
-        onToggleClick={() => setIsAboutOpen(isOpen => !isOpen)}
+        isOnRootRoute={!isSettingsOpen}
+        onBrandClick={() => setIsSettingsOpen(false)}
+        onToggleClick={() => setIsSettingsOpen(isOpen => !isOpen)}
       />
       <ExpandButton {...messages.expandButton} />
 
       <div className={styles.content}>
-        {isAboutOpen ? (
-          <PageAbout
-            {...messages.pageAbout}
+        {isSettingsOpen ? (
+          <PageSettings
+            {...messages.pageSettings}
             appVersion={appVersion}
             githubUrl={GITHUB_URL}
             currentChangelog={currentChangelog}

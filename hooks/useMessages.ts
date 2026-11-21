@@ -3,7 +3,7 @@ import { i18n } from '#i18n';
 import { useMemo } from 'react';
 import type { GeneratedI18nStructure } from '#i18n';
 
-type EnhancerTitleKey = Extract<keyof GeneratedI18nStructure, `pageAboutEnhancers${string}`>;
+type EnhancerTitleKey = Extract<keyof GeneratedI18nStructure, `pageSettingsEnhancers${string}`>;
 
 // 'equivalent-pricings' -> 'EquivalentPricings'
 const slugToPascalCase = (slug: string) =>
@@ -14,7 +14,7 @@ const slugToPascalCase = (slug: string) =>
 
 // Falls back to the slug itself for enhancers without a title (the key is unknown at type level)
 const getEnhancerTitle = (slug: string): string =>
-  i18n.t(`pageAboutEnhancers${slugToPascalCase(slug)}` as EnhancerTitleKey) || slug;
+  i18n.t(`pageSettingsEnhancers${slugToPascalCase(slug)}` as EnhancerTitleKey) || slug;
 
 const buildMessages = () => ({
   genericAlertMessage: i18n.t('genericAlertFlash'),
@@ -23,7 +23,7 @@ const buildMessages = () => ({
     title: i18n.t('generalTitle'),
     logoAlt: i18n.t('logoAlt'),
     collapseLabel: i18n.t('headerCollapse'),
-    showAboutLabel: i18n.t('headerShowAbout'),
+    showSettingsLabel: i18n.t('headerShowSettings'),
     showMainLabel: i18n.t('headerShowMain'),
   },
 
@@ -57,15 +57,20 @@ const buildMessages = () => ({
     logoAlt: i18n.t('logoAlt'),
   }),
 
-  pageAbout: {
-    enhancersTitle: i18n.t('pageAboutEnhancersTitle'),
+  pageSettings: {
+    enhancersTitle: i18n.t('pageSettingsEnhancersTitle'),
     getEnhancerTitle,
-    githubTitle: i18n.t('pageAboutGithubTitle'),
-    githubDescription: i18n.t('pageAboutGithubDescription'),
-    githubButtonLabel: i18n.t('pageAboutGithubButton'),
-    creditsTitle: i18n.t('pageAboutCreditsTitle'),
-    creditsDescription: i18n.t('pageAboutCreditsDescription'),
-    disclaimer: i18n.t('pageAboutDisclaimer'),
+    githubTitle: i18n.t('pageSettingsGithubTitle'),
+    githubDescription: i18n.t('pageSettingsGithubDescription'),
+    githubButtonLabel: i18n.t('pageSettingsGithubButton'),
+    creditsTitle: i18n.t('pageSettingsCreditsTitle'),
+    creditsDescription: i18n.t('pageSettingsCreditsDescription'),
+    disclaimer: i18n.t('pageSettingsDisclaimer'),
+    backupTitle: i18n.t('pageSettingsBackupTitle'),
+    backupDescription: i18n.t('pageSettingsBackupDescription'),
+    generateBackupLabel: i18n.t('pageSettingsBackupGenerateButton'),
+    restoreBackupLabel: i18n.t('pageSettingsBackupRestoreButton'),
+    restoreBackupErrorMessage: i18n.t('pageSettingsBackupRestoreErrorFlash'),
   },
 
   pagePinnedItems: {
@@ -97,9 +102,6 @@ const buildMessages = () => ({
     importFolderLabel: i18n.t('pageBookmarksImportFolder'),
     importPobLabel: i18n.t('pageBookmarksImportPob'),
     foldersWarningMessage: i18n.t('pageBookmarksFoldersWarning'),
-    backupTitle: i18n.t('pageBookmarksBackupTitle'),
-    generateBackupLabel: i18n.t('pageBookmarksBackupGenerateButton'),
-    restoreBackupLabel: i18n.t('pageBookmarksBackupRestoreButton'),
     folderModalTitle: i18n.t('pageBookmarksFolderEditionModalTitle'),
     folderTitleLabel: i18n.t('pageBookmarksFolderEditionTitleLabel'),
     folderIconLabel: i18n.t('pageBookmarksFolderEditionIconLabel'),
@@ -148,7 +150,6 @@ const buildMessages = () => ({
     updateFolderSuccessMessage: (title: string) => i18n.t('pageBookmarksUpdateFolderSuccessFlash', [title]),
     importFolderSuccessMessage: (title: string) => i18n.t('pageBookmarksImportFolderSuccessFlash', [title]),
     copyTradeSuccessMessage: (title: string) => i18n.t('pageBookmarksFolderCopyTradeToClipboardSuccessFlash', [title]),
-    restoreBackupErrorMessage: i18n.t('pageBookmarksBackupRestoreErrorFlash'),
     genericAlertMessage: i18n.t('genericAlertFlash'),
     modalCloseLabel: i18n.t('modalClose'),
     logoAlt: i18n.t('logoAlt'),

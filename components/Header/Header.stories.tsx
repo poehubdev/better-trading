@@ -2,7 +2,7 @@ import Header from './index';
 import {
   logoAltMessages,
   headerCollapseMessages,
-  headerShowAboutMessages,
+  headerShowSettingsMessages,
   headerShowMainMessages,
 } from '@/.storybook/common-messages';
 import { resolveLocaleValue, defineMessages } from '@/.storybook/locale-utils';
@@ -25,7 +25,7 @@ const meta = {
     },
     logoAlt: { control: false, description: '(Derived from locale in render)' },
     collapseLabel: { control: false, description: '(Derived from locale in render)' },
-    showAboutLabel: { control: false, description: '(Derived from locale in render)' },
+    showSettingsLabel: { control: false, description: '(Derived from locale in render)' },
     showMainLabel: { control: false, description: '(Derived from locale in render)' },
     isOnRootRoute: {
       control: 'boolean',
@@ -93,7 +93,7 @@ export const OnRootRoute: Story = {
     title: 'Better Trading',
     logoAlt: '',
     collapseLabel: '',
-    showAboutLabel: '',
+    showSettingsLabel: '',
     showMainLabel: '',
     isOnRootRoute: true,
   },
@@ -110,7 +110,7 @@ export const OnRootRoute: Story = {
         title={title}
         logoAlt={resolveLocaleValue(locale, logoAltMessages)}
         collapseLabel={resolveLocaleValue(locale, headerCollapseMessages)}
-        showAboutLabel={resolveLocaleValue(locale, headerShowAboutMessages)}
+        showSettingsLabel={resolveLocaleValue(locale, headerShowSettingsMessages)}
         showMainLabel={resolveLocaleValue(locale, headerShowMainMessages)}
         isOnRootRoute={true}
         onBrandClick={() => alert(brandClickMessage)}
@@ -128,7 +128,7 @@ export const OnSubRoute: Story = {
     title: 'Better Trading',
     logoAlt: '',
     collapseLabel: '',
-    showAboutLabel: '',
+    showSettingsLabel: '',
     showMainLabel: '',
     isOnRootRoute: false,
   },
@@ -145,7 +145,7 @@ export const OnSubRoute: Story = {
         title={title}
         logoAlt={resolveLocaleValue(locale, logoAltMessages)}
         collapseLabel={resolveLocaleValue(locale, headerCollapseMessages)}
-        showAboutLabel={resolveLocaleValue(locale, headerShowAboutMessages)}
+        showSettingsLabel={resolveLocaleValue(locale, headerShowSettingsMessages)}
         showMainLabel={resolveLocaleValue(locale, headerShowMainMessages)}
         isOnRootRoute={false}
         onBrandClick={() => alert(brandClickMessage)}

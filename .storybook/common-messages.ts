@@ -56,8 +56,8 @@ export const headerExpandMessages = defineMessages({
   'th-TH': 'ขยายแผง Better Trading',
 });
 
-export const headerShowAboutMessages = defineMessages({
-  'en-US': 'Show details about Better Trading',
+export const headerShowSettingsMessages = defineMessages({
+  'en-US': 'Show Better Trading settings',
   'fr-FR': 'Afficher les détails de Better Trading',
   'es-ES': 'Mostrar detalles de Better Trading',
   'de-DE': 'Details zu Better Trading anzeigen',

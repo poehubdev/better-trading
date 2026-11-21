@@ -7,7 +7,7 @@ logoAlt: Better Trading Logo
 
 headerCollapse: Collapse Better Trading panel
 headerExpand: Expand Better Trading panel
-headerShowAbout: Show details about Better Trading
+headerShowSettings: Show Better Trading settings
 headerShowMain: Show trading tools
 
 modalClose: Close
@@ -33,17 +33,22 @@ itemResultsRegroupSimilarsButton:
   1: 1 similar result
   n: $1 similar results
 
-pageAboutDisclaimer: This extension is fan-made and not affiliated with Grinding Gear Games in any way.
-pageAboutEnhancersTitle: Enabled item result enhancers
-pageAboutEnhancersEquivalentPricings: Equivalent pricings (powered by poe.ninja)
-pageAboutEnhancersHighlightStatFilters: Highlight searched mods
-pageAboutEnhancersMaximumSockets: Warning for armors that cannot be 6-socketed
-pageAboutEnhancersRegroupSimilars: Regroup similar results
-pageAboutGithubTitle: On GitHub
-pageAboutGithubDescription: To contribute, report issues or simply browse the code.
-pageAboutGithubButton: View on GitHub
-pageAboutCreditsTitle: Credits
-pageAboutCreditsDescription: 'Better Trading was originally created by <strong>InfaMc</strong> (<a href="https://github.com/pboutin">@pboutin</a>) and is currently maintained by <strong>brosmike</strong> (<a href="https://github.com/dbjorge">@dbjorge</a>).'
+pageSettingsDisclaimer: This extension is fan-made and not affiliated with Grinding Gear Games in any way.
+pageSettingsEnhancersTitle: Enabled item result enhancers
+pageSettingsEnhancersEquivalentPricings: Equivalent pricings (powered by poe.ninja)
+pageSettingsEnhancersHighlightStatFilters: Highlight searched mods
+pageSettingsEnhancersMaximumSockets: Warning for armors that cannot be 6-socketed
+pageSettingsEnhancersRegroupSimilars: Regroup similar results
+pageSettingsBackupTitle: Backup tools
+pageSettingsBackupDescription: Save all your bookmarks to a file, or restore them from one.
+pageSettingsBackupGenerateButton: Save file
+pageSettingsBackupRestoreButton: Restore from file
+pageSettingsBackupRestoreErrorFlash: Backup restoration has failed.
+pageSettingsGithubTitle: On GitHub
+pageSettingsGithubDescription: To contribute, report issues or simply browse the code.
+pageSettingsGithubButton: View on GitHub
+pageSettingsCreditsTitle: Credits
+pageSettingsCreditsDescription: 'Better Trading was originally created by <strong>InfaMc</strong> (<a href="https://github.com/pboutin">@pboutin</a>) and is currently maintained by <strong>brosmike</strong> (<a href="https://github.com/dbjorge">@dbjorge</a>).'
 
 pagePinnedItemsWarning: Pins last until you change the search or reload the page.
 pagePinnedItemsClear: Unpin all
@@ -70,10 +75,6 @@ pageBookmarksDeleteFolderSuccessFlash: 'The folder "$1" has been deleted.'
 pageBookmarksUpdateFolderSuccessFlash: 'The folder "$1" has been updated.'
 pageBookmarksCreateFolderSuccessFlash: 'The folder "$1" has been created.'
 pageBookmarksImportFolderSuccessFlash: 'The folder "$1" has been imported.'
-pageBookmarksBackupTitle: Backup tools
-pageBookmarksBackupGenerateButton: Save file
-pageBookmarksBackupRestoreButton: Restore from file
-pageBookmarksBackupRestoreErrorFlash: Backup restoration has failed.
 pageBookmarksFolderEditFolder: Edit
 pageBookmarksFolderDeleteFolder: Delete
 pageBookmarksFolderArchiveFolder: Archive

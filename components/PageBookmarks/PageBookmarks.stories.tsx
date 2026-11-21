@@ -24,7 +24,6 @@ import type { Meta, StoryObj } from '@storybook/react-vite';
  * Features:
  * - Create, edit, archive, and delete bookmark folders
  * - Organize trades within folders
- * - Backup and restore all bookmarks
  * - Import/export individual folders
  * - Toggle between active and archived folders
  */
@@ -54,9 +53,6 @@ const meta = {
     importFolderLabel: '',
     importPobLabel: '',
     foldersWarningMessage: '',
-    backupTitle: '',
-    generateBackupLabel: '',
-    restoreBackupLabel: '',
     folderModalTitle: '',
     folderTitleLabel: '',
     folderIconLabel: '',
@@ -102,7 +98,6 @@ const meta = {
     createFolderSuccessMessage: () => '',
     updateFolderSuccessMessage: () => '',
     importFolderSuccessMessage: () => '',
-    restoreBackupErrorMessage: '',
   },
 } satisfies Meta<typeof PageBookmarks>;
 
@@ -212,45 +207,6 @@ const foldersWarningMessages = defineMessages({
   'ja-JP': 'フォルダが多すぎます。パフォーマンスを向上させるために、古いものをアーカイブすることを検討してください。',
   'ko-KR': '폴더가 많습니다. 성능 향상을 위해 오래된 폴더를 보관하는 것을 고려하세요.',
   'th-TH': 'คุณมีโฟลเดอร์มากมาย พิจารณาเก็บถาวรโฟลเดอร์เก่าเพื่อปรับปรุงประสิทธิภาพ',
-});
-
-const backupTitleMessages = defineMessages({
-  'en-US': 'Backup & Restore',
-  'fr-FR': 'Sauvegarde et restauration',
-  'es-ES': 'Copia de seguridad y restauración',
-  'de-DE': 'Sicherung & Wiederherstellung',
-  'pt-BR': 'Backup e restauração',
-  'ru-RU': 'Резервное копирование и восстановление',
-  'zh-CN': '备份与恢复',
-  'ja-JP': 'バックアップと復元',
-  'ko-KR': '백업 및 복원',
-  'th-TH': 'สำรองและกู้คืน',
-});
-
-const generateBackupMessages = defineMessages({
-  'en-US': 'Export Backup',
-  'fr-FR': 'Exporter la sauvegarde',
-  'es-ES': 'Exportar copia',
-  'de-DE': 'Sicherung exportieren',
-  'pt-BR': 'Exportar backup',
-  'ru-RU': 'Экспортировать резервную копию',
-  'zh-CN': '导出备份',
-  'ja-JP': 'バックアップをエクスポート',
-  'ko-KR': '백업 내보내기',
-  'th-TH': 'ส่งออกการสำรอง',
-});
-
-const restoreBackupMessages = defineMessages({
-  'en-US': 'Restore Backup',
-  'fr-FR': 'Restaurer la sauvegarde',
-  'es-ES': 'Restaurar copia',
-  'de-DE': 'Sicherung wiederherstellen',
-  'pt-BR': 'Restaurar backup',
-  'ru-RU': 'Восстановить резервную копию',
-  'zh-CN': '恢复备份',
-  'ja-JP': 'バックアップを復元',
-  'ko-KR': '백업 복원',
-  'th-TH': 'กู้คืนการสำรอง',
 });
 
 const folderModalTitleMessages = defineMessages({
@@ -656,19 +612,6 @@ const reorderMessages = defineMessages({
   'th-TH': 'ลากเพื่อจัดลำดับ หรือใช้ปุ่มลูกศร',
 });
 
-const restoreBackupErrorMessages = defineMessages({
-  'en-US': 'Failed to restore backup. The file may be corrupted.',
-  'fr-FR': 'Échec de la restauration de la sauvegarde. Le fichier peut être corrompu.',
-  'es-ES': 'Error al restaurar la copia. El archivo puede estar dañado.',
-  'de-DE': 'Sicherung konnte nicht wiederhergestellt werden. Die Datei ist möglicherweise beschädigt.',
-  'pt-BR': 'Falha ao restaurar backup. O arquivo pode estar corrompido.',
-  'ru-RU': 'Не удалось восстановить резервную копию. Файл может быть поврежден.',
-  'zh-CN': '恢复备份失败。文件可能已损坏。',
-  'ja-JP': 'バックアップの復元に失敗しました。ファイルが破損している可能性があります。',
-  'ko-KR': '백업 복원에 실패했습니다. 파일이 손상되었을 수 있습니다.',
-  'th-TH': 'การกู้คืนการสำรองล้มเหลว ไฟล์อาจเสียหาย',
-});
-
 const tradeModalTitleMessages = defineMessages({
   'en-US': 'Bookmark trade',
   'fr-FR': "Enregistrer l'échange",
@@ -856,9 +799,6 @@ export const Default: Story = {
         importFolderLabel={resolveLocaleValue(locale, importFolderMessages)}
         importPobLabel={resolveLocaleValue(locale, importPobMessages)}
         foldersWarningMessage={resolveLocaleValue(locale, foldersWarningMessages)}
-        backupTitle={resolveLocaleValue(locale, backupTitleMessages)}
-        generateBackupLabel={resolveLocaleValue(locale, generateBackupMessages)}
-        restoreBackupLabel={resolveLocaleValue(locale, restoreBackupMessages)}
         folderModalTitle={resolveLocaleValue(locale, folderModalTitleMessages)}
         folderTitleLabel={resolveLocaleValue(locale, folderTitleLabelMessages)}
         folderIconLabel={resolveLocaleValue(locale, folderIconLabelMessages)}
@@ -904,7 +844,6 @@ export const Default: Story = {
         createFolderSuccessMessage={titleMessage(locale, createFolderSuccessMessages)}
         updateFolderSuccessMessage={titleMessage(locale, updateFolderSuccessMessages)}
         importFolderSuccessMessage={titleMessage(locale, importFolderSuccessMessages)}
-        restoreBackupErrorMessage={resolveLocaleValue(locale, restoreBackupErrorMessages)}
         copyTradeSuccessMessage={titleMessage(locale, copyTradeSuccessMessages)}
         genericAlertMessage={resolveLocaleValue(locale, genericAlertMessages)}
         modalCloseLabel={resolveLocaleValue(locale, modalCloseMessages)}

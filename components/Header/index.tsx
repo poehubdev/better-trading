@@ -3,12 +3,12 @@
 // Responsibilities:
 //  - Display the Better Trading header with logo and title
 //  - Trigger collapse of the side panel
-//  - Provide navigation buttons (info/close)
+//  - Provide navigation buttons (settings/close)
 
 import styles from './styles.module.scss';
 import AngleRightIcon from '@/assets/icons/filled/angle-right.svg?react';
 import CloseIcon from '@/assets/icons/filled/close.svg?react';
-import InfoIcon from '@/assets/icons/filled/info.svg?react';
+import SettingsIcon from '@/assets/icons/filled/settings-gear-6.svg?react';
 import { getExtensionUrl } from '@/utils/extension-url';
 import { collapseSidePanel, initializeSidePanelCollapse } from '@/utils/side-panel-collapse';
 import { useCallback, useEffect } from 'react';
@@ -22,7 +22,7 @@ interface HeaderProps {
   /** Aria label of the collapse button */
   collapseLabel: string;
   /** Aria label of the toggle button while on the root route */
-  showAboutLabel: string;
+  showSettingsLabel: string;
   /** Aria label of the toggle button while on a sub route */
   showMainLabel: string;
   /** Whether the current route is the root route */
@@ -40,7 +40,7 @@ const Header: FC<HeaderProps> = ({
   title,
   logoAlt,
   collapseLabel,
-  showAboutLabel,
+  showSettingsLabel,
   showMainLabel,
   isOnRootRoute = true,
   onBrandClick,
@@ -72,8 +72,8 @@ const Header: FC<HeaderProps> = ({
           onClick={onToggleClick}
           type="button"
           className={styles.headerButton}
-          aria-label={isOnRootRoute ? showAboutLabel : showMainLabel}>
-          {isOnRootRoute ? <InfoIcon /> : <CloseIcon />}
+          aria-label={isOnRootRoute ? showSettingsLabel : showMainLabel}>
+          {isOnRootRoute ? <SettingsIcon /> : <CloseIcon />}
         </button>
       </div>
     </div>
