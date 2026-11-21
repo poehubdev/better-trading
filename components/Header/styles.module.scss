@@ -4,8 +4,10 @@
 
 .container {
   position: sticky;
-  backdrop-filter: blur(6px);
   z-index: 100;
+  // Scrolled content fades out under the header instead of cutting off at a hard edge
+  background: linear-gradient(rgba(#000, 0.9) 50%, transparent);
+  backdrop-filter: blur(6px);
   top: 0;
 
   > div {
@@ -39,7 +41,7 @@
     text-decoration: none;
 
     .logo {
-      transform: rotate(5deg);
+      transform: rotate(15deg);
     }
   }
 }
@@ -56,6 +58,7 @@
   font-family: variables.$primary-font;
   font-size: 20px;
   color: variables.$white;
+  user-select: none;
 }
 
 .headerButton {
@@ -79,4 +82,31 @@
 .headerButton svg {
   width: 22px;
   height: 22px;
+}
+
+// Turns a little on hover, like the brand logo
+.settingsIcon {
+  transition: transform 0.2s ease;
+
+  .headerButton:hover &,
+  .headerButton:focus & {
+    transform: rotate(30deg);
+  }
+}
+
+// Nudges towards the side the panel collapses to
+.collapseIcon {
+  transition: transform 0.2s ease;
+
+  .headerButton:hover &,
+  .headerButton:focus & {
+    transform: translateX(3px);
+  }
+}
+
+// Logo clone dropped by the brand click easter egg (positioned inline, moved by a rAF physics loop)
+.ball {
+  position: fixed;
+  z-index: 10000;
+  pointer-events: none;
 }
