@@ -5,6 +5,7 @@ import MarkdownChangelog from '@/components/MarkdownChangelog';
 import Modal from '@/components/Modal';
 import { useItemResults } from '@/hooks/useItemResults';
 import { getIsPanelBlurEnabled, setIsPanelBlurEnabled } from '@/utils/panel-blur';
+import { getIsPanelScrollbarVisible, setIsPanelScrollbarVisible } from '@/utils/panel-scrollbar';
 import classnames from 'classnames';
 import { useState } from 'react';
 import type { ChangelogData } from '@/components/ChangelogBanner';
@@ -35,6 +36,7 @@ interface PageSettingsProps {
   disclaimer: string;
   appearanceTitle: string;
   panelBlurLabel: string;
+  panelScrollbarLabel: string;
   backupTitle: string;
   backupDescription: string;
   generateBackupLabel: string;
@@ -85,6 +87,7 @@ const PageSettings = ({
   disclaimer,
   appearanceTitle,
   panelBlurLabel,
+  panelScrollbarLabel,
   backupTitle,
   backupDescription,
   generateBackupLabel,
@@ -99,6 +102,13 @@ const PageSettings = ({
   const togglePanelBlur = (isEnabled: boolean) => {
     setIsPanelBlurEnabled(isEnabled);
     setIsPanelBlurEnabledState(isEnabled);
+  };
+
+  const [isPanelScrollbarVisible, setIsPanelScrollbarVisibleState] = useState(getIsPanelScrollbarVisible);
+
+  const togglePanelScrollbar = (isVisible: boolean) => {
+    setIsPanelScrollbarVisible(isVisible);
+    setIsPanelScrollbarVisibleState(isVisible);
   };
 
   return (
@@ -126,6 +136,13 @@ const PageSettings = ({
             value={isPanelBlurEnabled}
             label={panelBlurLabel}
             onChange={togglePanelBlur}
+          />
+
+          <FormCheckbox
+            className={styles.enhancerCheckbox}
+            value={isPanelScrollbarVisible}
+            label={panelScrollbarLabel}
+            onChange={togglePanelScrollbar}
           />
         </section>
 

@@ -41,6 +41,7 @@ pageSettingsEnhancersMaximumSockets: Warning for armors that cannot be 6-sockete
 pageSettingsEnhancersRegroupSimilars: Regroup similar results
 pageSettingsAppearanceTitle: Appearance
 pageSettingsPanelBlur: Blur the page behind the panel
+pageSettingsPanelScrollbar: Show the panel scrollbar
 pageSettingsBackupTitle: Backup tools
 pageSettingsBackupDescription: Save all your bookmarks to a file, or restore them from one.
 pageSettingsBackupGenerateButton: Save file

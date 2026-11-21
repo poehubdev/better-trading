@@ -17,6 +17,7 @@ const meta = {
   args: {
     appearanceTitle: '',
     panelBlurLabel: '',
+    panelScrollbarLabel: '',
     backupTitle: '',
     backupDescription: '',
     generateBackupLabel: '',
@@ -287,6 +288,19 @@ const appearanceTitleMessages = defineMessages({
   'th-TH': 'รูปลักษณ์',
 });
 
+const panelScrollbarMessages = defineMessages({
+  'en-US': 'Show the panel scrollbar',
+  'fr-FR': 'Afficher la barre de défilement du panneau',
+  'es-ES': 'Mostrar la barra de desplazamiento del panel',
+  'de-DE': 'Bildlaufleiste des Panels anzeigen',
+  'pt-BR': 'Mostrar a barra de rolagem do painel',
+  'ru-RU': 'Показывать полосу прокрутки панели',
+  'zh-CN': '显示面板滚动条',
+  'ja-JP': 'パネルのスクロールバーを表示する',
+  'ko-KR': '패널 스크롤바 표시',
+  'th-TH': 'แสดงแถบเลื่อนของแผง',
+});
+
 const panelBlurMessages = defineMessages({
   'en-US': 'Blur the page behind the panel',
   'fr-FR': 'Flouter la page derrière le panneau',
@@ -378,6 +392,7 @@ const getMessages = (locale: string) => ({
   disclaimer: resolveLocaleValue(locale, disclaimerMessages),
   appearanceTitle: resolveLocaleValue(locale, appearanceTitleMessages),
   panelBlurLabel: resolveLocaleValue(locale, panelBlurMessages),
+  panelScrollbarLabel: resolveLocaleValue(locale, panelScrollbarMessages),
   backupTitle: resolveLocaleValue(locale, backupTitleMessages),
   backupDescription: resolveLocaleValue(locale, backupDescriptionMessages),
   generateBackupLabel: resolveLocaleValue(locale, generateBackupMessages),

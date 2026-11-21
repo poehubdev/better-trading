@@ -1,6 +1,7 @@
 import '@/styles/app.scss';
 import App from './App.tsx';
 import { applyPanelBlur, getIsPanelBlurEnabled } from '@/utils/panel-blur';
+import { applyPanelScrollbar, getIsPanelScrollbarVisible } from '@/utils/panel-scrollbar';
 import { getIsSidePanelCollapsed } from '@/utils/side-panel-collapse';
 import { createRoot } from 'react-dom/client';
 
@@ -38,6 +39,7 @@ export default defineContentScript({
           document.body.classList.add('bt-body');
           if (getIsSidePanelCollapsed()) document.body.classList.add('bt-is-collapsed');
           applyPanelBlur(getIsPanelBlurEnabled());
+          applyPanelScrollbar(getIsPanelScrollbarVisible());
         } else {
           container.style.display = 'none';
         }

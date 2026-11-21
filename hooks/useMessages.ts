@@ -69,6 +69,7 @@ const buildMessages = () => ({
     disclaimer: i18n.t('pageSettingsDisclaimer'),
     appearanceTitle: i18n.t('pageSettingsAppearanceTitle'),
     panelBlurLabel: i18n.t('pageSettingsPanelBlur'),
+    panelScrollbarLabel: i18n.t('pageSettingsPanelScrollbar'),
     backupTitle: i18n.t('pageSettingsBackupTitle'),
     backupDescription: i18n.t('pageSettingsBackupDescription'),
     generateBackupLabel: i18n.t('pageSettingsBackupGenerateButton'),
