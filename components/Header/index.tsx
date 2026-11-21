@@ -49,10 +49,12 @@ const dropLogoBall = (logo: HTMLImageElement, power: number) => {
   //  - minX: offset at which the ball's left edge touches the left side of the viewport
   //  - maxX: offset at which its right edge touches the right side
   //  - floor: offset at which its bottom edge touches the bottom of the viewport
-  // There is no ceiling: a steep throw may leave the top of the screen briefly and fall back in.
+  //  - ceiling: offset at which its top edge touches the top of the viewport. The header sits at the top, so without
+  //    it a strong throw would vanish off-screen for a second or more.
   const minX = -rect.left;
   const maxX = window.innerWidth - rect.right;
   const floor = window.innerHeight - rect.bottom;
+  const ceiling = -rect.top;
   const radius = rect.width / 2;
 
   // Tuning knobs. They're exaggerated compared to real-world physics so the whole show lasts about a second or two.
@@ -99,6 +101,12 @@ const dropLogoBall = (logo: HTMLImageElement, power: number) => {
       if (Math.abs(vy) < 150) vy = 0;
     }
 
+    // Ceiling hit: clamp and send it back down, keeping 60% of the speed like the side walls
+    if (y <= ceiling) {
+      y = ceiling;
+      vy = -vy * 0.6;
+    }
+
     // Side wall hit: clamp inside the viewport and reflect the horizontal speed, keeping 60% of it
     if (x <= minX || x >= maxX) {
       x = Math.min(Math.max(x, minX), maxX);
@@ -132,7 +140,7 @@ const dropLogoBall = (logo: HTMLImageElement, power: number) => {
 // at first, then faster, the levels lost doubling every CLICK_COOLDOWN_DOUBLING ms, so a lone click after a long
 // pause is a weak throw.
 // Module-level because there is a single header and the streak should survive re-renders.
-// Cooldown curve: 1 level lost after this many ms idle, 3 after twice that, 7, 15... (full cooldown in 4 steps)
+// Cooldown curve: 1 level lost after this many ms idle, 3 after twice that, 7, 14... (full cooldown in 4 steps)
 const CLICK_COOLDOWN_DOUBLING = 500;
 // Streak length at which the throw reaches full power: 15 levels, from a lone click (0) to 14 quick follow-ups
 const CLICK_STREAK_MAX = 14;
