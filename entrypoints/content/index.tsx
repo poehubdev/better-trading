@@ -1,5 +1,6 @@
 import '@/styles/app.scss';
 import App from './App.tsx';
+import { applyPanelBlur, getIsPanelBlurEnabled } from '@/utils/panel-blur';
 import { getIsSidePanelCollapsed } from '@/utils/side-panel-collapse';
 import { createRoot } from 'react-dom/client';
 
@@ -36,6 +37,7 @@ export default defineContentScript({
         if (document.querySelector('#trade')) {
           document.body.classList.add('bt-body');
           if (getIsSidePanelCollapsed()) document.body.classList.add('bt-is-collapsed');
+          applyPanelBlur(getIsPanelBlurEnabled());
         } else {
           container.style.display = 'none';
         }

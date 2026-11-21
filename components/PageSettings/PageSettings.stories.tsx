@@ -1,11 +1,12 @@
 import PageSettings from './index.tsx';
 import { BookmarksProvider } from '@/contexts/BookmarksContext';
+import { logoAltMessages, modalCloseMessages } from '@/.storybook/common-messages';
 import { resolveLocaleValue, defineMessages } from '@/.storybook/locale-utils';
 import { MockItemResultsProvider } from '@/.storybook/mock-providers';
 import type { Meta, StoryObj } from '@storybook/react-vite';
 
 /**
- * PageSettings component displays the settings page with changelog, enhancers, backup tools, links and credits.
+ * PageSettings component displays settings first, then a footer with links, changelog and credits.
  */
 const meta = {
   component: PageSettings,
@@ -14,6 +15,8 @@ const meta = {
   parameters: { layout: 'padded' },
   // Strings come from the locale in each story's render
   args: {
+    appearanceTitle: '',
+    panelBlurLabel: '',
     backupTitle: '',
     backupDescription: '',
     generateBackupLabel: '',
@@ -112,84 +115,47 @@ const enhancerTitleMessages: Record<string, Record<string, string>> = {
   }),
 };
 
-const githubTitleMessages = defineMessages({
-  'en-US': 'Open Source',
-  'fr-FR': 'Open Source',
-  'es-ES': 'Código abierto',
-  'de-DE': 'Open Source',
-  'pt-BR': 'Código aberto',
-  'ru-RU': 'Открытый исходный код',
-  'zh-CN': '开源',
-  'ja-JP': 'オープンソース',
-  'ko-KR': '오픈 소스',
-  'th-TH': 'โอเพ่นซอร์ส',
+const changelogLabelMessages = defineMessages({
+  'en-US': 'Changelog',
+  'fr-FR': 'Notes de version',
+  'es-ES': 'Novedades',
+  'de-DE': 'Änderungsprotokoll',
+  'pt-BR': 'Novidades',
+  'ru-RU': 'Список изменений',
+  'zh-CN': '更新日志',
+  'ja-JP': '変更履歴',
+  'ko-KR': '변경 사항',
+  'th-TH': 'บันทึกการเปลี่ยนแปลง',
 });
 
-const githubDescriptionMessages = defineMessages({
-  'en-US':
-    'Better Trading is an open-source project. You can contribute, report issues, or view the source code on GitHub.',
-  'fr-FR':
-    'Better Trading est un projet open source. Vous pouvez contribuer, signaler des problèmes ou consulter le code source sur GitHub.',
-  'es-ES':
-    'Better Trading es un proyecto de código abierto. Puedes contribuir, reportar problemas o ver el código fuente en GitHub.',
-  'de-DE':
-    'Better Trading ist ein Open-Source-Projekt. Sie können beitragen, Probleme melden oder den Quellcode auf GitHub einsehen.',
-  'pt-BR':
-    'Better Trading é um projeto de código aberto. Você pode contribuir, reportar problemas ou visualizar o código-fonte no GitHub.',
-  'ru-RU':
-    'Better Trading — это проект с открытым исходным кодом. Вы можете внести свой вклад, сообщить о проблемах или просмотреть исходный код на GitHub.',
-  'zh-CN': 'Better Trading 是一个开源项目。您可以在 GitHub 上贡献代码、报告问题或查看源代码。',
-  'ja-JP':
-    'Better Trading はオープンソースプロジェクトです。GitHub で貢献、問題の報告、またはソースコードの表示ができます。',
-  'ko-KR':
-    'Better Trading은 오픈 소스 프로젝트입니다. GitHub에서 기여하거나, 문제를 보고하거나, 소스 코드를 볼 수 있습니다.',
-  'th-TH': 'Better Trading เป็นโครงการโอเพนซอร์ส คุณสามารถมีส่วนร่วม รายงานปัญหา หรือดูโค้ดต้นฉบับบน GitHub',
+const maintainerMessages = defineMessages({
+  'en-US': 'Maintained by <strong>Message</strong> (<a href="https://github.com/message">@message</a>)',
+  'fr-FR': 'Maintenu par <strong>Message</strong> (<a href="https://github.com/message">@message</a>)',
+  'es-ES': 'Mantenido por <strong>Message</strong> (<a href="https://github.com/message">@message</a>)',
+  'de-DE': 'Gepflegt von <strong>Message</strong> (<a href="https://github.com/message">@message</a>)',
+  'pt-BR': 'Mantido por <strong>Message</strong> (<a href="https://github.com/message">@message</a>)',
+  'ru-RU': 'Поддерживается <strong>Message</strong> (<a href="https://github.com/message">@message</a>)',
+  'zh-CN': '维护者：<strong>Message</strong>（<a href="https://github.com/message">@message</a>）',
+  'ja-JP': 'メンテナー：<strong>Message</strong>（<a href="https://github.com/message">@message</a>）',
+  'ko-KR': '관리자: <strong>Message</strong> (<a href="https://github.com/message">@message</a>)',
+  'th-TH': 'ดูแลโดย <strong>Message</strong> (<a href="https://github.com/message">@message</a>)',
 });
 
-const githubButtonMessages = defineMessages({
-  'en-US': 'View on GitHub',
-  'fr-FR': 'Voir sur GitHub',
-  'es-ES': 'Ver en GitHub',
-  'de-DE': 'Auf GitHub ansehen',
-  'pt-BR': 'Ver no GitHub',
-  'ru-RU': 'Посмотреть на GitHub',
-  'zh-CN': '在 GitHub 上查看',
-  'ja-JP': 'GitHub で表示',
-  'ko-KR': 'GitHub에서 보기',
-  'th-TH': 'ดูบน GitHub',
-});
+const originalAuthors =
+  '<strong>InfaMc</strong> (<a href="https://github.com/pboutin">@pboutin</a>) & <strong>brosmike</strong> (<a href="https://github.com/dbjorge">@dbjorge</a>)';
+const originalProject = '<a href="https://github.com/exile-center/better-trading">Better Trading</a>';
 
-const creditsTitleMessages = defineMessages({
-  'en-US': 'Credits',
-  'fr-FR': 'Crédits',
-  'es-ES': 'Créditos',
-  'de-DE': 'Danksagungen',
-  'pt-BR': 'Créditos',
-  'ru-RU': 'Благодарности',
-  'zh-CN': '鸣谢',
-  'ja-JP': 'クレジット',
-  'ko-KR': '크레딧',
-  'th-TH': 'เครดิต',
-});
-
-const creditsDescriptionMessages = defineMessages({
-  'en-US':
-    'Thanks to <strong>Path of Exile</strong> and <strong>Grinding Gear Games</strong> for creating an amazing game.',
-  'fr-FR':
-    'Merci à <strong>Path of Exile</strong> et <strong>Grinding Gear Games</strong> pour avoir créé un jeu incroyable.',
-  'es-ES':
-    'Gracias a <strong>Path of Exile</strong> y <strong>Grinding Gear Games</strong> por crear un juego increíble.',
-  'de-DE':
-    'Danke an <strong>Path of Exile</strong> und <strong>Grinding Gear Games</strong> für die Schaffung eines großartigen Spiels.',
-  'pt-BR':
-    'Obrigado a <strong>Path of Exile</strong> e <strong>Grinding Gear Games</strong> por criar um jogo incrível.',
-  'ru-RU':
-    'Спасибо <strong>Path of Exile</strong> и <strong>Grinding Gear Games</strong> за создание удивительной игры.',
-  'zh-CN': '感谢 <strong>Path of Exile</strong> 和 <strong>Grinding Gear Games</strong> 创造了一款精彩的游戏。',
-  'ja-JP':
-    '<strong>Path of Exile</strong> と <strong>Grinding Gear Games</strong> が素晴らしいゲームを作成してくれたことに感謝します。',
-  'ko-KR': '멋진 게임을 만들어준 <strong>Path of Exile</strong>과 <strong>Grinding Gear Games</strong>에 감사드립니다.',
-  'th-TH': 'ขอบคุณ <strong>Path of Exile</strong> และ <strong>Grinding Gear Games</strong> ที่สร้างเกมที่ยอดเยี่ยม',
+const creditsMessages = defineMessages({
+  'en-US': `Based on ${originalProject} by ${originalAuthors}`,
+  'fr-FR': `Basé sur ${originalProject} de ${originalAuthors}`,
+  'es-ES': `Basado en ${originalProject} de ${originalAuthors}`,
+  'de-DE': `Basiert auf ${originalProject} von ${originalAuthors}`,
+  'pt-BR': `Baseado em ${originalProject} de ${originalAuthors}`,
+  'ru-RU': `Основано на ${originalProject} от ${originalAuthors}`,
+  'zh-CN': `基于 ${originalAuthors} 的 ${originalProject}`,
+  'ja-JP': `${originalAuthors} による ${originalProject} をベースにしています`,
+  'ko-KR': `${originalAuthors}의 ${originalProject} 기반`,
+  'th-TH': `อิงจาก ${originalProject} โดย ${originalAuthors}`,
 });
 
 const disclaimerMessages = defineMessages({
@@ -308,6 +274,32 @@ const changelogMarkdownMessages = defineMessages({
 - แก้ไขบั๊กราคา`,
 });
 
+const appearanceTitleMessages = defineMessages({
+  'en-US': 'Appearance',
+  'fr-FR': 'Apparence',
+  'es-ES': 'Apariencia',
+  'de-DE': 'Darstellung',
+  'pt-BR': 'Aparência',
+  'ru-RU': 'Внешний вид',
+  'zh-CN': '外观',
+  'ja-JP': '外観',
+  'ko-KR': '모양',
+  'th-TH': 'รูปลักษณ์',
+});
+
+const panelBlurMessages = defineMessages({
+  'en-US': 'Blur the page behind the panel',
+  'fr-FR': 'Flouter la page derrière le panneau',
+  'es-ES': 'Desenfocar la página detrás del panel',
+  'de-DE': 'Seite hinter dem Panel weichzeichnen',
+  'pt-BR': 'Desfocar a página atrás do painel',
+  'ru-RU': 'Размывать страницу под панелью',
+  'zh-CN': '模糊面板后方的页面',
+  'ja-JP': 'パネルの背後のページをぼかす',
+  'ko-KR': '패널 뒤 페이지 흐리게 하기',
+  'th-TH': 'เบลอหน้าเว็บด้านหลังแผง',
+});
+
 const backupTitleMessages = defineMessages({
   'en-US': 'Backup & Restore',
   'fr-FR': 'Sauvegarde et restauration',
@@ -377,12 +369,15 @@ const getMessages = (locale: string) => ({
   enhancersTitle: resolveLocaleValue(locale, enhancersTitleMessages),
   getEnhancerTitle: (slug: string) =>
     enhancerTitleMessages[slug] ? resolveLocaleValue(locale, enhancerTitleMessages[slug]) : slug,
-  githubTitle: resolveLocaleValue(locale, githubTitleMessages),
-  githubDescription: resolveLocaleValue(locale, githubDescriptionMessages),
-  githubButtonLabel: resolveLocaleValue(locale, githubButtonMessages),
-  creditsTitle: resolveLocaleValue(locale, creditsTitleMessages),
-  creditsDescription: resolveLocaleValue(locale, creditsDescriptionMessages),
+  githubLinkLabel: 'GitHub',
+  changelogLabel: resolveLocaleValue(locale, changelogLabelMessages),
+  modalCloseLabel: resolveLocaleValue(locale, modalCloseMessages),
+  logoAlt: resolveLocaleValue(locale, logoAltMessages),
+  maintainer: resolveLocaleValue(locale, maintainerMessages),
+  credits: resolveLocaleValue(locale, creditsMessages),
   disclaimer: resolveLocaleValue(locale, disclaimerMessages),
+  appearanceTitle: resolveLocaleValue(locale, appearanceTitleMessages),
+  panelBlurLabel: resolveLocaleValue(locale, panelBlurMessages),
   backupTitle: resolveLocaleValue(locale, backupTitleMessages),
   backupDescription: resolveLocaleValue(locale, backupDescriptionMessages),
   generateBackupLabel: resolveLocaleValue(locale, generateBackupMessages),
@@ -397,11 +392,12 @@ export const Default: Story = {
     githubUrl: '',
     enhancersTitle: '',
     getEnhancerTitle: slug => slug,
-    githubTitle: '',
-    githubDescription: '',
-    githubButtonLabel: '',
-    creditsTitle: '',
-    creditsDescription: '',
+    githubLinkLabel: '',
+    changelogLabel: '',
+    modalCloseLabel: '',
+    logoAlt: '',
+    maintainer: '',
+    credits: '',
     disclaimer: '',
   },
   render: (args, { globals }) => {
@@ -410,7 +406,7 @@ export const Default: Story = {
     return (
       <PageSettings
         appVersion="2.5.3"
-        githubUrl="https://github.com/exile-center/better-trading"
+        githubUrl="https://github.com/message/better-trading"
         {...messages}
         data-locale={globals.locale}
       />
@@ -425,11 +421,12 @@ export const WithChangelog: Story = {
     githubUrl: '',
     enhancersTitle: '',
     getEnhancerTitle: slug => slug,
-    githubTitle: '',
-    githubDescription: '',
-    githubButtonLabel: '',
-    creditsTitle: '',
-    creditsDescription: '',
+    githubLinkLabel: '',
+    changelogLabel: '',
+    modalCloseLabel: '',
+    logoAlt: '',
+    maintainer: '',
+    credits: '',
     disclaimer: '',
   },
   render: (args, { globals }) => {
@@ -439,7 +436,7 @@ export const WithChangelog: Story = {
     return (
       <PageSettings
         appVersion="2.5.3"
-        githubUrl="https://github.com/exile-center/better-trading"
+        githubUrl="https://github.com/message/better-trading"
         currentChangelog={{
           slug: '2.0.0',
           markdown: changelogMarkdown,
@@ -458,11 +455,12 @@ export const Complete: Story = {
     githubUrl: '',
     enhancersTitle: '',
     getEnhancerTitle: slug => slug,
-    githubTitle: '',
-    githubDescription: '',
-    githubButtonLabel: '',
-    creditsTitle: '',
-    creditsDescription: '',
+    githubLinkLabel: '',
+    changelogLabel: '',
+    modalCloseLabel: '',
+    logoAlt: '',
+    maintainer: '',
+    credits: '',
     disclaimer: '',
   },
   render: (args, { globals }) => {
@@ -472,7 +470,7 @@ export const Complete: Story = {
     return (
       <PageSettings
         appVersion="2.5.3"
-        githubUrl="https://github.com/exile-center/better-trading"
+        githubUrl="https://github.com/message/better-trading"
         discordUrl="https://discord.gg/example"
         chaosRecipeOverlayUrl="https://example.com"
         currentChangelog={{

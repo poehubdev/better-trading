@@ -39,16 +39,16 @@ pageSettingsEnhancersEquivalentPricings: Equivalent pricings (powered by poe.nin
 pageSettingsEnhancersHighlightStatFilters: Highlight searched mods
 pageSettingsEnhancersMaximumSockets: Warning for armors that cannot be 6-socketed
 pageSettingsEnhancersRegroupSimilars: Regroup similar results
+pageSettingsAppearanceTitle: Appearance
+pageSettingsPanelBlur: Blur the page behind the panel
 pageSettingsBackupTitle: Backup tools
 pageSettingsBackupDescription: Save all your bookmarks to a file, or restore them from one.
 pageSettingsBackupGenerateButton: Save file
 pageSettingsBackupRestoreButton: Restore from file
 pageSettingsBackupRestoreErrorFlash: Backup restoration has failed.
-pageSettingsGithubTitle: On GitHub
-pageSettingsGithubDescription: To contribute, report issues or simply browse the code.
-pageSettingsGithubButton: View on GitHub
-pageSettingsCreditsTitle: Credits
-pageSettingsCreditsDescription: 'Better Trading was originally created by <strong>InfaMc</strong> (<a href="https://github.com/pboutin">@pboutin</a>) and is currently maintained by <strong>brosmike</strong> (<a href="https://github.com/dbjorge">@dbjorge</a>).'
+pageSettingsGithubLink: GitHub
+pageSettingsMaintainer: 'Maintained by <strong>Message</strong> (<a href="https://github.com/message">@message</a>)'
+pageSettingsCredits: 'Based on <a href="https://github.com/exile-center/better-trading">Better Trading</a> by <strong>InfaMc</strong> (<a href="https://github.com/pboutin">@pboutin</a>) and <strong>brosmike</strong> (<a href="https://github.com/dbjorge">@dbjorge</a>)'
 
 pagePinnedItemsWarning: Pins last until you change the search or reload the page.
 pagePinnedItemsClear: Unpin all

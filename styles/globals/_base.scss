@@ -1,5 +1,12 @@
 @use 'sass:math';
+@use 'sass:color';
 @use '@/styles/variables';
+
+// scrollbar-color is inherited: setting it on the root themes both the page and the panel scrollbars.
+html:has(> body.bt-body) {
+  scrollbar-width: thin;
+  scrollbar-color: color.mix(variables.$gold-alt, variables.$gold-light) #0a0a0a;
+}
 
 body.bt-body {
   overflow-y: scroll;
@@ -22,9 +29,31 @@ body.bt-body {
     right: 0;
     bottom: 0;
     overflow-y: auto;
+    // Reserve the scrollbar's space up front so it appearing on overflow doesn't squeeze the content sideways.
+    scrollbar-gutter: stable;
     width: variables.$extension-width;
-    background-color: rgba(#0a0a0a, 0.8);
     transition: right 0.2s ease;
+
+    // Blur keeps the site artwork as a tint but stops its details from cutting through the text.
+    // On a fixed pseudo-element, not the container: backdrop-filter on the container would make it the
+    // containing block of its position: fixed descendants (flash messages, contextual menus).
+    &::before {
+      content: '';
+      position: fixed;
+      z-index: -1;
+      top: 0;
+      right: inherit;
+      bottom: 0;
+      width: variables.$extension-width;
+      background-color: rgba(#0a0a0a, 0.88);
+      backdrop-filter: blur(6px);
+      transition: inherit;
+    }
+  }
+
+  // Opt-out from the settings page (utils/panel-blur.ts)
+  &.bt-no-blur #better-trading-container::before {
+    backdrop-filter: none;
   }
 
   &.bt-is-collapsed {

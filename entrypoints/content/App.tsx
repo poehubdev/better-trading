@@ -20,7 +20,7 @@ import { getLocalValue, setLocalValue } from '@/utils/storage';
 import { useState } from 'react';
 
 const CURRENT_PAGE_STORAGE_KEY = 'current-page';
-const GITHUB_URL = 'https://github.com/exile-center/better-trading';
+const GITHUB_URL = 'https://github.com/message/better-trading';
 
 const readStoredPage = (): RootPage => {
   const stored = getLocalValue(CURRENT_PAGE_STORAGE_KEY);
