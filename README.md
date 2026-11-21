@@ -1,88 +1,119 @@
+<div align="center">
+
+<img src="public/assets/images/logo.svg" alt="Better Trading logo" width="128" height="128" />
+
 # Better Trading
 
-A browser extension that enhances the [pathofexile.com trade site](https://www.pathofexile.com/trade) for **Path of
-Exile** and **Path of Exile 2**: saved searches, search history, pinned items and smarter result lists, right inside the
-trade page.
+Bookmarks, history, pinned items and price conversion for **Path of Exile** and **Path of Exile 2**,
+right inside the trade page.
 
-[**Install for Chrome**](https://chrome.google.com/webstore/detail/better-pathofexile-tradin/fhlinfpmdlijegjlpgedcmglkakaghnk)
-· [Firefox build](https://addons.mozilla.org/en-US/firefox/addon/better-pathofexile-trading/)
+<sub>**This product isn't affiliated with or endorsed by Grinding Gear Games in any way.**</sub>
 
-> Fan-made. Not affiliated with Grinding Gear Games in any way.
+[![Chrome Web Store](https://img.shields.io/chrome-web-store/users/fhlinfpmdlijegjlpgedcmglkakaghnk?label=Chrome&logo=googlechrome&logoColor=white&color=e0a93a)](https://chrome.google.com/webstore/detail/better-pathofexile-tradin/fhlinfpmdlijegjlpgedcmglkakaghnk)
+[![Firefox Add-ons](https://img.shields.io/amo/users/better-pathofexile-trading?label=Firefox&logo=firefoxbrowser&logoColor=white&color=e0a93a)](https://addons.mozilla.org/en-US/firefox/addon/better-pathofexile-trading/)
+[![Latest release](https://img.shields.io/github/v/release/message/better-trading?label=release&color=9fb3c4)](https://github.com/message/better-trading/releases/latest)
+
+[**Add to Chrome**](https://chrome.google.com/webstore/detail/better-pathofexile-tradin/fhlinfpmdlijegjlpgedcmglkakaghnk)
+&nbsp;·&nbsp;
+[**Add to Firefox**](https://addons.mozilla.org/en-US/firefox/addon/better-pathofexile-trading/)
+
+<br />
+
+<!-- TODO: add screenshot docs/readme/screenshots/hero.png -->
+<img src="docs/readme/screenshots/hero.png" alt="The pathofexile.com trade page with the Better Trading side panel open on the right, showing bookmark folders next to the search results" width="900" />
+
+</div>
+
+---
+
+The trade site doesn't save your searches. Better Trading does, along with your history, the items you pinned and
+prices converted to chaos or divine.
 
 ## Features
 
-**Bookmarks** — keep your searches organised.
+### <img src="docs/readme/bookmark.svg" width="22" height="22" align="top" alt="" /> Bookmarks that stay organised
 
-- Folders with custom icons (including ascendancy icons), per game version, archivable and drag-and-drop sortable
-- Save the current search as a trade, mark it as completed, copy its URL, or open it as a live search
-- Trades also store the search query, so they can still be opened if the site changes its URL format
-  ([ADR 0001](docs/adr/0001-trades-keep-url-and-search-query.md))
-- Share a folder as an export string, import one from a friend, back up and restore everything from a file
+Save any search with one click and file it into folders. Give folders an icon (yes, ascendancy icons too), keep PoE 1
+and PoE 2 apart, drag things into order, and archive what you're done with. Tick trades off as you buy, copy their URL,
+or jump straight into a live search.
 
-**History** — your recent searches are recorded automatically (last 50) and one click away.
+<!-- TODO: add screenshot docs/readme/screenshots/bookmarks.png -->
+<img src="docs/readme/screenshots/bookmarks.png" alt="Bookmarks panel beside the trade search: folders with ascendancy icons, a PoE 1 / PoE 2 switch, and an open folder listing saved trades, one ticked as completed" width="800" />
 
-**Pinned items** — pin listings from the results and keep them in view while you refine the search.
+### <img src="docs/readme/import-pob.svg" width="22" height="22" align="top" alt="" /> Path of Building import
 
-**Result enhancers** — small, individually toggleable tweaks to the results list:
+Paste a Path of Building code and get a ready-made folder of searches for every item in the build. Gearing up a new
+character goes from an evening to a coffee break.
 
-- Equivalent pricings, converted using [poe.ninja](https://poe.ninja/) ratios
-- Regroup similar results
-- Pin button on every result
+<!-- TODO: add screenshot docs/readme/screenshots/pob-import.png -->
+<img src="docs/readme/screenshots/pob-import.png" alt="Path of Building import modal with a pasted build code, next to the resulting folder of item searches" width="800" />
 
-## Status: rewrite in progress
+### <img src="docs/readme/file-export.svg" width="22" height="22" align="top" alt="" /> Share and back up
 
-This repository is a ground-up rewrite of the original Ember.js extension on **[WXT](https://wxt.dev/) + React 19 +
-TypeScript**, which also brings Firefox support back through a single codebase. The legacy code lives in
-`old-extension/` (git-ignored) and is used only as a porting reference.
+Send a folder to a friend as an export string, import theirs, or back up your whole collection to a file and restore it
+on another machine.
 
-Not yet ported: the searched-mods highlighting and the "max sockets" warning enhancers, and the content-script UI is
-still being wired together component by component (see `entrypoints/content/App.tsx`).
+<!-- TODO: add screenshot docs/readme/screenshots/share.png -->
+<img src="docs/readme/screenshots/share.png" alt="Folder export modal showing the export string ready to copy, with the import and backup buttons visible" width="800" />
+
+### <img src="docs/readme/history.svg" width="22" height="22" align="top" alt="" /> History
+
+Every search you run is remembered (the last 50), so the one you closed by accident is one click away.
+
+<!-- TODO: add screenshot docs/readme/screenshots/history.png -->
+<img src="docs/readme/screenshots/history.png" alt="History panel listing recent searches with their titles and how long ago they were run" width="800" />
+
+### <img src="docs/readme/pin.svg" width="22" height="22" align="top" alt="" /> Pinned items
+
+Pin listings from the results and keep them in view while you keep refining the search.
+Compare them side by side, then buy the best one.
+
+<!-- TODO: add screenshot docs/readme/screenshots/pinned-items.png -->
+<img src="docs/readme/screenshots/pinned-items.png" alt="Pinned items panel with several pinned listings shown next to the search results, each with a pin button" width="800" />
+
+### <img src="docs/readme/compress.svg" width="22" height="22" align="top" alt="" /> Smarter results
+
+- **Equivalent pricings**: prices also shown in chaos (or divine for chaos prices), using live
+  [poe.ninja](https://poe.ninja/) rates.
+- **Regroup similar results**: identical listings from the same seller at the same price collapse into one, with a
+  toggle to expand them.
+
+Each enhancer can be turned off on its own.
+
+<!-- TODO: add screenshot docs/readme/screenshots/results.png -->
+<img src="docs/readme/screenshots/results.png" alt="Trade results showing a divine price with its chaos equivalent underneath, and a collapsed group of identical listings with its expand toggle" width="800" />
+
+## Privacy
+
+No accounts, no tracking. Everything is stored locally in your browser; the only outside request is fetching currency
+rates from poe.ninja.
+
+---
 
 ## Development
 
-Requirements: Node (`lts/jod`, see [`.nvmrc`](.nvmrc)) and [pnpm](https://pnpm.io/).
+Built with [WXT](https://wxt.dev/), React 19 and TypeScript, one codebase for Chrome and Firefox.
+Requires Node (`lts/jod`, see [`.nvmrc`](.nvmrc)) and [pnpm](https://pnpm.io/).
 
 ```sh
 pnpm install
-pnpm dev           # Chromium with the extension loaded, opens the PoE trade site
+pnpm dev           # Chromium with the extension loaded, opens the trade site
 pnpm dev:firefox   # same, for Firefox
-pnpm storybook     # develop UI components in isolation on :6006
+pnpm storybook     # build UI components in isolation on :6006
 ```
 
-| Command                        | What it does                                 |
-| ------------------------------ | -------------------------------------------- |
-| `pnpm build` / `build:firefox` | Production build into `.output/`             |
-| `pnpm zip` / `zip:firefox`     | Store-ready zip into `.output/`              |
-| `pnpm compile`                 | Type check (`tsc --noEmit`)                  |
-| `pnpm lint` / `lint:fix`       | ESLint                                       |
-| `pnpm format`                  | Prettier                                     |
+| Command                        | What it does                       |
+| ------------------------------ | ---------------------------------- |
+| `pnpm build` / `build:firefox` | Production build into `.output/`   |
+| `pnpm zip` / `zip:firefox`     | Store-ready zip into `.output/`    |
+| `pnpm test`                    | Unit tests (vitest)                |
+| `pnpm compile`                 | Type check                         |
+| `pnpm lint` / `pnpm format`    | ESLint / Prettier                  |
 
-A husky pre-commit hook runs lint-staged and `pnpm compile`, so type errors block commits. There is no test runner yet.
-
-### Project layout
-
-```
-entrypoints/   content script (mounts the React UI on the trade site) and background worker (poe.ninja proxy)
-components/    presentational UI: index.tsx + styles.module.scss + stories, one folder each
-hooks/         React hooks (bookmarks, trade history, item enhancer, storage, …)
-contexts/      bookmarks and item-results state
-services/      non-React logic: bookmark storage, poe.ninja, item-result enhancers
-utils/         pure helpers: storage, trade-location parsing, export/backup, DOM parsing
-locales/       translations (@wxt-dev/i18n); only `en` for now, more will come
-docs/adr/      architecture decision records
-```
-
-Domain terms (Folder, Trade, Search Query, Export String, …) are defined in [`GLOSSARY.md`](GLOSSARY.md).
-
-## Contributing
-
-1. Pick or open an issue on GitHub.
-2. Build UI in Storybook first. Every component needs a story, and user-visible strings must come from props/locales,
-   never be hardcoded: check your component under other locales with the toolbar locale switcher.
-3. Follow the lint rules (arrow functions, `import type`, `@/` alias) and make sure `pnpm lint` and `pnpm compile`
-   pass.
-
-[`CLAUDE.md`](CLAUDE.md) documents the architecture and conventions in more detail.
+Architecture, conventions and the release process are in [`AGENTS.md`](AGENTS.md); domain terms (Folder, Trade,
+Export String, …) in [`GLOSSARY.md`](GLOSSARY.md). Contributions welcome: pick or open an
+[issue](https://github.com/message/better-trading/issues), build the UI in Storybook first, and keep `pnpm lint`,
+`pnpm compile` and `pnpm test` green.
 
 ## Credits
 
