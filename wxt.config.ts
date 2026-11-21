@@ -1,6 +1,7 @@
 import { pobStatsPath } from './scripts/pob-stats';
 import { transformCode } from '@code-inspector/core';
 import { defineConfig } from 'wxt';
+import fs from 'node:fs';
 import path from 'node:path';
 import type { Plugin } from 'vite';
 import type { UserConfig } from 'wxt';
@@ -46,6 +47,17 @@ const config: UserConfig = {
     chromiumArgs: ['https://www.pathofexile.com/trade'],
   },
   hooks: {
+    // WXT picks what to rebuild from the bundle's module ids, and Sass partials pulled in with @use aren't modules,
+    // so saving styles/globals/_base.scss etc. was a silent no-op in dev. Touch the entry stylesheet instead.
+    'server:started': (_, server) => {
+      const entry = path.resolve(import.meta.dirname, 'styles/app.scss');
+      server.watcher.on('change', file => {
+        if (file.endsWith('.scss') && !file.endsWith('.module.scss') && file !== entry) {
+          const now = new Date();
+          fs.utimesSync(entry, now, now);
+        }
+      });
+    },
     'prepare:publicPaths': (_, paths) => {
       paths.push('pob-stats.ndjson');
     },
