@@ -94,6 +94,13 @@ worked well, redesign it if there is a clearly better approach. Parity is about 
 **Look at the page before judging it.** When the user talks about an object on a page (an element, a layout, a
 style, a rendered item, a visual bug), assess it live with the Chrome MCP (e.g. `mcp__chrome-9222__*`:
 `take_snapshot`, `take_screenshot`, `get_css_styles`, `evaluate_script`) instead of guessing from the source code.
+Before the first MCP call, check the setup and report what's missing instead of working around it:
+1. Chrome is up: `list_pages` succeeds. If it fails, Chrome isn't running with debugging on port 9222; ask the
+   user to start it, don't launch one yourself.
+2. The extension is current: `pnpm dev` is running (`pgrep -af wxt`), or `.output/` was rebuilt after your last
+   change and the extension was reloaded.
+3. The page works: a `pathofexile.com/trade` tab is open and loaded (not a login or Cloudflare page), and
+   `document.querySelector('#better-trading-container')` returns an element.
 
 ## Agent skills
 
