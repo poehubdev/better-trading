@@ -37,7 +37,7 @@
   cursor: pointer;
 
   &:hover,
-  &:focus {
+  &:focus-visible {
     text-decoration: none;
 
     .logo {
@@ -75,7 +75,7 @@
   transition: color 0.2s ease;
 
   &:hover,
-  &:focus {
+  &:focus-visible {
     color: rgba(variables.$white, 0.8);
   }
 }
@@ -90,7 +90,7 @@
   transition: transform 0.2s ease;
 
   .headerButton:hover &,
-  .headerButton:focus & {
+  .headerButton:focus-visible & {
     transform: rotate(30deg);
   }
 }
@@ -100,7 +100,7 @@
   transition: transform 0.2s ease;
 
   .headerButton:hover &,
-  .headerButton:focus & {
+  .headerButton:focus-visible & {
     transform: translateX(3px);
   }
 }
