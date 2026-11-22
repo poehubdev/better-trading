@@ -87,8 +87,13 @@ downloaded at build or test time. Two kinds of lines:
 - Unique lines from `scripts/pob-uniques.ndjson`, copied verbatim: `{ unique: <name>, fixed?, multiBase? }`.
   `fixed` lists the trade stat numbers (`stat_<n>`, `effect_<n>`) every copy has; the import searches the unique's other explicit
   mods as random. `multiBase` marks a name shared by several bases, so the search also sets the base type. Game data
-  can't produce these, so the file was taken from APT at 2498730 and is edited by hand: add a unique there when the
-  import searches stats every copy has, or misses its base.
+  can't produce these, so they follow APT's hand-kept `items.ndjson`: `pnpm pob-uniques [sha]` applies what APT
+  changed since the commit in `scripts/pob-uniques.apt-sha` (default: up to APT master) and prints a commit message
+  listing each added, updated and removed unique with its stat texts, plus the APT commits. A unique edited here
+  keeps our version and is listed as a conflict, so hand edits survive (add a unique when the import searches stats
+  every copy has, or misses its base). The weekly `pob-uniques-sync` workflow runs it and opens a PR with the
+  regenerated `public/pob-stats.ndjson` (`pnpm pob-stats` without an argument re-appends the unique lines to the
+  current stat lines) and the test result; nothing is written when no unique line changed.
 
 On a new PoE1 patch: in dat-mcp run `npm run stats -- poe1 <patch>`, here run
 `pnpm pob-stats ~/www/poehubdev/dat-mcp/data/poe1-<patch>-stats.ndjson`, then `pnpm test`, and commit the regenerated

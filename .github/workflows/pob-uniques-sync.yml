@@ -1,0 +1,48 @@
+name: Sync PoB unique lines with APT
+
+# Weekly: applies Awakened PoE Trade's changes to scripts/pob-uniques.ndjson and opens a PR that lists them
+on:
+  schedule:
+    - cron: '0 6 * * 1'
+  workflow_dispatch:
+
+permissions:
+  contents: write
+  pull-requests: write
+
+jobs:
+  sync:
+    runs-on: ubuntu-latest
+    env:
+      CI: true
+      GH_TOKEN: ${{ github.token }}
+    steps:
+      - uses: actions/checkout@v4
+      - uses: pnpm/action-setup@v4
+        with:
+          version: 11
+      - uses: actions/setup-node@v4
+        with:
+          node-version-file: .nvmrc
+          cache: pnpm
+      - run: pnpm install --frozen-lockfile
+      - run: node scripts/pob-uniques-sync.ts --message "$RUNNER_TEMP/message"
+      - name: Open a PR when APT moved
+        run: |
+          [ -f "$RUNNER_TEMP/message" ] || exit 0
+          branch="pob-uniques-sync/$(cat scripts/pob-uniques.apt-sha | cut -c1-7)"
+          git ls-remote --exit-code origin "refs/heads/$branch" >/dev/null && exit 0
+          node scripts/pob-stats.ts
+          git config user.name 'github-actions[bot]'
+          git config user.email '41898282+github-actions[bot]@users.noreply.github.com'
+          git switch -c "$branch"
+          git add scripts/pob-uniques.ndjson scripts/pob-uniques.apt-sha public/pob-stats.ndjson
+          git commit -F "$RUNNER_TEMP/message"
+          git push origin "$branch"
+          tests=$(pnpm test 2>&1 | tail -5)
+          gh pr create --title "$(head -1 "$RUNNER_TEMP/message")" --body "$(tail -n +3 "$RUNNER_TEMP/message")
+
+          \`pnpm test\` on this branch:
+          \`\`\`
+          $tests
+          \`\`\`"

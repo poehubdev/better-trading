@@ -22,6 +22,7 @@
     "postinstall": "wxt prepare",
     "prepare": "husky",
     "pob-stats": "node scripts/pob-stats.ts",
+    "pob-uniques": "node scripts/pob-uniques-sync.ts",
     "test": "vitest run",
     "test:watch": "vitest"
   },
