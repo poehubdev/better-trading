@@ -44,6 +44,7 @@ jobs:
       - uses: actions/download-artifact@v4
         with:
           merge-multiple: true
-      - run: gh release create "$GITHUB_REF_NAME" --generate-notes *.zip
+      # Tags with a suffix (v2.0.0-alpha.1) are published as pre-releases
+      - run: gh release create "$GITHUB_REF_NAME" --generate-notes $([[ "$GITHUB_REF_NAME" == *-* ]] && echo --prerelease) *.zip
         env:
           GH_TOKEN: ${{ github.token }}
