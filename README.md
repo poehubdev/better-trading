@@ -11,7 +11,7 @@ right inside the trade page.
 
 [![Chrome Web Store](https://img.shields.io/chrome-web-store/users/fhlinfpmdlijegjlpgedcmglkakaghnk?label=Chrome&logo=googlechrome&logoColor=white&color=e0a93a)](https://chrome.google.com/webstore/detail/better-pathofexile-tradin/fhlinfpmdlijegjlpgedcmglkakaghnk)
 [![Firefox Add-ons](https://img.shields.io/amo/users/better-pathofexile-trading?label=Firefox&logo=firefoxbrowser&logoColor=white&color=e0a93a)](https://addons.mozilla.org/en-US/firefox/addon/better-pathofexile-trading/)
-[![Latest release](https://img.shields.io/github/v/release/message/better-trading?label=release&color=9fb3c4)](https://github.com/message/better-trading/releases/latest)
+[![Latest release](https://img.shields.io/github/v/release/poehubdev/better-trading?label=release&color=9fb3c4)](https://github.com/poehubdev/better-trading/releases/latest)
 
 [**Add to Chrome**](https://chrome.google.com/webstore/detail/better-pathofexile-tradin/fhlinfpmdlijegjlpgedcmglkakaghnk)
 &nbsp;·&nbsp;
@@ -102,20 +102,29 @@ pnpm dev:firefox   # same, for Firefox
 pnpm storybook     # build UI components in isolation on :6006
 ```
 
-| Command                        | What it does                       |
-| ------------------------------ | ---------------------------------- |
-| `pnpm build` / `build:firefox` | Production build into `.output/`   |
-| `pnpm zip` / `zip:firefox`     | Store-ready zip into `.output/`    |
-| `pnpm test`                    | Unit tests (vitest)                |
-| `pnpm compile`                 | Type check                         |
-| `pnpm lint` / `pnpm format`    | ESLint / Prettier                  |
+| Command                         | What it does                               |
+| ------------------------------- | ------------------------------------------ |
+| `pnpm build` / `build:firefox`  | Production build into `.output/`           |
+| `pnpm zip` / `zip:firefox`      | Store-ready zip into `.output/`            |
+| `pnpm test`                     | Unit tests (vitest)                        |
+| `pnpm compile`                  | Type check                                 |
+| `pnpm lint` / `pnpm format`     | ESLint / Prettier                          |
+| `pnpm pob-stats [stats.ndjson]` | Regenerate the PoB import's stat data      |
+| `pnpm pob-uniques [apt sha]`    | Sync the PoB import's unique list with APT |
+
+The Path of Building import reads `public/pob-stats.ndjson`, which is committed. Its stat lines are generated from
+the game files by dat-mcp (our private game data tool): on a new patch, run
+`npm run stats -- poe1 <patch>` there and `pnpm pob-stats <dat-mcp>/data/poe1-<patch>-stats.ndjson` here. Its unique
+lines come from [Awakened PoE Trade](https://github.com/SnosMe/awakened-poe-trade): a weekly workflow opens a PR when
+they change there. Details in `AGENTS.md` and [ADR 0002](docs/adr/0002-pob-stat-data-from-dat-mcp.md).
 
 Architecture, conventions and the release process are in [`AGENTS.md`](AGENTS.md); domain terms (Folder, Trade,
 Export String, …) in [`GLOSSARY.md`](GLOSSARY.md). Contributions welcome: pick or open an
-[issue](https://github.com/message/better-trading/issues), build the UI in Storybook first, and keep `pnpm lint`,
+[issue](https://github.com/poehubdev/better-trading/issues), build the UI in Storybook first, and keep `pnpm lint`,
 `pnpm compile` and `pnpm test` green.
 
 ## Credits
 
 Originally created by **InfaMc** ([@pboutin](https://github.com/pboutin)) and maintained by **brosmike**
-([@dbjorge](https://github.com/dbjorge)).
+([@dbjorge](https://github.com/dbjorge)). The Path of Building import's unique data comes from
+[Awakened PoE Trade](https://github.com/SnosMe/awakened-poe-trade) by [@SnosMe](https://github.com/SnosMe).
