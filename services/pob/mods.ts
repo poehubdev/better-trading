@@ -22,7 +22,7 @@ interface Stat {
   trade: { ids: Record<string, string[]>; inverted?: boolean };
 }
 
-/** What APT knows about a unique beyond its name, from the `{ unique }` lines of pob-stats.ndjson */
+/** What the import knows about a unique beyond its name, from the `{ unique }` lines of pob-stats.ndjson */
 interface UniqueInfo {
   unique: string;
   /** Trade stat numbers (`stat_123`) every copy has; any other explicit mod is rolled at random */
@@ -40,7 +40,7 @@ const uniques = new Map<string, UniqueInfo>();
 const conquerorIds = new Map<string, string[]>();
 const seedTexts = new Map<string, string>();
 
-/** Indexes APT's stats.ndjson: one stat per line, or `{ stats }` for stats sharing a text. Runs once */
+/** Indexes pob-stats.ndjson (APT's stats.ndjson format): one stat per line, or `{ stats }` for stats sharing a text. Runs once */
 const loadStats = (ndjson: string) => {
   if (byText.size) return;
   for (const line of ndjson.split('\n')) {
