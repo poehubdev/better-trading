@@ -1,12 +1,14 @@
-# CLAUDE.md
+# AGENTS.md
 
-This file provides guidance to Claude Code (claude.ai/code) when working with code in this repository.
+Guidance for coding agents working in this repository.
 
 ## Project
 
-Better Trading: a browser extension for the pathofexile.com trade site (PoE 1 and 2), being rewritten from Ember.js
-to WXT + React 19 + TypeScript. The legacy Ember code lives in `old-extension/` (git-ignored, excluded from
-`tsc` and ESLint) and serves only as a porting reference; do not edit it. `README.md` is still the WXT template.
+Better Trading: a browser extension for the pathofexile.com trade site (PoE 1 and 2), rewritten from Ember.js
+to WXT + React 19 + TypeScript. The legacy Ember code may sit in `old-extension/` (git-ignored, often absent, excluded
+from `tsc` and ESLint); it is only a porting reference, never edit it. The behavioural reference is the upstream repo
+`exile-center/better-trading` (checked out at `~/www/better-trading`). Domain terms (Game Version, Folder, Trade, …)
+are defined in `GLOSSARY.md`; decisions in `docs/adr/`.
 
 ## Commands
 
@@ -17,17 +19,20 @@ Package manager is pnpm (Node `lts/jod`, see `.nvmrc`).
 - `pnpm storybook` — Storybook on :6006; the primary way to develop UI components in isolation
 - `pnpm compile` — `tsc --noEmit` type check
 - `pnpm lint` / `pnpm lint:fix`, `pnpm format` / `pnpm format:check`
+- `pnpm test` / `pnpm test:watch` — vitest (`vitest.config.ts`, WXT's vitest plugin). Single file or test:
+  `pnpm test services/pob/mods.test.ts` / `pnpm test -t '<name>'`. Tests sit next to the code as `*.test.ts`; most
+  cover `services/pob/` (ported from the pob2bt CLI) with Build Code fixtures in `services/pob/fixtures/` and
+  snapshots in `__snapshots__/`. Work test-first there: add a failing test for the behavior, then change the code.
+  The first run downloads PoB stat data (see below), so it needs network.
 
 **Non-TTY shells (agents, scripts):** run `wxt`, `pnpm` and `git commit` (its hook calls pnpm) as
-`CI=true timeout 20 <cmd> < /dev/null`. Without `CI=true`, Vite 7 watches stdin: a closed stdin makes `wxt build`
+`CI=true timeout 20 <cmd> < /dev/null`. Without `CI=true`, Vite watches stdin: a closed stdin makes `wxt build`
 exit 0 mid-build with an empty `.output/`, and a never-closing one makes `wxt prepare` (the `postinstall`) hang.
-
-- `pnpm test` / `pnpm test:watch` — vitest (`vitest.config.ts`, WXT's vitest plugin). Tests sit next to the code
-  as `*.test.ts`; today they cover `services/pob/` (ported from the pob2bt CLI) with Build Code fixtures in
-  `services/pob/fixtures/`. Work test-first there: add a failing test for the behavior, then change the code.
 
 The husky pre-commit hook runs `lint-staged` (prettier + eslint --fix) and then `pnpm compile`, so type errors block
 commits. It does not run the tests.
+
+`bin/next-tickets` lists open GitHub issues in dependency waves (which ticket to pick next).
 
 **Releasing:** set `changelog` in `package.json` to a new slug and write `changelogs/<slug>.md` (shown in the
 in-app changelog banner; WXT takes the manifest version from `package.json`), commit, then
@@ -39,60 +44,75 @@ triggers `.github/workflows/build.yml`, which builds both browsers and creates a
 
 **Entrypoints** (`entrypoints/`):
 - `content/` — content script injected on all PoE trade domains; mounts a React root via WXT `createIntegratedUi`
-  into `body` (`#better-trading-container`). `App.tsx` is still a placeholder: components are not wired in yet.
+  into `body` (`#better-trading-container`). `App.tsx` is the shell: it nests the context providers, renders the
+  header, changelog banner and the current root page (bookmarks / history / pinned items, or settings), and
+  remembers the page in local storage.
 - `background.ts` — service worker. Its only job is proxying `poe.ninja` API requests
   (`{ query: 'poe-ninja', resource }` message) because content scripts can't fetch cross-origin. Called via
   `utils/extension-background.ts` from `services/poe-ninja.ts`.
 
-**Layers** (all imported with the `@/` alias, e.g. `@/hooks/useBookmarks`):
-- `components/<Name>/index.tsx` + `styles.module.scss` + `<Name>.stories.tsx` — presentational UI. Page-level
-  components (`Page*`) get **all user-visible strings as props** (labels, messages), not from i18n internally;
-  stories supply them per locale via `.storybook/locale-utils.ts` (`defineMessages` / `resolveLocaleValue`).
-  Real strings go in `locales/en.yml` (`@wxt-dev/i18n`).
-- `hooks/` — React hooks; `useBookmarks` is a thin wrapper over `BookmarksContext`.
-- `contexts/` — `BookmarksContext` holds `folders` state and wraps `services/bookmarks/storage`, refreshing state
-  after every mutation; `ItemResultsContext` wires the enhancer services and pinned items.
-- `services/` — non-React logic: `bookmarks/storage.ts` (persistence), `poe-ninja.ts` (chaos ratios, cached 1 h) and `item-results/enhancers/*`
-  (pinnable, equivalent-pricings, regroup-similars) implementing `ItemResultsEnhancerService` from `types/item-results.ts`.
-- `utils/` — pure helpers (storage, trade-location parsing, bookmark export/backup, DOM item parsing).
+**Strings flow top-down.** Components never call i18n. `hooks/useMessages.ts` resolves every user-visible string
+from `locales/en.yml` (`@wxt-dev/i18n`, `#i18n`) and `App.tsx` spreads them into components as props
+(`{...messages.header}`). Storybook supplies the same props per locale via `.storybook/locale-utils.ts`
+(`defineMessages` / `resolveLocaleValue`).
+
+**Layers** (all imported with the `@/` alias):
+- `components/<Name>/index.tsx` + `styles.module.scss` + `<Name>.stories.tsx` — UI. `Page*` components are the
+  root pages.
+- `contexts/` — app state: `BookmarksContext` (folders, wraps `services/bookmarks/storage.ts`, refreshes after every
+  mutation), `TradeHistoryContext`, `FlashMessagesContext`, `ItemResultsContext` (wires the result enhancers and
+  pinned items). `hooks/` holds thin wrappers and DOM/storage hooks.
+- `services/` — non-React logic: `bookmarks/storage.ts` (persistence), `poe-ninja.ts` (chaos ratios, cached 1 h),
+  `item-results/enhancers/*` (stateful enhancers), `pob/` (Path of Building build code → trade search import).
+- `utils/` — pure helpers (storage, trade-location parsing, bookmark export/backup, DOM item parsing, and the
+  stateless enhancers in `utils/item-results/enhancers/`).
 - `types/` — shared types (`*Struct` naming for persisted shapes).
 
 **Item enhancement flow**: `useItemEnhancer` runs a `MutationObserver` on the trade site's `#trade` element,
 finds un-enhanced `.resultset > div.row[data-id]` rows (marked with the `bt-enhanced` attribute afterwards), and
 runs each enhancer's `initialize` → `prepare` → `enhance` (per item) / `clear`, sequentially through a promise
-queue. Enhancers can be disabled by `slug`.
+queue. Enhancers implement `ItemResultsEnhancerService` (`types/item-results.ts`), are registered in
+`ItemResultsContext`, and can be disabled by `slug` from settings.
 
-**Storage**: `utils/storage.ts` wraps `localStorage` with the `bt-` key prefix and optional expiry
-(`{ value, expiresAt }`) and degrades to no-op if unavailable; `hooks/useStorage.ts` is its React binding.
-Trade history (`hooks/useTradeHistory.ts`, max 50 entries) is stored through it.
+**Storage** (`utils/storage.ts`, keys prefixed `bt-`): two tiers. `getValue` / `setValue` / `setEphemeralValue`
+are async over `chrome.storage.local` with optional expiry (`{ value, expiresAt }`) — bookmarks, trade history
+(max 50), poe.ninja cache. `getLocalValue` / `setLocalValue` are sync over `localStorage` for UI state (current
+page, collapsed panel, disabled enhancers). Both degrade to no-op if unavailable.
 
-**Storybook mocking**: components must run in Storybook without extension APIs. `.storybook/mock-providers.tsx`
-provides mock context providers (e.g. `MockTradeHistoryProvider`) and components pick them up via
-`useMockable*` hooks, falling back to the real hook. This branch (`feature/service-layer`) is moving toward a
-service layer that replaces these per-component `services-stub.ts` files; check the current state of that
-migration before adding new stubs.
+**PoB stat data**: `scripts/pob-stats.ts` builds `pob-stats.ndjson` from Awakened PoE Trade's stat data at a pinned
+commit (`APT_SHA`); it is downloaded and cached, not committed, and `wxt.config.ts` ships it as a public asset.
+Bump the SHA there to update.
+
+**Storybook**: stories run the real contexts and services; `.storybook/chrome-storage-mock.ts` is an in-memory
+`chrome.storage.local`, and `.storybook/mock-providers.tsx` has mock providers (`MockTradeHistoryProvider`, …) for
+seeding context state.
+
+**Dev tooling**: in `pnpm dev`, JSX elements carry `data-insp-path="file:line:col:tag"` (see `wxt.config.ts`), so
+an element on the page maps straight to its source. Saving a global Sass partial touches `styles/app.scss` to force
+a rebuild.
 
 ## Conventions
 
 ESLint enforces (see `eslint.config.ts`): arrow-function expressions only (`func-style`), `import type` for
 type-only imports, a specific `import-x/order` (index → sibling → parent → `@/` internal → external → builtin →
-type), and `export` statements last in the file. No parent-relative
-imports (`../`) in TS or SCSS `@use`: use the `@/` alias (e.g. `@/components/Button`, `@/.storybook/locale-utils`,
-`@use '@/styles/variables'`); only same-directory `./` imports stay relative. Prettier: single quotes, no parens on single-arg arrows,
-120 columns, trailing commas. Styles are SCSS modules; global trade-site tweaks live in `styles/globals/`.
-SVG icons in `assets/icons/` are imported as React components through `vite-plugin-svgr` (`modules/svgr.ts`).
+type), and `export` statements last in the file. No parent-relative imports (`../`) in TS or SCSS `@use`: use the
+`@/` alias (e.g. `@/components/Button`, `@/.storybook/locale-utils`, `@use '@/styles/variables'`); only
+same-directory `./` imports stay relative. Prettier: single quotes, no parens on single-arg arrows, 120 columns,
+trailing commas. Styles are SCSS modules; global trade-site tweaks live in `styles/globals/`. SVG icons in
+`assets/icons/` are imported as React components through `vite-plugin-svgr` (`modules/svgr.ts`), sized 1em by
+default.
 
 **Every new component needs a Storybook story** (`<Name>.stories.tsx` next to it). Stories must work with the
 Storybook locale switcher (toolbar `locale` global, see `.storybook/preview.tsx`): supply user-visible strings per
-locale via `defineMessages` / `resolveLocaleValue` from `.storybook/locale-utils.ts`, and check the component under
-other locales, because fonts and text length change per language. Only `en` exists in `locales/` today, but more
-languages WILL be added, so never assume English-only layout or hardcode strings in components.
+locale via `defineMessages` / `resolveLocaleValue`, and check the component under other locales, because fonts and
+text length change per language. Only `en` exists in `locales/` today, but more languages WILL be added, so never
+assume English-only layout or hardcode strings in components.
 
-**Port, don't copy.** When migrating something from `old-extension/`, review the old solution first: keep it if it
+**Port, don't copy.** When migrating something from the Ember version, review the old solution first: keep it if it
 worked well, redesign it if there is a clearly better approach. Parity is about behavior, not about code structure.
 
 **Look at the page before judging it.** When the user talks about an object on a page (an element, a layout, a
-style, a rendered item, a visual bug), assess it live with the Chrome MCP (e.g. `mcp__chrome-9222__*`:
+style, a rendered item, a visual bug), assess it live with the Chrome DevTools MCP (e.g. `mcp__chrome-9222__*`:
 `take_snapshot`, `take_screenshot`, `get_css_styles`, `evaluate_script`) instead of guessing from the source code.
 Before the first MCP call, check the setup and report what's missing instead of working around it:
 1. Chrome is up: `list_pages` succeeds. If it fails, Chrome isn't running with debugging on port 9222; ask the
@@ -110,7 +130,8 @@ Issues live in GitHub Issues for `message/better-trading` (via the `gh` CLI). Se
 
 ### Triage labels
 
-Default five-label vocabulary (`needs-triage`, `needs-info`, `ready-for-agent`, `ready-for-human`, `wontfix`). See `docs/agents/triage-labels.md`.
+Default five-label vocabulary (`needs-triage`, `needs-info`, `ready-for-agent`, `ready-for-human`, `wontfix`). See
+`docs/agents/triage-labels.md`.
 
 ### Domain docs
 
