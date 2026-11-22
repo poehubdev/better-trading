@@ -12,7 +12,7 @@ new patch by `pnpm pob-stats`.
 The unique lines are a committed list (`scripts/pob-uniques.ndjson`) that follows APT. The game files have no link from
 a unique to its mods, and APT's `fixed` lists are hand-picked rather than "what every copy has" (Aul's Uprising leaves
 out its `+# to maximum Life`), so no generator reproduces them. A weekly workflow three-way merges APT's changes since
-the last synced commit into the list and opens a PR that names each change; uniques we edited by hand keep our version
+the last synced commit into the list and pushes it to a branch, with an issue that names each change; uniques we edited by hand keep our version
 and are flagged. Trade stat numbers are hashes of the game's stat ids and do not change between patches, so the list
 only moves when a unique does.
 
@@ -29,4 +29,4 @@ only moves when a unique does.
 - A new patch's stats reach the import only when someone regenerates and commits the file.
 - New uniques with random mods or several bases arrive only once APT adds them; until then, or if APT stops updating,
   add them to `scripts/pob-uniques.ndjson` by hand.
-- The workflow needs "Allow GitHub Actions to create and approve pull requests" in the repo settings.
+- Someone opens and merges the PR from the issue's link; Actions can't create PRs in this org.

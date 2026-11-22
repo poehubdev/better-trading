@@ -91,9 +91,10 @@ downloaded at build or test time. Two kinds of lines:
   changed since the commit in `scripts/pob-uniques.apt-sha` (default: up to APT master) and prints a commit message
   listing each added, updated and removed unique with its stat texts, plus the APT commits. A unique edited here
   keeps our version and is listed as a conflict, so hand edits survive (add a unique when the import searches stats
-  every copy has, or misses its base). The weekly `pob-uniques-sync` workflow runs it and opens a PR with the
+  every copy has, or misses its base). The weekly `pob-uniques-sync` workflow runs it and pushes a branch with the
   regenerated `public/pob-stats.ndjson` (`pnpm pob-stats` without an argument re-appends the unique lines to the
-  current stat lines) and the test result; nothing is written when no unique line changed.
+  current stat lines), then opens an issue with the changes, the test result and a link to open the PR (the org doesn't
+  let Actions create PRs); nothing is written when no unique line changed.
 
 On a new PoE1 patch: in dat-mcp run `npm run stats -- poe1 <patch>`, here run
 `pnpm pob-stats ~/www/poehubdev/dat-mcp/data/poe1-<patch>-stats.ndjson`, then `pnpm test`, and commit the regenerated

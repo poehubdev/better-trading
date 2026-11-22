@@ -1,6 +1,7 @@
 name: Sync PoB unique lines with APT
 
-# Weekly: applies Awakened PoE Trade's changes to scripts/pob-uniques.ndjson and opens a PR that lists them
+# Weekly: applies Awakened PoE Trade's changes to scripts/pob-uniques.ndjson on a branch and opens an issue that lists
+# them, with a link to open the PR (the org doesn't let Actions create PRs)
 on:
   schedule:
     - cron: '0 6 * * 1'
@@ -8,7 +9,7 @@ on:
 
 permissions:
   contents: write
-  pull-requests: write
+  issues: write
 
 jobs:
   sync:
@@ -27,7 +28,7 @@ jobs:
           cache: pnpm
       - run: pnpm install --frozen-lockfile
       - run: node scripts/pob-uniques-sync.ts --message "$RUNNER_TEMP/message"
-      - name: Open a PR when APT moved
+      - name: Push a branch and open an issue when a unique changed in APT
         run: |
           [ -f "$RUNNER_TEMP/message" ] || exit 0
           branch="pob-uniques-sync/$(cat scripts/pob-uniques.apt-sha | cut -c1-7)"
@@ -40,7 +41,9 @@ jobs:
           git commit -F "$RUNNER_TEMP/message"
           git push origin "$branch"
           tests=$(pnpm test 2>&1 | tail -5)
-          gh pr create --title "$(head -1 "$RUNNER_TEMP/message")" --body "$(tail -n +3 "$RUNNER_TEMP/message")
+          gh issue create --title "$(head -1 "$RUNNER_TEMP/message")" --body "Branch \`$branch\` has this sync; [open the PR](https://github.com/$GITHUB_REPOSITORY/compare/main...$branch?expand=1), review the changes and merge.
+
+          $(tail -n +3 "$RUNNER_TEMP/message")
 
           \`pnpm test\` on this branch:
           \`\`\`
