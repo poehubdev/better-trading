@@ -15,7 +15,7 @@
   width: 50%;
   padding: 5px 0;
   border: none;
-  border-bottom: 2px solid transparent;
+  border-bottom: 1px solid transparent;
   margin: 0;
   background-color: transparent;
   text-align: center;
@@ -28,7 +28,8 @@
 
   &:hover,
   &:focus {
-    background-color: rgba(variables.$gold, 0.2);
+    color: #e9cf9f;
+    background-color: #533e22;
   }
 
   &.isActive {
