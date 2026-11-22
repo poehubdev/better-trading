@@ -21,6 +21,7 @@
     "lint:fix": "eslint . --fix",
     "postinstall": "wxt prepare",
     "prepare": "husky",
+    "pob-stats": "node scripts/pob-stats.ts",
     "test": "vitest run",
     "test:watch": "vitest"
   },

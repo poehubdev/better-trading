@@ -1,0 +1,55 @@
+{"unique":"Aul's Uprising","fixed":["effect_2236653998","stat_3547189490","stat_3896241826","stat_3169825297"]}
+{"unique":"Baleful Dominion","fixed":["stat_3787436548"]}
+{"unique":"Beacon of Madness","fixed":["effect_2338856567","pseudo_increased_movement_speed","stat_2250533757"]}
+{"unique":"Bound By Destiny","fixed":[]}
+{"unique":"Brutal Restraint","fixed":["stat_3787436548"]}
+{"unique":"Cinderswallow Urn","fixed":["stat_1437957544","stat_2557247391","stat_388617051","stat_3477833022"]}
+{"unique":"Circle of Ambition","fixed":["stat_3078295401"]}
+{"unique":"Circle of Anguish","fixed":["pseudo_adds_fire_damage","stat_709508406"]}
+{"unique":"Circle of Fear","fixed":["pseudo_adds_cold_damage","stat_1037193709"]}
+{"unique":"Circle of Guilt","fixed":["pseudo_adds_physical_damage","stat_1940865751","stat_3484657501"]}
+{"unique":"Circle of Nostalgia","fixed":["pseudo_adds_chaos_damage","stat_2223678961","stat_2923486259"]}
+{"unique":"Circle of Regret","fixed":["pseudo_adds_lightning_damage","stat_3336890334"]}
+{"unique":"Combat Focus","multiBase":true}
+{"unique":"Destructive Aspiration","fixed":["stat_3787436548"]}
+{"unique":"Doryani's Delusion","fixed":["pseudo_increased_movement_speed","stat_2250533757"],"multiBase":true}
+{"unique":"Elegant Hubris","fixed":["stat_3787436548"]}
+{"unique":"Extinguishing Grasp","fixed":["stat_3787436548"]}
+{"unique":"Festering Vengeance","fixed":["stat_3787436548"]}
+{"unique":"Forbidden Shako","fixed":["stat_1379411836"]}
+{"unique":"Glorious Vanity","fixed":["stat_3787436548"]}
+{"unique":"Grand Spectrum","fixed":[],"multiBase":true}
+{"unique":"Heroic Tragedy","fixed":["stat_3787436548"]}
+{"unique":"Impresence","fixed":["stat_3442107889","stat_836936635","stat_3594640492","stat_2511217560","pseudo_adds_cold_damage","stat_1037193709","pseudo_adds_fire_damage","stat_709508406","pseudo_adds_lightning_damage","stat_3336890334","pseudo_adds_physical_damage","stat_1940865751"]}
+{"unique":"Legacy of the Rose","fixed":["stat_1509134228","stat_2891184298","stat_124131830","stat_410922651","stat_3469876297","stat_2262736444"]}
+{"unique":"Lethal Pride","fixed":["stat_3787436548"]}
+{"unique":"Megalomaniac","fixed":["stat_3086156145","stat_2557943734"]}
+{"unique":"Militant Faith","fixed":["stat_3787436548"]}
+{"unique":"Pearl of Tsoatha","fixed":["stat_2901986750","pseudo_increased_elemental_damage","stat_3141070085"]}
+{"unique":"Precursor's Emblem","fixed":["stat_2482852589","stat_983749596"],"multiBase":true}
+{"unique":"Ralakesh's Impatience","fixed":["stat_4220027924","stat_2923486259","pseudo_increased_movement_speed","stat_2250533757","stat_1658498488"]}
+{"unique":"Reclaimed Malevolence","fixed":["stat_3787436548"]}
+{"unique":"Replica Dragonfang's Flight","fixed":["stat_2901986750","stat_2587176568","stat_752930724"]}
+{"unique":"Rotmother's Mutiny","fixed":["stat_2901986750","stat_569299859","stat_1263695895"]}
+{"unique":"Screams of the Desiccated","fixed":["stat_328541901","stat_2923486259"]}
+{"unique":"Skin of the Lords","fixed":["stat_3192592092","stat_2843100721","stat_1389153006","stat_608438307"]}
+{"unique":"Split Personality","fixed":["stat_372478711"]}
+{"unique":"Sublime Vision","fixed":["stat_472812693","stat_1636209393"]}
+{"unique":"Subsume the Source","fixed":["stat_1581907402","stat_1515509665","stat_847997388"]}
+{"unique":"That Which Was Taken","fixed":[]}
+{"unique":"The Balance of Terror","fixed":["stat_2901986750"]}
+{"unique":"The Covetous Dark","fixed":["stat_2301191210","stat_1823668305"]}
+{"unique":"The Dark Monarch","fixed":["stat_4052037485","stat_2162097452","stat_2923486259","stat_1263695895"]}
+{"unique":"The First Crest","fixed":["stat_3182333322"]}
+{"unique":"The Light of Meaning","fixed":[]}
+{"unique":"The Perandus Pact","fixed":[]}
+{"unique":"The Unseen Hue","fixed":["stat_2672805335","stat_782230869"]}
+{"unique":"Tombfist","fixed":["stat_210067635"]}
+{"unique":"Triumvirate Authority","fixed":["stat_1170386874"]}
+{"unique":"Twisted Wish","fixed":["stat_1901628087","stat_1602736646"]}
+{"unique":"Vessel of Vinktar","fixed":["stat_388617051","stat_3446170049","stat_1187803783","stat_2687254633"]}
+{"unique":"Voices","fixed":["stat_247746531"]}
+{"unique":"Volkuur's Guidance","fixed":["stat_1237693206","stat_2373079502","stat_2424717327","stat_949718413"]}
+{"unique":"Vorana's March","fixed":["stat_1493091477","stat_3664803307","pseudo_increased_movement_speed","stat_2250533757"]}
+{"unique":"Watcher's Eye","fixed":["stat_2482852589","stat_983749596","stat_2748665614"]}
+{"unique":"Zana's Ingenuity","fixed":["stat_2891184298","stat_2482852589","stat_2901986750"]}

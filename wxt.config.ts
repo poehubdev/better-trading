@@ -1,4 +1,3 @@
-import { pobStatsPath } from './scripts/pob-stats';
 import { transformCode } from '@code-inspector/core';
 import { defineConfig } from 'wxt';
 import fs from 'node:fs';
@@ -57,13 +56,6 @@ const config: UserConfig = {
           fs.utimesSync(entry, now, now);
         }
       });
-    },
-    'prepare:publicPaths': (_, paths) => {
-      paths.push('pob-stats.ndjson');
-    },
-    // Stat data for the PoB import, fetched at a pinned commit instead of living in git (see scripts/pob-stats.ts)
-    'build:publicAssets': async (_, files) => {
-      files.push({ absoluteSrc: await pobStatsPath(), relativeDest: 'pob-stats.ndjson' });
     },
   },
 };

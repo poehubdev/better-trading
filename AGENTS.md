@@ -79,9 +79,11 @@ are async over `chrome.storage.local` with optional expiry (`{ value, expiresAt 
 (max 50), poe.ninja cache. `getLocalValue` / `setLocalValue` are sync over `localStorage` for UI state (current
 page, collapsed panel, disabled enhancers). Both degrade to no-op if unavailable.
 
-**PoB stat data**: `scripts/pob-stats.ts` builds `pob-stats.ndjson` from Awakened PoE Trade's stat data at a pinned
-commit (`APT_SHA`); it is downloaded and cached, not committed, and `wxt.config.ts` ships it as a public asset.
-Bump the SHA there to update.
+**PoB stat data**: `public/pob-stats.ndjson` (committed, shipped as a public asset) holds the stat matchers and trade
+ids from dat-mcp (poehubdev/dat-mcp) plus the unique lines of `scripts/pob-uniques.ndjson`. Those were taken from
+Awakened PoE Trade at 2498730 and are edited by hand, since game data can't produce them. On a new patch, run
+`npm run stats -- poe1 <patch>` in dat-mcp, then `pnpm pob-stats <dat-mcp>/data/poe1-<patch>-stats.ndjson`, run
+`pnpm test` and commit.
 
 **Storybook**: stories run the real contexts and services; `.storybook/chrome-storage-mock.ts` is an in-memory
 `chrome.storage.local`, and `.storybook/mock-providers.tsx` has mock providers (`MockTradeHistoryProvider`, …) for
