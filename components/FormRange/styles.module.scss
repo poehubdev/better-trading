@@ -1,0 +1,39 @@
+@use '@/styles/variables';
+
+$range-font-size: 13px;
+
+.wrapper {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+}
+
+.isDisabled {
+  opacity: 0.5;
+}
+
+.label,
+.value {
+  flex-shrink: 0;
+  font-family: variables.$primary-font;
+  font-size: $range-font-size;
+  line-height: 1;
+  color: variables.$white;
+}
+
+.input {
+  flex: 1;
+  min-width: 0;
+  margin: 0;
+  accent-color: variables.$brown;
+  cursor: pointer;
+
+  &:disabled {
+    cursor: default;
+  }
+}
+
+.value {
+  min-width: 4ch;
+  text-align: right;
+}

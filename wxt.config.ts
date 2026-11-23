@@ -35,7 +35,10 @@ const config: UserConfig = {
     host_permissions: ['https://poe.ninja/*'],
     // Images are used by the content script on the trade site (see utils/extension-url.ts)
     web_accessible_resources: [
-      { resources: ['assets/images/*'], matches: ['https://*.pathofexile.com/*', 'https://poe.game.daum.net/*'] },
+      {
+        resources: ['assets/images/*', 'assets/images/currency/*/*', 'assets/sounds/*'],
+        matches: ['https://*.pathofexile.com/*', 'https://poe.game.daum.net/*'],
+      },
     ],
   },
   // Icons are sized like font icons (1em) unless CSS says otherwise

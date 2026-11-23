@@ -70,6 +70,23 @@ const buildMessages = () => ({
     appearanceTitle: i18n.t('pageSettingsAppearanceTitle'),
     panelBlurLabel: i18n.t('pageSettingsPanelBlur'),
     panelScrollbarLabel: i18n.t('pageSettingsPanelScrollbar'),
+    logoThrowLabel: i18n.t('pageSettingsLogoThrow'),
+    logoThrowOptionLabels: {
+      none: i18n.t('pageSettingsLogoThrowNone'),
+      logo: i18n.t('pageSettingsLogoThrowLogo'),
+      currency: i18n.t('pageSettingsLogoThrowCurrency'),
+    },
+    logoSoundLabel: i18n.t('pageSettingsLogoSound'),
+    logoSoundOptionLabels: {
+      none: i18n.t('pageSettingsLogoSoundNone'),
+      alert: i18n.t('pageSettingsLogoSoundAlert'),
+    },
+    logoSoundVolumeLabel: i18n.t('pageSettingsLogoSoundVolume'),
+    // ponytail: plain "60%"; use Intl percent formatting when locales/ grows
+    formatVolume: (volume: number) => `${volume}%`,
+    pilferingRingTitle: i18n.t('pageSettingsPilferingRingTitle'),
+    pilferingRingDescription: i18n.t('pageSettingsPilferingRingDescription'),
+    pilferingRingResetLabel: i18n.t('pageSettingsPilferingRingReset'),
     backupTitle: i18n.t('pageSettingsBackupTitle'),
     backupDescription: i18n.t('pageSettingsBackupDescription'),
     generateBackupLabel: i18n.t('pageSettingsBackupGenerateButton'),

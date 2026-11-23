@@ -1,0 +1,73 @@
+@use '@/styles/variables';
+
+$radio-size: 12px;
+$radio-border-width: 2px;
+$radio-inner-padding: 2px;
+$radio-font-size: 13px;
+$radio-spacing: 5px;
+$radio-transition-duration: 0.2s;
+
+.wrapper {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 5px 15px;
+  padding: 0;
+  border: 0;
+  margin: 0;
+}
+
+.legend {
+  width: 100%;
+  padding: 0;
+  margin-bottom: 5px;
+  font-family: variables.$primary-font;
+  font-size: $radio-font-size;
+  color: variables.$white;
+}
+
+.option {
+  display: flex;
+  align-items: center;
+  cursor: pointer;
+}
+
+// The native input stays focusable and keyboard-operable; only its look is replaced
+.input {
+  appearance: none;
+  flex-shrink: 0;
+  box-sizing: content-box; // trade site sets border-box globally
+  display: grid;
+  place-content: center;
+  width: $radio-size;
+  height: $radio-size;
+  border: $radio-border-width solid variables.$brown;
+  border-radius: 50%;
+  margin: 0 $radio-spacing 0 0;
+  cursor: pointer;
+
+  &::before {
+    content: '';
+    width: $radio-size - 2 * $radio-inner-padding;
+    height: $radio-size - 2 * $radio-inner-padding;
+    border-radius: 50%;
+    background-color: variables.$white;
+    transform: scale(0);
+    transition: transform $radio-transition-duration ease;
+  }
+
+  &:checked::before {
+    transform: scale(1);
+  }
+
+  &:focus-visible {
+    outline: 1px solid variables.$white;
+    outline-offset: 2px;
+  }
+}
+
+.label {
+  font-family: variables.$primary-font;
+  font-size: $radio-font-size;
+  line-height: 1;
+  color: variables.$white;
+}

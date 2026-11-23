@@ -49,7 +49,11 @@ const Shell = () => {
       <Header
         {...messages.header}
         isOnRootRoute={!isSettingsOpen}
-        onBrandClick={() => setIsSettingsOpen(false)}
+        onBrandClick={() => {
+          // Only fired when the logo throw is off: then the logo is the "home" button
+          setIsSettingsOpen(false);
+          changePage(RootPage.BOOKMARKS);
+        }}
         onToggleClick={() => setIsSettingsOpen(isOpen => !isOpen)}
       />
       <ExpandButton {...messages.expandButton} />

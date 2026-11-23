@@ -10,6 +10,9 @@ import AngleRightIcon from '@/assets/icons/filled/angle-right.svg?react';
 import CloseIcon from '@/assets/icons/filled/close.svg?react';
 import SettingsIcon from '@/assets/icons/filled/settings-gear-6.svg?react';
 import { getExtensionUrl } from '@/utils/extension-url';
+import { playLogoSound, prepareLogoSound } from '@/utils/logo-sound';
+import { MIRROR_IMAGE, getLogoThrow, pickCurrencyImage } from '@/utils/logo-throw';
+import { countCurrencyDrop } from '@/utils/pilfering-ring';
 import { collapseSidePanel, initializeSidePanelCollapse } from '@/utils/side-panel-collapse';
 import { useCallback, useEffect } from 'react';
 import type { FC, MouseEvent } from 'react';
@@ -23,8 +26,9 @@ import type { FC, MouseEvent } from 'react';
  * seconds (speeds in px/s, accelerations in px/s²). The y axis points down, as in the DOM.
  *
  * `power` (0..1) scales the throw speed: 0 is a weak hop, 1 a throw that crosses the whole viewport.
+ * `src` swaps the clone's image (a currency), keeping the logo's size and starting spot.
  */
-const dropLogoBall = (logo: HTMLImageElement, power: number) => {
+const dropLogoBall = (logo: HTMLImageElement, power: number, src?: string) => {
   // Purely decorative motion: respect the OS "reduce motion" setting and do nothing
   if (window.matchMedia('(prefers-reduced-motion: reduce)').matches) return;
 
@@ -32,6 +36,7 @@ const dropLogoBall = (logo: HTMLImageElement, power: number) => {
   // `.ball` is `position: fixed` (viewport coordinates, unaffected by page scroll) and ignores the pointer.
   const rect = logo.getBoundingClientRect();
   const ball = logo.cloneNode() as HTMLImageElement;
+  if (src) ball.src = src;
   ball.className = styles.ball ?? '';
   Object.assign(ball.style, {
     left: `${rect.left}px`,
@@ -172,7 +177,7 @@ interface HeaderProps {
   showMainLabel: string;
   /** Whether the current route is the root route */
   isOnRootRoute?: boolean;
-  /** Callback when brand logo is clicked */
+  /** Callback when the brand logo is clicked while the logo throw is off (it then acts as the home button) */
   onBrandClick?: () => void;
   /** Callback when toggle button is clicked */
   onToggleClick?: () => void;
@@ -200,10 +205,26 @@ const Header: FC<HeaderProps> = ({
   }, []);
 
   const handleBrandClick = useCallback(
-    (event: MouseEvent<HTMLButtonElement>) => {
+    async (event: MouseEvent<HTMLButtonElement>) => {
       const logo = event.currentTarget.querySelector('img');
-      if (logo) dropLogoBall(logo, nextThrowPower());
-      onBrandClick?.();
+      const logoThrow = getLogoThrow();
+      // Easter egg off: the logo is a plain "home" button, no throw, no sound
+      if (logoThrow === 'none') {
+        onBrandClick?.();
+        return;
+      }
+      const power = nextThrowPower();
+      // A game without currency images yet falls back to the logo
+      const currency = logoThrow === 'currency' ? pickCurrencyImage() : null;
+      const isMirror = !!currency?.endsWith(`/${MIRROR_IMAGE}`);
+      // Cold audio context: wait for it before the animation, otherwise the sound lags and its start is clipped
+      await prepareLogoSound(isMirror);
+      if (logo) {
+        dropLogoBall(logo, power, currency ? getExtensionUrl(currency) : undefined);
+        // Exile's Pilfering Ring in the settings counts what dropped
+        if (currency) countCurrencyDrop(currency);
+      }
+      void playLogoSound(power, isMirror);
     },
     [onBrandClick],
   );
