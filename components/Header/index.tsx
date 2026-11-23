@@ -17,6 +17,35 @@ import { collapseSidePanel, initializeSidePanelCollapse } from '@/utils/side-pan
 import { useCallback, useEffect } from 'react';
 import type { FC, MouseEvent } from 'react';
 
+// Pop played by the original logo when it "launches" the clone. One is picked at random per click.
+// Each is a list of WAAPI keyframes; they are added on top of the hover rotation (`composite: 'add'`), so the logo
+// doesn't snap back to 0° under the cursor.
+const LOGO_POPS: Keyframe[][] = [
+  // Pop: squeezed by the launch, then overshoots
+  [
+    { transform: 'scale(1)' },
+    { transform: 'scale(0.7)', offset: 0.25 },
+    { transform: 'scale(1.2)', offset: 0.6 },
+    { transform: 'scale(1)' },
+  ],
+  // Jelly: squash and stretch
+  [
+    { transform: 'scale(1, 1)' },
+    { transform: 'scale(1.3, 0.7)', offset: 0.2 },
+    { transform: 'scale(0.85, 1.2)', offset: 0.5 },
+    { transform: 'scale(1.05, 0.95)', offset: 0.75 },
+    { transform: 'scale(1, 1)' },
+  ],
+  // Wobble: a damped swing
+  [
+    { transform: 'rotate(0)' },
+    { transform: 'rotate(-25deg)', offset: 0.2 },
+    { transform: 'rotate(18deg)', offset: 0.45 },
+    { transform: 'rotate(-10deg)', offset: 0.7 },
+    { transform: 'rotate(0)' },
+  ],
+];
+
 /**
  * Easter egg: throws a clone of the logo out of the header like a ball. It flies in a random upward direction,
  * falls under gravity, bounces off the bottom and the sides of the viewport, rolls along the bottom until friction
@@ -43,6 +72,11 @@ const dropLogoBall = (logo: HTMLImageElement, power: number, src?: string) => {
     top: `${rect.top}px`,
     width: `${rect.width}px`,
     height: `${rect.height}px`,
+  });
+  logo.animate(LOGO_POPS[Math.floor(Math.random() * LOGO_POPS.length)] ?? [], {
+    duration: 450,
+    easing: 'ease-out',
+    composite: 'add',
   });
   // Appended to <body> rather than the header, so the side panel's overflow and transforms can't clip it
   document.body.append(ball);
