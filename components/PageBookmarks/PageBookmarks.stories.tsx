@@ -47,11 +47,18 @@ const meta = {
   ],
   args: {
     collapseAllLabel: '',
+    searchLabel: '',
+    clearSearchLabel: '',
+    noMatchesMessage: () => '',
     showArchivedLabel: '',
     showUnarchivedLabel: '',
     createFolderLabel: '',
     importFolderLabel: '',
     importPobLabel: '',
+    importFolderHint: '',
+    importPobHint: '',
+    emptyTitle: '',
+    emptyHint: '',
     foldersWarningMessage: '',
     folderModalTitle: '',
     folderTitleLabel: '',
@@ -131,6 +138,45 @@ const seed = {
 };
 
 // Localized messages for all labels and strings
+const searchMessages = defineMessages({
+  'en-US': 'Search folders and trades',
+  'fr-FR': 'Rechercher dans les dossiers et les échanges',
+  'es-ES': 'Buscar carpetas e intercambios',
+  'de-DE': 'Ordner und Handel durchsuchen',
+  'pt-BR': 'Pesquisar pastas e negociações',
+  'ru-RU': 'Поиск по папкам и обменам',
+  'zh-CN': '搜索文件夹和交易',
+  'ja-JP': 'フォルダーと取引を検索',
+  'ko-KR': '폴더 및 거래 검색',
+  'th-TH': 'ค้นหาโฟลเดอร์และการซื้อขาย',
+});
+
+const clearSearchMessages = defineMessages({
+  'en-US': 'Clear search',
+  'fr-FR': 'Effacer la recherche',
+  'es-ES': 'Borrar búsqueda',
+  'de-DE': 'Suche löschen',
+  'pt-BR': 'Limpar pesquisa',
+  'ru-RU': 'Очистить поиск',
+  'zh-CN': '清除搜索',
+  'ja-JP': '検索をクリア',
+  'ko-KR': '검색 지우기',
+  'th-TH': 'ล้างการค้นหา',
+});
+
+const noMatchesMessages = defineMessages({
+  'en-US': 'No folders or trades match "{title}"',
+  'fr-FR': 'Aucun dossier ni échange ne correspond à « {title} »',
+  'es-ES': 'Ninguna carpeta ni intercambio coincide con "{title}"',
+  'de-DE': 'Keine Ordner oder Handel passen zu „{title}“',
+  'pt-BR': 'Nenhuma pasta ou negociação corresponde a "{title}"',
+  'ru-RU': 'Нет папок и обменов по запросу «{title}»',
+  'zh-CN': '没有与“{title}”匹配的文件夹或交易',
+  'ja-JP': '「{title}」に一致するフォルダーや取引はありません',
+  'ko-KR': '"{title}"와(과) 일치하는 폴더나 거래가 없습니다',
+  'th-TH': 'ไม่มีโฟลเดอร์หรือการซื้อขายที่ตรงกับ "{title}"',
+});
+
 const collapseAllMessages = defineMessages({
   'en-US': 'Collapse All',
   'fr-FR': 'Tout réduire',
@@ -311,6 +357,58 @@ const importPobMessages = defineMessages({
   'ja-JP': 'PoBをインポート',
   'ko-KR': 'PoB 가져오기',
   'th-TH': 'นำเข้า PoB',
+});
+
+const importFolderHintMessages = defineMessages({
+  'en-US': 'A folder code someone shared, or one you exported.',
+  'fr-FR': 'Un code de dossier partagé par quelqu’un, ou que vous avez exporté.',
+  'es-ES': 'Un código de carpeta que alguien compartió o que exportaste.',
+  'de-DE': 'Ein Ordnercode, den jemand geteilt oder den du exportiert hast.',
+  'pt-BR': 'Um código de pasta que alguém compartilhou ou que você exportou.',
+  'ru-RU': 'Код папки, которым кто-то поделился или который вы экспортировали.',
+  'zh-CN': '他人分享或你导出的文件夹代码。',
+  'ja-JP': '誰かが共有した、または自分でエクスポートしたフォルダコード。',
+  'ko-KR': '다른 사람이 공유했거나 직접 내보낸 폴더 코드.',
+  'th-TH': 'รหัสโฟลเดอร์ที่มีคนแชร์ หรือที่คุณส่งออกไว้',
+});
+
+const importPobHintMessages = defineMessages({
+  'en-US': 'Searches for the gear of a Path of Building build.',
+  'fr-FR': 'Des recherches pour l’équipement d’un build Path of Building.',
+  'es-ES': 'Búsquedas para el equipo de una build de Path of Building.',
+  'de-DE': 'Suchen nach der Ausrüstung eines Path-of-Building-Builds.',
+  'pt-BR': 'Buscas para o equipamento de uma build do Path of Building.',
+  'ru-RU': 'Поиски снаряжения для билда из Path of Building.',
+  'zh-CN': '为 Path of Building 构筑的装备生成搜索。',
+  'ja-JP': 'Path of Buildingのビルドの装備を検索します。',
+  'ko-KR': 'Path of Building 빌드의 장비 검색.',
+  'th-TH': 'การค้นหาอุปกรณ์ของบิลด์ Path of Building',
+});
+
+const emptyTitleMessages = defineMessages({
+  'en-US': 'No bookmarks yet',
+  'fr-FR': 'Aucun favori pour l’instant',
+  'es-ES': 'Aún no hay marcadores',
+  'de-DE': 'Noch keine Lesezeichen',
+  'pt-BR': 'Nenhum favorito ainda',
+  'ru-RU': 'Закладок пока нет',
+  'zh-CN': '还没有书签',
+  'ja-JP': 'ブックマークはまだありません',
+  'ko-KR': '아직 북마크가 없습니다',
+  'th-TH': 'ยังไม่มีบุ๊กมาร์ก',
+});
+
+const emptyHintMessages = defineMessages({
+  'en-US': 'Save searches into folders to get back to them in one click.',
+  'fr-FR': 'Rangez vos recherches dans des dossiers pour les retrouver en un clic.',
+  'es-ES': 'Guarda búsquedas en carpetas para volver a ellas con un clic.',
+  'de-DE': 'Speichere Suchen in Ordnern, um sie mit einem Klick wieder aufzurufen.',
+  'pt-BR': 'Salve buscas em pastas para voltar a elas com um clique.',
+  'ru-RU': 'Сохраняйте поиски в папки, чтобы возвращаться к ним в один клик.',
+  'zh-CN': '将搜索保存到文件夹中，一键即可返回。',
+  'ja-JP': '検索をフォルダに保存すると、ワンクリックで戻れます。',
+  'ko-KR': '검색을 폴더에 저장하면 한 번의 클릭으로 돌아갈 수 있습니다.',
+  'th-TH': 'บันทึกการค้นหาลงในโฟลเดอร์เพื่อกลับมาได้ในคลิกเดียว',
 });
 
 const importPobModalTitleMessages = defineMessages({
@@ -793,11 +891,18 @@ export const Default: Story = {
     return (
       <PageBookmarks
         collapseAllLabel={resolveLocaleValue(locale, collapseAllMessages)}
+        searchLabel={resolveLocaleValue(locale, searchMessages)}
+        clearSearchLabel={resolveLocaleValue(locale, clearSearchMessages)}
+        noMatchesMessage={titleMessage(locale, noMatchesMessages)}
         showArchivedLabel={resolveLocaleValue(locale, showArchivedMessages)}
         showUnarchivedLabel={resolveLocaleValue(locale, showUnarchivedMessages)}
         createFolderLabel={resolveLocaleValue(locale, createFolderMessages)}
         importFolderLabel={resolveLocaleValue(locale, importFolderMessages)}
         importPobLabel={resolveLocaleValue(locale, importPobMessages)}
+        importFolderHint={resolveLocaleValue(locale, importFolderHintMessages)}
+        importPobHint={resolveLocaleValue(locale, importPobHintMessages)}
+        emptyTitle={resolveLocaleValue(locale, emptyTitleMessages)}
+        emptyHint={resolveLocaleValue(locale, emptyHintMessages)}
         foldersWarningMessage={resolveLocaleValue(locale, foldersWarningMessages)}
         folderModalTitle={resolveLocaleValue(locale, folderModalTitleMessages)}
         folderTitleLabel={resolveLocaleValue(locale, folderTitleLabelMessages)}
@@ -887,6 +992,29 @@ export const KeyboardReorder: Story = {
   },
 };
 
+/** "jugg boots": only the Juggernaut Folder, expanded, with only its boots; matched characters highlighted */
+export const Search: Story = {
+  ...Default,
+  play: async ({ canvasElement, globals }) => {
+    const canvas = within(canvasElement);
+    const input = canvas.getByRole('searchbox', { name: resolveLocaleValue(globals.locale as string, searchMessages) });
+
+    await userEvent.type(input, 'boots');
+    await waitFor(() => expect(canvas.getByRole('link', { name: 'Kaom boots' })).toBeVisible());
+    await expect(canvas.queryByText('Life chest')).toBeNull();
+
+    await userEvent.clear(input);
+    await userEvent.type(input, 'xyz');
+    await waitFor(() => expect(getFolderTitles(canvasElement)).toEqual([]));
+
+    await userEvent.clear(input);
+    await userEvent.type(input, 'jugg boots');
+    await waitFor(() => expect(getFolderTitles(canvasElement)).toEqual(['Juggernaut gear']));
+    await waitFor(() => expect(canvas.getByRole('link', { name: 'Kaom boots' })).toBeVisible());
+    await expect(canvas.queryByText('Life chest')).toBeNull();
+  },
+};
+
 /** "Chaos recipe" dragged by its handle: dimmed, already moved above "Juggernaut gear" (live preview) */
 export const DraggingFolder: Story = {
   ...Default,
@@ -925,6 +1053,35 @@ export const ManyFolders: Story = {
         icon: null,
         archivedAt: null,
       })),
+    }),
+};
+
+/** No Folders for this Game Version: the adding actions spelled out, with what each import expects */
+export const Empty: Story = {
+  ...Default,
+  beforeEach: () => seedChromeStorage({ 'bookmark-folders': [] }),
+};
+
+/** Empty on a PoE 2 page: no Path of Building import (PoE 1 only) */
+export const EmptyPoe2: Story = {
+  ...Default,
+  name: 'Empty (PoE 2)',
+  beforeEach: () => {
+    seedChromeStorage({ 'bookmark-folders': [] });
+    // The Game Version comes from the page path, as on the trade site
+    const { href } = window.location;
+    window.history.replaceState(null, '', `/trade2/search/poe2/Standard${window.location.search}`);
+    return () => window.history.replaceState(null, '', href);
+  },
+};
+
+/** Only archived Folders: the empty state, and the archive toggle stays in the toolbar */
+export const EmptyWithArchive: Story = {
+  ...Default,
+  name: 'Empty with archived Folders',
+  beforeEach: () =>
+    seedChromeStorage({
+      'bookmark-folders': [seed['bookmark-folders'][3]!],
     }),
 };
 

@@ -35,7 +35,8 @@
   flex-direction: column;
   align-items: center;
   gap: 10px;
-  padding: 48px 20px 24px;
+  // Bookmarks' 36px plus the height of its toolbar, so the icon stays put when switching between the two pages
+  padding: 71px 10px 20px;
   color: variables.$gray-alt;
   text-align: center;
 
@@ -48,7 +49,7 @@
 .emptyIcon {
   width: 34px;
   height: 34px;
-  color: variables.$white;
+  color: variables.$gold-light;
   transform: rotate(30deg);
 }
 

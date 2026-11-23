@@ -11,7 +11,23 @@ import { reorder } from '@atlaskit/pragmatic-drag-and-drop/utils/reorder';
 import classnames from 'classnames';
 import { useState, useCallback, useEffect, useId, useRef } from 'react';
 import type { BookmarksFolderStruct, BookmarksTradeStruct } from '@/types/bookmarks';
+import type { FolderSearchMatch } from '@/utils/bookmarks-search';
 import type React from 'react';
+
+/** `text` with the characters at `indices` marked as search matches */
+const highlight = (text: string, indices: number[] | undefined) => {
+  if (!indices?.length) return text;
+  const matched = new Set(indices);
+  const parts: React.ReactNode[] = [];
+  let start = 0;
+  for (let index = 1; index <= text.length; index++) {
+    if (index < text.length && matched.has(index) === matched.has(start)) continue;
+    const part = text.slice(start, index);
+    parts.push(matched.has(start) ? <mark key={start}>{part}</mark> : part);
+    start = index;
+  }
+  return parts;
+};
 
 interface SortableTradeProps {
   listId: string;
@@ -75,6 +91,8 @@ interface FolderProps {
   listId: string;
   isExpanded: boolean;
   isArchived: boolean;
+  /** While searching: what matched. The Folder shows only the matching Trades and can't be reordered or collapsed */
+  search?: FolderSearchMatch;
   league: string | null;
   editFolderLabel: string;
   archiveFolderLabel: string;
@@ -116,6 +134,7 @@ const Folder: React.FC<FolderProps> = ({
   listId,
   isExpanded,
   isArchived,
+  search,
   league,
   editFolderLabel,
   archiveFolderLabel,
@@ -178,7 +197,7 @@ const Folder: React.FC<FolderProps> = ({
     onCancel,
   });
 
-  const { items: displayedTrades, preview: previewTrade, cancel: cancelTradePreview } = usePreviewOrder(trades);
+  const { items: orderedTrades, preview: previewTrade, cancel: cancelTradePreview } = usePreviewOrder(trades);
 
   // Show the new order right away; persisting it refreshes the Folders, which reloads the trades from storage
   const tradesListId = useId();
@@ -188,6 +207,8 @@ const Folder: React.FC<FolderProps> = ({
     listRef: tradesListRef,
     onPreview: previewTrade,
   });
+  const displayedTrades = search ? orderedTrades.filter(trade => search.trades.has(trade.id ?? '')) : orderedTrades;
+
   const handleMoveTrade = (fromIndex: number, toIndex: number) => {
     // A fetch already in flight read the old order: let it resolve without overwriting the new one
     latestFetchRef.current++;
@@ -205,6 +226,7 @@ const Folder: React.FC<FolderProps> = ({
         isExpanded && styles.isExpanded,
         isArchived && styles.isArchived,
         isDragging && styles.isDragging,
+        search && styles.isFiltered,
       )}>
       <div className={styles.header}>
         <div
@@ -214,7 +236,7 @@ const Folder: React.FC<FolderProps> = ({
           role="button"
           tabIndex={0}>
           {folder.icon && <BookmarkFolderIcon icon={folder.icon} className={styles.headerIcon} />}
-          <div className={styles.headerLabel}>{folder.title}</div>
+          <div className={styles.headerLabel}>{highlight(folder.title, search?.titleIndices)}</div>
           {!isArchived && <AngleDownIcon className={styles.expansionIndicator} />}
         </div>
 
@@ -277,7 +299,7 @@ const Folder: React.FC<FolderProps> = ({
                       <CheckIcon />
                     </span>
                   )}
-                  {trade.title}
+                  {highlight(trade.title, search?.trades.get(trade.id ?? ''))}
                 </a>
               </SortableTrade>
             ))}

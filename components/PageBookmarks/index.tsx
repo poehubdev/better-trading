@@ -14,19 +14,22 @@ import styles from './styles.module.scss';
 import TradeDeletion from './TradeDeletion';
 import TradeEdition from './TradeEdition';
 import ArchiveIcon from '@/assets/icons/filled/archive.svg?react';
+import BookmarkIcon from '@/assets/icons/filled/bookmark.svg?react';
+import CloseIcon from '@/assets/icons/filled/close.svg?react';
 import CollapseAllIcon from '@/assets/icons/filled/collapse-all-b.svg?react';
 import ImportPobIcon from '@/assets/icons/filled/import-pob.svg?react';
 import ReturnToActiveFoldersIcon from '@/assets/icons/filled/return-to-active-folders.svg?react';
+import SearchIcon from '@/assets/icons/filled/search.svg?react';
+import FileImportIcon from '@/assets/icons/solid/file-import.svg?react';
 import FolderPlusIcon from '@/assets/icons/solid/folder-plus.svg?react';
-import SquarePlusIcon from '@/assets/icons/solid/square-plus.svg?react';
 import AlertMessage from '@/components/AlertMessage';
-import Button from '@/components/Button';
 import LoadingContainer from '@/components/LoadingContainer';
 import { useFlashMessagesContext } from '@/contexts/FlashMessagesContext';
 import { useBookmarks } from '@/hooks/useBookmarks';
 import { useBookmarksState } from '@/hooks/useBookmarksState';
 import { usePreviewOrder, useSortableZone } from '@/hooks/useSortable';
 import { useTradeLocation } from '@/hooks/useTradeLocation';
+import { searchBookmarks } from '@/utils/bookmarks-search';
 import { copyToClipboard } from '@/utils/copy-to-clipboard';
 import { convertPobBuildCode } from '@/utils/extension-background';
 import { recommendTitle } from '@/utils/search-panel';
@@ -57,11 +60,18 @@ interface StagedDeletingTrade {
 interface PageBookmarksProps {
   // Localized strings
   collapseAllLabel: string;
+  searchLabel: string;
+  clearSearchLabel: string;
+  noMatchesMessage: (query: string) => string;
   showArchivedLabel: string;
   showUnarchivedLabel: string;
   createFolderLabel: string;
   importFolderLabel: string;
   importPobLabel: string;
+  importFolderHint: string;
+  importPobHint: string;
+  emptyTitle: string;
+  emptyHint: string;
   foldersWarningMessage: string;
   folderModalTitle: string;
   folderTitleLabel: string;
@@ -118,11 +128,18 @@ interface PageBookmarksProps {
 
 const PageBookmarks: React.FC<PageBookmarksProps> = ({
   collapseAllLabel,
+  searchLabel,
+  clearSearchLabel,
+  noMatchesMessage,
   showArchivedLabel,
   showUnarchivedLabel,
   createFolderLabel,
   importFolderLabel,
   importPobLabel,
+  importFolderHint,
+  importPobHint,
+  emptyTitle,
+  emptyHint,
   foldersWarningMessage,
   folderModalTitle,
   folderTitleLabel,
@@ -185,6 +202,9 @@ const PageBookmarks: React.FC<PageBookmarksProps> = ({
   const [isShowingArchivedFolders, setIsShowingArchivedFolders] = useState(false);
   const [stagedTrade, setStagedTrade] = useState<StagedTrade | null>(null);
   const [stagedDeletingTrade, setStagedDeletingTrade] = useState<StagedDeletingTrade | null>(null);
+  const [searchQuery, setSearchQuery] = useState('');
+  const [searchedTrades, setSearchedTrades] = useState<Record<string, BookmarksTradeStruct[]>>({});
+  const searchInputRef = useRef<HTMLInputElement>(null);
 
   const { refreshFolders, fetchTradesByFolderId, serializeFolder } = bookmarks;
 
@@ -196,6 +216,20 @@ const PageBookmarks: React.FC<PageBookmarksProps> = ({
     window.addEventListener('focus', handleFocus);
     return () => window.removeEventListener('focus', handleFocus);
   }, [refreshFolders]);
+
+  // Searching reads the Trades of every Folder, again after every Bookmarks mutation (fresh `folders`)
+  const { folders } = bookmarks;
+  const isSearching = searchQuery.trim() !== '';
+  useEffect(() => {
+    if (!isSearching) return;
+    let isCurrent = true;
+    Promise.all(folders.map(async folder => [folder.id!, await fetchTradesByFolderId(folder.id!)] as const))
+      .then(entries => isCurrent && setSearchedTrades(Object.fromEntries(entries)))
+      .catch(() => addFlash(genericAlertMessage, 'alert'));
+    return () => {
+      isCurrent = false;
+    };
+  }, [isSearching, folders, fetchTradesByFolderId, addFlash, genericAlertMessage]);
 
   // Scroll while dragging near an edge: the extension panel scrolls, Storybook (no panel) scrolls the window
   useEffect(() => {
@@ -210,7 +244,19 @@ const PageBookmarks: React.FC<PageBookmarksProps> = ({
   const displayedFolders = isShowingArchivedFolders ? archivedFolders : activeFolders;
   const hasArchivedFolders = archivedFolders.length > 0;
   const hasActiveFolders = activeFolders.length > 0;
-  const foldersWarningIsVisible = !isShowingArchivedFolders && displayedFolders.length >= FOLDERS_WARNING_THRESHOLD;
+  // Null while not filtering; the archive isn't searched
+  const searchMatches = isShowingArchivedFolders
+    ? null
+    : searchBookmarks(
+        searchQuery,
+        displayedFolders.map(folder => ({
+          id: folder.id!,
+          title: folder.title,
+          trades: searchedTrades[folder.id!] ?? [],
+        })),
+      );
+  const foldersWarningIsVisible =
+    !isShowingArchivedFolders && !searchMatches && displayedFolders.length >= FOLDERS_WARNING_THRESHOLD;
 
   // Leave the archive view once it runs empty (restore, delete or a change in another tab): its toggle is hidden then
   if (isShowingArchivedFolders && !hasArchivedFolders) setIsShowingArchivedFolders(false);
@@ -290,6 +336,12 @@ const PageBookmarks: React.FC<PageBookmarksProps> = ({
 
   const handleToggleArchiveDisplay = () => {
     setIsShowingArchivedFolders(!isShowingArchivedFolders);
+    setSearchQuery('');
+  };
+
+  const handleClearSearch = () => {
+    setSearchQuery('');
+    searchInputRef.current?.focus();
   };
 
   const handleCreateFolder = () => {
@@ -313,13 +365,15 @@ const PageBookmarks: React.FC<PageBookmarksProps> = ({
     collapseAllFolders();
   };
 
-  const handleImportFolder = () => {
-    setImporting('folder');
-  };
+  const startImport = (kind: 'folder' | 'pob') => setImporting(kind);
 
-  const handleImportPob = () => {
-    setImporting('pob');
-  };
+  // Path of Building builds are PoE 1 only
+  const importOptions = [
+    { kind: 'folder' as const, icon: FileImportIcon, label: importFolderLabel, hint: importFolderHint },
+    ...(version === '1'
+      ? [{ kind: 'pob' as const, icon: ImportPobIcon, label: importPobLabel, hint: importPobHint }]
+      : []),
+  ];
 
   const handleCancelImportFolder = () => {
     setImporting(null);
@@ -443,32 +497,65 @@ const PageBookmarks: React.FC<PageBookmarksProps> = ({
 
   return (
     <LoadingContainer task={bookmarks.refreshFolders} size="large">
-      <div className={styles.headerActions}>
+      <div className={styles.toolbar}>
         {hasActiveFolders && !isShowingArchivedFolders && (
-          <Button
-            type="button"
-            theme="gold"
-            label={collapseAllLabel}
-            icon={CollapseAllIcon}
-            onClick={handleCollapseAllFolders}
-          />
+          <div className={styles.search}>
+            <SearchIcon className={styles.searchIcon} aria-hidden />
+            <input
+              ref={searchInputRef}
+              type="search"
+              className={styles.searchInput}
+              placeholder={searchLabel}
+              aria-label={searchLabel}
+              value={searchQuery}
+              onChange={event => setSearchQuery(event.target.value)}
+              onKeyDown={event => event.key === 'Escape' && setSearchQuery('')}
+            />
+            {searchQuery && (
+              <button
+                type="button"
+                className={styles.searchClear}
+                aria-label={clearSearchLabel}
+                title={clearSearchLabel}
+                onClick={handleClearSearch}>
+                <CloseIcon aria-hidden />
+              </button>
+            )}
+          </div>
         )}
 
-        {hasArchivedFolders && (
-          <Button
-            type="button"
-            theme="gold"
-            label={isShowingArchivedFolders ? showUnarchivedLabel : showArchivedLabel}
-            icon={isShowingArchivedFolders ? ReturnToActiveFoldersIcon : ArchiveIcon}
-            onClick={handleToggleArchiveDisplay}
-          />
-        )}
+        {/* Viewing the list: secondary, icon only. Adding lives at the end of the list, where new Folders land */}
+        <div className={styles.viewActions}>
+          {hasActiveFolders && !isShowingArchivedFolders && !searchMatches && (
+            <button
+              type="button"
+              className={styles.viewAction}
+              aria-label={collapseAllLabel}
+              title={collapseAllLabel}
+              onClick={handleCollapseAllFolders}>
+              <CollapseAllIcon aria-hidden />
+            </button>
+          )}
+
+          {hasArchivedFolders && (
+            <button
+              type="button"
+              className={styles.viewAction}
+              aria-label={isShowingArchivedFolders ? showUnarchivedLabel : showArchivedLabel}
+              aria-pressed={isShowingArchivedFolders}
+              title={isShowingArchivedFolders ? showUnarchivedLabel : showArchivedLabel}
+              onClick={handleToggleArchiveDisplay}>
+              {isShowingArchivedFolders ? <ReturnToActiveFoldersIcon aria-hidden /> : <ArchiveIcon aria-hidden />}
+            </button>
+          )}
+        </div>
       </div>
 
       <div ref={foldersWrapperRef} className={styles.foldersWrapper}>
         {sortedFolders.map((folder, folderIndex) => {
           const folderId = folder.id;
-          if (!folderId) return null;
+          const search = searchMatches?.get(folderId ?? '');
+          if (!folderId || (searchMatches && !search)) return null;
           return (
             <div key={folderId} className={styles.folderWrapper}>
               <Folder
@@ -476,8 +563,9 @@ const PageBookmarks: React.FC<PageBookmarksProps> = ({
                 index={folderIndex}
                 count={sortedFolders.length}
                 listId={foldersListId}
-                isExpanded={!folder.archivedAt && expandedFolderIds.includes(folderId)}
+                isExpanded={!folder.archivedAt && (Boolean(search) || expandedFolderIds.includes(folderId))}
                 isArchived={Boolean(folder.archivedAt)}
+                search={search}
                 league={league}
                 editFolderLabel={editFolderLabel}
                 archiveFolderLabel={archiveFolderLabel}
@@ -497,7 +585,7 @@ const PageBookmarks: React.FC<PageBookmarksProps> = ({
                 onPreview={previewFolder}
                 onCancel={cancelFolderPreview}
                 onReorderTrades={trades => handleReorderTrades(trades, folderId)}
-                onExpansionToggle={() => handleToggleFolderExpansion(folderId)}
+                onExpansionToggle={() => !search && handleToggleFolderExpansion(folderId)}
                 onEdit={() => handleStageFolder(folder)}
                 onDelete={() => handleDeleteFolder(folder)}
                 onArchiveToggle={() => handleToggleFolderArchive(folder)}
@@ -516,37 +604,44 @@ const PageBookmarks: React.FC<PageBookmarksProps> = ({
         })}
       </div>
 
-      {!isShowingArchivedFolders && (
-        <div className={styles.actions}>
-          <Button
-            type="button"
-            className={styles.createFolderButton}
-            theme="gold"
-            label={createFolderLabel}
-            icon={FolderPlusIcon}
-            onClick={handleCreateFolder}
-          />
+      {searchMatches?.size === 0 && (
+        <div className={styles.noMatches}>
+          <p className={styles.noMatchesMessage}>{noMatchesMessage(searchQuery.trim())}</p>
+          <button type="button" className={styles.noMatchesClear} onClick={handleClearSearch}>
+            {clearSearchLabel}
+          </button>
+        </div>
+      )}
 
-          <Button
-            type="button"
-            className={styles.createFolderButton}
-            theme="gold"
-            label={importFolderLabel}
-            icon={SquarePlusIcon}
-            onClick={handleImportFolder}
-          />
+      {/* What this page is for, above the add block, while there is nothing else to show */}
+      {!hasActiveFolders && !isShowingArchivedFolders && (
+        <div className={styles.empty}>
+          <BookmarkIcon className={styles.emptyIcon} aria-hidden />
+          <div className={styles.emptyTitle}>{emptyTitle}</div>
+          <p className={styles.emptyHint}>{emptyHint}</p>
+        </div>
+      )}
 
-          {/* Path of Building builds are PoE 1 only */}
-          {version === '1' && (
-            <Button
-              type="button"
-              className={styles.createFolderButton}
-              theme="gold"
-              label={importPobLabel}
-              icon={ImportPobIcon}
-              onClick={handleImportPob}
-            />
-          )}
+      {/* Adding at the end of the list, where new Folders land: create one empty, or import it below */}
+      {!isShowingArchivedFolders && !searchMatches && (
+        <div className={styles.addRow}>
+          <button type="button" className={styles.addRowCreate} onClick={handleCreateFolder}>
+            <FolderPlusIcon className={styles.addRowIcon} aria-hidden />
+            {createFolderLabel}
+          </button>
+          <div className={styles.addRowImports}>
+            {importOptions.map(({ kind, icon: Icon, label, hint }) => (
+              <button
+                key={kind}
+                type="button"
+                className={styles.addRowImport}
+                title={hint}
+                onClick={() => startImport(kind)}>
+                <Icon className={styles.addRowIcon} aria-hidden />
+                {label}
+              </button>
+            ))}
+          </div>
         </div>
       )}
 

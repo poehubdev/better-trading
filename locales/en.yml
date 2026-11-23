@@ -76,7 +76,14 @@ pageHistoryClearSuccessFlash: The search history has been cleared.
 pageBookmarksCreateFolder: New folder
 pageBookmarksImportFolder: Import folder
 pageBookmarksImportPob: Import PoB
+pageBookmarksImportFolderHint: A folder code someone shared, or one you exported.
+pageBookmarksImportPobHint: Searches for the gear of a Path of Building build.
+pageBookmarksEmptyTitle: No bookmarks yet
+pageBookmarksEmptyHint: Save searches into folders to get back to them in one click.
 pageBookmarksCollapseAll: Collapse folders
+pageBookmarksSearch: Search folders and trades
+pageBookmarksClearSearch: Clear search
+pageBookmarksNoMatches: 'No folders or trades match "$1"'
 pageBookmarksShowArchivedFolders: Show archive
 pageBookmarksShowUnarchivedFolders: Return to active folders
 pageBookmarksFoldersWarning: Having a lot of folders can slow down the website.<br>Backup unnecessary folders using the export feature, then delete them.

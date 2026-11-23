@@ -12,6 +12,17 @@
     }
   }
 
+  // Searching: always expanded, in the stored order
+  &.isFiltered {
+    .expansionWrapper {
+      pointer-events: none;
+    }
+
+    .handle {
+      display: none;
+    }
+  }
+
   &.isArchived {
     .expansionWrapper {
       pointer-events: none;
@@ -175,4 +186,15 @@
 
 .handleIcon {
   font-size: 18px;
+}
+
+// Search matches in Folder and Trade titles
+.headerLabel,
+.tradeLink {
+  mark {
+    background: none;
+    color: variables.$gold-light;
+    text-decoration: underline 1px variables.$gold-alt;
+    text-underline-offset: 3px;
+  }
 }

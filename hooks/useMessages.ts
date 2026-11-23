@@ -112,11 +112,18 @@ const buildMessages = () => ({
 
   pageBookmarks: {
     collapseAllLabel: i18n.t('pageBookmarksCollapseAll'),
+    searchLabel: i18n.t('pageBookmarksSearch'),
+    clearSearchLabel: i18n.t('pageBookmarksClearSearch'),
+    noMatchesMessage: (query: string) => i18n.t('pageBookmarksNoMatches', [query]),
     showArchivedLabel: i18n.t('pageBookmarksShowArchivedFolders'),
     showUnarchivedLabel: i18n.t('pageBookmarksShowUnarchivedFolders'),
     createFolderLabel: i18n.t('pageBookmarksCreateFolder'),
     importFolderLabel: i18n.t('pageBookmarksImportFolder'),
     importPobLabel: i18n.t('pageBookmarksImportPob'),
+    importFolderHint: i18n.t('pageBookmarksImportFolderHint'),
+    importPobHint: i18n.t('pageBookmarksImportPobHint'),
+    emptyTitle: i18n.t('pageBookmarksEmptyTitle'),
+    emptyHint: i18n.t('pageBookmarksEmptyHint'),
     foldersWarningMessage: i18n.t('pageBookmarksFoldersWarning'),
     folderModalTitle: i18n.t('pageBookmarksFolderEditionModalTitle'),
     folderTitleLabel: i18n.t('pageBookmarksFolderEditionTitleLabel'),

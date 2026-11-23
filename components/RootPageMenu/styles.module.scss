@@ -33,7 +33,9 @@
   }
 
   &.isActive {
+    color: #e9cf9f;
     border-color: variables.$gold-alt;
+    background-color: variables.$gold;
   }
 }
 
