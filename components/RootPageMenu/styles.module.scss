@@ -5,6 +5,8 @@
   position: relative;
   width: 100%;
   margin-bottom: 10px;
+  // A rule under the whole tab strip ties the tabs to the page below; the active tab's gold edge sits on it
+  border-bottom: 1px solid variables.$gray;
 }
 
 .menuItem {
@@ -16,7 +18,7 @@
   padding: 5px 0;
   border: none;
   border-bottom: 1px solid transparent;
-  margin: 0;
+  margin: 0 0 -1px;
   background-color: transparent;
   text-align: center;
   color: variables.$white;
