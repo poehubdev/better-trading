@@ -8,11 +8,10 @@ import MarkdownChangelog from '@/components/MarkdownChangelog';
 import Modal from '@/components/Modal';
 import { useItemResults } from '@/hooks/useItemResults';
 import {
-  LOGO_SOUNDS,
-  getLogoSound,
   getLogoSoundVolume,
+  isLogoSoundEnabled,
   playLogoSound,
-  setLogoSound,
+  setLogoSoundEnabled,
   setLogoSoundVolume,
 } from '@/utils/logo-sound';
 import { LOGO_THROWS, getLogoThrow, setLogoThrow } from '@/utils/logo-throw';
@@ -21,7 +20,6 @@ import { getIsPanelScrollbarVisible, setIsPanelScrollbarVisible } from '@/utils/
 import classnames from 'classnames';
 import { useState } from 'react';
 import type { ChangelogData } from '@/components/ChangelogBanner';
-import type { LogoSound } from '@/utils/logo-sound';
 import type { LogoThrow } from '@/utils/logo-throw';
 
 interface Enhancer {
@@ -54,11 +52,9 @@ interface PageSettingsProps {
   logoThrowLabel: string;
   logoThrowOptionLabels: Record<LogoThrow, string>;
   logoSoundLabel: string;
-  logoSoundOptionLabels: Record<LogoSound, string>;
   logoSoundVolumeLabel: string;
   formatVolume: (volume: number) => string;
   pilferingRingTitle: string;
-  pilferingRingDescription: string;
   pilferingRingResetLabel: string;
   backupTitle: string;
   backupDescription: string;
@@ -114,11 +110,9 @@ const PageSettings = ({
   logoThrowLabel,
   logoThrowOptionLabels,
   logoSoundLabel,
-  logoSoundOptionLabels,
   logoSoundVolumeLabel,
   formatVolume,
   pilferingRingTitle,
-  pilferingRingDescription,
   pilferingRingResetLabel,
   backupTitle,
   backupDescription,
@@ -150,14 +144,14 @@ const PageSettings = ({
     setLogoThrowState(newLogoThrow);
   };
 
-  const [logoSound, setLogoSoundState] = useState(getLogoSound);
+  const [isLogoSoundOn, setIsLogoSoundOnState] = useState(isLogoSoundEnabled);
   const [logoSoundVolume, setLogoSoundVolumeState] = useState(getLogoSoundVolume);
 
-  // Changing the sound plays it, so the choice can be heard right away
-  const changeLogoSound = (newLogoSound: LogoSound) => {
-    setLogoSound(newLogoSound);
-    setLogoSoundState(newLogoSound);
-    void playLogoSound();
+  // Turning the sound on plays it, so its volume can be heard right away
+  const toggleLogoSound = (isOn: boolean) => {
+    setLogoSoundEnabled(isOn);
+    setIsLogoSoundOnState(isOn);
+    if (isOn) void playLogoSound();
   };
 
   const changeLogoSoundVolume = (newVolume: number) => {
@@ -207,32 +201,28 @@ const PageSettings = ({
             onChange={changeLogoThrow}
           />
 
-          <FormRadioGroup
-            className={styles.enhancerCheckbox}
-            label={logoSoundLabel}
-            options={LOGO_SOUNDS.map(value => ({ value, label: logoSoundOptionLabels[value] }))}
-            value={logoSound}
-            onChange={changeLogoSound}
-          />
+          {/* Opening bookmarks makes no sound; the volume only matters while the sound is on */}
+          {logoThrow !== 'none' && (
+            <>
+              <FormCheckbox
+                className={styles.enhancerCheckbox}
+                value={isLogoSoundOn}
+                label={logoSoundLabel}
+                onChange={toggleLogoSound}
+              />
 
-          <FormRange
-            className={styles.enhancerCheckbox}
-            label={logoSoundVolumeLabel}
-            value={logoSoundVolume}
-            valueText={formatVolume(logoSoundVolume)}
-            disabled={logoSound === 'none'}
-            onChange={changeLogoSoundVolume}
-          />
+              {isLogoSoundOn && (
+                <FormRange
+                  className={styles.enhancerCheckbox}
+                  label={logoSoundVolumeLabel}
+                  value={logoSoundVolume}
+                  valueText={formatVolume(logoSoundVolume)}
+                  onChange={changeLogoSoundVolume}
+                />
+              )}
+            </>
+          )}
         </section>
-
-        <PilferingRing
-          className={styles.section}
-          titleClassName={styles.sectionTitle}
-          title={pilferingRingTitle}
-          description={pilferingRingDescription}
-          resetLabel={pilferingRingResetLabel}
-        />
-
         <section className={styles.section}>
           <h1 className={styles.sectionTitle}>{backupTitle}</h1>
 
@@ -244,6 +234,13 @@ const PageSettings = ({
             restoreErrorMessage={restoreBackupErrorMessage}
           />
         </section>
+
+        <PilferingRing
+          className={styles.section}
+          titleClassName={styles.sectionTitle}
+          title={pilferingRingTitle}
+          resetLabel={pilferingRingResetLabel}
+        />
       </div>
 
       <footer className={styles.footer}>

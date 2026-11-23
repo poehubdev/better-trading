@@ -21,11 +21,9 @@ const meta = {
     logoThrowLabel: '',
     logoThrowOptionLabels: { none: '', logo: '', currency: '' },
     logoSoundLabel: '',
-    logoSoundOptionLabels: { none: '', alert: '' },
     logoSoundVolumeLabel: '',
     formatVolume: volume => `${volume}%`,
     pilferingRingTitle: '',
-    pilferingRingDescription: '',
     pilferingRingResetLabel: '',
     backupTitle: '',
     backupDescription: '',
@@ -324,29 +322,29 @@ const panelBlurMessages = defineMessages({
 });
 
 const logoThrowMessages = defineMessages({
-  'en-US': 'Clicking the logo throws',
-  'fr-FR': 'Cliquer sur le logo lance',
-  'es-ES': 'Al hacer clic en el logo se lanza',
-  'de-DE': 'Klick auf das Logo wirft',
-  'pt-BR': 'Clicar no logo lança',
-  'ru-RU': 'Клик по логотипу бросает',
-  'zh-CN': '点击标志时抛出',
-  'ja-JP': 'ロゴをクリックすると投げるもの',
-  'ko-KR': '로고 클릭 시 던지기',
-  'th-TH': 'คลิกโลโก้เพื่อโยน',
+  'en-US': 'Logo click',
+  'fr-FR': 'Clic sur le logo',
+  'es-ES': 'Clic en el logo',
+  'de-DE': 'Klick aufs Logo',
+  'pt-BR': 'Clique no logo',
+  'ru-RU': 'Клик по логотипу',
+  'zh-CN': '点击标志',
+  'ja-JP': 'ロゴのクリック',
+  'ko-KR': '로고 클릭',
+  'th-TH': 'คลิกโลโก้',
 });
 
 const logoThrowNoneMessages = defineMessages({
-  'en-US': 'Nothing',
-  'fr-FR': 'Rien',
-  'es-ES': 'Nada',
-  'de-DE': 'Nichts',
-  'pt-BR': 'Nada',
-  'ru-RU': 'Ничего',
-  'zh-CN': '无',
-  'ja-JP': 'なし',
-  'ko-KR': '없음',
-  'th-TH': 'ไม่มี',
+  'en-US': 'Bookmarks',
+  'fr-FR': 'Favoris',
+  'es-ES': 'Marcadores',
+  'de-DE': 'Lesezeichen',
+  'pt-BR': 'Favoritos',
+  'ru-RU': 'Закладки',
+  'zh-CN': '书签',
+  'ja-JP': 'ブックマーク',
+  'ko-KR': '북마크',
+  'th-TH': 'บุ๊กมาร์ก',
 });
 
 const logoThrowLogoMessages = defineMessages({
@@ -376,42 +374,16 @@ const logoThrowCurrencyMessages = defineMessages({
 });
 
 const logoSoundMessages = defineMessages({
-  'en-US': 'Sound',
-  'fr-FR': 'Son',
-  'es-ES': 'Sonido',
-  'de-DE': 'Ton',
-  'pt-BR': 'Som',
-  'ru-RU': 'Звук',
-  'zh-CN': '声音',
-  'ja-JP': 'サウンド',
-  'ko-KR': '소리',
-  'th-TH': 'เสียง',
-});
-
-const logoSoundNoneMessages = defineMessages({
-  'en-US': 'None',
-  'fr-FR': 'Aucun',
-  'es-ES': 'Ninguno',
-  'de-DE': 'Keiner',
-  'pt-BR': 'Nenhum',
-  'ru-RU': 'Без звука',
-  'zh-CN': '无',
-  'ja-JP': 'なし',
-  'ko-KR': '없음',
-  'th-TH': 'ไม่มี',
-});
-
-const logoSoundAlertMessages = defineMessages({
-  'en-US': 'Loot alert',
-  'fr-FR': 'Alerte de butin',
-  'es-ES': 'Alerta de botín',
-  'de-DE': 'Beute-Alarm',
-  'pt-BR': 'Alerta de saque',
-  'ru-RU': 'Сигнал лута',
-  'zh-CN': '掉落提示',
-  'ja-JP': 'ドロップ通知',
-  'ko-KR': '전리품 알림',
-  'th-TH': 'แจ้งเตือนของดรอป',
+  'en-US': 'Play a sound',
+  'fr-FR': 'Jouer un son',
+  'es-ES': 'Reproducir un sonido',
+  'de-DE': 'Ton abspielen',
+  'pt-BR': 'Tocar um som',
+  'ru-RU': 'Воспроизводить звук',
+  'zh-CN': '播放音效',
+  'ja-JP': '効果音を鳴らす',
+  'ko-KR': '소리 재생',
+  'th-TH': 'เล่นเสียง',
 });
 
 const logoSoundVolumeMessages = defineMessages({
@@ -513,16 +485,11 @@ const getMessages = (locale: string) => ({
     currency: resolveLocaleValue(locale, logoThrowCurrencyMessages),
   },
   logoSoundLabel: resolveLocaleValue(locale, logoSoundMessages),
-  logoSoundOptionLabels: {
-    none: resolveLocaleValue(locale, logoSoundNoneMessages),
-    alert: resolveLocaleValue(locale, logoSoundAlertMessages),
-  },
   logoSoundVolumeLabel: resolveLocaleValue(locale, logoSoundVolumeMessages),
   formatVolume: (volume: number) => `${volume}%`,
   // ponytail: English only, like githubLinkLabel; add locale maps when the strings are translated
   pilferingRingTitle: "Exile's Pilfering Ring",
-  pilferingRingDescription: 'Counts the currency that dropped when you clicked the logo.',
-  pilferingRingResetLabel: 'Reset the counters',
+  pilferingRingResetLabel: 'Reset',
   backupTitle: resolveLocaleValue(locale, backupTitleMessages),
   backupDescription: resolveLocaleValue(locale, backupDescriptionMessages),
   generateBackupLabel: resolveLocaleValue(locale, generateBackupMessages),

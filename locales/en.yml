@@ -42,17 +42,14 @@ pageSettingsEnhancersRegroupSimilars: Regroup similar results
 pageSettingsAppearanceTitle: Appearance
 pageSettingsPanelBlur: Blur the page behind the panel
 pageSettingsPanelScrollbar: Show the panel scrollbar
-pageSettingsLogoThrow: Clicking the logo throws
-pageSettingsLogoThrowNone: Nothing
+pageSettingsLogoThrow: Logo click
+pageSettingsLogoThrowNone: Bookmarks
 pageSettingsLogoThrowLogo: Logo
 pageSettingsLogoThrowCurrency: Currency
-pageSettingsLogoSound: Sound
-pageSettingsLogoSoundNone: None
-pageSettingsLogoSoundAlert: Loot alert
+pageSettingsLogoSound: Play a sound
 pageSettingsLogoSoundVolume: Volume
 pageSettingsPilferingRingTitle: Exile's Pilfering Ring
-pageSettingsPilferingRingDescription: Counts the currency that dropped when you clicked the logo.
-pageSettingsPilferingRingReset: Reset the counters
+pageSettingsPilferingRingReset: Reset
 pageSettingsBackupTitle: Backup tools
 pageSettingsBackupDescription: Save all your bookmarks to a file, or restore them from one.
 pageSettingsBackupGenerateButton: Save file

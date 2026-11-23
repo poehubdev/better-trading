@@ -8,7 +8,6 @@ import { useEffect, useState } from 'react';
 
 interface PilferingRingProps {
   title: string;
-  description: string;
   resetLabel: string;
   /** Section and title classes of the settings page, so the block looks like its siblings */
   className?: string;
@@ -19,7 +18,7 @@ interface PilferingRingProps {
  * PilferingRing component - the Exile's Pilfering Ring easter egg: how many of each currency
  * the logo has thrown so far. Hidden for games without currency images.
  */
-const PilferingRing = ({ title, description, resetLabel, className, titleClassName }: PilferingRingProps) => {
+const PilferingRing = ({ title, resetLabel, className, titleClassName }: PilferingRingProps) => {
   // The settings stay open while the logo is thrown, so follow the drops live
   const [counts, setCounts] = useState(getCurrencyCounts);
   useEffect(() => subscribeToCurrencyDrops(() => setCounts(getCurrencyCounts())), []);
@@ -31,10 +30,7 @@ const PilferingRing = ({ title, description, resetLabel, className, titleClassNa
     <section className={className}>
       <div className={styles.header}>
         <img className={styles.ring} src={getExtensionUrl('/assets/images/pilfering-ring.png')} alt="" />
-        <div>
-          <h1 className={classnames(titleClassName, styles.title)}>{title}</h1>
-          <p className={styles.description}>{description}</p>
-        </div>
+        <h1 className={classnames(titleClassName, styles.title)}>{title}</h1>
       </div>
 
       <ul className={styles.grid}>

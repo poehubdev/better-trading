@@ -1,27 +1,20 @@
 import { getExtensionUrl } from '@/utils/extension-url';
 import { getLocalValue, setLocalValue } from '@/utils/storage';
 
-/** What a logo throw sounds like (easter egg) */
-type LogoSound = 'none' | 'alert';
-
-const LOGO_SOUNDS: LogoSound[] = ['none', 'alert'];
-const SOUND_FILES: Record<Exclude<LogoSound, 'none'>, string> = {
-  alert: '/assets/sounds/AlertSound_06.ogg',
-};
-// Played on top of the selected sound when a Mirror of Kalandra drops, at the same volume; muted by 'none' too
+// The tink a logo throw makes (easter egg)
+const SOUND_FILE = '/assets/sounds/AlertSound_06.ogg';
+// Played on top of the tink when a Mirror of Kalandra drops, at the same volume; muted with it
 const MIRROR_SOUND_FILE = '/assets/sounds/SH22Mirror.ogg';
 const SOUND_STORAGE_KEY = 'logo-sound';
 const VOLUME_STORAGE_KEY = 'logo-sound-volume';
 const DEFAULT_VOLUME = 60;
 const MAX_PAN_SPREAD = 0.15; // pan spread of a full-power throw; -1 is full left, 1 full right
 
-const getLogoSound = (): LogoSound => {
-  const stored = getLocalValue(SOUND_STORAGE_KEY);
-  return LOGO_SOUNDS.find(sound => sound === stored) ?? 'alert';
-};
+// Stored as 'none' (off) or 'alert' (on), the values of the former sound picker
+const isLogoSoundEnabled = (): boolean => getLocalValue(SOUND_STORAGE_KEY) !== 'none';
 
-const setLogoSound = (sound: LogoSound): void => {
-  setLocalValue(SOUND_STORAGE_KEY, sound);
+const setLogoSoundEnabled = (enabled: boolean): void => {
+  setLocalValue(SOUND_STORAGE_KEY, enabled ? 'alert' : 'none');
 };
 
 /** Volume in percent, 0..100 */
@@ -61,13 +54,12 @@ const prepare = async (path: string) => {
 };
 
 /**
- * Resolves once the selected sound is ready to play without a cold start (never rejects). Await it before the visual
+ * Resolves once the sound is ready to play without a cold start (never rejects). Await it before the visual
  * part of a throw so the animation and the sound begin together.
  */
 const prepareLogoSound = async (mirror = false): Promise<void> => {
-  const sound = getLogoSound();
-  if (sound === 'none' || getLogoSoundVolume() === 0) return;
-  const paths = mirror ? [SOUND_FILES[sound], MIRROR_SOUND_FILE] : [SOUND_FILES[sound]];
+  if (!isLogoSoundEnabled() || getLogoSoundVolume() === 0) return;
+  const paths = mirror ? [SOUND_FILE, MIRROR_SOUND_FILE] : [SOUND_FILE];
   await Promise.all(paths.map(prepare)).catch(() => undefined);
 };
 
@@ -88,27 +80,24 @@ const playClip = async (path: string, volume: number, power: number): Promise<vo
 };
 
 /**
- * Plays the selected sound at the selected volume; silently does nothing if it can't.
+ * Plays the sound at the selected volume; silently does nothing if it can't.
  * `power` (0..1, the throw power) widens the random pan: a weak throw sounds near the centre, a full-power one up to
  * 30% left or right, as if it landed further away. `mirror` adds the Mirror of Kalandra clip.
  */
 const playLogoSound = async (power = 0, mirror = false): Promise<void> => {
-  const sound = getLogoSound();
   const volume = getLogoSoundVolume();
-  if (sound === 'none' || volume === 0) return;
+  if (!isLogoSoundEnabled() || volume === 0) return;
 
-  const paths = mirror ? [SOUND_FILES[sound], MIRROR_SOUND_FILE] : [SOUND_FILES[sound]];
+  const paths = mirror ? [SOUND_FILE, MIRROR_SOUND_FILE] : [SOUND_FILE];
   // Each clip is isolated: a broken one must not silence the other
   await Promise.all(paths.map(path => playClip(path, volume, power)));
 };
 
 export {
-  LOGO_SOUNDS,
-  getLogoSound,
-  setLogoSound,
+  isLogoSoundEnabled,
+  setLogoSoundEnabled,
   getLogoSoundVolume,
   setLogoSoundVolume,
   prepareLogoSound,
   playLogoSound,
 };
-export type { LogoSound };

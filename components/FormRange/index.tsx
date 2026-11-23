@@ -46,6 +46,8 @@ const FormRange: React.FC<FormRangeProps> = ({
         step={step}
         value={value}
         aria-valuetext={valueText}
+        // How much of the track is filled, painted by the stylesheet (Chromium has no progress pseudo-element)
+        style={{ '--fill': `${((value - min) / (max - min)) * 100}%` } as React.CSSProperties}
         disabled={disabled}
         onChange={event => onChange(Number(event.target.value))}
       />

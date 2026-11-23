@@ -1,6 +1,8 @@
 @use '@/styles/variables';
 
 $range-font-size: 13px;
+$range-track-height: 4px;
+$range-thumb-size: 14px;
 
 .wrapper {
   display: flex;
@@ -18,22 +20,71 @@ $range-font-size: 13px;
   font-family: variables.$primary-font;
   font-size: $range-font-size;
   line-height: 1;
-  color: variables.$white;
 }
 
-.input {
-  flex: 1;
-  min-width: 0;
+.label {
   margin: 0;
-  accent-color: variables.$brown;
-  cursor: pointer;
-
-  &:disabled {
-    cursor: default;
-  }
+  font-weight: normal; // the trade site bolds labels globally
+  color: variables.$gray-alt;
 }
 
 .value {
   min-width: 4ch;
   text-align: right;
+  color: variables.$white;
+}
+
+// Dark track with a square gold thumb, like the segments and buttons
+.input {
+  flex: 1;
+  min-width: 0;
+  height: $range-thumb-size + 2px;
+  margin: 0;
+  background: transparent;
+  appearance: none;
+  cursor: pointer;
+
+  &:disabled {
+    cursor: default;
+  }
+
+  // The part from min up to the value is gold, the rest stays gray
+  &::-webkit-slider-runnable-track {
+    height: $range-track-height;
+    background: linear-gradient(to right, variables.$gold-alt var(--fill, 0%), variables.$gray var(--fill, 0%));
+  }
+
+  &::-moz-range-track {
+    height: $range-track-height;
+    background-color: variables.$gray;
+  }
+
+  &::-moz-range-progress {
+    height: $range-track-height;
+    background-color: variables.$gold-alt;
+  }
+
+  &::-webkit-slider-thumb {
+    width: $range-thumb-size;
+    height: $range-thumb-size;
+    margin-top: ($range-track-height - $range-thumb-size) * 0.5;
+    border: 1px solid variables.$gold-light;
+    border-radius: 0;
+    background-color: variables.$gold;
+    appearance: none;
+  }
+
+  &::-moz-range-thumb {
+    box-sizing: border-box;
+    width: $range-thumb-size;
+    height: $range-thumb-size;
+    border: 1px solid variables.$gold-light;
+    border-radius: 0;
+    background-color: variables.$gold;
+  }
+
+  &:focus-visible {
+    outline: 1px solid variables.$white;
+    outline-offset: 2px;
+  }
 }
