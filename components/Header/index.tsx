@@ -14,7 +14,7 @@ import { playLogoSound, prepareLogoSound } from '@/utils/logo-sound';
 import { MIRROR_IMAGE, getLogoThrow, pickCurrencyImage } from '@/utils/logo-throw';
 import { countCurrencyDrop } from '@/utils/pilfering-ring';
 import { collapseSidePanel, initializeSidePanelCollapse } from '@/utils/side-panel-collapse';
-import { useCallback, useEffect } from 'react';
+import { useCallback, useEffect, useState } from 'react';
 import type { FC, MouseEvent } from 'react';
 
 // Pop played by the original logo when it "launches" the clone. One is picked at random per click.
@@ -230,6 +230,9 @@ const Header: FC<HeaderProps> = ({
   onBrandClick,
   onToggleClick,
 }) => {
+  // Currency mode: the currency sitting in the logo's spot, thrown by the next click. Null until the first click.
+  const [heldCurrency, setHeldCurrency] = useState<string | null>(null);
+
   useEffect(() => {
     initializeSidePanelCollapse();
   }, []);
@@ -248,8 +251,9 @@ const Header: FC<HeaderProps> = ({
         return;
       }
       const power = nextThrowPower();
-      // A game without currency images yet falls back to the logo
-      const currency = logoThrow === 'currency' ? pickCurrencyImage() : null;
+      // Throws the held currency (a fresh pick while the logo still shows). A game without currency images yet falls
+      // back to the logo.
+      const currency = logoThrow === 'currency' ? (heldCurrency ?? pickCurrencyImage()) : null;
       const isMirror = !!currency?.endsWith(`/${MIRROR_IMAGE}`);
       // Cold audio context: wait for it before the animation, otherwise the sound lags and its start is clipped
       await prepareLogoSound(isMirror);
@@ -258,12 +262,17 @@ const Header: FC<HeaderProps> = ({
         // Exile's Pilfering Ring in the settings counts what dropped
         if (currency) countCurrencyDrop(currency);
       }
+      // The next currency takes the thrown one's spot (after the clone above was made from it)
+      if (currency) setHeldCurrency(pickCurrencyImage());
       void playLogoSound(power, isMirror);
     },
-    [onBrandClick],
+    [heldCurrency, onBrandClick],
   );
 
-  const logoUrl = getExtensionUrl('/assets/images/logo.svg');
+  // Back to the logo once the throw is switched off currency in the settings
+  const logoUrl = getExtensionUrl(
+    heldCurrency && getLogoThrow() === 'currency' ? heldCurrency : '/assets/images/logo.svg',
+  );
 
   return (
     <div className={styles.container}>
