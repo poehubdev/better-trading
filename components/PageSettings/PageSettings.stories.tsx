@@ -551,7 +551,7 @@ export const Default: Story = {
     return (
       <PageSettings
         appVersion="2.5.3"
-        githubUrl="https://github.com/message/better-trading"
+        githubUrl="https://github.com/poehubdev/better-trading"
         {...messages}
         data-locale={globals.locale}
       />
@@ -581,7 +581,7 @@ export const WithChangelog: Story = {
     return (
       <PageSettings
         appVersion="2.5.3"
-        githubUrl="https://github.com/message/better-trading"
+        githubUrl="https://github.com/poehubdev/better-trading"
         currentChangelog={{
           slug: '2.0.0',
           markdown: changelogMarkdown,
@@ -615,7 +615,7 @@ export const Complete: Story = {
     return (
       <PageSettings
         appVersion="2.5.3"
-        githubUrl="https://github.com/message/better-trading"
+        githubUrl="https://github.com/poehubdev/better-trading"
         discordUrl="https://discord.gg/example"
         chaosRecipeOverlayUrl="https://example.com"
         currentChangelog={{

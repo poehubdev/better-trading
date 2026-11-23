@@ -142,7 +142,7 @@ Before the first MCP call, check the setup and report what's missing instead of 
 
 ### Issue tracker
 
-Issues live in GitHub Issues for `message/better-trading` (via the `gh` CLI). See `docs/agents/issue-tracker.md`.
+Issues live in GitHub Issues for `poehubdev/better-trading` (via the `gh` CLI). See `docs/agents/issue-tracker.md`.
 
 ### Triage labels
 
