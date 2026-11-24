@@ -2,8 +2,9 @@
 import { toExportString } from './index';
 import { decodeBuild } from './build';
 import { matchMod } from './mods';
+import { inPool, modPool } from './pools';
 import { decodeExportString, fixture } from './test-utils';
-import { describe, expect, it } from 'vitest';
+import { describe, expect, it, vi } from 'vitest';
 import { deflateSync } from 'node:zlib';
 
 const FIXTURES = {
@@ -422,6 +423,62 @@ describe('Base jewel mod types', () => {
   });
 });
 
+describe('Mod Pool', () => {
+  const belt = (implicits: string[], base = 'Leather Belt') =>
+    singleItem(
+      `Rarity: RARE\nDoom Lock\n${base}\nItem Level: 84\nImplicits: ${implicits.length}\n${implicits.join('\n')}`,
+    ).then(folder => folder.trades[0]!.query);
+  const idsOf = (query: any): string[] =>
+    (query.stats ?? []).flatMap((group: any) => group.filters.map((filter: any) => filter.id));
+
+  it("leaves out another base's implicit", async () => {
+    // Has # Abyssal Sockets is a Stygian Vise implicit, never a Leather Belt one
+    expect(idsOf(await belt(['Has 1 Abyssal Socket']))).not.toContain('implicit.stat_3527617737');
+    expect(idsOf(await belt(['Has 1 Abyssal Socket'], 'Stygian Vise'))).toContain('implicit.stat_3527617737');
+  });
+
+  it('keeps the corruptions the base can roll and leaves out the others', async () => {
+    // +# to Level of all Fire Spell Skill Gems is a weapon corruption
+    const ids = idsOf(await belt(['Bleeding cannot be inflicted on you', '+1 to Level of all Fire Spell Skill Gems']));
+    expect(ids).toContain('implicit.stat_1901158930');
+    expect(ids.some(id => id.endsWith('stat_591105508'))).toBe(false);
+  });
+
+  it('keeps the enchants the base can have and leaves out the others', async () => {
+    const ids = idsOf(
+      await belt([
+        '{crafted}Recover 2% of Life when you Kill an Enemy while you have Rage',
+        '{crafted}Regenerate 1% of Life per second if you were Hit Recently',
+      ]),
+    );
+    expect(ids).toContain('enchant.stat_3305072079');
+    expect(ids.some(id => id.endsWith('stat_1122635070'))).toBe(false);
+  });
+
+  it('finds the Mod Pool of a base PoB names with a variant', async () => {
+    expect(modPool('Two-Stone Ring (Fire/Lightning)')).toBe(modPool('Two-Stone Ring'));
+    expect(modPool('Two-Stone Ring')).toBeDefined();
+  });
+
+  it('checks nothing on a base missing from the Mod Pools, and warns', async () => {
+    const warn = vi.spyOn(console, 'warn').mockImplementation(() => {});
+    const ids = idsOf(await belt(['Has 1 Abyssal Socket'], 'Imaginary Belt'));
+    expect(ids).toContain('implicit.stat_3527617737');
+    expect(warn).toHaveBeenCalledWith(expect.stringContaining('Imaginary Belt'));
+    warn.mockRestore();
+  });
+
+  it("checks a unique's implicits and enchants, not its explicit mods", async () => {
+    const { trades } = await singleItem(
+      `Rarity: UNIQUE\nWatcher's Eye\nPrismatic Jewel\nItem Level: 84\nImplicits: 2\nCorrupted Blood cannot be inflicted on you\n+1 to Maximum Endurance Charges\n6% increased maximum Life\nCorrupted`,
+    );
+    const ids = idsOf(trades[0]!.query);
+    expect(ids).toContain('implicit.stat_1658498488');
+    expect(ids.some(id => id.endsWith('stat_1515657623'))).toBe(false);
+    expect(ids).toContain('explicit.stat_983749596');
+  });
+});
+
 describe('Forbidden Flame and Flesh', () => {
   const pair = ['explicit.stat_2460506030', 'explicit.stat_1190333629'].map(id => ({ id, value: { option: 3184 } }));
 
@@ -711,12 +768,14 @@ describe('Aggregate Jewel Trade', () => {
     const [group, ...others] = trade!.query.stats;
     expect(others.map((other: any) => other.type)).toEqual(['weight']);
     expect(group.type).toBe('count');
-    // Each distinct mod in its explicit and fractured variants (an implicit is only on a corrupted jewel), with no value
-    const expected = [...new Set([LIFE, CRIT, SPEED, RES].flatMap(line => matchMod(line)!.ids))].filter(id =>
-      /^(explicit|fractured)\./.test(id),
+    // Each distinct mod in its explicit and fractured variants, and as an implicit where a jewel can have it (attack
+    // speed and lightning resistance are Synthesis implicits), with no value
+    const pool = modPool('Viridian Jewel')!;
+    const expected = [...new Set([LIFE, CRIT, SPEED, RES].flatMap(line => matchMod(line)!.ids))].filter(
+      id => /^(explicit|fractured)\./.test(id) || (id.startsWith('implicit.') && inPool(pool, id)),
     );
     expect(group.filters).toEqual(expected.map(id => ({ id })));
-    expect(new Set(ids(group).map((id: string) => id.split('.')[0]))).toEqual(new Set(['explicit', 'fractured']));
+    expect(ids(group)).toContain('implicit.stat_681332047');
   });
 
   it('adds the implicit variant only of the mods a corrupted jewel can have as an implicit', async () => {
@@ -848,7 +907,8 @@ describe('Weight Group', () => {
     expect(stats.at(-1)).toEqual({
       type: 'weight',
       value: { min: 35.2 },
-      filters: ['explicit', 'implicit', 'fractured', 'enchant'].map(type => ({
+      // An amulet cannot have it as an implicit or enchant: those variants are left out
+      filters: ['explicit', 'fractured'].map(type => ({
         id: `${type}.stat_3988349707`,
         value: { weight: 1 },
       })),

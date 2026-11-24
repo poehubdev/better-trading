@@ -1,5 +1,6 @@
-// Test helpers for the PoB import, ported from pob2bt (test/decode.ts). Importing this loads the stat data
+// Test helpers for the PoB import, ported from pob2bt (test/decode.ts). Importing this loads the stat data and Mod Pools
 import { loadStats } from './mods';
+import { loadPools } from './pools';
 import { Base64 } from 'js-base64';
 import { readFile } from 'node:fs/promises';
 
@@ -18,6 +19,7 @@ interface DecodedFolder {
 }
 
 loadStats(await readFile(new URL('../../public/pob-stats.ndjson', import.meta.url), 'utf8'));
+loadPools(JSON.parse(await readFile(new URL('../../public/pob-pools.json', import.meta.url), 'utf8')));
 
 /** Decodes a format 3 Export String back into its Folder and each Trade's Search Query */
 const decodeExportString = (exportString: string): DecodedFolder => {

@@ -1,9 +1,11 @@
 // Ported from pob2bt (src/index.ts): Build Code to a BT Export String. Skill Gem Trades (`--gems`) are left out
 import { decodeBuild } from './build';
 import { matchMod, matchTimeless, uniqueInfo } from './mods';
+import { inPool, modPool, tierMaxes } from './pools';
 import { Base64 } from 'js-base64';
 import type { BuildItem, Influence, Item, Mod } from './build';
 import type { ModMatch } from './mods';
+import type { ModPool } from './pools';
 
 interface Result {
   exportString: string;
@@ -89,40 +91,6 @@ const PSEUDO_TOTALS: Record<string, string[]> = {
   stat_2300185227: ['dexterity', 'intelligence'],
 };
 
-// The fewest passives each cluster size is sold with: a jewel with the fewest is wanted at most that, any more at least that
-const FEWEST_PASSIVES: Record<string, number> = { Large: 8, Medium: 4, Small: 2 };
-
-// What a Viridian, Cobalt, Crimson or Prismatic Jewel can get from corruption (poedb); no other mod is ever its implicit
-const JEWEL_CORRUPTION_LINES = [
-  'Corrupted Blood cannot be inflicted on you',
-  'You cannot be Hindered',
-  '6% increased Effect of Non-Damaging Ailments',
-  '4% increased Area of Effect',
-  '9% increased Global Critical Strike Chance',
-  '4% increased Damage',
-  'You cannot be Maimed',
-  'Minions deal 4% increased Damage',
-  '2% increased Reservation Efficiency of Skills',
-  'You cannot be Cursed with Silence',
-  'Damage Penetrates 1% Fire Resistance',
-  'Damage Penetrates 1% Cold Resistance',
-  'Damage Penetrates 1% Lightning Resistance',
-  'Damage Penetrates 1% Elemental Resistances',
-  'Hits have 12% chance to ignore Enemy Physical Damage Reduction',
-  '22% reduced Ignite Duration on you',
-  '22% reduced Effect of Chill on you',
-  '22% reduced Effect of Shock on you',
-  '22% reduced Poison Duration on you',
-  '22% reduced Bleed Duration on you',
-  '22% reduced Effect of Curses on you',
-];
-// Immunities are in no jewel's normal mod pool: only corruption gives them
-const JEWEL_IMPLICIT_ONLY_LINES = [
-  'Corrupted Blood cannot be inflicted on you',
-  'You cannot be Hindered',
-  'You cannot be Maimed',
-  'You cannot be Cursed with Silence',
-];
 const BASE_JEWELS = new Set(['Cobalt Jewel', 'Crimson Jewel', 'Viridian Jewel', 'Prismatic Jewel']);
 
 const WEAPON_CATEGORIES: Record<string, string> = {
@@ -158,16 +126,15 @@ const scaled = (value: number) => Math.max(Math.floor(value * MIN_FACTOR), Math.
 // A weight group sums fractions, so its minimum stays fractional
 const scaledSum = (value: number) => Math.round(value * MIN_FACTOR * 100) / 100;
 
-/** Implicit trade IDs of mod lines; needs the stats loaded, so it runs on first use */
-const implicitIds = (lines: string[]) =>
-  new Set(lines.flatMap(line => matchMod(line)?.ids.filter(id => id.startsWith('implicit.')) ?? []));
-let jewelImplicits: { corruption: Set<string>; only: Set<string> } | undefined;
-
 /** Keeps the trade stat IDs of the given modifier types (`enchant` in `enchant.stat_123`), or all if there are none */
 const onlyTypes = (ids: string[], types: string[]) => {
   const kept = ids.filter(id => types.includes(id.split('.')[0]!));
   return kept.length ? kept : ids;
 };
+
+/** Drops the IDs the base can never carry (ADR 0003); `only` limits the check to those modifier types */
+const possible = (ids: string[], pool: ModPool | undefined, only?: string[]) =>
+  pool ? ids.filter(id => (only && !only.includes(id.split('.')[0]!)) || inPool(pool, id)) : ids;
 
 /** Option stats are `<id>|<option>`; the rest take the minimum if there is one */
 const statFilter = (id: string, value: StatValue): StatFilter => {
@@ -176,11 +143,15 @@ const statFilter = (id: string, value: StatValue): StatFilter => {
   return value ? { id, value } : { id };
 };
 
-/** The limit on the "Adds # Passive Skills" enchant of a cluster jewel of this base */
-const passiveCount = (text: string, base: string): StatValue => {
+/**
+ * The limit on the "Adds # Passive Skills" enchant (`id`) of a cluster jewel of this base: a jewel with the fewest
+ * passives its base allows (its Mod Pool's lowest Tier) is wanted at most that, any more at least that
+ */
+const passiveCount = (text: string, base: string, id: string): StatValue => {
   const count = Number(/^Adds (\d+) Passive Skills$/.exec(text)?.[1]);
   if (!count) return undefined;
-  return count <= (FEWEST_PASSIVES[base.split(' ')[0]!] ?? 0) ? { max: count } : { min: count };
+  const fewest = Math.min(...tierMaxes(base, id).filter(Boolean));
+  return count <= fewest && Number.isFinite(fewest) ? { max: count } : { min: count };
 };
 
 /** Matches the mod lines of an item, joining the stats that span lines */
@@ -211,17 +182,17 @@ const matchedMods = function* (
   }
 };
 
-/** One `count` group per matched mod over all its type variants; implicits on, explicits off unless `allOn` */
-const statGroups = (mods: Mod[], reportUnmatched: Report, allOn = false): StatGroup[] =>
-  [...matchedMods(mods, reportUnmatched)].map(({ match, implicit }) => {
+/**
+ * A unique's `count` group per matched mod, all on. Its mod is of one known type, so it is a single stat; the base's Mod
+ * Pool checks only its implicits and enchants, since a unique's explicit mods are its own
+ */
+const statGroups = (mods: Mod[], reportUnmatched: Report, pool: ModPool | undefined): StatGroup[] =>
+  [...matchedMods(mods, reportUnmatched)].flatMap(({ match, implicit }) => {
     const value = match.value === undefined ? undefined : { min: scaled(match.value) };
-    return {
-      type: 'count',
-      value: { min: 1 },
-      disabled: !(implicit || allOn),
-      // A unique's mod is of one known type, so it is a single stat
-      filters: onlyTypes(match.ids, [implicit ? 'implicit' : 'explicit']).map(id => statFilter(id, value)),
-    };
+    const ids = possible(onlyTypes(match.ids, [implicit ? 'implicit' : 'explicit']), pool, ['implicit', 'enchant']);
+    return ids.length
+      ? [{ type: 'count' as const, value: { min: 1 }, disabled: false, filters: ids.map(id => statFilter(id, value)) }]
+      : [];
   });
 
 /**
@@ -248,6 +219,7 @@ const andFirst = (groups: StatGroup[]): StatGroup[] => {
 const rareStatGroups = (mods: Mod[], influences: StatFilter[], reportUnmatched: Report, base?: string) => {
   const jewel = !!base?.endsWith('Jewel');
   const cluster = !!base?.endsWith('Cluster Jewel');
+  const pool = base ? modPool(base) : undefined;
   const totals = new Map<string, number>();
   const groups: StatGroup[] = [];
   // A cluster jewel's enchants all have to be there: they share the and group of the totals
@@ -259,10 +231,12 @@ const rareStatGroups = (mods: Mod[], influences: StatFilter[], reportUnmatched: 
     // An enchant is never rolled: the exact value is what the jewel is worth
     const enchant = (cluster && implicit) || tagged;
     // A jewel has no crafted mods: its implicit block holds enchants (cluster) or a corrupted implicit
-    const ids =
+    const typed =
       jewel || enchant
         ? onlyTypes(match.ids, enchant ? ['enchant'] : implicit ? ['implicit'] : ['explicit', 'fractured'])
         : match.ids;
+    const ids = possible(typed, pool);
+    if (!ids.length) continue;
     const value = match.value;
     // ponytail: negative rolls have no value and stay single-mod groups, so a total may overshoot such an item
     const folded = !enchant && value !== undefined && PSEUDO_TOTALS[ids[0]!.split('.')[1]!];
@@ -271,7 +245,7 @@ const rareStatGroups = (mods: Mod[], influences: StatFilter[], reportUnmatched: 
       continue;
     }
     const min =
-      (cluster && passiveCount(text, base!)) ||
+      (cluster && passiveCount(text, base!, ids[0]!)) ||
       (value === undefined ? undefined : { min: enchant ? value : scaled(value) });
     if (enchant) {
       // A flask's enchant is a bonus, not a requirement: switched off
@@ -369,7 +343,8 @@ const searchQuery = ({ slot, item }: BuildItem, reportUnmatched: Report) => {
       !timeless &&
       (jewel || (!!fixed && !mod.implicit && !matchMod(mod.text)?.ids.some(id => fixed.has(id.split('.')[1]!))));
     const identity = item.mods.filter(mod => mod.mutated || random(mod));
-    const stats = statGroups(identity, reportUnmatched, true);
+    const pool = item.base ? modPool(item.base) : undefined;
+    const stats = statGroups(identity, reportUnmatched, pool);
     // A flask's enchant is not part of its identity but makes a find worth more: the exact value, switched off
     const enchants = slot.startsWith('Flask')
       ? [
@@ -378,7 +353,7 @@ const searchQuery = ({ slot, item }: BuildItem, reportUnmatched: Report) => {
             reportUnmatched,
           ),
         ].flatMap(({ match }) =>
-          onlyTypes(match.ids, ['enchant']).map(id => ({
+          possible(onlyTypes(match.ids, ['enchant']), pool).map(id => ({
             ...statFilter(id, match.value === undefined ? undefined : { min: match.value }),
             disabled: true,
           })),
@@ -408,12 +383,14 @@ const searchQuery = ({ slot, item }: BuildItem, reportUnmatched: Report) => {
   return query;
 };
 
-const aggregateIds = (ids: string[]) => {
-  jewelImplicits ??= { corruption: implicitIds(JEWEL_CORRUPTION_LINES), only: implicitIds(JEWEL_IMPLICIT_ONLY_LINES) };
-  const { corruption, only } = jewelImplicits;
-  const implicit = ids.filter(id => only.has(id));
-  return implicit.length ? implicit : ids.filter(id => /^(explicit|fractured)\./.test(id) || corruption.has(id));
-};
+/** A base jewel mod as an explicit, fractured or corrupted implicit, as far as the jewel's Mod Pool allows each */
+const aggregateIds = (ids: string[], pool: ModPool | undefined) =>
+  pool
+    ? possible(
+        ids.filter(id => /^(explicit|fractured|implicit)\./.test(id)),
+        pool,
+      )
+    : ids.filter(id => /^(explicit|fractured)\./.test(id));
 
 /** The Aggregate Jewel: one Trade for any base jewel with enough of the mods found on the build's base jewels */
 const aggregateJewel = (items: BuildItem[]) => {
@@ -432,7 +409,8 @@ const aggregateJewel = (items: BuildItem[]) => {
       continue;
     // Unmatched lines are already reported by the jewel's own Trade
     const mods = [...matchedMods(item.mods, () => {})];
-    const matches = mods.map(({ match }) => aggregateIds(match.ids)).filter(ids => ids.length);
+    const pool = modPool(item.base);
+    const matches = mods.map(({ match }) => aggregateIds(match.ids, pool)).filter(ids => ids.length);
     for (const ids of matches) ids.forEach(id => union.add(id));
     // The weight group is worth the most valuable jewel, counting only mods that roll (as on a rare)
     let sum = 0;

@@ -38,5 +38,16 @@ The list of recent searches the user ran on the trade site, recorded automatical
 **Pinned Item**:
 An item from the trade results that the user pinned to keep it in view across searches.
 
+**Mod Pool**:
+Every trade stat, per modifier type (explicit, implicit, fractured, crafted, enchant, corruption, Synthesis implicit), that an item of a given base can carry, from any source (base, influences, crafting, essences, ...). A search filter outside the item's Mod Pool can never match.
+_Avoid_: mod list, possible mods
+
+**Tier**:
+One value range of a modifier, unlocked from a minimum item level. A roll falls into exactly one Tier.
+
+**Roll Floor**:
+How far below the build item's roll a search filter's minimum sits: exact, a percentage of the roll, or none (the modifier only).
+_Avoid_: min factor
+
 **Item Enhancer**:
 A toggleable tweak applied to rows of the trade results (pinning, equivalent pricings, regrouping similar items, highlighting stat filters, maximum sockets).

@@ -1,5 +1,6 @@
 import { toExportString } from '@/services/pob';
 import { loadStats } from '@/services/pob/mods';
+import { loadPools } from '@/services/pob/pools';
 
 interface PoeNinjaMessage {
   query: 'poe-ninja';
@@ -35,14 +36,22 @@ const handlePoeNinjaRequest = async (resource: string): Promise<unknown> => {
   }
 };
 
-// Loaded on the first import only; a failed load is retried on the next one
+// Stat data and Mod Pools, loaded on the first import only; a failed load is retried on the next one
 let pobStats: Promise<void> | undefined;
 
 /** Path of Building Build Code to an Export String; null when the code is not a build */
 const handlePobImport = async (buildCode: string): Promise<string | null> => {
-  pobStats ??= fetch(browser.runtime.getURL('/pob-stats.ndjson'))
-    .then(response => response.text())
-    .then(loadStats)
+  pobStats ??= Promise.all([
+    fetch(browser.runtime.getURL('/pob-stats.ndjson'))
+      .then(response => response.text())
+      .then(loadStats),
+    // Without Mod Pools the import still works, unchecked
+    fetch(browser.runtime.getURL('/pob-pools.json'))
+      .then(response => response.json())
+      .then(loadPools)
+      .catch(error => console.warn('[pob-import] Mod Pools not loaded', error)),
+  ])
+    .then(() => {})
     .catch(error => {
       pobStats = undefined;
       throw error;
