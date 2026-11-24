@@ -1,7 +1,7 @@
 // Ported from pob2bt (src/index.ts): Build Code to a BT Export String. Skill Gem Trades (`--gems`) are left out
 import { decodeBuild } from './build';
 import { matchMod, matchTimeless, uniqueInfo } from './mods';
-import { inPool, modPool, tierMaxes } from './pools';
+import { affixesOf, inPool, modPool, tierMaxes } from './pools';
 import { Base64 } from 'js-base64';
 import type { BuildItem, Influence, Item, Mod } from './build';
 import type { ModMatch } from './mods';
@@ -158,12 +158,12 @@ const passiveCount = (text: string, base: string, id: string): StatValue => {
 const matchedMods = function* (
   mods: Mod[],
   reportUnmatched: Report,
-): Generator<{ match: ModMatch; implicit: boolean; enchant: boolean; text: string }> {
+): Generator<{ match: ModMatch; text: string } & Pick<Mod, 'implicit' | 'enchant' | 'crafted' | 'fractured'>> {
   // Lines already joined to an earlier one that was not right before them
   const joined = new Set<number>();
   for (let i = 0; i < mods.length; i++) {
     if (joined.has(i)) continue;
-    const { text, implicit, enchant } = mods[i]!;
+    const { text, implicit, enchant, crafted, fractured } = mods[i]!;
     let match = matchMod(text);
     let line = text;
     // Some stats span two lines (cluster jewel enchants) or three (Impossible Escape)
@@ -178,7 +178,7 @@ const matchedMods = function* (
       if (match) joined.add(j);
     }
     if (!match) reportUnmatched(text);
-    else yield { match, implicit, enchant, text: line };
+    else yield { match, implicit, enchant, crafted, fractured, text: line };
   }
 };
 
@@ -214,7 +214,9 @@ const andFirst = (groups: StatGroup[]): StatGroup[] => {
 
 /**
  * Rare, magic and flask stats: an `and` group of pseudo totals and cluster enchants (on) and influences (off), `count`
- * groups for the other mods, and a `weight` group of the explicit ones
+ * groups for the other mods, and a `weight` group of the explicit ones. A crafted mod is wanted in any rolled or crafted
+ * form, or as an empty affix slot to craft it, and stays out of the totals and the weighted sum; a fractured one is
+ * wanted as an explicit or fractured mod
  */
 const rareStatGroups = (mods: Mod[], influences: StatFilter[], reportUnmatched: Report, base?: string) => {
   const jewel = !!base?.endsWith('Jewel');
@@ -227,19 +229,29 @@ const rareStatGroups = (mods: Mod[], influences: StatFilter[], reportUnmatched: 
   // Keyed by id: two lines of one stat must not weigh it twice
   const weighted = new Map<string, StatFilter>();
   let weightSum = 0;
-  for (const { match, implicit, enchant: tagged, text } of matchedMods(mods, reportUnmatched)) {
+  for (const { match, implicit, enchant: tagged, crafted, fractured, text } of matchedMods(mods, reportUnmatched)) {
     // An enchant is never rolled: the exact value is what the jewel is worth
     const enchant = (cluster && implicit) || tagged;
     // A jewel has no crafted mods: its implicit block holds enchants (cluster) or a corrupted implicit
     const typed =
-      jewel || enchant
-        ? onlyTypes(match.ids, enchant ? ['enchant'] : implicit ? ['implicit'] : ['explicit', 'fractured'])
+      jewel || enchant || crafted || fractured
+        ? onlyTypes(
+            match.ids,
+            enchant
+              ? ['enchant']
+              : implicit
+                ? ['implicit']
+                : crafted
+                  ? ['explicit', 'fractured', 'crafted']
+                  : ['explicit', 'fractured'],
+          )
         : match.ids;
     const ids = possible(typed, pool);
     if (!ids.length) continue;
     const value = match.value;
     // ponytail: negative rolls have no value and stay single-mod groups, so a total may overshoot such an item
-    const folded = !enchant && value !== undefined && PSEUDO_TOTALS[ids[0]!.split('.')[1]!];
+    const stat = ids[0]!.split('|')[0]!.split('.')[1]!;
+    const folded = !enchant && !crafted && value !== undefined && PSEUDO_TOTALS[stat];
     if (folded) {
       for (const total of folded) totals.set(total, (totals.get(total) ?? 0) + value);
       continue;
@@ -252,8 +264,18 @@ const rareStatGroups = (mods: Mod[], influences: StatFilter[], reportUnmatched: 
       enchants.push(...ids.map(id => ({ ...statFilter(id, min), ...(base?.endsWith('Flask') && { disabled: true }) })));
       continue;
     }
-    groups.push({ type: 'count', value: { min: 1 }, disabled: false, filters: ids.map(id => statFilter(id, min)) });
-    if (!implicit && value !== undefined && !ids.some(id => id.includes('|'))) {
+    // ponytail: each crafted mod asks for one empty slot, so one slot also stands in for several crafts (multimod);
+    // count the crafts per affix if that lets bad bases through
+    const emptySlots = crafted
+      ? affixesOf(base, stat).map(affix => ({ id: `pseudo.pseudo_number_of_empty_${affix}_mods`, value: { min: 1 } }))
+      : [];
+    groups.push({
+      type: 'count',
+      value: { min: 1 },
+      disabled: false,
+      filters: [...ids.map(id => statFilter(id, min)), ...emptySlots],
+    });
+    if (!implicit && !crafted && value !== undefined && !ids.some(id => id.includes('|'))) {
       for (const id of ids) weighted.set(id, { id, value: { weight: 1 } });
       weightSum += value;
     }
@@ -339,8 +361,10 @@ const searchQuery = ({ slot, item }: BuildItem, reportUnmatched: Report) => {
     // unique jewel, as even a fixed one may roll what sets the price (Voices sockets). A Timeless one goes by its seed
     const jewel = !!item.base?.endsWith('Jewel');
     const fixed = info?.fixed && new Set(info.fixed);
+    // A bench craft is the owner's addition, not part of the unique
     const random = (mod: Mod) =>
       !timeless &&
+      !mod.crafted &&
       (jewel || (!!fixed && !mod.implicit && !matchMod(mod.text)?.ids.some(id => fixed.has(id.split('.')[1]!))));
     const identity = item.mods.filter(mod => mod.mutated || random(mod));
     const pool = item.base ? modPool(item.base) : undefined;

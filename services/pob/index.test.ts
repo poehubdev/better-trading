@@ -491,6 +491,67 @@ describe('Mod Pool', () => {
   });
 });
 
+describe('Crafted and fractured mods', () => {
+  const stats = (...mods: string[]) =>
+    singleItem(
+      `Rarity: RARE\nDoom Lock\nLeather Belt\nItem Level: 84\nImplicits: 0\n${mods.join('\n')}\n15% increased Flask Effect Duration`,
+    ).then(folder => folder.trades[0]!.query.stats as any[]);
+  const groupOf = (groups: any[], stat: string) =>
+    groups.find(group => group.type !== 'weight' && group.filters.some((filter: any) => filter.id.endsWith(stat)));
+
+  it('searches a crafted prefix in any rolled or crafted form, or an empty prefix to craft it', async () => {
+    const groups = await stats('{crafted}+40 to maximum Life');
+    expect(groupOf(groups, 'stat_3299347043')).toEqual({
+      type: 'count',
+      value: { min: 1 },
+      disabled: false,
+      filters: [
+        { id: 'explicit.stat_3299347043', value: { min: 32 } },
+        { id: 'fractured.stat_3299347043', value: { min: 32 } },
+        { id: 'crafted.stat_3299347043', value: { min: 32 } },
+        { id: 'pseudo.pseudo_number_of_empty_prefix_mods', value: { min: 1 } },
+      ],
+    });
+    expect(JSON.stringify(groups)).not.toContain('pseudo_total_life');
+  });
+
+  it('offers an empty suffix for a crafted suffix', async () => {
+    const filters = groupOf(await stats('{crafted}+25% to Fire Resistance'), 'stat_3372524247').filters;
+    expect(filters.at(-1)).toEqual({ id: 'pseudo.pseudo_number_of_empty_suffix_mods', value: { min: 1 } });
+    expect(filters.map((filter: any) => filter.id)).not.toContain('pseudo.pseudo_number_of_empty_prefix_mods');
+  });
+
+  it('leaves a crafted mod out of the weighted sum', async () => {
+    const weight = (await stats('{crafted}+40 to maximum Life', '+100 to Armour')).find(
+      group => group.type === 'weight',
+    );
+    expect(weight.filters.map((filter: any) => filter.id)).not.toContain('crafted.stat_3299347043');
+    expect(weight.filters.some((filter: any) => filter.id.endsWith('stat_3299347043'))).toBe(false);
+    // Armour and the flask duration line: (100 + 15) × 0.8
+    expect(weight.value).toEqual({ min: 92 });
+  });
+
+  it('leaves a crafted mod out of the identity of a unique', async () => {
+    const { trades } = await singleItem(
+      // Every explicit mod of a Bound By Destiny is random, so it would be searched
+      `Rarity: UNIQUE\nBound By Destiny\nLeather Belt\nItem Level: 84\nImplicits: 0\n{crafted}+25% to Fire Resistance`,
+    );
+    expect(trades[0]!.query).toEqual({ status: { option: 'securable' }, name: 'Bound By Destiny' });
+  });
+
+  it('searches a fractured mod as an explicit or fractured one', async () => {
+    expect(groupOf(await stats('{fractured}+100 to Armour'), 'stat_809229260')).toEqual({
+      type: 'count',
+      value: { min: 1 },
+      disabled: false,
+      filters: [
+        { id: 'explicit.stat_809229260', value: { min: 80 } },
+        { id: 'fractured.stat_809229260', value: { min: 80 } },
+      ],
+    });
+  });
+});
+
 describe('Forbidden Flame and Flesh', () => {
   const pair = ['explicit.stat_2460506030', 'explicit.stat_1190333629'].map(id => ({ id, value: { option: 3184 } }));
 
@@ -930,16 +991,17 @@ describe('Weight Group', () => {
   it('sums the values of several mods', async () => {
     const { stats } = await tradeOf('righteous-fire-chieftain-3.30.txt', 'Gloves — Honour Mitts');
     const weight = stats.find((group: any) => group.type === 'weight');
-    // Life regeneration rate 20, area of effect 16, area damage 20, damage during flask effect 28
-    expect(weight.value).toEqual({ min: 67.2 });
+    // Life regeneration rate 20, area of effect 16, area damage 20; damage during flask effect 28 is crafted
+    expect(weight.value).toEqual({ min: 44.8 });
     expect(weight.filters.every((filter: any) => filter.value.weight === 1)).toBe(true);
   });
 
   it('leaves out implicits and mods without a value', async () => {
     const { stats } = await tradeOf('righteous-fire-chieftain-3.30.txt', 'Ring 1 — Hypnotic Circle');
     const weight = stats.find((group: any) => group.type === 'weight');
-    // Damage over time multiplier 23, physical damage against you 8 (average), increased damage 37; minus mana has no value
-    expect(weight.value).toEqual({ min: 54.4 });
+    // Damage over time multiplier 23, physical damage against you 8 (average); minus mana has no value, increased
+    // damage 37 is crafted
+    expect(weight.value).toEqual({ min: 24.8 });
     expect(JSON.stringify(weight)).not.toMatch(/implicit\.stat_3182714256|stat_1050105434/);
   });
 });
