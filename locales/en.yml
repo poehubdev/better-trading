@@ -49,7 +49,7 @@ pageSettingsLogoThrowCurrency: Currency
 pageSettingsLogoSound: Play sounds
 pageSettingsLogoSoundVolume: Volume
 pageSettingsPilferingRingTitle: Exile's Pilfering Ring
-pageSettingsPilferingRingReset: Reset
+pageSettingsPilferingRingResetHint: Hold to reset
 pageSettingsBackupTitle: Backup tools
 pageSettingsBackupDescription: Save all your bookmarks to a file, or restore them from one.
 pageSettingsBackupGenerateButton: Save file

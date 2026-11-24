@@ -44,6 +44,121 @@
   color: variables.$white;
 }
 
+.resetWrap {
+  position: relative;
+  display: flex;
+  align-items: center;
+  margin-left: auto;
+}
+
+// Round hold-to-reset button. --p is the channel progress (0..1), --on is 1 while channeling.
 .reset {
-  margin-top: 10px;
+  position: relative;
+  display: grid;
+  place-items: center;
+  flex: none;
+  width: 38px;
+  height: 38px;
+  padding: 0;
+  border: 1px solid variables.$gold-alt;
+  border-radius: 50%;
+  background: radial-gradient(circle, #2a1c08, #100a03);
+  color: variables.$gold-light;
+  outline: none;
+  cursor: pointer;
+  user-select: none;
+  touch-action: none;
+  transition: border-color 0.2s;
+
+  &:hover,
+  &:focus-visible {
+    border-color: variables.$gold-light;
+  }
+
+  // Flashes with the release, then shrinks away. Its animationend unmounts the button, so it stays under reduced motion.
+  &.isLeaving {
+    pointer-events: none;
+    animation: leave 0.3s ease-in forwards;
+  }
+}
+
+// Progress ring around the button
+.arc {
+  position: absolute;
+  inset: -4px;
+  border-radius: 50%;
+  background: conic-gradient(variables.$gold-light calc(var(--p) * 360deg), transparent 0);
+  mask: radial-gradient(farthest-side, transparent calc(100% - 3px), #000 calc(100% - 2.5px));
+}
+
+// The spark riding the arc's leading edge
+.sparkArm {
+  position: absolute;
+  inset: -4px;
+  opacity: var(--on);
+  transform: rotate(calc(var(--p) * 360deg));
+  pointer-events: none;
+}
+
+.spark {
+  position: absolute;
+  top: 0;
+  left: 50%;
+  width: 5px;
+  height: 5px;
+  margin: -1px 0 0 -2.5px;
+  border-radius: 50%;
+  background-color: #fff;
+  box-shadow:
+    0 0 6px 2px variables.$gold-light,
+    0 0 14px 5px rgba(variables.$gold-light, 0.45);
+}
+
+.glyph {
+  width: 18px;
+  height: 18px;
+  transform: rotate(calc(var(--p) * -360deg));
+  filter: drop-shadow(0 0 calc(var(--p) * 6px) variables.$gold-light);
+}
+
+// Spawned on <body> by the completed cast
+.wave {
+  position: fixed;
+  z-index: 10001;
+  border: 1px solid variables.$gold-light;
+  border-radius: 50%;
+  box-shadow:
+    0 0 8px rgba(variables.$gold-light, 0.6),
+    inset 0 0 8px rgba(variables.$gold-light, 0.4);
+  pointer-events: none;
+}
+
+// The emptied grid fades back in after the reset
+.refill .icon {
+  animation: refill 0.5s ease-out 0.35s both;
+}
+
+@keyframes leave {
+  0% {
+    transform: scale(1.3);
+    filter: brightness(2.2);
+  }
+
+  20% {
+    transform: scale(1);
+    filter: brightness(1);
+    opacity: 1;
+  }
+
+  100% {
+    transform: scale(0.2) rotate(-180deg);
+    opacity: 0;
+  }
+}
+
+@keyframes refill {
+  from {
+    opacity: 0;
+    transform: scale(0.6);
+  }
 }

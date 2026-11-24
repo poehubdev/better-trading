@@ -81,7 +81,7 @@ const buildMessages = () => ({
     // ponytail: plain "60%"; use Intl percent formatting when locales/ grows
     formatVolume: (volume: number) => `${volume}%`,
     pilferingRingTitle: i18n.t('pageSettingsPilferingRingTitle'),
-    pilferingRingResetLabel: i18n.t('pageSettingsPilferingRingReset'),
+    pilferingRingResetHint: i18n.t('pageSettingsPilferingRingResetHint'),
     backupTitle: i18n.t('pageSettingsBackupTitle'),
     backupDescription: i18n.t('pageSettingsBackupDescription'),
     generateBackupLabel: i18n.t('pageSettingsBackupGenerateButton'),

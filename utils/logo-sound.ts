@@ -82,15 +82,16 @@ const playClip = async (path: string, volume: number, power: number): Promise<vo
 /**
  * Plays the sound at the selected volume; silently does nothing if it can't.
  * `power` (0..1, the throw power) widens the random pan: a weak throw sounds near the centre, a full-power one up to
- * 30% left or right, as if it landed further away. `mirror` adds the Mirror of Kalandra clip.
+ * 30% left or right, as if it landed further away. `mirror` adds the Mirror of Kalandra clip. `loudness` (0..1) scales
+ * the selected volume, for quieter follow-up hits.
  */
-const playLogoSound = async (power = 0, mirror = false): Promise<void> => {
+const playLogoSound = async (power = 0, mirror = false, loudness = 1): Promise<void> => {
   const volume = getLogoSoundVolume();
   if (!isLogoSoundEnabled() || volume === 0) return;
 
   const paths = mirror ? [SOUND_FILE, MIRROR_SOUND_FILE] : [SOUND_FILE];
   // Each clip is isolated: a broken one must not silence the other
-  await Promise.all(paths.map(path => playClip(path, volume, power)));
+  await Promise.all(paths.map(path => playClip(path, volume * loudness, power)));
 };
 
 export {

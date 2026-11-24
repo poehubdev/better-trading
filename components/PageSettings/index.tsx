@@ -55,7 +55,7 @@ interface PageSettingsProps {
   logoSoundVolumeLabel: string;
   formatVolume: (volume: number) => string;
   pilferingRingTitle: string;
-  pilferingRingResetLabel: string;
+  pilferingRingResetHint: string;
   backupTitle: string;
   backupDescription: string;
   generateBackupLabel: string;
@@ -113,7 +113,7 @@ const PageSettings = ({
   logoSoundVolumeLabel,
   formatVolume,
   pilferingRingTitle,
-  pilferingRingResetLabel,
+  pilferingRingResetHint,
   backupTitle,
   backupDescription,
   generateBackupLabel,
@@ -239,7 +239,7 @@ const PageSettings = ({
           className={styles.section}
           titleClassName={styles.sectionTitle}
           title={pilferingRingTitle}
-          resetLabel={pilferingRingResetLabel}
+          resetHint={pilferingRingResetHint}
         />
       </div>
 
