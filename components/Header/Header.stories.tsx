@@ -1,10 +1,5 @@
 import Header from './index';
-import {
-  logoAltMessages,
-  headerCollapseMessages,
-  headerShowSettingsMessages,
-  headerShowMainMessages,
-} from '@/.storybook/common-messages';
+import { buildMessages } from '@/hooks/useMessages';
 import { resolveLocaleValue, defineMessages } from '@/.storybook/locale-utils';
 import type { Meta, StoryObj } from '@storybook/react-vite';
 
@@ -18,15 +13,8 @@ const meta = {
   parameters: {
     layout: 'padded',
   },
+  args: buildMessages().header,
   argTypes: {
-    title: {
-      control: false,
-      description: '(Derived from locale in render)',
-    },
-    logoAlt: { control: false, description: '(Derived from locale in render)' },
-    collapseLabel: { control: false, description: '(Derived from locale in render)' },
-    showSettingsLabel: { control: false, description: '(Derived from locale in render)' },
-    showMainLabel: { control: false, description: '(Derived from locale in render)' },
     isOnRootRoute: {
       control: 'boolean',
       description: 'Whether currently on root route (affects toggle icon)',
@@ -43,20 +31,6 @@ const meta = {
 } satisfies Meta<typeof Header>;
 
 type Story = StoryObj<typeof meta>;
-
-// Localized title messages
-const titleMessages = defineMessages({
-  'en-US': 'Better Trading',
-  'fr-FR': 'Better Trading',
-  'es-ES': 'Better Trading',
-  'de-DE': 'Better Trading',
-  'pt-BR': 'Better Trading',
-  'ru-RU': 'Better Trading',
-  'zh-CN': 'Better Trading',
-  'ja-JP': 'Better Trading',
-  'ko-KR': 'Better Trading',
-  'th-TH': 'Better Trading',
-});
 
 // Localized alert messages for interaction feedback
 const brandClickMessages = defineMessages({
@@ -90,28 +64,18 @@ const toggleClickMessages = defineMessages({
  */
 export const OnRootRoute: Story = {
   args: {
-    title: 'Better Trading',
-    logoAlt: '',
-    collapseLabel: '',
-    showSettingsLabel: '',
-    showMainLabel: '',
     isOnRootRoute: true,
   },
   render: (args, context) => {
     const { globals } = context;
     const locale = globals.locale as string;
-    const title = resolveLocaleValue(locale, titleMessages);
     const brandClickMessage = resolveLocaleValue(locale, brandClickMessages);
     const toggleClickMessage = resolveLocaleValue(locale, toggleClickMessages);
 
     return (
       <Header
         {...args}
-        title={title}
-        logoAlt={resolveLocaleValue(locale, logoAltMessages)}
-        collapseLabel={resolveLocaleValue(locale, headerCollapseMessages)}
-        showSettingsLabel={resolveLocaleValue(locale, headerShowSettingsMessages)}
-        showMainLabel={resolveLocaleValue(locale, headerShowMainMessages)}
+        {...buildMessages().header}
         isOnRootRoute={true}
         onBrandClick={() => alert(brandClickMessage)}
         onToggleClick={() => alert(toggleClickMessage)}
@@ -125,28 +89,18 @@ export const OnRootRoute: Story = {
  */
 export const OnSubRoute: Story = {
   args: {
-    title: 'Better Trading',
-    logoAlt: '',
-    collapseLabel: '',
-    showSettingsLabel: '',
-    showMainLabel: '',
     isOnRootRoute: false,
   },
   render: (args, context) => {
     const { globals } = context;
     const locale = globals.locale as string;
-    const title = resolveLocaleValue(locale, titleMessages);
     const brandClickMessage = resolveLocaleValue(locale, brandClickMessages);
     const toggleClickMessage = resolveLocaleValue(locale, toggleClickMessages);
 
     return (
       <Header
         {...args}
-        title={title}
-        logoAlt={resolveLocaleValue(locale, logoAltMessages)}
-        collapseLabel={resolveLocaleValue(locale, headerCollapseMessages)}
-        showSettingsLabel={resolveLocaleValue(locale, headerShowSettingsMessages)}
-        showMainLabel={resolveLocaleValue(locale, headerShowMainMessages)}
+        {...buildMessages().header}
         isOnRootRoute={false}
         onBrandClick={() => alert(brandClickMessage)}
         onToggleClick={() => alert(toggleClickMessage)}

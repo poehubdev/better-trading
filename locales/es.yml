@@ -1,0 +1,106 @@
+logoAlt: Logotipo de Better Trading
+modalClose: Cerrar
+changelogBannerModalButton: Novedades
+
+pageSettingsDisclaimer: Esta extensión está hecha por fans y no está afiliada de ningún modo a Grinding Gear Games.
+pageSettingsEnhancersTitle: Mejoras de resultados activadas
+pageSettingsEnhancersEquivalentPricings: Precios equivalentes (con poe.ninja)
+pageSettingsEnhancersHighlightStatFilters: Resaltar los modificadores buscados
+pageSettingsEnhancersMaximumSockets: Aviso para armaduras que no pueden tener 6 engarces
+pageSettingsEnhancersRegroupSimilars: Reagrupar resultados similares
+pageSettingsAppearanceTitle: Apariencia
+pageSettingsPanelBlur: Desenfocar la página detrás del panel
+pageSettingsPanelScrollbar: Mostrar la barra de desplazamiento del panel
+pageSettingsLogoThrow: Clic en el logo
+pageSettingsLogoThrowNone: Marcadores
+pageSettingsLogoThrowLogo: Logo
+pageSettingsLogoThrowCurrency: Moneda
+pageSettingsLogoSound: Reproducir sonidos
+pageSettingsLogoSoundVolume: Volumen
+pageSettingsPilferingRingResetHint: Mantén pulsado para restablecer
+pageSettingsBackupTitle: Herramientas de copia de seguridad
+pageSettingsBackupDescription: Guarda todos tus marcadores en un archivo o restáuralos desde uno.
+pageSettingsBackupGenerateButton: Guardar archivo
+pageSettingsBackupRestoreButton: Restaurar desde archivo
+pageSettingsBackupRestoreErrorFlash: La restauración de la copia de seguridad ha fallado.
+pageSettingsMaintainer: 'Mantenido por <strong>Message</strong> (<a href="https://github.com/message">@message</a>)'
+pageSettingsCredits: 'Basado en <a href="https://github.com/exile-center/better-trading">Better Trading</a> de <strong>InfaMc</strong> (<a href="https://github.com/pboutin">@pboutin</a>) y <strong>brosmike</strong> (<a href="https://github.com/dbjorge">@dbjorge</a>)'
+
+generalTitle: 'Better Trading'
+genericAlertFlash: '¡Vaya! Algo salió mal.'
+headerCollapse: 'Contraer el panel de Better Trading'
+headerExpand: 'Expandir el panel de Better Trading'
+headerShowSettings: 'Mostrar la configuración de Better Trading'
+headerShowMain: 'Mostrar herramientas de comercio'
+changelogBannerNotice: 'La nueva versión $1 ya está instalada.'
+changelogBannerModalTitle: 'Novedades de $1'
+changelogBannerDismissButton: 'Descartar'
+clipboardTextareaButton: 'Copiar al portapapeles'
+clipboardTextareaButtonCopied: 'Copiado'
+rootPageMenuLabel: 'Páginas de Better Trading'
+rootPageMenuBookmarks: 'Marcadores'
+rootPageMenuHistory: 'Historial'
+rootPageMenuPinnedItems: 'Artículos anclados'
+itemResultsPinnablePin: 'Anclar'
+pagePinnedItemsWarning: 'Los anclajes duran hasta que cambies la búsqueda o recargues la página.'
+pagePinnedItemsClear: 'Desanclar todo'
+pagePinnedItemsCount:
+  1: '1 anclado'
+  n: '$1 anclados'
+pagePinnedItemsEmptyTitle: 'No hay artículos anclados'
+pagePinnedItemsEmptyHint: 'Busca {pin} entre los botones de acción en la esquina inferior derecha de cada resultado. Los objetos fijados se quedan aquí para que puedas compararlos.'
+pagePinnedItemsUnpinItem: 'Desanclar'
+pagePinnedItemsScrollToItem: 'Mostrar en los resultados'
+pageHistoryClear: 'Borrar historial'
+pageHistoryEmpty: 'El historial de búsqueda está vacío por ahora.'
+pageHistoryClearSuccessFlash: 'Se ha borrado el historial de búsqueda.'
+pageBookmarksCreateFolder: 'Nueva carpeta'
+pageBookmarksEmptyTitle: 'Aún no hay marcadores'
+pageBookmarksEmptyHint: 'Guarda búsquedas en carpetas para volver a ellas con un clic.'
+pageBookmarksCollapseAll: 'Contraer carpetas'
+pageBookmarksSearch: 'Buscar carpetas e intercambios'
+pageBookmarksClearSearch: 'Borrar búsqueda'
+pageBookmarksNoMatches: 'Ninguna carpeta ni intercambio coincide con "$1"'
+pageBookmarksShowArchivedFolders: 'Mostrar archivo'
+pageBookmarksShowUnarchivedFolders: 'Volver a las carpetas activas'
+pageBookmarksFoldersWarning: 'Tener muchas carpetas puede ralentizar el sitio web.<br>Haz una copia de las carpetas innecesarias con la función de exportación y luego elimínalas.'
+pageBookmarksDeleteFolderSuccessFlash: 'Se ha eliminado la carpeta "$1".'
+pageBookmarksUpdateFolderSuccessFlash: 'Se ha actualizado la carpeta "$1".'
+pageBookmarksCreateFolderSuccessFlash: 'Se ha creado la carpeta "$1".'
+pageBookmarksImportFolderSuccessFlash: 'Se ha importado la carpeta "$1".'
+pageBookmarksFolderEditFolder: 'Editar'
+pageBookmarksFolderDeleteFolder: 'Eliminar'
+pageBookmarksFolderArchiveFolder: 'Archivar'
+pageBookmarksFolderRestoreFolder: 'Restaurar'
+pageBookmarksFolderExportFolder: 'Exportar/Compartir'
+pageBookmarksFolderOpenLiveTrade: 'Búsqueda en vivo'
+pageBookmarksFolderCreateTrade: 'Registrar el intercambio actual'
+pageBookmarksFolderCopyTradeToClipboard: 'Copiar URL al portapapeles'
+pageBookmarksFolderCopyTradeToClipboardSuccessFlash: 'La URL del intercambio "$1" se ha copiado al portapapeles.'
+pageBookmarksFolderEditTrade: 'Editar'
+pageBookmarksFolderDeleteTrade: 'Eliminar'
+pageBookmarksFolderReorder: 'Arrastra para reordenar o usa las flechas'
+pageBookmarksFolderUpdateTradeLocation: 'Guardar el intercambio activo'
+pageBookmarksFolderCompleteTrade: 'Marcar como completado'
+pageBookmarksFolderUncompleteTrade: 'Marcar como incompleto'
+pageBookmarksFolderDeleteTradeSuccessFlash: 'Se ha eliminado el intercambio "$1".'
+pageBookmarksFolderUpdateTradeSuccessFlash: 'Se ha actualizado el intercambio "$1".'
+pageBookmarksFolderCreateTradeSuccessFlash: 'Se ha creado el intercambio "$1".'
+pageBookmarksFolderPersistTradeLocationSuccessFlash: 'Se ha actualizado la ubicación del intercambio "$1".'
+pageBookmarksFolderTradeDeletionModalTitle: 'Confirmar eliminación'
+pageBookmarksFolderTradeDeletionConfirmation: '¿Eliminar el marcador "$1"?'
+pageBookmarksFolderTradeDeletionDelete: 'Eliminar'
+pageBookmarksFolderTradeDeletionCancel: 'Cancelar'
+pageBookmarksFolderFolderExportModalTitle: 'Exportación de la carpeta de marcadores'
+pageBookmarksFolderFolderExportExportCode: 'Código de exportación'
+pageBookmarksFolderFolderExportExportCodeHelper: 'Este código permite restaurar una carpeta. Sirve como copia de seguridad o para compartirla.'
+pageBookmarksFolderFolderExportClose: 'Cerrar'
+pageBookmarksFolderTradeEditionModalTitle: 'Guardar intercambio'
+pageBookmarksFolderTradeEditionTitleLabel: 'Título'
+pageBookmarksFolderEditionModalTitle: 'Carpeta de marcadores'
+pageBookmarksFolderEditionTitleLabel: 'Título'
+pageBookmarksFolderEditionIconLabel: 'Icono'
+pageBookmarksFolderEditionSave: 'Guardar'
+pageBookmarksFolderImportModalTitle: 'Importar carpeta de marcadores'
+pageBookmarksFolderImportImportCodeLabel: 'Código de importación'
+pageBookmarksFolderImportInvalidCode: 'El código introducido parece no ser válido, prueba con otro.'

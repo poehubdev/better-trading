@@ -1,0 +1,106 @@
+logoAlt: โลโก้ Better Trading
+modalClose: ปิด
+changelogBannerModalButton: บันทึกการเปลี่ยนแปลง
+
+pageSettingsDisclaimer: ส่วนขยายนี้สร้างโดยแฟน ๆ และไม่มีส่วนเกี่ยวข้องใด ๆ กับ Grinding Gear Games
+pageSettingsEnhancersTitle: ตัวปรับปรุงผลลัพธ์ที่เปิดใช้
+pageSettingsEnhancersEquivalentPricings: ราคาเทียบเท่า (จาก poe.ninja)
+pageSettingsEnhancersHighlightStatFilters: ไฮไลต์ม็อดที่ค้นหา
+pageSettingsEnhancersMaximumSockets: คำเตือนสำหรับเกราะที่ไม่สามารถมี 6 ช่องได้
+pageSettingsEnhancersRegroupSimilars: จัดกลุ่มผลลัพธ์ที่คล้ายกัน
+pageSettingsAppearanceTitle: รูปลักษณ์
+pageSettingsPanelBlur: เบลอหน้าเว็บด้านหลังแผง
+pageSettingsPanelScrollbar: แสดงแถบเลื่อนของแผง
+pageSettingsLogoThrow: คลิกโลโก้
+pageSettingsLogoThrowNone: บุ๊กมาร์ก
+pageSettingsLogoThrowLogo: โลโก้
+pageSettingsLogoThrowCurrency: สกุลเงิน
+pageSettingsLogoSound: เล่นเสียง
+pageSettingsLogoSoundVolume: ระดับเสียง
+pageSettingsPilferingRingResetHint: กดค้างไว้เพื่อรีเซ็ต
+pageSettingsBackupTitle: เครื่องมือสำรองข้อมูล
+pageSettingsBackupDescription: บันทึกบุ๊กมาร์กทั้งหมดลงไฟล์ หรือกู้คืนจากไฟล์
+pageSettingsBackupGenerateButton: บันทึกไฟล์
+pageSettingsBackupRestoreButton: กู้คืนจากไฟล์
+pageSettingsBackupRestoreErrorFlash: การกู้คืนข้อมูลสำรองล้มเหลว
+pageSettingsMaintainer: 'ดูแลโดย <strong>Message</strong> (<a href="https://github.com/message">@message</a>)'
+pageSettingsCredits: 'อิงจาก <a href="https://github.com/exile-center/better-trading">Better Trading</a> โดย <strong>InfaMc</strong> (<a href="https://github.com/pboutin">@pboutin</a>) และ <strong>brosmike</strong> (<a href="https://github.com/dbjorge">@dbjorge</a>)'
+
+generalTitle: 'Better Trading'
+genericAlertFlash: 'อุ๊ย! เกิดข้อผิดพลาดบางอย่าง!'
+headerCollapse: 'ยุบแผง Better Trading'
+headerExpand: 'ขยายแผง Better Trading'
+headerShowSettings: 'แสดงการตั้งค่าของ Better Trading'
+headerShowMain: 'แสดงเครื่องมือซื้อขาย'
+changelogBannerNotice: 'ติดตั้งเวอร์ชันใหม่ $1 แล้ว'
+changelogBannerModalTitle: 'บันทึกการเปลี่ยนแปลง $1'
+changelogBannerDismissButton: 'ปิด'
+clipboardTextareaButton: 'คัดลอกไปยังคลิปบอร์ด'
+clipboardTextareaButtonCopied: 'คัดลอกแล้ว'
+rootPageMenuLabel: 'หน้าของ Better Trading'
+rootPageMenuBookmarks: 'บุ๊กมาร์ก'
+rootPageMenuHistory: 'ประวัติ'
+rootPageMenuPinnedItems: 'ไอเทมที่ปักหมุด'
+itemResultsPinnablePin: 'ปักหมุด'
+pagePinnedItemsWarning: 'การปักหมุดจะคงอยู่จนกว่าคุณจะเปลี่ยนการค้นหาหรือโหลดหน้าใหม่'
+pagePinnedItemsClear: 'เลิกปักหมุดทั้งหมด'
+pagePinnedItemsCount:
+  1: 'ปักหมุด 1 รายการ'
+  n: 'ปักหมุด $1 รายการ'
+pagePinnedItemsEmptyTitle: 'ไม่มีไอเทมที่ปักหมุด'
+pagePinnedItemsEmptyHint: 'มองหา {pin} ในปุ่มการทำงานที่มุมขวาล่างของแต่ละผลลัพธ์ ไอเทมที่ปักหมุดจะอยู่ที่นี่เพื่อให้คุณเปรียบเทียบได้'
+pagePinnedItemsUnpinItem: 'เลิกปักหมุด'
+pagePinnedItemsScrollToItem: 'แสดงในผลลัพธ์'
+pageHistoryClear: 'ล้างประวัติ'
+pageHistoryEmpty: 'ขณะนี้ประวัติการค้นหาว่างเปล่า'
+pageHistoryClearSuccessFlash: 'ล้างประวัติการค้นหาแล้ว'
+pageBookmarksCreateFolder: 'โฟลเดอร์ใหม่'
+pageBookmarksEmptyTitle: 'ยังไม่มีบุ๊กมาร์ก'
+pageBookmarksEmptyHint: 'บันทึกการค้นหาลงในโฟลเดอร์เพื่อกลับมาได้ในคลิกเดียว'
+pageBookmarksCollapseAll: 'ยุบโฟลเดอร์'
+pageBookmarksSearch: 'ค้นหาโฟลเดอร์และการซื้อขาย'
+pageBookmarksClearSearch: 'ล้างการค้นหา'
+pageBookmarksNoMatches: 'ไม่มีโฟลเดอร์หรือการซื้อขายที่ตรงกับ "$1"'
+pageBookmarksShowArchivedFolders: 'แสดงที่เก็บถาวร'
+pageBookmarksShowUnarchivedFolders: 'กลับไปยังโฟลเดอร์ที่ใช้งานอยู่'
+pageBookmarksFoldersWarning: 'การมีโฟลเดอร์จำนวนมากอาจทำให้เว็บไซต์ช้าลง<br>สำรองโฟลเดอร์ที่ไม่จำเป็นด้วยฟีเจอร์ส่งออก แล้วลบทิ้ง'
+pageBookmarksDeleteFolderSuccessFlash: 'ลบโฟลเดอร์ "$1" แล้ว'
+pageBookmarksUpdateFolderSuccessFlash: 'อัปเดตโฟลเดอร์ "$1" แล้ว'
+pageBookmarksCreateFolderSuccessFlash: 'สร้างโฟลเดอร์ "$1" แล้ว'
+pageBookmarksImportFolderSuccessFlash: 'นำเข้าโฟลเดอร์ "$1" แล้ว'
+pageBookmarksFolderEditFolder: 'แก้ไข'
+pageBookmarksFolderDeleteFolder: 'ลบ'
+pageBookmarksFolderArchiveFolder: 'เก็บถาวร'
+pageBookmarksFolderRestoreFolder: 'กู้คืน'
+pageBookmarksFolderExportFolder: 'ส่งออก/แชร์'
+pageBookmarksFolderOpenLiveTrade: 'การค้นหาสด'
+pageBookmarksFolderCreateTrade: 'ลงทะเบียนการซื้อขายปัจจุบัน'
+pageBookmarksFolderCopyTradeToClipboard: 'คัดลอก URL ไปยังคลิปบอร์ด'
+pageBookmarksFolderCopyTradeToClipboardSuccessFlash: 'คัดลอก URL การซื้อขายของ "$1" ไปยังคลิปบอร์ดแล้ว'
+pageBookmarksFolderEditTrade: 'แก้ไข'
+pageBookmarksFolderDeleteTrade: 'ลบ'
+pageBookmarksFolderReorder: 'ลากเพื่อจัดลำดับ หรือใช้ปุ่มลูกศร'
+pageBookmarksFolderUpdateTradeLocation: 'บันทึกการซื้อขายที่เปิดอยู่'
+pageBookmarksFolderCompleteTrade: 'ทำเครื่องหมายว่าเสร็จสิ้น'
+pageBookmarksFolderUncompleteTrade: 'ทำเครื่องหมายว่ายังไม่เสร็จ'
+pageBookmarksFolderDeleteTradeSuccessFlash: 'ลบการซื้อขาย "$1" แล้ว'
+pageBookmarksFolderUpdateTradeSuccessFlash: 'อัปเดตการซื้อขาย "$1" แล้ว'
+pageBookmarksFolderCreateTradeSuccessFlash: 'สร้างการซื้อขาย "$1" แล้ว'
+pageBookmarksFolderPersistTradeLocationSuccessFlash: 'อัปเดตตำแหน่งของการซื้อขาย "$1" แล้ว'
+pageBookmarksFolderTradeDeletionModalTitle: 'ยืนยันการลบ'
+pageBookmarksFolderTradeDeletionConfirmation: 'ลบบุ๊กมาร์ก "$1" หรือไม่'
+pageBookmarksFolderTradeDeletionDelete: 'ลบ'
+pageBookmarksFolderTradeDeletionCancel: 'ยกเลิก'
+pageBookmarksFolderFolderExportModalTitle: 'ส่งออกโฟลเดอร์บุ๊กมาร์ก'
+pageBookmarksFolderFolderExportExportCode: 'รหัสส่งออก'
+pageBookmarksFolderFolderExportExportCodeHelper: 'ใช้รหัสนี้เพื่อกู้คืนโฟลเดอร์ได้ ใช้สำรองข้อมูลหรือแชร์ก็ได้'
+pageBookmarksFolderFolderExportClose: 'ปิด'
+pageBookmarksFolderTradeEditionModalTitle: 'บุ๊กมาร์กการซื้อขาย'
+pageBookmarksFolderTradeEditionTitleLabel: 'ชื่อ'
+pageBookmarksFolderEditionModalTitle: 'โฟลเดอร์บุ๊กมาร์ก'
+pageBookmarksFolderEditionTitleLabel: 'ชื่อ'
+pageBookmarksFolderEditionIconLabel: 'ไอคอน'
+pageBookmarksFolderEditionSave: 'บันทึก'
+pageBookmarksFolderImportModalTitle: 'นำเข้าโฟลเดอร์บุ๊กมาร์ก'
+pageBookmarksFolderImportImportCodeLabel: 'รหัสนำเข้า'
+pageBookmarksFolderImportInvalidCode: 'รหัสที่ป้อนดูเหมือนไม่ถูกต้อง ลองรหัสอื่น'

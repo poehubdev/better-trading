@@ -1,6 +1,7 @@
 import type { Preview } from '@storybook/react-vite';
 import React from 'react';
 import '@/styles/app.scss';
+import { setStoryLocale } from './i18n-mock';
 import { docsTheme } from './theme'; // added
 import FlashMessages from '@/components/FlashMessages';
 import { FlashMessagesProvider, useFlashMessagesContext } from '@/contexts/FlashMessagesContext';
@@ -27,6 +28,7 @@ const preview: Preview = {
           { value: 'ja-JP', right: '🇯🇵', title: 'Japanese' },
           { value: 'pt-BR', right: '🇧🇷', title: 'Portuguese' },
           { value: 'th-TH', right: '🇹🇭', title: 'Thai' },
+          { value: 'zh-CN', right: '🇨🇳', title: 'Chinese' },
           { value: 'de-DE', right: '🇩🇪', title: 'German' },
           { value: 'fr-FR', right: '🇫🇷', title: 'French' },
           { value: 'es-ES', right: '🇪🇸', title: 'Spanish' },
@@ -67,6 +69,7 @@ export const decorators = [
       document.body.style.color = '#FFFFFF';
       document.body.style.minHeight = '100vh';
       const locale = context.globals?.locale || 'en-US';
+      setStoryLocale(locale);
       if (document.documentElement.lang !== locale) {
         document.documentElement.lang = locale;
       }

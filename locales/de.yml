@@ -1,0 +1,106 @@
+logoAlt: Better-Trading-Logo
+modalClose: Schließen
+changelogBannerModalButton: Änderungsprotokoll
+
+pageSettingsDisclaimer: Diese Erweiterung ist ein Fanprojekt und in keiner Weise mit Grinding Gear Games verbunden.
+pageSettingsEnhancersTitle: Aktive Ergebnis-Verbesserungen
+pageSettingsEnhancersEquivalentPricings: Äquivalente Preise (von poe.ninja)
+pageSettingsEnhancersHighlightStatFilters: Gesuchte Modifikatoren hervorheben
+pageSettingsEnhancersMaximumSockets: Warnung für Rüstungen, die keine 6 Fassungen haben können
+pageSettingsEnhancersRegroupSimilars: Ähnliche Ergebnisse gruppieren
+pageSettingsAppearanceTitle: Darstellung
+pageSettingsPanelBlur: Seite hinter dem Panel weichzeichnen
+pageSettingsPanelScrollbar: Bildlaufleiste des Panels anzeigen
+pageSettingsLogoThrow: Klick aufs Logo
+pageSettingsLogoThrowNone: Lesezeichen
+pageSettingsLogoThrowLogo: Logo
+pageSettingsLogoThrowCurrency: Währung
+pageSettingsLogoSound: Töne abspielen
+pageSettingsLogoSoundVolume: Lautstärke
+pageSettingsPilferingRingResetHint: Zum Zurücksetzen gedrückt halten
+pageSettingsBackupTitle: Sicherungswerkzeuge
+pageSettingsBackupDescription: Alle Lesezeichen in einer Datei sichern oder aus einer Datei wiederherstellen.
+pageSettingsBackupGenerateButton: Datei speichern
+pageSettingsBackupRestoreButton: Aus Datei wiederherstellen
+pageSettingsBackupRestoreErrorFlash: Die Wiederherstellung der Sicherung ist fehlgeschlagen.
+pageSettingsMaintainer: 'Gepflegt von <strong>Message</strong> (<a href="https://github.com/message">@message</a>)'
+pageSettingsCredits: 'Basiert auf <a href="https://github.com/exile-center/better-trading">Better Trading</a> von <strong>InfaMc</strong> (<a href="https://github.com/pboutin">@pboutin</a>) und <strong>brosmike</strong> (<a href="https://github.com/dbjorge">@dbjorge</a>)'
+
+generalTitle: 'Better Trading'
+genericAlertFlash: 'Hoppla! Etwas ist schiefgelaufen!'
+headerCollapse: 'Better-Trading-Bereich einklappen'
+headerExpand: 'Better-Trading-Bereich ausklappen'
+headerShowSettings: 'Better-Trading-Einstellungen anzeigen'
+headerShowMain: 'Handelswerkzeuge anzeigen'
+changelogBannerNotice: 'Die neue Version $1 ist jetzt installiert.'
+changelogBannerModalTitle: 'Änderungsprotokoll $1'
+changelogBannerDismissButton: 'Ausblenden'
+clipboardTextareaButton: 'In die Zwischenablage kopieren'
+clipboardTextareaButtonCopied: 'Kopiert'
+rootPageMenuLabel: 'Better-Trading-Seiten'
+rootPageMenuBookmarks: 'Lesezeichen'
+rootPageMenuHistory: 'Verlauf'
+rootPageMenuPinnedItems: 'Angeheftete Artikel'
+itemResultsPinnablePin: 'Anheften'
+pagePinnedItemsWarning: 'Angeheftetes bleibt, bis Sie die Suche ändern oder die Seite neu laden.'
+pagePinnedItemsClear: 'Alle lösen'
+pagePinnedItemsCount:
+  1: '1 angeheftet'
+  n: '$1 angeheftet'
+pagePinnedItemsEmptyTitle: 'Keine angehefteten Artikel'
+pagePinnedItemsEmptyHint: 'Suchen Sie {pin} bei den Aktionsschaltflächen unten rechts in jedem Ergebnis. Angeheftete Gegenstände bleiben hier, damit Sie sie vergleichen können.'
+pagePinnedItemsUnpinItem: 'Lösen'
+pagePinnedItemsScrollToItem: 'In Ergebnissen anzeigen'
+pageHistoryClear: 'Verlauf löschen'
+pageHistoryEmpty: 'Der Suchverlauf ist derzeit leer.'
+pageHistoryClearSuccessFlash: 'Der Suchverlauf wurde gelöscht.'
+pageBookmarksCreateFolder: 'Neuer Ordner'
+pageBookmarksEmptyTitle: 'Noch keine Lesezeichen'
+pageBookmarksEmptyHint: 'Speichere Suchen in Ordnern, um sie mit einem Klick wieder aufzurufen.'
+pageBookmarksCollapseAll: 'Ordner einklappen'
+pageBookmarksSearch: 'Ordner und Handel durchsuchen'
+pageBookmarksClearSearch: 'Suche löschen'
+pageBookmarksNoMatches: 'Keine Ordner oder Handel passen zu „$1“'
+pageBookmarksShowArchivedFolders: 'Archiv anzeigen'
+pageBookmarksShowUnarchivedFolders: 'Zurück zu den aktiven Ordnern'
+pageBookmarksFoldersWarning: 'Viele Ordner können die Website verlangsamen.<br>Sichere nicht benötigte Ordner mit der Exportfunktion und lösche sie dann.'
+pageBookmarksDeleteFolderSuccessFlash: 'Der Ordner „$1“ wurde gelöscht.'
+pageBookmarksUpdateFolderSuccessFlash: 'Der Ordner „$1“ wurde aktualisiert.'
+pageBookmarksCreateFolderSuccessFlash: 'Der Ordner „$1“ wurde erstellt.'
+pageBookmarksImportFolderSuccessFlash: 'Der Ordner „$1“ wurde importiert.'
+pageBookmarksFolderEditFolder: 'Bearbeiten'
+pageBookmarksFolderDeleteFolder: 'Löschen'
+pageBookmarksFolderArchiveFolder: 'Archivieren'
+pageBookmarksFolderRestoreFolder: 'Wiederherstellen'
+pageBookmarksFolderExportFolder: 'Exportieren/Teilen'
+pageBookmarksFolderOpenLiveTrade: 'Live-Suche'
+pageBookmarksFolderCreateTrade: 'Aktuellen Handel speichern'
+pageBookmarksFolderCopyTradeToClipboard: 'URL in die Zwischenablage kopieren'
+pageBookmarksFolderCopyTradeToClipboardSuccessFlash: 'Die Handels-URL für „$1“ wurde in die Zwischenablage kopiert.'
+pageBookmarksFolderEditTrade: 'Bearbeiten'
+pageBookmarksFolderDeleteTrade: 'Löschen'
+pageBookmarksFolderReorder: 'Zum Sortieren ziehen oder die Pfeiltasten verwenden'
+pageBookmarksFolderUpdateTradeLocation: 'Aktiven Handel speichern'
+pageBookmarksFolderCompleteTrade: 'Als abgeschlossen markieren'
+pageBookmarksFolderUncompleteTrade: 'Als unvollständig markieren'
+pageBookmarksFolderDeleteTradeSuccessFlash: 'Der Handel „$1“ wurde gelöscht.'
+pageBookmarksFolderUpdateTradeSuccessFlash: 'Der Handel „$1“ wurde aktualisiert.'
+pageBookmarksFolderCreateTradeSuccessFlash: 'Der Handel „$1“ wurde erstellt.'
+pageBookmarksFolderPersistTradeLocationSuccessFlash: 'Der Ort des Handels „$1“ wurde aktualisiert.'
+pageBookmarksFolderTradeDeletionModalTitle: 'Löschen bestätigen'
+pageBookmarksFolderTradeDeletionConfirmation: 'Lesezeichen „$1“ löschen?'
+pageBookmarksFolderTradeDeletionDelete: 'Löschen'
+pageBookmarksFolderTradeDeletionCancel: 'Abbrechen'
+pageBookmarksFolderFolderExportModalTitle: 'Export des Lesezeichenordners'
+pageBookmarksFolderFolderExportExportCode: 'Exportcode'
+pageBookmarksFolderFolderExportExportCodeHelper: 'Mit diesem Code lässt sich ein Ordner wiederherstellen. Er eignet sich zur Sicherung und zum Teilen.'
+pageBookmarksFolderFolderExportClose: 'Schließen'
+pageBookmarksFolderTradeEditionModalTitle: 'Handel merken'
+pageBookmarksFolderTradeEditionTitleLabel: 'Titel'
+pageBookmarksFolderEditionModalTitle: 'Lesezeichenordner'
+pageBookmarksFolderEditionTitleLabel: 'Titel'
+pageBookmarksFolderEditionIconLabel: 'Symbol'
+pageBookmarksFolderEditionSave: 'Speichern'
+pageBookmarksFolderImportModalTitle: 'Lesezeichenordner importieren'
+pageBookmarksFolderImportImportCodeLabel: 'Importcode'
+pageBookmarksFolderImportInvalidCode: 'Der eingegebene Code scheint ungültig zu sein, versuche einen anderen.'

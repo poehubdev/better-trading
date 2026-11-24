@@ -1,6 +1,6 @@
 import Modal from './index';
 import Button from '@/components/Button';
-import { logoAltMessages, modalCloseMessages } from '@/.storybook/common-messages';
+import { buildMessages } from '@/hooks/useMessages';
 import { resolveLocaleValue, defineMessages } from '@/.storybook/locale-utils';
 import { useState } from 'react';
 import type { Meta, StoryObj } from '@storybook/react-vite';
@@ -194,12 +194,7 @@ export const Basic: Story = {
     return (
       <>
         <Button theme="blue" label={buttonLabel} onClick={() => setIsOpen(true)} />
-        <Modal
-          isOpen={isOpen}
-          title={title}
-          closeLabel={resolveLocaleValue(globals.locale as string, modalCloseMessages)}
-          logoAlt={resolveLocaleValue(globals.locale as string, logoAltMessages)}
-          onClose={() => setIsOpen(false)}>
+        <Modal isOpen={isOpen} title={title} {...buildMessages().modal} onClose={() => setIsOpen(false)}>
           <p>{content}</p>
         </Modal>
       </>
@@ -221,12 +216,7 @@ export const WithForm: Story = {
     return (
       <>
         <Button theme="blue" label={buttonLabel} onClick={() => setIsOpen(true)} />
-        <Modal
-          isOpen={isOpen}
-          title={title}
-          closeLabel={resolveLocaleValue(globals.locale as string, modalCloseMessages)}
-          logoAlt={resolveLocaleValue(globals.locale as string, logoAltMessages)}
-          onClose={() => setIsOpen(false)}>
+        <Modal isOpen={isOpen} title={title} {...buildMessages().modal} onClose={() => setIsOpen(false)}>
           <form
             onSubmit={e => {
               e.preventDefault();
@@ -263,12 +253,7 @@ export const WithLongContent: Story = {
     return (
       <>
         <Button theme="blue" label={buttonLabel} onClick={() => setIsOpen(true)} />
-        <Modal
-          isOpen={isOpen}
-          title={title}
-          closeLabel={resolveLocaleValue(globals.locale as string, modalCloseMessages)}
-          logoAlt={resolveLocaleValue(globals.locale as string, logoAltMessages)}
-          onClose={() => setIsOpen(false)}>
+        <Modal isOpen={isOpen} title={title} {...buildMessages().modal} onClose={() => setIsOpen(false)}>
           <div>
             <p>{content}</p>
             <p>{content}</p>
@@ -295,8 +280,7 @@ export const CustomStyled: Story = {
         <Modal
           isOpen={isOpen}
           title={title}
-          closeLabel={resolveLocaleValue(globals.locale as string, modalCloseMessages)}
-          logoAlt={resolveLocaleValue(globals.locale as string, logoAltMessages)}
+          {...buildMessages().modal}
           onClose={() => setIsOpen(false)}
           className="custom-modal-class">
           <p>{content}</p>

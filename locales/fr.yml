@@ -1,0 +1,106 @@
+logoAlt: Logo de Better Trading
+modalClose: Fermer
+changelogBannerModalButton: Notes de version
+
+pageSettingsDisclaimer: "Cette extension est faite par des fans et n'est en aucun cas affiliée à Grinding Gear Games."
+pageSettingsEnhancersTitle: Améliorations des résultats activées
+pageSettingsEnhancersEquivalentPricings: Prix équivalents (via poe.ninja)
+pageSettingsEnhancersHighlightStatFilters: Surligner les modificateurs recherchés
+pageSettingsEnhancersMaximumSockets: Avertissement pour les armures qui ne peuvent pas avoir 6 châsses
+pageSettingsEnhancersRegroupSimilars: Regrouper les résultats similaires
+pageSettingsAppearanceTitle: Apparence
+pageSettingsPanelBlur: Flouter la page derrière le panneau
+pageSettingsPanelScrollbar: Afficher la barre de défilement du panneau
+pageSettingsLogoThrow: Clic sur le logo
+pageSettingsLogoThrowNone: Favoris
+pageSettingsLogoThrowLogo: Logo
+pageSettingsLogoThrowCurrency: Monnaie
+pageSettingsLogoSound: Jouer des sons
+pageSettingsLogoSoundVolume: Volume
+pageSettingsPilferingRingResetHint: Maintenez pour réinitialiser
+pageSettingsBackupTitle: Outils de sauvegarde
+pageSettingsBackupDescription: Enregistrez tous vos favoris dans un fichier ou restaurez-les depuis un fichier.
+pageSettingsBackupGenerateButton: Enregistrer le fichier
+pageSettingsBackupRestoreButton: Restaurer depuis un fichier
+pageSettingsBackupRestoreErrorFlash: La restauration de la sauvegarde a échoué.
+pageSettingsMaintainer: 'Maintenu par <strong>Message</strong> (<a href="https://github.com/message">@message</a>)'
+pageSettingsCredits: 'Basé sur <a href="https://github.com/exile-center/better-trading">Better Trading</a> de <strong>InfaMc</strong> (<a href="https://github.com/pboutin">@pboutin</a>) et <strong>brosmike</strong> (<a href="https://github.com/dbjorge">@dbjorge</a>)'
+
+generalTitle: 'Better Trading'
+genericAlertFlash: "Oups ! Une erreur s'est produite !"
+headerCollapse: 'Réduire le panneau Better Trading'
+headerExpand: 'Développer le panneau Better Trading'
+headerShowSettings: 'Afficher les paramètres de Better Trading'
+headerShowMain: 'Afficher les outils de trade'
+changelogBannerNotice: 'La nouvelle version $1 est maintenant installée.'
+changelogBannerModalTitle: 'Notes de version $1'
+changelogBannerDismissButton: 'Ignorer'
+clipboardTextareaButton: 'Copier dans le presse-papiers'
+clipboardTextareaButtonCopied: 'Copié'
+rootPageMenuLabel: 'Pages de Better Trading'
+rootPageMenuBookmarks: 'Favoris'
+rootPageMenuHistory: 'Historique'
+rootPageMenuPinnedItems: 'Articles épinglés'
+itemResultsPinnablePin: 'Épingler'
+pagePinnedItemsWarning: "Les épingles restent jusqu'à ce que vous changiez la recherche ou rechargiez la page."
+pagePinnedItemsClear: 'Tout désépingler'
+pagePinnedItemsCount:
+  1: '1 épinglé'
+  n: '$1 épinglés'
+pagePinnedItemsEmptyTitle: 'Aucun article épinglé'
+pagePinnedItemsEmptyHint: "Cherchez {pin} parmi les boutons d'action en bas à droite de chaque résultat. Les objets épinglés restent ici pour que vous puissiez les comparer."
+pagePinnedItemsUnpinItem: 'Désépingler'
+pagePinnedItemsScrollToItem: 'Afficher dans les résultats'
+pageHistoryClear: "Effacer l'historique"
+pageHistoryEmpty: "L'historique de recherche est actuellement vide."
+pageHistoryClearSuccessFlash: "L'historique de recherche a été effacé."
+pageBookmarksCreateFolder: 'Nouveau dossier'
+pageBookmarksEmptyTitle: 'Aucun favori pour l’instant'
+pageBookmarksEmptyHint: 'Rangez vos recherches dans des dossiers pour les retrouver en un clic.'
+pageBookmarksCollapseAll: 'Réduire les dossiers'
+pageBookmarksSearch: 'Rechercher dans les dossiers et les échanges'
+pageBookmarksClearSearch: 'Effacer la recherche'
+pageBookmarksNoMatches: 'Aucun dossier ni échange ne correspond à « $1 »'
+pageBookmarksShowArchivedFolders: 'Afficher les archives'
+pageBookmarksShowUnarchivedFolders: 'Revenir aux dossiers actifs'
+pageBookmarksFoldersWarning: "Avoir beaucoup de dossiers peut ralentir le site.<br>Sauvegardez les dossiers inutiles avec la fonction d'exportation, puis supprimez-les."
+pageBookmarksDeleteFolderSuccessFlash: 'Le dossier « $1 » a été supprimé.'
+pageBookmarksUpdateFolderSuccessFlash: 'Le dossier « $1 » a été mis à jour.'
+pageBookmarksCreateFolderSuccessFlash: 'Le dossier « $1 » a été créé.'
+pageBookmarksImportFolderSuccessFlash: 'Le dossier « $1 » a été importé.'
+pageBookmarksFolderEditFolder: 'Modifier'
+pageBookmarksFolderDeleteFolder: 'Supprimer'
+pageBookmarksFolderArchiveFolder: 'Archiver'
+pageBookmarksFolderRestoreFolder: 'Restaurer'
+pageBookmarksFolderExportFolder: 'Exporter/Partager'
+pageBookmarksFolderOpenLiveTrade: 'Recherche en direct'
+pageBookmarksFolderCreateTrade: "Enregistrer l'échange actuel"
+pageBookmarksFolderCopyTradeToClipboard: "Copier l'URL dans le presse-papiers"
+pageBookmarksFolderCopyTradeToClipboardSuccessFlash: "L'URL de l'échange « $1 » a été copiée dans le presse-papiers."
+pageBookmarksFolderEditTrade: 'Modifier'
+pageBookmarksFolderDeleteTrade: 'Supprimer'
+pageBookmarksFolderReorder: 'Glisser pour réorganiser, ou utiliser les flèches'
+pageBookmarksFolderUpdateTradeLocation: "Enregistrer l'échange actif"
+pageBookmarksFolderCompleteTrade: 'Marquer comme terminé'
+pageBookmarksFolderUncompleteTrade: 'Marquer comme non terminé'
+pageBookmarksFolderDeleteTradeSuccessFlash: "L'échange « $1 » a été supprimé."
+pageBookmarksFolderUpdateTradeSuccessFlash: "L'échange « $1 » a été mis à jour."
+pageBookmarksFolderCreateTradeSuccessFlash: "L'échange « $1 » a été créé."
+pageBookmarksFolderPersistTradeLocationSuccessFlash: "L'emplacement de l'échange « $1 » a été mis à jour."
+pageBookmarksFolderTradeDeletionModalTitle: 'Confirmer la suppression'
+pageBookmarksFolderTradeDeletionConfirmation: 'Supprimer le favori « $1 » ?'
+pageBookmarksFolderTradeDeletionDelete: 'Supprimer'
+pageBookmarksFolderTradeDeletionCancel: 'Annuler'
+pageBookmarksFolderFolderExportModalTitle: 'Exportation du dossier de favoris'
+pageBookmarksFolderFolderExportExportCode: "Code d'exportation"
+pageBookmarksFolderFolderExportExportCodeHelper: 'Ce code permet de restaurer un dossier. Il peut servir de sauvegarde ou être partagé.'
+pageBookmarksFolderFolderExportClose: 'Fermer'
+pageBookmarksFolderTradeEditionModalTitle: "Enregistrer l'échange"
+pageBookmarksFolderTradeEditionTitleLabel: 'Titre'
+pageBookmarksFolderEditionModalTitle: 'Dossier de favoris'
+pageBookmarksFolderEditionTitleLabel: 'Titre'
+pageBookmarksFolderEditionIconLabel: 'Icône'
+pageBookmarksFolderEditionSave: 'Enregistrer'
+pageBookmarksFolderImportModalTitle: 'Importer un dossier de favoris'
+pageBookmarksFolderImportImportCodeLabel: "Code d'importation"
+pageBookmarksFolderImportInvalidCode: 'Le code saisi semble invalide, essayez-en un autre.'

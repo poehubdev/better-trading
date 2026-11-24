@@ -51,9 +51,12 @@ triggers `.github/workflows/build.yml`, which builds both browsers and creates a
   `utils/extension-background.ts` from `services/poe-ninja.ts`.
 
 **Strings flow top-down.** Components never call i18n. `hooks/useMessages.ts` resolves every user-visible string
-from `locales/en.yml` (`@wxt-dev/i18n`, `#i18n`) and `App.tsx` spreads them into components as props
-(`{...messages.header}`). Storybook supplies the same props per locale via `.storybook/locale-utils.ts`
-(`defineMessages` / `resolveLocaleValue`).
+from `locales/<lang>.yml` (`@wxt-dev/i18n`, `#i18n`; `en` is the default, other languages may cover only some keys and
+fall back to it) and `App.tsx` spreads them into components as props (`{...messages.header}`). In Storybook,
+`.storybook/i18n-mock.ts` serves the same yml files in the toolbar locale, so stories spread `buildMessages()` from
+`hooks/useMessages.ts` too (see `PageSettings.stories.tsx`). Only story sample content that is not a UI string (demo
+labels, body text, changelog markdown) keeps per-locale maps via `.storybook/locale-utils.ts` (`defineMessages` /
+`resolveLocaleValue`).
 
 **Layers** (all imported with the `@/` alias):
 - `components/<Name>/index.tsx` + `styles.module.scss` + `<Name>.stories.tsx` — UI. `Page*` components are the
@@ -119,10 +122,10 @@ trailing commas. Styles are SCSS modules; global trade-site tweaks live in `styl
 default.
 
 **Every new component needs a Storybook story** (`<Name>.stories.tsx` next to it). Stories must work with the
-Storybook locale switcher (toolbar `locale` global, see `.storybook/preview.tsx`): supply user-visible strings per
-locale via `defineMessages` / `resolveLocaleValue`, and check the component under other locales, because fonts and
-text length change per language. Only `en` exists in `locales/` today, but more languages WILL be added, so never
-assume English-only layout or hardcode strings in components.
+Storybook locale switcher (toolbar `locale` global, see `.storybook/preview.tsx`): take user-visible strings from
+`buildMessages()` (translations go in `locales/<lang>.yml`, not in the story), and check the component under other
+locales, because fonts and text length change per language. Never assume English-only layout or hardcode strings in
+components.
 
 **Port, don't copy.** When migrating something from the Ember version, review the old solution first: keep it if it
 worked well, redesign it if there is a clearly better approach. Parity is about behavior, not about code structure.

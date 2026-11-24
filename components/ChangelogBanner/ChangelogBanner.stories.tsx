@@ -1,6 +1,5 @@
 import ChangelogBanner from './index.tsx';
-import { logoAltMessages, modalCloseMessages } from '@/.storybook/common-messages';
-import { resolveLocaleValue, defineMessages } from '@/.storybook/locale-utils';
+import { buildMessages } from '@/hooks/useMessages';
 import type { Meta, StoryObj } from '@storybook/react-vite';
 
 /**
@@ -23,38 +22,9 @@ const meta = {
       control: 'object',
       description: 'Changelog data object with slug and markdown content',
     },
-    noticeText: {
-      control: false,
-      description: '(Derived from locale in render)',
-    },
-    modalButtonLabel: {
-      control: false,
-      description: '(Derived from locale in render)',
-    },
-    modalTitle: {
-      control: false,
-      description: '(Derived from locale in render)',
-    },
-    dismissButtonLabel: {
-      control: false,
-      description: '(Derived from locale in render)',
-    },
-    modalCloseLabel: {
-      control: false,
-      description: '(Derived from locale in render)',
-    },
-    logoAlt: {
-      control: false,
-      description: '(Derived from locale in render)',
-    },
   },
   args: {
-    noticeText: '',
-    modalButtonLabel: '',
-    modalTitle: '',
-    dismissButtonLabel: '',
-    modalCloseLabel: '',
-    logoAlt: '',
+    ...buildMessages().changelogBanner(storyVersion),
     changelog: {
       slug: '2.0.0',
       markdown: `
@@ -71,82 +41,10 @@ const meta = {
 
 type Story = StoryObj<typeof meta>;
 
-// Notice text messages
-const noticeMessages = defineMessages({
-  'en-US': 'Better Trading has been updated to version {version}!',
-  'fr-FR': 'Better Trading a été mis à jour vers la version {version} !',
-  'es-ES': '¡Better Trading se ha actualizado a la versión {version}!',
-  'de-DE': 'Better Trading wurde auf Version {version} aktualisiert!',
-  'pt-BR': 'Better Trading foi atualizado para a versão {version}!',
-  'ru-RU': 'Better Trading обновлён до версии {version}!',
-  'zh-CN': 'Better Trading 已更新至版本 {version}！',
-  'ja-JP': 'Better Trading がバージョン {version} に更新されました！',
-  'ko-KR': 'Better Trading이 버전 {version}(으)로 업데이트되었습니다!',
-  'th-TH': 'Better Trading อัปเดตเป็นเวอร์ชัน {version} แล้ว!',
-});
-
-// Modal button label messages
-const modalButtonMessages = defineMessages({
-  'en-US': 'View Changelog',
-  'fr-FR': 'Voir le journal des modifications',
-  'es-ES': 'Ver registro de cambios',
-  'de-DE': 'Änderungsprotokoll anzeigen',
-  'pt-BR': 'Ver registro de alterações',
-  'ru-RU': 'Посмотреть журнал изменений',
-  'zh-CN': '查看更新日志',
-  'ja-JP': '変更履歴を表示',
-  'ko-KR': '변경 로그 보기',
-  'th-TH': 'ดูบันทึกการเปลี่ยนแปลง',
-});
-
-// Modal title messages
-const modalTitleMessages = defineMessages({
-  'en-US': "What's new in version {version}",
-  'fr-FR': 'Nouveautés de la version {version}',
-  'es-ES': 'Novedades de la versión {version}',
-  'de-DE': 'Neuerungen in Version {version}',
-  'pt-BR': 'Novidades na versão {version}',
-  'ru-RU': 'Что нового в версии {version}',
-  'zh-CN': '版本 {version} 的新功能',
-  'ja-JP': 'バージョン {version} の新機能',
-  'ko-KR': '버전 {version}의 새로운 기능',
-  'th-TH': 'มีอะไรใหม่ในเวอร์ชัน {version}',
-});
-
-// Dismiss button label messages
-const dismissButtonMessages = defineMessages({
-  'en-US': 'Got it!',
-  'fr-FR': "C'est compris !",
-  'es-ES': '¡Entendido!',
-  'de-DE': 'Verstanden!',
-  'pt-BR': 'Entendi!',
-  'ru-RU': 'Понятно!',
-  'zh-CN': '明白了！',
-  'ja-JP': 'わかりました！',
-  'ko-KR': '알겠습니다!',
-  'th-TH': 'เข้าใจแล้ว!',
-});
-
 export const Default: Story = {
-  render: (args, { globals }) => {
-    const noticeTemplate = resolveLocaleValue(globals.locale as string, noticeMessages);
-    const modalButtonLabel = resolveLocaleValue(globals.locale as string, modalButtonMessages);
-    const modalTitleTemplate = resolveLocaleValue(globals.locale as string, modalTitleMessages);
-    const dismissButtonLabel = resolveLocaleValue(globals.locale as string, dismissButtonMessages);
-
-    return (
-      <ChangelogBanner
-        {...args}
-        noticeText={noticeTemplate.replace('{version}', storyVersion)}
-        modalButtonLabel={modalButtonLabel}
-        modalTitle={modalTitleTemplate.replace('{version}', storyVersion)}
-        dismissButtonLabel={dismissButtonLabel}
-        modalCloseLabel={resolveLocaleValue(globals.locale as string, modalCloseMessages)}
-        logoAlt={resolveLocaleValue(globals.locale as string, logoAltMessages)}
-        data-locale={globals.locale}
-      />
-    );
-  },
+  render: (args, { globals }) => (
+    <ChangelogBanner {...args} {...buildMessages().changelogBanner(storyVersion)} data-locale={globals.locale} />
+  ),
 };
 
 export const NoChangelog: Story = {
@@ -154,30 +52,14 @@ export const NoChangelog: Story = {
   args: {
     changelog: undefined,
   },
-  render: (args, { globals }) => {
-    const noticeTemplate = resolveLocaleValue(globals.locale as string, noticeMessages);
-    const modalButtonLabel = resolveLocaleValue(globals.locale as string, modalButtonMessages);
-    const modalTitleTemplate = resolveLocaleValue(globals.locale as string, modalTitleMessages);
-    const dismissButtonLabel = resolveLocaleValue(globals.locale as string, dismissButtonMessages);
-
-    return (
-      <div>
-        <p style={{ marginBottom: 16, fontStyle: 'italic', color: '#666' }}>
-          The banner is hidden when no changelog is provided.
-        </p>
-        <ChangelogBanner
-          {...args}
-          noticeText={noticeTemplate.replace('{version}', storyVersion)}
-          modalButtonLabel={modalButtonLabel}
-          modalTitle={modalTitleTemplate.replace('{version}', storyVersion)}
-          dismissButtonLabel={dismissButtonLabel}
-          modalCloseLabel={resolveLocaleValue(globals.locale as string, modalCloseMessages)}
-          logoAlt={resolveLocaleValue(globals.locale as string, logoAltMessages)}
-          data-locale={globals.locale}
-        />
-      </div>
-    );
-  },
+  render: (args, { globals }) => (
+    <div>
+      <p style={{ marginBottom: 16, fontStyle: 'italic', color: '#666' }}>
+        The banner is hidden when no changelog is provided.
+      </p>
+      <ChangelogBanner {...args} {...buildMessages().changelogBanner(storyVersion)} data-locale={globals.locale} />
+    </div>
+  ),
 };
 
 export const LongChangelog: Story = {
@@ -214,25 +96,9 @@ export const LongChangelog: Story = {
       `,
     },
   },
-  render: (args, { globals }) => {
-    const noticeTemplate = resolveLocaleValue(globals.locale as string, noticeMessages);
-    const modalButtonLabel = resolveLocaleValue(globals.locale as string, modalButtonMessages);
-    const modalTitleTemplate = resolveLocaleValue(globals.locale as string, modalTitleMessages);
-    const dismissButtonLabel = resolveLocaleValue(globals.locale as string, dismissButtonMessages);
-
-    return (
-      <ChangelogBanner
-        {...args}
-        noticeText={noticeTemplate.replace('{version}', storyVersion)}
-        modalButtonLabel={modalButtonLabel}
-        modalTitle={modalTitleTemplate.replace('{version}', storyVersion)}
-        dismissButtonLabel={dismissButtonLabel}
-        modalCloseLabel={resolveLocaleValue(globals.locale as string, modalCloseMessages)}
-        logoAlt={resolveLocaleValue(globals.locale as string, logoAltMessages)}
-        data-locale={globals.locale}
-      />
-    );
-  },
+  render: (args, { globals }) => (
+    <ChangelogBanner {...args} {...buildMessages().changelogBanner(storyVersion)} data-locale={globals.locale} />
+  ),
 };
 
 export default meta;

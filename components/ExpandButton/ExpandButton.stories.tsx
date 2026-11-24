@@ -1,7 +1,6 @@
 import ExpandButton from './index';
+import { buildMessages } from '@/hooks/useMessages';
 import { collapseSidePanel, expandSidePanel } from '@/utils/side-panel-collapse';
-import { logoAltMessages, headerExpandMessages } from '@/.storybook/common-messages';
-import { resolveLocaleValue } from '@/.storybook/locale-utils';
 import { useEffect } from 'react';
 import type { Meta, StoryObj } from '@storybook/react-vite';
 
@@ -20,9 +19,8 @@ const meta = {
 type Story = StoryObj<typeof meta>;
 
 export const Default: Story = {
-  args: { logoAlt: '', expandLabel: '' },
-  render: (args, { globals }) => {
-    const locale = globals.locale as string;
+  args: buildMessages().expandButton,
+  render: args => {
     const CollapsedPreview = () => {
       useEffect(() => {
         collapseSidePanel();
@@ -31,12 +29,7 @@ export const Default: Story = {
         };
       }, []);
 
-      return (
-        <ExpandButton
-          logoAlt={resolveLocaleValue(locale, logoAltMessages)}
-          expandLabel={resolveLocaleValue(locale, headerExpandMessages)}
-        />
-      );
+      return <ExpandButton {...args} {...buildMessages().expandButton} />;
     };
 
     return <CollapsedPreview />;

@@ -1,0 +1,106 @@
+logoAlt: Логотип Better Trading
+modalClose: Закрыть
+changelogBannerModalButton: Список изменений
+
+pageSettingsDisclaimer: Это фанатское расширение, никак не связанное с Grinding Gear Games.
+pageSettingsEnhancersTitle: Включённые улучшения результатов
+pageSettingsEnhancersEquivalentPricings: Эквивалентные цены (на основе poe.ninja)
+pageSettingsEnhancersHighlightStatFilters: Подсвечивать искомые свойства
+pageSettingsEnhancersMaximumSockets: Предупреждение для брони, в которой нельзя сделать 6 гнёзд
+pageSettingsEnhancersRegroupSimilars: Группировать похожие результаты
+pageSettingsAppearanceTitle: Внешний вид
+pageSettingsPanelBlur: Размывать страницу под панелью
+pageSettingsPanelScrollbar: Показывать полосу прокрутки панели
+pageSettingsLogoThrow: Клик по логотипу
+pageSettingsLogoThrowNone: Закладки
+pageSettingsLogoThrowLogo: Логотип
+pageSettingsLogoThrowCurrency: Валюта
+pageSettingsLogoSound: Воспроизводить звуки
+pageSettingsLogoSoundVolume: Громкость
+pageSettingsPilferingRingResetHint: Удерживайте, чтобы сбросить
+pageSettingsBackupTitle: Резервное копирование
+pageSettingsBackupDescription: Сохраните все закладки в файл или восстановите их из файла.
+pageSettingsBackupGenerateButton: Сохранить файл
+pageSettingsBackupRestoreButton: Восстановить из файла
+pageSettingsBackupRestoreErrorFlash: Не удалось восстановить резервную копию.
+pageSettingsMaintainer: 'Поддерживается <strong>Message</strong> (<a href="https://github.com/message">@message</a>)'
+pageSettingsCredits: 'Основано на <a href="https://github.com/exile-center/better-trading">Better Trading</a> от <strong>InfaMc</strong> (<a href="https://github.com/pboutin">@pboutin</a>) и <strong>brosmike</strong> (<a href="https://github.com/dbjorge">@dbjorge</a>)'
+
+generalTitle: 'Better Trading'
+genericAlertFlash: 'Ой! Что-то пошло не так!'
+headerCollapse: 'Свернуть панель Better Trading'
+headerExpand: 'Развернуть панель Better Trading'
+headerShowSettings: 'Показать настройки Better Trading'
+headerShowMain: 'Показать торговые инструменты'
+changelogBannerNotice: 'Новая версия $1 установлена.'
+changelogBannerModalTitle: 'Список изменений $1'
+changelogBannerDismissButton: 'Скрыть'
+clipboardTextareaButton: 'Копировать в буфер обмена'
+clipboardTextareaButtonCopied: 'Скопировано'
+rootPageMenuLabel: 'Страницы Better Trading'
+rootPageMenuBookmarks: 'Закладки'
+rootPageMenuHistory: 'История'
+rootPageMenuPinnedItems: 'Закрепленные предметы'
+itemResultsPinnablePin: 'Закрепить'
+pagePinnedItemsWarning: 'Закреплённое сохраняется, пока вы не смените поиск или не перезагрузите страницу.'
+pagePinnedItemsClear: 'Открепить всё'
+pagePinnedItemsCount:
+  1: 'Закреплён 1'
+  n: 'Закреплено: $1'
+pagePinnedItemsEmptyTitle: 'Нет закреплённых предметов'
+pagePinnedItemsEmptyHint: 'Ищите {pin} среди кнопок действий в правом нижнем углу каждого результата. Закреплённые предметы остаются здесь, чтобы их можно было сравнить.'
+pagePinnedItemsUnpinItem: 'Открепить'
+pagePinnedItemsScrollToItem: 'Показать в результатах'
+pageHistoryClear: 'Очистить историю'
+pageHistoryEmpty: 'История поиска сейчас пуста.'
+pageHistoryClearSuccessFlash: 'История поиска очищена.'
+pageBookmarksCreateFolder: 'Новая папка'
+pageBookmarksEmptyTitle: 'Закладок пока нет'
+pageBookmarksEmptyHint: 'Сохраняйте поиски в папки, чтобы возвращаться к ним в один клик.'
+pageBookmarksCollapseAll: 'Свернуть папки'
+pageBookmarksSearch: 'Поиск по папкам и обменам'
+pageBookmarksClearSearch: 'Очистить поиск'
+pageBookmarksNoMatches: 'Нет папок и обменов по запросу «$1»'
+pageBookmarksShowArchivedFolders: 'Показать архив'
+pageBookmarksShowUnarchivedFolders: 'Вернуться к активным папкам'
+pageBookmarksFoldersWarning: 'Большое количество папок может замедлять работу сайта.<br>Сохраните ненужные папки с помощью экспорта, а затем удалите их.'
+pageBookmarksDeleteFolderSuccessFlash: 'Папка «$1» удалена.'
+pageBookmarksUpdateFolderSuccessFlash: 'Папка «$1» обновлена.'
+pageBookmarksCreateFolderSuccessFlash: 'Папка «$1» создана.'
+pageBookmarksImportFolderSuccessFlash: 'Папка «$1» импортирована.'
+pageBookmarksFolderEditFolder: 'Редактировать'
+pageBookmarksFolderDeleteFolder: 'Удалить'
+pageBookmarksFolderArchiveFolder: 'Архивировать'
+pageBookmarksFolderRestoreFolder: 'Восстановить'
+pageBookmarksFolderExportFolder: 'Экспорт/Поделиться'
+pageBookmarksFolderOpenLiveTrade: 'Живой поиск'
+pageBookmarksFolderCreateTrade: 'Сохранить текущий обмен'
+pageBookmarksFolderCopyTradeToClipboard: 'Скопировать URL в буфер обмена'
+pageBookmarksFolderCopyTradeToClipboardSuccessFlash: 'Ссылка на обмен «$1» скопирована в буфер обмена.'
+pageBookmarksFolderEditTrade: 'Редактировать'
+pageBookmarksFolderDeleteTrade: 'Удалить'
+pageBookmarksFolderReorder: 'Перетащите, чтобы изменить порядок, или используйте стрелки'
+pageBookmarksFolderUpdateTradeLocation: 'Сохранить активный обмен'
+pageBookmarksFolderCompleteTrade: 'Отметить как завершенное'
+pageBookmarksFolderUncompleteTrade: 'Отметить как незавершенное'
+pageBookmarksFolderDeleteTradeSuccessFlash: 'Обмен «$1» удалён.'
+pageBookmarksFolderUpdateTradeSuccessFlash: 'Обмен «$1» обновлён.'
+pageBookmarksFolderCreateTradeSuccessFlash: 'Обмен «$1» создан.'
+pageBookmarksFolderPersistTradeLocationSuccessFlash: 'Адрес обмена «$1» обновлён.'
+pageBookmarksFolderTradeDeletionModalTitle: 'Подтвердите удаление'
+pageBookmarksFolderTradeDeletionConfirmation: 'Удалить закладку «$1»?'
+pageBookmarksFolderTradeDeletionDelete: 'Удалить'
+pageBookmarksFolderTradeDeletionCancel: 'Отмена'
+pageBookmarksFolderFolderExportModalTitle: 'Экспорт папки закладок'
+pageBookmarksFolderFolderExportExportCode: 'Код экспорта'
+pageBookmarksFolderFolderExportExportCodeHelper: 'По этому коду можно восстановить папку. Он подходит для резервной копии и для того, чтобы поделиться.'
+pageBookmarksFolderFolderExportClose: 'Закрыть'
+pageBookmarksFolderTradeEditionModalTitle: 'Сохранить обмен'
+pageBookmarksFolderTradeEditionTitleLabel: 'Название'
+pageBookmarksFolderEditionModalTitle: 'Папка закладок'
+pageBookmarksFolderEditionTitleLabel: 'Название'
+pageBookmarksFolderEditionIconLabel: 'Иконка'
+pageBookmarksFolderEditionSave: 'Сохранить'
+pageBookmarksFolderImportModalTitle: 'Импорт папки закладок'
+pageBookmarksFolderImportImportCodeLabel: 'Код импорта'
+pageBookmarksFolderImportInvalidCode: 'Введённый код выглядит недействительным, попробуйте другой.'

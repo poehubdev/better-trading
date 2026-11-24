@@ -1,6 +1,6 @@
 import RootPageMenu from './index.tsx';
+import { buildMessages } from '@/hooks/useMessages';
 import { RootPage } from '@/types/root-page';
-import { rootPageMenuLabelMessages } from '@/.storybook/common-messages';
 import { resolveLocaleValue, defineMessages } from '@/.storybook/locale-utils';
 import { useState } from 'react';
 import type { Meta, StoryObj } from '@storybook/react-vite';
@@ -13,6 +13,7 @@ const meta = {
   title: 'Components/RootPageMenu',
   tags: ['autodocs'],
   parameters: { layout: 'padded' },
+  args: buildMessages().rootPageMenu,
   argTypes: {
     currentPage: {
       control: { type: 'radio' },
@@ -36,46 +37,6 @@ const meta = {
 
 type Story = StoryObj<typeof meta>;
 
-// Localized messages
-const bookmarksMessages = defineMessages({
-  'en-US': 'Bookmarks',
-  'fr-FR': 'Favoris',
-  'es-ES': 'Marcadores',
-  'de-DE': 'Lesezeichen',
-  'pt-BR': 'Favoritos',
-  'ru-RU': 'Закладки',
-  'zh-CN': '书签',
-  'ja-JP': 'ブックマーク',
-  'ko-KR': '북마크',
-  'th-TH': 'บุ๊กมาร์ก',
-});
-
-const pinnedItemsMessages = defineMessages({
-  'en-US': 'Pinned Items',
-  'fr-FR': 'Articles épinglés',
-  'es-ES': 'Artículos anclados',
-  'de-DE': 'Angeheftete Artikel',
-  'pt-BR': 'Itens fixados',
-  'ru-RU': 'Закрепленные предметы',
-  'zh-CN': '固定物品',
-  'ja-JP': 'ピン留めアイテム',
-  'ko-KR': '고정된 아이템',
-  'th-TH': 'ไอเทมที่ปักหมุด',
-});
-
-const historyMessages = defineMessages({
-  'en-US': 'History',
-  'fr-FR': 'Historique',
-  'es-ES': 'Historial',
-  'de-DE': 'Verlauf',
-  'pt-BR': 'Histórico',
-  'ru-RU': 'История',
-  'zh-CN': '历史记录',
-  'ja-JP': '履歴',
-  'ko-KR': '기록',
-  'th-TH': 'ประวัติ',
-});
-
 const currentPageMessages = defineMessages({
   'en-US': 'Current Page:',
   'fr-FR': 'Page actuelle :',
@@ -89,35 +50,20 @@ const currentPageMessages = defineMessages({
   'th-TH': 'หน้าปัจจุบัน:',
 });
 
-const getLabels = (locale: string) => ({
-  labels: {
-    bookmarks: resolveLocaleValue(locale, bookmarksMessages),
-    pinnedItems: resolveLocaleValue(locale, pinnedItemsMessages),
-    history: resolveLocaleValue(locale, historyMessages),
-  },
-  ariaLabel: resolveLocaleValue(locale, rootPageMenuLabelMessages),
-});
-
 export const BookmarksActive: Story = {
   name: 'Bookmarks Active',
   args: {
     currentPage: RootPage.BOOKMARKS,
     onChange: () => {},
-    labels: { bookmarks: '', pinnedItems: '', history: '' },
-    ariaLabel: '',
   },
-  render: (args, { globals }) => {
-    const labels = getLabels(globals.locale as string);
-
-    return (
-      <RootPageMenu
-        currentPage={RootPage.BOOKMARKS}
-        onChange={page => console.log('Changed to:', page)}
-        {...labels}
-        data-locale={globals.locale}
-      />
-    );
-  },
+  render: (args, { globals }) => (
+    <RootPageMenu
+      currentPage={RootPage.BOOKMARKS}
+      onChange={page => console.log('Changed to:', page)}
+      {...buildMessages().rootPageMenu}
+      data-locale={globals.locale}
+    />
+  ),
 };
 
 export const PinnedItemsActive: Story = {
@@ -125,21 +71,15 @@ export const PinnedItemsActive: Story = {
   args: {
     currentPage: RootPage.PINNED_ITEMS,
     onChange: () => {},
-    labels: { bookmarks: '', pinnedItems: '', history: '' },
-    ariaLabel: '',
   },
-  render: (args, { globals }) => {
-    const labels = getLabels(globals.locale as string);
-
-    return (
-      <RootPageMenu
-        currentPage={RootPage.PINNED_ITEMS}
-        onChange={page => console.log('Changed to:', page)}
-        {...labels}
-        data-locale={globals.locale}
-      />
-    );
-  },
+  render: (args, { globals }) => (
+    <RootPageMenu
+      currentPage={RootPage.PINNED_ITEMS}
+      onChange={page => console.log('Changed to:', page)}
+      {...buildMessages().rootPageMenu}
+      data-locale={globals.locale}
+    />
+  ),
 };
 
 export const HistoryActive: Story = {
@@ -147,21 +87,15 @@ export const HistoryActive: Story = {
   args: {
     currentPage: RootPage.HISTORY,
     onChange: () => {},
-    labels: { bookmarks: '', pinnedItems: '', history: '' },
-    ariaLabel: '',
   },
-  render: (args, { globals }) => {
-    const labels = getLabels(globals.locale as string);
-
-    return (
-      <RootPageMenu
-        currentPage={RootPage.HISTORY}
-        onChange={page => console.log('Changed to:', page)}
-        {...labels}
-        data-locale={globals.locale}
-      />
-    );
-  },
+  render: (args, { globals }) => (
+    <RootPageMenu
+      currentPage={RootPage.HISTORY}
+      onChange={page => console.log('Changed to:', page)}
+      {...buildMessages().rootPageMenu}
+      data-locale={globals.locale}
+    />
+  ),
 };
 
 export const Interactive: Story = {
@@ -169,17 +103,14 @@ export const Interactive: Story = {
   args: {
     currentPage: RootPage.BOOKMARKS,
     onChange: () => {},
-    labels: { bookmarks: '', pinnedItems: '', history: '' },
-    ariaLabel: '',
   },
   render: (args, { globals }) => {
     const [currentPage, setCurrentPage] = useState<RootPage>(RootPage.BOOKMARKS);
-    const labels = getLabels(globals.locale as string);
     const currentPageLabel = resolveLocaleValue(globals.locale as string, currentPageMessages);
 
     return (
       <div data-locale={globals.locale}>
-        <RootPageMenu currentPage={currentPage} onChange={setCurrentPage} {...labels} />
+        <RootPageMenu currentPage={currentPage} onChange={setCurrentPage} {...buildMessages().rootPageMenu} />
         <div style={{ marginTop: 20, padding: 10, backgroundColor: '#1a1a1a', color: '#fff' }}>
           <strong>{currentPageLabel}</strong> {currentPage}
         </div>

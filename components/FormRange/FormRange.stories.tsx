@@ -1,5 +1,5 @@
 import FormRange from './index';
-import { defineMessages, resolveLocaleValue } from '@/.storybook/locale-utils';
+import { buildMessages } from '@/hooks/useMessages';
 import { useState } from 'react';
 import type { Meta, StoryObj } from '@storybook/react-vite';
 
@@ -14,25 +14,12 @@ const meta = {
 
 type Story = StoryObj<typeof meta>;
 
-const volumeLabels = defineMessages({
-  'en-US': 'Volume',
-  'fr-FR': 'Volume',
-  'es-ES': 'Volumen',
-  'de-DE': 'Lautstärke',
-  'pt-BR': 'Volume',
-  'ru-RU': 'Громкость',
-  'zh-CN': '音量',
-  'ja-JP': '音量',
-  'ko-KR': '음량',
-  'th-TH': 'ระดับเสียง',
-});
-
-const VolumeWrapper = ({ locale, disabled }: { locale: string; disabled?: boolean }) => {
+const VolumeWrapper = ({ disabled }: { disabled?: boolean }) => {
   const [value, setValue] = useState(60);
   return (
     <div style={{ width: 300 }}>
       <FormRange
-        label={resolveLocaleValue(locale, volumeLabels)}
+        label={buildMessages().pageSettings.logoSoundVolumeLabel}
         value={value}
         valueText={`${value}%`}
         onChange={setValue}
@@ -44,12 +31,12 @@ const VolumeWrapper = ({ locale, disabled }: { locale: string; disabled?: boolea
 
 export const Volume: Story = {
   args: {} as never,
-  render: (args, { globals }) => <VolumeWrapper locale={globals.locale as string} />,
+  render: () => <VolumeWrapper />,
 };
 
 export const Disabled: Story = {
   args: {} as never,
-  render: (args, { globals }) => <VolumeWrapper locale={globals.locale as string} disabled />,
+  render: () => <VolumeWrapper disabled />,
 };
 
 export default meta;

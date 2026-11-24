@@ -192,5 +192,5 @@ type Messages = ReturnType<typeof buildMessages>;
 
 const useMessages = (): Messages => useMemo(() => buildMessages(), []);
 
-export { useMessages, getEnhancerTitle };
+export { useMessages, buildMessages, getEnhancerTitle };
 export type { Messages };

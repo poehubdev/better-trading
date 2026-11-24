@@ -1,0 +1,106 @@
+logoAlt: Better Trading 标志
+modalClose: 关闭
+changelogBannerModalButton: 更新日志
+
+pageSettingsDisclaimer: 此扩展程序由玩家制作，与 Grinding Gear Games 没有任何关联。
+pageSettingsEnhancersTitle: 已启用的结果增强器
+pageSettingsEnhancersEquivalentPricings: 等价价格（由 poe.ninja 提供）
+pageSettingsEnhancersHighlightStatFilters: 高亮搜索的词缀
+pageSettingsEnhancersMaximumSockets: 无法拥有 6 孔的护甲警告
+pageSettingsEnhancersRegroupSimilars: 合并相似结果
+pageSettingsAppearanceTitle: 外观
+pageSettingsPanelBlur: 模糊面板后方的页面
+pageSettingsPanelScrollbar: 显示面板滚动条
+pageSettingsLogoThrow: 点击标志
+pageSettingsLogoThrowNone: 书签
+pageSettingsLogoThrowLogo: 标志
+pageSettingsLogoThrowCurrency: 通货
+pageSettingsLogoSound: 播放音效
+pageSettingsLogoSoundVolume: 音量
+pageSettingsPilferingRingResetHint: 长按以重置
+pageSettingsBackupTitle: 备份工具
+pageSettingsBackupDescription: 将所有书签保存到文件，或从文件恢复。
+pageSettingsBackupGenerateButton: 保存文件
+pageSettingsBackupRestoreButton: 从文件恢复
+pageSettingsBackupRestoreErrorFlash: 恢复备份失败。
+pageSettingsMaintainer: '维护者：<strong>Message</strong> (<a href="https://github.com/message">@message</a>)'
+pageSettingsCredits: '基于 <strong>InfaMc</strong> (<a href="https://github.com/pboutin">@pboutin</a>) 和 <strong>brosmike</strong> (<a href="https://github.com/dbjorge">@dbjorge</a>) 的 <a href="https://github.com/exile-center/better-trading">Better Trading</a>'
+
+generalTitle: 'Better Trading'
+genericAlertFlash: '哎呀！出错了！'
+headerCollapse: '折叠 Better Trading 面板'
+headerExpand: '展开 Better Trading 面板'
+headerShowSettings: '显示 Better Trading 设置'
+headerShowMain: '显示交易工具'
+changelogBannerNotice: '新版本 $1 已安装。'
+changelogBannerModalTitle: '$1 更新日志'
+changelogBannerDismissButton: '忽略'
+clipboardTextareaButton: '复制到剪贴板'
+clipboardTextareaButtonCopied: '已复制'
+rootPageMenuLabel: 'Better Trading 页面'
+rootPageMenuBookmarks: '书签'
+rootPageMenuHistory: '历史记录'
+rootPageMenuPinnedItems: '固定物品'
+itemResultsPinnablePin: '固定'
+pagePinnedItemsWarning: '固定的物品会保留到你更改搜索或重新加载页面为止。'
+pagePinnedItemsClear: '取消全部固定'
+pagePinnedItemsCount:
+  1: '已固定 1 个'
+  n: '已固定 $1 个'
+pagePinnedItemsEmptyTitle: '没有固定的物品'
+pagePinnedItemsEmptyHint: '在每个结果右下角的操作按钮中找到 {pin}。固定的物品会保留在这里，方便你进行比较。'
+pagePinnedItemsUnpinItem: '取消固定'
+pagePinnedItemsScrollToItem: '在结果中显示'
+pageHistoryClear: '清除历史'
+pageHistoryEmpty: '搜索历史目前为空。'
+pageHistoryClearSuccessFlash: '搜索历史已清除。'
+pageBookmarksCreateFolder: '新建文件夹'
+pageBookmarksEmptyTitle: '还没有书签'
+pageBookmarksEmptyHint: '将搜索保存到文件夹中，一键即可返回。'
+pageBookmarksCollapseAll: '折叠文件夹'
+pageBookmarksSearch: '搜索文件夹和交易'
+pageBookmarksClearSearch: '清除搜索'
+pageBookmarksNoMatches: '没有与“$1”匹配的文件夹或交易'
+pageBookmarksShowArchivedFolders: '显示存档'
+pageBookmarksShowUnarchivedFolders: '返回活动文件夹'
+pageBookmarksFoldersWarning: '文件夹过多可能会拖慢网站。<br>请用导出功能备份不需要的文件夹，然后删除它们。'
+pageBookmarksDeleteFolderSuccessFlash: '文件夹“$1”已删除。'
+pageBookmarksUpdateFolderSuccessFlash: '文件夹“$1”已更新。'
+pageBookmarksCreateFolderSuccessFlash: '文件夹“$1”已创建。'
+pageBookmarksImportFolderSuccessFlash: '文件夹“$1”已导入。'
+pageBookmarksFolderEditFolder: '编辑'
+pageBookmarksFolderDeleteFolder: '删除'
+pageBookmarksFolderArchiveFolder: '存档'
+pageBookmarksFolderRestoreFolder: '恢复'
+pageBookmarksFolderExportFolder: '导出/分享'
+pageBookmarksFolderOpenLiveTrade: '实时搜索'
+pageBookmarksFolderCreateTrade: '登记当前交易'
+pageBookmarksFolderCopyTradeToClipboard: '复制 URL 到剪贴板'
+pageBookmarksFolderCopyTradeToClipboardSuccessFlash: '“$1”的交易链接已复制到剪贴板。'
+pageBookmarksFolderEditTrade: '编辑'
+pageBookmarksFolderDeleteTrade: '删除'
+pageBookmarksFolderReorder: '拖动以排序，或使用方向键'
+pageBookmarksFolderUpdateTradeLocation: '保存当前交易'
+pageBookmarksFolderCompleteTrade: '标记为完成'
+pageBookmarksFolderUncompleteTrade: '标记为未完成'
+pageBookmarksFolderDeleteTradeSuccessFlash: '交易“$1”已删除。'
+pageBookmarksFolderUpdateTradeSuccessFlash: '交易“$1”已更新。'
+pageBookmarksFolderCreateTradeSuccessFlash: '交易“$1”已创建。'
+pageBookmarksFolderPersistTradeLocationSuccessFlash: '交易“$1”的位置已更新。'
+pageBookmarksFolderTradeDeletionModalTitle: '确认删除'
+pageBookmarksFolderTradeDeletionConfirmation: '删除书签“$1”？'
+pageBookmarksFolderTradeDeletionDelete: '删除'
+pageBookmarksFolderTradeDeletionCancel: '取消'
+pageBookmarksFolderFolderExportModalTitle: '导出书签文件夹'
+pageBookmarksFolderFolderExportExportCode: '导出代码'
+pageBookmarksFolderFolderExportExportCodeHelper: '此代码可用于恢复文件夹，也可用于备份和分享。'
+pageBookmarksFolderFolderExportClose: '关闭'
+pageBookmarksFolderTradeEditionModalTitle: '收藏交易'
+pageBookmarksFolderTradeEditionTitleLabel: '标题'
+pageBookmarksFolderEditionModalTitle: '书签文件夹'
+pageBookmarksFolderEditionTitleLabel: '标题'
+pageBookmarksFolderEditionIconLabel: '图标'
+pageBookmarksFolderEditionSave: '保存'
+pageBookmarksFolderImportModalTitle: '导入书签文件夹'
+pageBookmarksFolderImportImportCodeLabel: '导入代码'
+pageBookmarksFolderImportInvalidCode: '输入的代码似乎无效，请换一个。'

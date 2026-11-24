@@ -1,0 +1,106 @@
+logoAlt: Logotipo do Better Trading
+modalClose: Fechar
+changelogBannerModalButton: Novidades
+
+pageSettingsDisclaimer: Esta extensão é feita por fãs e não tem nenhuma afiliação com a Grinding Gear Games.
+pageSettingsEnhancersTitle: Melhorias de resultados ativadas
+pageSettingsEnhancersEquivalentPricings: Preços equivalentes (via poe.ninja)
+pageSettingsEnhancersHighlightStatFilters: Destacar modificadores pesquisados
+pageSettingsEnhancersMaximumSockets: Aviso para armaduras que não podem ter 6 engastes
+pageSettingsEnhancersRegroupSimilars: Reagrupar resultados semelhantes
+pageSettingsAppearanceTitle: Aparência
+pageSettingsPanelBlur: Desfocar a página atrás do painel
+pageSettingsPanelScrollbar: Mostrar a barra de rolagem do painel
+pageSettingsLogoThrow: Clique no logo
+pageSettingsLogoThrowNone: Favoritos
+pageSettingsLogoThrowLogo: Logo
+pageSettingsLogoThrowCurrency: Moeda
+pageSettingsLogoSound: Tocar sons
+pageSettingsLogoSoundVolume: Volume
+pageSettingsPilferingRingResetHint: Mantenha pressionado para redefinir
+pageSettingsBackupTitle: Ferramentas de backup
+pageSettingsBackupDescription: Salve todos os seus favoritos em um arquivo ou restaure-os a partir de um.
+pageSettingsBackupGenerateButton: Salvar arquivo
+pageSettingsBackupRestoreButton: Restaurar de um arquivo
+pageSettingsBackupRestoreErrorFlash: A restauração do backup falhou.
+pageSettingsMaintainer: 'Mantido por <strong>Message</strong> (<a href="https://github.com/message">@message</a>)'
+pageSettingsCredits: 'Baseado em <a href="https://github.com/exile-center/better-trading">Better Trading</a> de <strong>InfaMc</strong> (<a href="https://github.com/pboutin">@pboutin</a>) e <strong>brosmike</strong> (<a href="https://github.com/dbjorge">@dbjorge</a>)'
+
+generalTitle: 'Better Trading'
+genericAlertFlash: 'Ops! Algo deu errado!'
+headerCollapse: 'Recolher o painel do Better Trading'
+headerExpand: 'Expandir o painel do Better Trading'
+headerShowSettings: 'Mostrar as configurações do Better Trading'
+headerShowMain: 'Mostrar ferramentas de troca'
+changelogBannerNotice: 'A nova versão $1 já está instalada.'
+changelogBannerModalTitle: 'Novidades da $1'
+changelogBannerDismissButton: 'Dispensar'
+clipboardTextareaButton: 'Copiar para a área de transferência'
+clipboardTextareaButtonCopied: 'Copiado'
+rootPageMenuLabel: 'Páginas do Better Trading'
+rootPageMenuBookmarks: 'Favoritos'
+rootPageMenuHistory: 'Histórico'
+rootPageMenuPinnedItems: 'Itens fixados'
+itemResultsPinnablePin: 'Fixar'
+pagePinnedItemsWarning: 'Os itens fixados permanecem até você mudar a busca ou recarregar a página.'
+pagePinnedItemsClear: 'Desafixar tudo'
+pagePinnedItemsCount:
+  1: '1 fixado'
+  n: '$1 fixados'
+pagePinnedItemsEmptyTitle: 'Nenhum item fixado'
+pagePinnedItemsEmptyHint: 'Procure {pin} nos botões de ação no canto inferior direito de cada resultado. Os itens fixados ficam aqui para você compará-los.'
+pagePinnedItemsUnpinItem: 'Desafixar'
+pagePinnedItemsScrollToItem: 'Mostrar nos resultados'
+pageHistoryClear: 'Limpar histórico'
+pageHistoryEmpty: 'O histórico de busca está vazio no momento.'
+pageHistoryClearSuccessFlash: 'O histórico de busca foi limpo.'
+pageBookmarksCreateFolder: 'Nova pasta'
+pageBookmarksEmptyTitle: 'Nenhum favorito ainda'
+pageBookmarksEmptyHint: 'Salve buscas em pastas para voltar a elas com um clique.'
+pageBookmarksCollapseAll: 'Recolher pastas'
+pageBookmarksSearch: 'Pesquisar pastas e negociações'
+pageBookmarksClearSearch: 'Limpar pesquisa'
+pageBookmarksNoMatches: 'Nenhuma pasta ou negociação corresponde a "$1"'
+pageBookmarksShowArchivedFolders: 'Mostrar arquivo'
+pageBookmarksShowUnarchivedFolders: 'Voltar às pastas ativas'
+pageBookmarksFoldersWarning: 'Ter muitas pastas pode deixar o site lento.<br>Faça backup das pastas desnecessárias com a função de exportação e depois exclua-as.'
+pageBookmarksDeleteFolderSuccessFlash: 'A pasta "$1" foi excluída.'
+pageBookmarksUpdateFolderSuccessFlash: 'A pasta "$1" foi atualizada.'
+pageBookmarksCreateFolderSuccessFlash: 'A pasta "$1" foi criada.'
+pageBookmarksImportFolderSuccessFlash: 'A pasta "$1" foi importada.'
+pageBookmarksFolderEditFolder: 'Editar'
+pageBookmarksFolderDeleteFolder: 'Excluir'
+pageBookmarksFolderArchiveFolder: 'Arquivar'
+pageBookmarksFolderRestoreFolder: 'Restaurar'
+pageBookmarksFolderExportFolder: 'Exportar/Compartilhar'
+pageBookmarksFolderOpenLiveTrade: 'Pesquisa ao vivo'
+pageBookmarksFolderCreateTrade: 'Registrar a negociação atual'
+pageBookmarksFolderCopyTradeToClipboard: 'Copiar URL para a área de transferência'
+pageBookmarksFolderCopyTradeToClipboardSuccessFlash: 'A URL da negociação "$1" foi copiada para a área de transferência.'
+pageBookmarksFolderEditTrade: 'Editar'
+pageBookmarksFolderDeleteTrade: 'Excluir'
+pageBookmarksFolderReorder: 'Arraste para reordenar ou use as setas'
+pageBookmarksFolderUpdateTradeLocation: 'Salvar a negociação ativa'
+pageBookmarksFolderCompleteTrade: 'Marcar como concluído'
+pageBookmarksFolderUncompleteTrade: 'Marcar como incompleto'
+pageBookmarksFolderDeleteTradeSuccessFlash: 'A negociação "$1" foi excluída.'
+pageBookmarksFolderUpdateTradeSuccessFlash: 'A negociação "$1" foi atualizada.'
+pageBookmarksFolderCreateTradeSuccessFlash: 'A negociação "$1" foi criada.'
+pageBookmarksFolderPersistTradeLocationSuccessFlash: 'O local da negociação "$1" foi atualizado.'
+pageBookmarksFolderTradeDeletionModalTitle: 'Confirmar exclusão'
+pageBookmarksFolderTradeDeletionConfirmation: 'Excluir o favorito "$1"?'
+pageBookmarksFolderTradeDeletionDelete: 'Excluir'
+pageBookmarksFolderTradeDeletionCancel: 'Cancelar'
+pageBookmarksFolderFolderExportModalTitle: 'Exportação da pasta de favoritos'
+pageBookmarksFolderFolderExportExportCode: 'Código de exportação'
+pageBookmarksFolderFolderExportExportCodeHelper: 'Este código pode restaurar uma pasta. Serve como backup ou para compartilhá-la.'
+pageBookmarksFolderFolderExportClose: 'Fechar'
+pageBookmarksFolderTradeEditionModalTitle: 'Salvar negociação'
+pageBookmarksFolderTradeEditionTitleLabel: 'Título'
+pageBookmarksFolderEditionModalTitle: 'Pasta de favoritos'
+pageBookmarksFolderEditionTitleLabel: 'Título'
+pageBookmarksFolderEditionIconLabel: 'Ícone'
+pageBookmarksFolderEditionSave: 'Salvar'
+pageBookmarksFolderImportModalTitle: 'Importar pasta de favoritos'
+pageBookmarksFolderImportImportCodeLabel: 'Código de importação'
+pageBookmarksFolderImportInvalidCode: 'O código informado parece inválido, tente outro.'

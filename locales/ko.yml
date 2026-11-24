@@ -1,0 +1,106 @@
+logoAlt: Better Trading 로고
+modalClose: 닫기
+changelogBannerModalButton: 변경 사항
+
+pageSettingsDisclaimer: 이 확장 프로그램은 팬이 만든 것으로 Grinding Gear Games와 전혀 관련이 없습니다.
+pageSettingsEnhancersTitle: 사용 중인 결과 향상 기능
+pageSettingsEnhancersEquivalentPricings: 동등 가격 (poe.ninja 제공)
+pageSettingsEnhancersHighlightStatFilters: 검색한 모드 강조
+pageSettingsEnhancersMaximumSockets: 6소켓이 불가능한 방어구 경고
+pageSettingsEnhancersRegroupSimilars: 비슷한 결과 묶기
+pageSettingsAppearanceTitle: 모양
+pageSettingsPanelBlur: 패널 뒤 페이지 흐리게 하기
+pageSettingsPanelScrollbar: 패널 스크롤바 표시
+pageSettingsLogoThrow: 로고 클릭
+pageSettingsLogoThrowNone: 북마크
+pageSettingsLogoThrowLogo: 로고
+pageSettingsLogoThrowCurrency: 화폐
+pageSettingsLogoSound: 소리 재생
+pageSettingsLogoSoundVolume: 음량
+pageSettingsPilferingRingResetHint: 길게 눌러 초기화
+pageSettingsBackupTitle: 백업 도구
+pageSettingsBackupDescription: 모든 북마크를 파일로 저장하거나 파일에서 복원합니다.
+pageSettingsBackupGenerateButton: 파일 저장
+pageSettingsBackupRestoreButton: 파일에서 복원
+pageSettingsBackupRestoreErrorFlash: 백업 복원에 실패했습니다.
+pageSettingsMaintainer: '관리자: <strong>Message</strong> (<a href="https://github.com/message">@message</a>)'
+pageSettingsCredits: '<strong>InfaMc</strong> (<a href="https://github.com/pboutin">@pboutin</a>), <strong>brosmike</strong> (<a href="https://github.com/dbjorge">@dbjorge</a>)의 <a href="https://github.com/exile-center/better-trading">Better Trading</a> 기반'
+
+generalTitle: 'Better Trading'
+genericAlertFlash: '이런! 문제가 발생했습니다!'
+headerCollapse: 'Better Trading 패널 접기'
+headerExpand: 'Better Trading 패널 펼치기'
+headerShowSettings: 'Better Trading 설정 보기'
+headerShowMain: '거래 도구 보기'
+changelogBannerNotice: '새 버전 $1이(가) 설치되었습니다.'
+changelogBannerModalTitle: '$1 변경 사항'
+changelogBannerDismissButton: '닫기'
+clipboardTextareaButton: '클립보드에 복사'
+clipboardTextareaButtonCopied: '복사됨'
+rootPageMenuLabel: 'Better Trading 페이지'
+rootPageMenuBookmarks: '북마크'
+rootPageMenuHistory: '기록'
+rootPageMenuPinnedItems: '고정된 아이템'
+itemResultsPinnablePin: '고정'
+pagePinnedItemsWarning: '검색을 변경하거나 페이지를 새로고침할 때까지 고정이 유지됩니다.'
+pagePinnedItemsClear: '모두 고정 해제'
+pagePinnedItemsCount:
+  1: '1개 고정됨'
+  n: '$1개 고정됨'
+pagePinnedItemsEmptyTitle: '고정된 아이템이 없습니다'
+pagePinnedItemsEmptyHint: '각 결과 오른쪽 아래의 작업 버튼에서 {pin}을 찾으세요. 고정한 아이템은 비교할 수 있도록 여기에 남습니다.'
+pagePinnedItemsUnpinItem: '고정 해제'
+pagePinnedItemsScrollToItem: '결과에서 보기'
+pageHistoryClear: '기록 지우기'
+pageHistoryEmpty: '검색 기록이 현재 비어 있습니다.'
+pageHistoryClearSuccessFlash: '검색 기록을 지웠습니다.'
+pageBookmarksCreateFolder: '새 폴더'
+pageBookmarksEmptyTitle: '아직 북마크가 없습니다'
+pageBookmarksEmptyHint: '검색을 폴더에 저장하면 한 번의 클릭으로 돌아갈 수 있습니다.'
+pageBookmarksCollapseAll: '폴더 접기'
+pageBookmarksSearch: '폴더 및 거래 검색'
+pageBookmarksClearSearch: '검색 지우기'
+pageBookmarksNoMatches: '"$1"와(과) 일치하는 폴더나 거래가 없습니다'
+pageBookmarksShowArchivedFolders: '보관함 표시'
+pageBookmarksShowUnarchivedFolders: '활성 폴더로 돌아가기'
+pageBookmarksFoldersWarning: '폴더가 많으면 웹사이트가 느려질 수 있습니다.<br>불필요한 폴더는 내보내기 기능으로 백업한 뒤 삭제하세요.'
+pageBookmarksDeleteFolderSuccessFlash: '"$1" 폴더가 삭제되었습니다.'
+pageBookmarksUpdateFolderSuccessFlash: '"$1" 폴더가 업데이트되었습니다.'
+pageBookmarksCreateFolderSuccessFlash: '"$1" 폴더가 생성되었습니다.'
+pageBookmarksImportFolderSuccessFlash: '"$1" 폴더를 가져왔습니다.'
+pageBookmarksFolderEditFolder: '편집'
+pageBookmarksFolderDeleteFolder: '삭제'
+pageBookmarksFolderArchiveFolder: '보관'
+pageBookmarksFolderRestoreFolder: '복원'
+pageBookmarksFolderExportFolder: '내보내기/공유'
+pageBookmarksFolderOpenLiveTrade: '실시간 검색'
+pageBookmarksFolderCreateTrade: '현재 거래 등록'
+pageBookmarksFolderCopyTradeToClipboard: 'URL을 클립보드에 복사'
+pageBookmarksFolderCopyTradeToClipboardSuccessFlash: '"$1" 거래 URL이 클립보드에 복사되었습니다.'
+pageBookmarksFolderEditTrade: '편집'
+pageBookmarksFolderDeleteTrade: '삭제'
+pageBookmarksFolderReorder: '드래그하거나 화살표 키로 순서 변경'
+pageBookmarksFolderUpdateTradeLocation: '활성 거래 저장'
+pageBookmarksFolderCompleteTrade: '완료로 표시'
+pageBookmarksFolderUncompleteTrade: '미완료로 표시'
+pageBookmarksFolderDeleteTradeSuccessFlash: '"$1" 거래가 삭제되었습니다.'
+pageBookmarksFolderUpdateTradeSuccessFlash: '"$1" 거래가 업데이트되었습니다.'
+pageBookmarksFolderCreateTradeSuccessFlash: '"$1" 거래가 생성되었습니다.'
+pageBookmarksFolderPersistTradeLocationSuccessFlash: '"$1" 거래 위치가 업데이트되었습니다.'
+pageBookmarksFolderTradeDeletionModalTitle: '삭제 확인'
+pageBookmarksFolderTradeDeletionConfirmation: '"$1" 북마크를 삭제할까요?'
+pageBookmarksFolderTradeDeletionDelete: '삭제'
+pageBookmarksFolderTradeDeletionCancel: '취소'
+pageBookmarksFolderFolderExportModalTitle: '북마크 폴더 내보내기'
+pageBookmarksFolderFolderExportExportCode: '내보내기 코드'
+pageBookmarksFolderFolderExportExportCodeHelper: '이 코드로 폴더를 복원할 수 있습니다. 백업과 공유에 사용할 수 있습니다.'
+pageBookmarksFolderFolderExportClose: '닫기'
+pageBookmarksFolderTradeEditionModalTitle: '거래 북마크'
+pageBookmarksFolderTradeEditionTitleLabel: '제목'
+pageBookmarksFolderEditionModalTitle: '북마크 폴더'
+pageBookmarksFolderEditionTitleLabel: '제목'
+pageBookmarksFolderEditionIconLabel: '아이콘'
+pageBookmarksFolderEditionSave: '저장'
+pageBookmarksFolderImportModalTitle: '북마크 폴더 가져오기'
+pageBookmarksFolderImportImportCodeLabel: '가져오기 코드'
+pageBookmarksFolderImportInvalidCode: '입력한 코드가 잘못된 것 같습니다. 다른 코드를 시도하세요.'

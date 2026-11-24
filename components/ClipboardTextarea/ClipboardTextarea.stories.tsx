@@ -1,4 +1,5 @@
 import { ClipboardTextarea } from './index';
+import { buildMessages } from '@/hooks/useMessages';
 import { defineMessages, resolveLocaleValue } from '@/.storybook/locale-utils';
 import type { Meta, StoryObj } from '@storybook/react-vite';
 
@@ -25,32 +26,6 @@ const shortTextValues = defineMessages({
   'ja-JP': 'こんにちは、世界！',
   'ko-KR': '안녕하세요, 세계!',
   'th-TH': 'สวัสดีชาวโลก!',
-});
-
-const copyButtonLabels = defineMessages({
-  'en-US': 'Copy',
-  'fr-FR': 'Copier',
-  'es-ES': 'Copiar',
-  'de-DE': 'Kopieren',
-  'pt-BR': 'Copiar',
-  'ru-RU': 'Копировать',
-  'zh-CN': '复制',
-  'ja-JP': 'コピー',
-  'ko-KR': '복사',
-  'th-TH': 'คัดลอก',
-});
-
-const copiedButtonLabels = defineMessages({
-  'en-US': 'Copied!',
-  'fr-FR': 'Copié !',
-  'es-ES': '¡Copiado!',
-  'de-DE': 'Kopiert!',
-  'pt-BR': 'Copiado!',
-  'ru-RU': 'Скопировано!',
-  'zh-CN': '已复制！',
-  'ja-JP': 'コピーしました！',
-  'ko-KR': '복사됨!',
-  'th-TH': 'คัดลอกแล้ว!',
 });
 
 const longTextValues = defineMessages({
@@ -216,8 +191,8 @@ const dataCopiedLabels = defineMessages({
 export const ShortText: Story = {
   render: (args, { globals }) => {
     const value = resolveLocaleValue(globals.locale as string, shortTextValues);
-    const buttonLabel = resolveLocaleValue(globals.locale as string, copyButtonLabels);
-    const buttonCopiedLabel = resolveLocaleValue(globals.locale as string, copiedButtonLabels);
+    const { copyToClipboardLabel: buttonLabel, copiedToClipboardLabel: buttonCopiedLabel } =
+      buildMessages().pageBookmarks;
 
     return (
       <ClipboardTextarea
@@ -233,8 +208,8 @@ export const ShortText: Story = {
 export const LongText: Story = {
   render: (args, { globals }) => {
     const value = resolveLocaleValue(globals.locale as string, longTextValues);
-    const buttonLabel = resolveLocaleValue(globals.locale as string, copyButtonLabels);
-    const buttonCopiedLabel = resolveLocaleValue(globals.locale as string, copiedButtonLabels);
+    const { copyToClipboardLabel: buttonLabel, copiedToClipboardLabel: buttonCopiedLabel } =
+      buildMessages().pageBookmarks;
 
     return (
       <ClipboardTextarea

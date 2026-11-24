@@ -1,0 +1,106 @@
+logoAlt: Better Trading のロゴ
+modalClose: 閉じる
+changelogBannerModalButton: 変更履歴
+
+pageSettingsDisclaimer: この拡張機能はファンが作ったもので、Grinding Gear Games とは一切関係ありません。
+pageSettingsEnhancersTitle: 有効な結果エンハンサー
+pageSettingsEnhancersEquivalentPricings: 同等価格（poe.ninja 提供）
+pageSettingsEnhancersHighlightStatFilters: 検索した Mod をハイライト
+pageSettingsEnhancersMaximumSockets: 6 ソケットにできない防具の警告
+pageSettingsEnhancersRegroupSimilars: 類似した結果をまとめる
+pageSettingsAppearanceTitle: 外観
+pageSettingsPanelBlur: パネルの背後のページをぼかす
+pageSettingsPanelScrollbar: パネルのスクロールバーを表示する
+pageSettingsLogoThrow: ロゴのクリック
+pageSettingsLogoThrowNone: ブックマーク
+pageSettingsLogoThrowLogo: ロゴ
+pageSettingsLogoThrowCurrency: カレンシー
+pageSettingsLogoSound: 効果音を鳴らす
+pageSettingsLogoSoundVolume: 音量
+pageSettingsPilferingRingResetHint: 長押しでリセット
+pageSettingsBackupTitle: バックアップツール
+pageSettingsBackupDescription: すべてのブックマークをファイルに保存、またはファイルから復元します。
+pageSettingsBackupGenerateButton: ファイルを保存
+pageSettingsBackupRestoreButton: ファイルから復元
+pageSettingsBackupRestoreErrorFlash: バックアップの復元に失敗しました。
+pageSettingsMaintainer: 'メンテナー：<strong>Message</strong> (<a href="https://github.com/message">@message</a>)'
+pageSettingsCredits: '<strong>InfaMc</strong> (<a href="https://github.com/pboutin">@pboutin</a>) と <strong>brosmike</strong> (<a href="https://github.com/dbjorge">@dbjorge</a>) による <a href="https://github.com/exile-center/better-trading">Better Trading</a> をベースにしています'
+
+generalTitle: 'Better Trading'
+genericAlertFlash: 'おっと！問題が発生しました！'
+headerCollapse: 'Better Trading パネルを折りたたむ'
+headerExpand: 'Better Trading パネルを展開する'
+headerShowSettings: 'Better Trading の設定を表示'
+headerShowMain: 'トレードツールを表示'
+changelogBannerNotice: '新しいバージョン $1 がインストールされました。'
+changelogBannerModalTitle: '$1 の変更履歴'
+changelogBannerDismissButton: '閉じる'
+clipboardTextareaButton: 'クリップボードにコピー'
+clipboardTextareaButtonCopied: 'コピーしました'
+rootPageMenuLabel: 'Better Trading のページ'
+rootPageMenuBookmarks: 'ブックマーク'
+rootPageMenuHistory: '履歴'
+rootPageMenuPinnedItems: 'ピン留めアイテム'
+itemResultsPinnablePin: 'ピン留め'
+pagePinnedItemsWarning: 'ピン留めは検索を変更するかページを再読み込みするまで保持されます。'
+pagePinnedItemsClear: 'すべてのピン留めを解除'
+pagePinnedItemsCount:
+  1: '1 件ピン留め'
+  n: '$1 件ピン留め'
+pagePinnedItemsEmptyTitle: 'ピン留めされたアイテムはありません'
+pagePinnedItemsEmptyHint: '各結果の右下にあるアクションボタンから {pin} を探してください。ピン留めしたアイテムはここに残り、比較できます。'
+pagePinnedItemsUnpinItem: 'ピン解除'
+pagePinnedItemsScrollToItem: '結果内で表示'
+pageHistoryClear: '履歴をクリア'
+pageHistoryEmpty: '検索履歴は現在空です。'
+pageHistoryClearSuccessFlash: '検索履歴をクリアしました。'
+pageBookmarksCreateFolder: '新しいフォルダ'
+pageBookmarksEmptyTitle: 'ブックマークはまだありません'
+pageBookmarksEmptyHint: '検索をフォルダに保存すると、ワンクリックで戻れます。'
+pageBookmarksCollapseAll: 'フォルダを折りたたむ'
+pageBookmarksSearch: 'フォルダーと取引を検索'
+pageBookmarksClearSearch: '検索をクリア'
+pageBookmarksNoMatches: '「$1」に一致するフォルダーや取引はありません'
+pageBookmarksShowArchivedFolders: 'アーカイブを表示'
+pageBookmarksShowUnarchivedFolders: 'アクティブなフォルダに戻る'
+pageBookmarksFoldersWarning: 'フォルダが多いとサイトが重くなることがあります。<br>不要なフォルダはエクスポート機能でバックアップしてから削除してください。'
+pageBookmarksDeleteFolderSuccessFlash: 'フォルダ「$1」を削除しました。'
+pageBookmarksUpdateFolderSuccessFlash: 'フォルダ「$1」を更新しました。'
+pageBookmarksCreateFolderSuccessFlash: 'フォルダ「$1」を作成しました。'
+pageBookmarksImportFolderSuccessFlash: 'フォルダ「$1」をインポートしました。'
+pageBookmarksFolderEditFolder: '編集'
+pageBookmarksFolderDeleteFolder: '削除'
+pageBookmarksFolderArchiveFolder: 'アーカイブ'
+pageBookmarksFolderRestoreFolder: '復元'
+pageBookmarksFolderExportFolder: 'エクスポート/共有'
+pageBookmarksFolderOpenLiveTrade: 'ライブ検索'
+pageBookmarksFolderCreateTrade: '現在の取引を登録'
+pageBookmarksFolderCopyTradeToClipboard: 'URL をクリップボードにコピー'
+pageBookmarksFolderCopyTradeToClipboardSuccessFlash: '「$1」の取引 URL をクリップボードにコピーしました。'
+pageBookmarksFolderEditTrade: '編集'
+pageBookmarksFolderDeleteTrade: '削除'
+pageBookmarksFolderReorder: 'ドラッグまたは矢印キーで並べ替え'
+pageBookmarksFolderUpdateTradeLocation: '現在開いている取引を保存'
+pageBookmarksFolderCompleteTrade: '完了としてマーク'
+pageBookmarksFolderUncompleteTrade: '未完了としてマーク'
+pageBookmarksFolderDeleteTradeSuccessFlash: '取引「$1」を削除しました。'
+pageBookmarksFolderUpdateTradeSuccessFlash: '取引「$1」を更新しました。'
+pageBookmarksFolderCreateTradeSuccessFlash: '取引「$1」を作成しました。'
+pageBookmarksFolderPersistTradeLocationSuccessFlash: '取引「$1」の場所を更新しました。'
+pageBookmarksFolderTradeDeletionModalTitle: '削除の確認'
+pageBookmarksFolderTradeDeletionConfirmation: 'ブックマーク「$1」を削除しますか？'
+pageBookmarksFolderTradeDeletionDelete: '削除'
+pageBookmarksFolderTradeDeletionCancel: 'キャンセル'
+pageBookmarksFolderFolderExportModalTitle: 'ブックマークフォルダのエクスポート'
+pageBookmarksFolderFolderExportExportCode: 'エクスポートコード'
+pageBookmarksFolderFolderExportExportCodeHelper: 'このコードでフォルダを復元できます。バックアップや共有に使えます。'
+pageBookmarksFolderFolderExportClose: '閉じる'
+pageBookmarksFolderTradeEditionModalTitle: '取引をブックマーク'
+pageBookmarksFolderTradeEditionTitleLabel: 'タイトル'
+pageBookmarksFolderEditionModalTitle: 'ブックマークフォルダ'
+pageBookmarksFolderEditionTitleLabel: 'タイトル'
+pageBookmarksFolderEditionIconLabel: 'アイコン'
+pageBookmarksFolderEditionSave: '保存'
+pageBookmarksFolderImportModalTitle: 'ブックマークフォルダをインポート'
+pageBookmarksFolderImportImportCodeLabel: 'インポートコード'
+pageBookmarksFolderImportInvalidCode: '入力されたコードは無効のようです。別のコードをお試しください。'
