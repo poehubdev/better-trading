@@ -7,6 +7,11 @@ import type { BuildItem, Influence, Item, Mod } from './build';
 import type { ModMatch } from './mods';
 import type { ModPool } from './pools';
 
+interface ImportOptions {
+  /** A weight group on and the per-mod groups it covers off (default), or the per-mod groups on and no weight group */
+  weightedSum?: boolean;
+}
+
 interface Result {
   exportString: string;
   /** Mod lines that could not be matched to a trade stat */
@@ -91,6 +96,19 @@ const PSEUDO_TOTALS: Record<string, string[]> = {
   stat_2300185227: ['dexterity', 'intelligence'],
 };
 
+/** The broadest pseudo totals, which the weight group sums: each with the stats whose largest roll on the base sets its weight */
+const WEIGHED_TOTALS: Record<string, string[]> = {
+  elemental_resistance: ['stat_3372524247', 'stat_4220027924', 'stat_1671376347'],
+  chaos_resistance: ['stat_2923486259'],
+  life: ['stat_3299347043'],
+  strength: ['stat_4080418644'],
+  dexterity: ['stat_3261801346'],
+  intelligence: ['stat_328541901'],
+};
+/** The totals suggested, disabled, when the base can carry them and the build item lacks them */
+const SUGGESTED_TOTALS = ['elemental_resistance', 'chaos_resistance', 'life'];
+const ELEMENTS = ['fire_resistance', 'cold_resistance', 'lightning_resistance'];
+
 const BASE_JEWELS = new Set(['Cobalt Jewel', 'Crimson Jewel', 'Viridian Jewel', 'Prismatic Jewel']);
 
 const WEAPON_CATEGORIES: Record<string, string> = {
@@ -125,6 +143,18 @@ const MIN_FACTOR = 0.8;
 const scaled = (value: number) => Math.max(Math.floor(value * MIN_FACTOR), Math.min(1, Math.floor(value)));
 // A weight group sums fractions, so its minimum stays fractional
 const scaledSum = (value: number) => Math.round(value * MIN_FACTOR * 100) / 100;
+
+/** 100 / the largest roll of any of these stats (`stat_123`) on any of the bases, so a full roll weighs 100; 1 when unknown */
+const weightOf = (bases: (string | undefined)[], stats: string[]) => {
+  const rolls = bases.flatMap(base =>
+    (base ? stats.flatMap(stat => tiers(base, 'explicit', stat)) : []).map(([, max]) => max),
+  );
+  const max = Math.max(0, ...rolls);
+  return max > 0 ? Math.round(10000 / max) / 100 : 1;
+};
+
+/** The trade stat numbers (`stat_123`) of trade IDs */
+const statsOf = (ids: string[]) => [...new Set(ids.map(id => id.split('.')[1]!))];
 
 /** Keeps the trade stat IDs of the given modifier types (`enchant` in `enchant.stat_123`), or all if there are none */
 const onlyTypes = (ids: string[], types: string[]) => {
@@ -217,12 +247,19 @@ const andFirst = (groups: StatGroup[]): StatGroup[] => {
 };
 
 /**
- * Rare, magic and flask stats: an `and` group of pseudo totals and cluster enchants (on) and influences (off), `count`
- * groups for the other mods, and a `weight` group of the explicit ones. A crafted mod is wanted in any rolled or crafted
- * form, or as an empty affix slot to craft it, and stays out of the totals and the weighted sum; a fractured one is
- * wanted as an explicit or fractured mod
+ * Rare, magic and flask stats: an `and` group of pseudo totals and cluster enchants (on), suggestions and influences
+ * (off), `count` groups for the other mods, and a `weight` group of the explicit ones and the broadest totals. With the
+ * weighted sum on, the `count` groups the weight group covers are off; with it off, there is no weight group. A crafted
+ * mod is wanted in any rolled or crafted form, or as an empty affix slot to craft it, and stays out of the totals and the
+ * weighted sum; a fractured one is wanted as an explicit or fractured mod
  */
-const rareStatGroups = (mods: Mod[], influences: StatFilter[], reportUnmatched: Report, base?: string) => {
+const rareStatGroups = (
+  mods: Mod[],
+  influences: StatFilter[],
+  reportUnmatched: Report,
+  base: string | undefined,
+  weightedSum: boolean,
+) => {
   const jewel = !!base?.endsWith('Jewel');
   const cluster = !!base?.endsWith('Cluster Jewel');
   const pool = base ? modPool(base) : undefined;
@@ -273,26 +310,49 @@ const rareStatGroups = (mods: Mod[], influences: StatFilter[], reportUnmatched: 
     const emptySlots = crafted
       ? affixesOf(base, stat).map(affix => ({ id: `pseudo.pseudo_number_of_empty_${affix}_mods`, value: { min: 1 } }))
       : [];
+    const weighed = weightedSum && !implicit && !crafted && value !== undefined && !ids.some(id => id.includes('|'));
     groups.push({
       type: 'count',
       value: { min: 1 },
-      disabled: false,
+      disabled: weighed,
       filters: [...ids.map(id => statFilter(id, min)), ...emptySlots],
     });
-    if (!implicit && !crafted && value !== undefined && !ids.some(id => id.includes('|'))) {
-      for (const id of ids) weighted.set(id, { id, value: { weight: 1 } });
-      weightSum += value;
+    if (weighed) {
+      const weight = weightOf([base], statsOf(ids));
+      for (const id of ids) weighted.set(id, { id, value: { weight } });
+      weightSum += weight * value;
+    }
+  }
+  const elemental = ELEMENTS.reduce((sum, element) => sum + (totals.get(element) ?? 0), 0);
+  const broad = new Map([...totals].filter(([total]) => !ELEMENTS.includes(total)));
+  if (elemental) broad.set('elemental_resistance', elemental);
+  const suggested = SUGGESTED_TOTALS.filter(
+    total => pool && !broad.has(total) && WEIGHED_TOTALS[total]!.some(stat => pool.explicit?.has(stat)),
+  );
+  if (weightedSum) {
+    // A suggestion is weighed but adds nothing to the minimum: the build item does not have it. The site's total life
+    // counts Strength / 2, so the build item's does too here, or Strength would score twice on the items found
+    const strength = (broad.get('strength') ?? 0) / 2;
+    for (const total of [...broad.keys(), ...suggested]) {
+      const weight = weightOf([base], WEIGHED_TOTALS[total]!);
+      weighted.set(`pseudo.pseudo_total_${total}`, { id: `pseudo.pseudo_total_${total}`, value: { weight } });
+      weightSum += weight * ((broad.get(total) ?? 0) + (total === 'life' ? strength : 0));
     }
   }
   const and = [
     ...[...totals].map(([total, sum]) => ({ id: `pseudo.pseudo_total_${total}`, value: { min: scaled(sum) } })),
+    // The per-element totals are on; one switch swaps them for their sum
+    ...(elemental
+      ? [{ id: 'pseudo.pseudo_total_elemental_resistance', value: { min: scaled(elemental) }, disabled: true }]
+      : []),
+    ...suggested.map(total => ({ id: `pseudo.pseudo_total_${total}`, disabled: true })),
     ...enchants,
     ...influences,
   ];
   return andFirst([
     ...(and.length ? [{ type: 'and' as const, filters: and }] : []),
     ...groups,
-    ...(weighted.size
+    ...(weightSum > 0
       ? [{ type: 'weight' as const, value: { min: scaledSum(weightSum) }, filters: [...weighted.values()] }]
       : []),
   ]);
@@ -381,7 +441,7 @@ const tradeCategory = (slot: string, type: string | undefined): string | undefin
   return SLOT_CATEGORIES[slot];
 };
 
-const searchQuery = ({ slot, item }: BuildItem, reportUnmatched: Report) => {
+const searchQuery = ({ slot, item }: BuildItem, reportUnmatched: Report, weightedSum: boolean) => {
   const query: Record<string, unknown> = { status: { option: 'securable' } };
   if (item.rarity === 'UNIQUE' || item.rarity === 'RELIC') {
     const name = item.name.replace(/^Foulborn /, '');
@@ -440,7 +500,7 @@ const searchQuery = ({ slot, item }: BuildItem, reportUnmatched: Report) => {
       const id = INFLUENCE_STATS[influence];
       return id ? [{ id, disabled: true }] : [];
     });
-    const stats = rareStatGroups(item.mods, influences, reportUnmatched, item.base);
+    const stats = rareStatGroups(item.mods, influences, reportUnmatched, item.base, weightedSum);
     if (stats.length) query.stats = stats;
   }
   return query;
@@ -456,7 +516,7 @@ const aggregateIds = (ids: string[], pool: ModPool | undefined) =>
     : ids.filter(id => /^(explicit|fractured)\./.test(id));
 
 /** The Aggregate Jewel: one Trade for any base jewel with enough of the mods found on the build's base jewels */
-const aggregateJewel = (items: BuildItem[]) => {
+const aggregateJewel = (items: BuildItem[], weightedSum: boolean) => {
   const union = new Set<string>();
   const weighted = new Map<string, StatFilter>();
   let most = 0;
@@ -480,8 +540,10 @@ const aggregateJewel = (items: BuildItem[]) => {
     for (const { match, implicit } of mods) {
       const ids = match.ids.filter(id => /^(explicit|fractured)\./.test(id) && !id.includes('|'));
       if (implicit || match.value === undefined || !ids.length) continue;
-      for (const id of ids) weighted.set(id, { id, value: { weight: 1 } });
-      sum += match.value;
+      // One weight per stat for every jewel: the largest roll on any base jewel
+      const weight = weightOf([...BASE_JEWELS], statsOf(ids));
+      for (const id of ids) weighted.set(id, { id, value: { weight } });
+      sum += weight * match.value;
     }
     weightSum = Math.max(weightSum, sum);
     most = Math.max(most, new Set(matches.map(ids => ids.join())).size);
@@ -496,7 +558,7 @@ const aggregateJewel = (items: BuildItem[]) => {
         value: { min: Math.min(Math.max(most, 2), 4) },
         filters: [...union].map(id => statFilter(id, undefined)),
       },
-      ...(weighted.size
+      ...(weightedSum && weighted.size
         ? [{ type: 'weight', value: { min: scaledSum(weightSum) }, filters: [...weighted.values()] }]
         : []),
     ],
@@ -536,7 +598,7 @@ const trade = (tit: string, query: object) => ({
 });
 
 /** Build Code to a BT Export String (format 3) holding one Folder; the stats must be loaded first */
-const toExportString = async (buildCode: string): Promise<Result> => {
+const toExportString = async (buildCode: string, { weightedSum = true }: ImportOptions = {}): Promise<Result> => {
   const build = await decodeBuild(buildCode);
   const name = build.ascendancy ?? build.className;
   const icon = name.toLowerCase();
@@ -549,12 +611,13 @@ const toExportString = async (buildCode: string): Promise<Result> => {
     trs: dedupe([
       ...build.items.map(buildItem => {
         const tit = titleOf(buildItem);
-        return { tit, query: searchQuery(buildItem, line => unmatched.push(`${tit}: ${line}`)) };
+        return { tit, query: searchQuery(buildItem, line => unmatched.push(`${tit}: ${line}`), weightedSum) };
       }),
-      ...aggregateJewel(build.items),
+      ...aggregateJewel(build.items, weightedSum),
     ]).map(({ tit, query }) => trade(tit, query)),
   };
   return { exportString: `3:${Base64.encode(JSON.stringify(folder))}`, unmatched };
 };
 
+export type { ImportOptions };
 export { toExportString };

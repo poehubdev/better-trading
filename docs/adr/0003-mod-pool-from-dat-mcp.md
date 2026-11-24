@@ -14,7 +14,8 @@ Tiers give the fewest passives a cluster jewel base allows and the item level fi
 of the build item's rolls (PoB's own item level only when no roll has a Tier), and for a cluster jewel a maximum just below the next level
 that unlocks more of its pool. Tiers carry only their largest roll and a stat's Tiers from different mods overlap
 (essence, Incursion, hybrid), so a roll is taken to fall into the tightest Tier that reaches it; a roll above every
-Tier (pure and hybrid mods summed, quality) is skipped. Normalising weights by maximum roll can build on them later.
+Tier (pure and hybrid mods summed, quality) is skipped. The weighted sum weighs each stat by 100 / its largest roll on
+the base, so a full roll of any stat weighs 100.
 
 ## Considered Options
 
