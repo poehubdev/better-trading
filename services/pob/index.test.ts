@@ -455,6 +455,18 @@ describe('Mod Pool', () => {
     expect(ids.some(id => id.endsWith('stat_1122635070'))).toBe(false);
   });
 
+  it('searches the flask-local twin of a stat on a flask and the global one elsewhere', async () => {
+    const mod = '20% chance to gain a Flask Charge when you deal a Critical Strike';
+    const idsOn = async (item: string) =>
+      idsOf((await singleItem(`${item}\nItem Level: 84\nImplicits: 0\n${mod}`)).trades[0]!.query);
+    const flaskIds = await idsOn('Rarity: MAGIC\nDivine Life Flask of Gluttony');
+    expect(flaskIds).toContain('explicit.stat_2858921304');
+    expect(flaskIds).not.toContain('explicit.stat_3738001379');
+    const beltIds = await idsOn('Rarity: RARE\nDoom Lock\nLeather Belt');
+    expect(beltIds).toContain('explicit.stat_3738001379');
+    expect(beltIds).not.toContain('explicit.stat_2858921304');
+  });
+
   it('finds the Mod Pool of a base PoB names with a variant', async () => {
     expect(modPool('Two-Stone Ring (Fire/Lightning)')).toBe(modPool('Two-Stone Ring'));
     expect(modPool('Two-Stone Ring')).toBeDefined();
