@@ -243,10 +243,34 @@ Variant: Pre 3.19.0
 Variant: Current
 Selected Variant: 2
 Implicits: 0
-{variant:1}Gain 1 Rage on Hit
-{variant:2}+25 to maximum Life`)
+{variant:1}+2 to Level of Socketed Support Gems
+{variant:2}+30% to Quality of Socketed Support Gems`)
     ).trades[0]!.query;
     expect(query).toEqual({ status: { option: 'securable' }, name: "Atziri's Disfavour" });
+  });
+
+  it('searches a unique by the mods its PoB definition lacks, not the ones every copy has', async () => {
+    const { stats } = await tradeOf('elemental-hit-slayer-3.30.txt', 'Unique Weapon — Paradoxica');
+    const ids = stats.flatMap((group: any) => group.filters.map((filter: any) => filter.id));
+    // Dexterity and Intelligence, Attack Speed and Penetration
+    expect(ids).toEqual(
+      expect.arrayContaining(['explicit.stat_2300185227', 'explicit.stat_681332047', 'explicit.stat_4064396395']),
+    );
+    // Double Damage, which every Paradoxica has
+    expect(ids).not.toContain('explicit.stat_1506185293');
+  });
+
+  it('leaves the bench-crafted mods of a unique out', async () => {
+    const query = (
+      await singleItem(`Rarity: UNIQUE
+Paradoxica
+Vaal Rapier
+Implicits: 1
++25% to Global Critical Strike Multiplier
+{crafted}22% increased Attack Speed
+Attacks with this Weapon deal Double Damage`)
+    ).trades[0]!.query;
+    expect(query.stats).toBeUndefined();
   });
 
   it('searches a relic as a unique', async () => {

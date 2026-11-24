@@ -4,8 +4,9 @@
 //   3. pnpm test, and commit the regenerated file.
 // Without an argument it keeps the current stat lines and only re-appends the unique lines (after editing those).
 // The input is in Awakened PoE Trade's stats.ndjson format. Only the fields services/pob/mods.ts reads are kept, and
-// the unique lines from scripts/pob-uniques.ndjson are appended (see UniqueInfo in services/pob/mods.ts). Game data
-// can't produce those lines, so that file was taken from APT at 2498730 and is edited by hand.
+// the unique lines are appended (see UniqueInfo in services/pob/mods.ts). Game data can't produce those: they come from
+// scripts/pob-unique-mods.ndjson (PoB's unique definitions, pnpm pob-unique-mods) overlaid field by field with
+// scripts/pob-uniques.ndjson (APT's lines and our hand edits), which wins.
 import { readFile, writeFile } from 'node:fs/promises';
 import { join } from 'node:path';
 
@@ -31,7 +32,15 @@ const slim = ({ better, matchers, trade }: Stat): Omit<Stat, 'ref'> => ({
 
 const input = process.argv[2];
 const out = join(import.meta.dirname, '../public/pob-stats.ndjson');
-const uniques = await readFile(join(import.meta.dirname, 'pob-uniques.ndjson'), 'utf8');
+const uniqueLines = async (file: string) =>
+  (await readFile(join(import.meta.dirname, file), 'utf8'))
+    .split('\n')
+    .flatMap(line => (line ? [JSON.parse(line) as { unique: string }] : []));
+const merged = new Map<string, { unique: string }>();
+for (const line of [...(await uniqueLines('pob-unique-mods.ndjson')), ...(await uniqueLines('pob-uniques.ndjson'))]) {
+  merged.set(line.unique, { ...merged.get(line.unique), ...line });
+}
+const uniques = [...merged.values()].map(line => JSON.stringify(line) + '\n').join('');
 const lines = (await readFile(input ?? out, 'utf8'))
   .split('\n')
   .filter(line => line && !line.startsWith('{"unique"'))

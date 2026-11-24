@@ -87,7 +87,11 @@ downloaded at build or test time. Two kinds of lines:
 
 - Stat lines (matchers, trade ids) in Awakened PoE Trade's `stats.ndjson` format, slimmed to the fields `mods.ts`
   reads. They come from dat-mcp (`~/www/poehubdev/dat-mcp`), which generates them from the game files.
-- Unique lines from `scripts/pob-uniques.ndjson`, copied verbatim: `{ unique: <name>, fixed?, multiBase? }`.
+- Unique lines `{ unique: <name>, fixed?, multiBase? }`: those of `scripts/pob-unique-mods.ndjson`, overlaid field by
+  field with those of `scripts/pob-uniques.ndjson` (which wins). The first is generated from Path of Building's unique
+  definitions (`src/Data/Uniques/*.lua`, not the ones PoB builds in code) by `pnpm pob-unique-mods [PoB checkout]`:
+  `fixed` is every explicit line of the definition in any variant, so a mod beyond them (Paradoxica's crafted rolls)
+  is searched. Rerun it when PoB changes uniques, then `pnpm pob-stats`. The second comes from APT:
   `fixed` lists the trade stat numbers (`stat_<n>`, `effect_<n>`) every copy has; the import searches the unique's other explicit
   mods as random. `multiBase` marks a name shared by several bases, so the search also sets the base type. Game data
   can't produce these, so they follow APT's hand-kept `items.ndjson`: `pnpm pob-uniques [sha]` applies what APT
@@ -99,8 +103,8 @@ downloaded at build or test time. Two kinds of lines:
   current stat lines) and the test result; nothing is written when no unique line changed.
 
 On a new PoE1 patch: in dat-mcp run `npm run stats -- poe1 <patch>`, here run
-`pnpm pob-stats ~/www/poehubdev/dat-mcp/data/poe1-<patch>-stats.ndjson`, then `pnpm test`, and commit the regenerated
-file (snapshot changes are expected only where the new patch changed stat texts or ids).
+`pnpm pob-stats ~/www/poehubdev/dat-mcp/data/poe1-<patch>-stats.ndjson`, `pnpm pob-unique-mods` and `pnpm pob-stats`
+(the unique lines match against the new stat lines), then `pnpm test`, and commit the regenerated files (snapshot changes are expected only where the new patch changed stat texts or ids).
 
 **Storybook**: stories run the real contexts and services; `.storybook/chrome-storage-mock.ts` is an in-memory
 `chrome.storage.local`, and `.storybook/mock-providers.tsx` has mock providers (`MockTradeHistoryProvider`, …) for

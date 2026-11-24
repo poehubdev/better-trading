@@ -26,6 +26,8 @@ interface Mod {
   enchant: boolean;
   /** Tagged {mutated}: differs on a Foulborn unique from the regular unique */
   mutated: boolean;
+  /** An explicit tagged {crafted}: a bench craft the player added */
+  crafted: boolean;
 }
 
 interface Item {
@@ -122,7 +124,8 @@ const parseMods = (lines: string[], selected: Set<number>): Mod[] => {
   return (
     lines
       .slice(at + 1)
-      .filter(line => !ITEM_FLAGS.has(line))
+      // "Foil Unique (Verdant)" is how POB keeps a foil's look
+      .filter(line => !ITEM_FLAGS.has(line) && !line.startsWith('Foil Unique'))
       // The implicit count includes lines of variants that are not selected
       .flatMap((line, i) => {
         const tags = /^(?:\{[^}]*\})+/.exec(line)?.[0] ?? '';
@@ -134,6 +137,7 @@ const parseMods = (lines: string[], selected: Set<number>): Mod[] => {
             implicit: i < implicits,
             enchant: i < implicits && tags.includes('{crafted}'),
             mutated: tags.includes('{mutated}'),
+            crafted: i >= implicits && tags.includes('{crafted}'),
           },
         ];
       })

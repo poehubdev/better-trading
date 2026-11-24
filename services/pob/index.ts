@@ -1,9 +1,9 @@
 // Ported from pob2bt (src/index.ts): Build Code to a BT Export String. Skill Gem Trades (`--gems`) are left out
 import { decodeBuild } from './build';
-import { matchMod, matchTimeless, uniqueInfo } from './mods';
+import { matchedMods, matchMod, matchTimeless, uniqueInfo } from './mods';
 import { Base64 } from 'js-base64';
 import type { BuildItem, Influence, Item, Mod } from './build';
-import type { ModMatch } from './mods';
+import type { MatchedMod } from './mods';
 
 interface Result {
   exportString: string;
@@ -183,37 +183,9 @@ const passiveCount = (text: string, base: string): StatValue => {
   return count <= (FEWEST_PASSIVES[base.split(' ')[0]!] ?? 0) ? { max: count } : { min: count };
 };
 
-/** Matches the mod lines of an item, joining the stats that span lines */
-const matchedMods = function* (
-  mods: Mod[],
-  reportUnmatched: Report,
-): Generator<{ match: ModMatch; implicit: boolean; enchant: boolean; text: string }> {
-  // Lines already joined to an earlier one that was not right before them
-  const joined = new Set<number>();
-  for (let i = 0; i < mods.length; i++) {
-    if (joined.has(i)) continue;
-    const { text, implicit, enchant } = mods[i]!;
-    let match = matchMod(text);
-    let line = text;
-    // Some stats span two lines (cluster jewel enchants) or three (Impossible Escape)
-    for (let next = mods[i + 1]; !match && next?.implicit === implicit && line.split('\n').length < 3;) {
-      match = matchMod((line = `${line}\n${next.text}`));
-      next = mods[i + line.split('\n').length];
-    }
-    if (match) i += line.split('\n').length - 1;
-    // POB may put another mod between a stat's two lines (Thread of Hope's "Passage")
-    for (let j = i + 2; !match && mods[j]?.implicit === implicit; j++) {
-      match = joined.has(j) ? undefined : matchMod((line = `${text}\n${mods[j]!.text}`));
-      if (match) joined.add(j);
-    }
-    if (!match) reportUnmatched(text);
-    else yield { match, implicit, enchant, text: line };
-  }
-};
-
 /** One `count` group per matched mod over all its type variants; implicits on, explicits off unless `allOn` */
-const statGroups = (mods: Mod[], reportUnmatched: Report, allOn = false): StatGroup[] =>
-  [...matchedMods(mods, reportUnmatched)].map(({ match, implicit }) => {
+const statGroups = (matched: MatchedMod[], allOn = false): StatGroup[] =>
+  matched.map(({ match, implicit }) => {
     const value = match.value === undefined ? undefined : { min: scaled(match.value) };
     return {
       type: 'count',
@@ -365,11 +337,19 @@ const searchQuery = ({ slot, item }: BuildItem, reportUnmatched: Report) => {
     // unique jewel, as even a fixed one may roll what sets the price (Voices sockets). A Timeless one goes by its seed
     const jewel = !!item.base?.endsWith('Jewel');
     const fixed = info?.fixed && new Set(info.fixed);
-    const random = (mod: Mod) =>
-      !timeless &&
-      (jewel || (!!fixed && !mod.implicit && !matchMod(mod.text)?.ids.some(id => fixed.has(id.split('.')[1]!))));
-    const identity = item.mods.filter(mod => mod.mutated || random(mod));
-    const stats = statGroups(identity, reportUnmatched, true);
+    // A bench craft is the player's, not the unique's. Lines are matched joined, as a stat may span several
+    const candidate = (mod: Mod) => mod.mutated || (!timeless && (jewel || (!!fixed && !mod.implicit && !mod.crafted)));
+    // ponytail: an unmatched line of a non-jewel goes unreported, since a fixed line without a trade stat (Berek's
+    // Respite) can't be told from a random one; carry PoB's unmatched lines in the unique lines if that matters
+    const matched = [
+      ...matchedMods(item.mods, text => {
+        if (item.mods.some(mod => mod.text === text && (mod.mutated || (jewel && !timeless)))) reportUnmatched(text);
+      }),
+    ];
+    const identity = matched.filter(
+      mod => candidate(mod) && (mod.mutated || jewel || !mod.match.ids.some(id => fixed?.has(id.split('.')[1]!))),
+    );
+    const stats = statGroups(identity, true);
     // A flask's enchant is not part of its identity but makes a find worth more: the exact value, switched off
     const enchants = slot.startsWith('Flask')
       ? [

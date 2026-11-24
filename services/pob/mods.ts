@@ -1,4 +1,5 @@
 // Ported from pob2bt (src/mods.ts): stats come in as text instead of being read from disk
+import type { Mod } from './build';
 
 /** A mod line matched to trade stats */
 interface ModMatch {
@@ -133,6 +134,8 @@ const REWRITES: [RegExp, string][] = [
   // "Grants Level 30 Aspect of the Cat Skill" is the stat "Grants Level # Aspect of the Cat". The few granted skills
   // whose stat ends in "Skill" (Anger, Hatred) match as they are, before this
   [/^(Grants Level \d+ .+) Skill$/, '$1'],
+  // The stat data has "increased Rarity of Items found" as a pseudo stat only; the explicit reads "to Item Rarity"
+  [/^(\d+)% increased Rarity of Items found$/, '+$1% to Item Rarity'],
 ];
 
 /** Matches a POB mod (one line, or two joined by \n) to trade stats, or returns undefined */
@@ -145,5 +148,34 @@ const matchMod = (line: string): ModMatch | undefined => {
   return undefined;
 };
 
-export type { ModMatch, UniqueInfo };
-export { loadStats, matchMod, matchTimeless, uniqueInfo };
+/** A mod of an item matched to trade stats; `text` holds every line of a stat that spans several */
+type MatchedMod = Mod & { match: ModMatch };
+
+/** Matches the mod lines of an item, joining the stats that span lines */
+const matchedMods = function* (mods: Mod[], reportUnmatched: (line: string) => void): Generator<MatchedMod> {
+  // Lines already joined to an earlier one that was not right before them
+  const joined = new Set<number>();
+  for (let i = 0; i < mods.length; i++) {
+    if (joined.has(i)) continue;
+    const mod = mods[i]!;
+    const { text, implicit } = mod;
+    let match = matchMod(text);
+    let line = text;
+    // Some stats span two lines (cluster jewel enchants) or three (Impossible Escape)
+    for (let next = mods[i + 1]; !match && next?.implicit === implicit && line.split('\n').length < 3;) {
+      match = matchMod((line = `${line}\n${next.text}`));
+      next = mods[i + line.split('\n').length];
+    }
+    if (match) i += line.split('\n').length - 1;
+    // POB may put another mod between a stat's two lines (Thread of Hope's "Passage")
+    for (let j = i + 2; !match && mods[j]?.implicit === implicit; j++) {
+      match = joined.has(j) ? undefined : matchMod((line = `${text}\n${mods[j]!.text}`));
+      if (match) joined.add(j);
+    }
+    if (!match) reportUnmatched(text);
+    else yield { ...mod, match, text: line };
+  }
+};
+
+export type { MatchedMod, ModMatch, UniqueInfo };
+export { loadStats, matchedMods, matchMod, matchTimeless, uniqueInfo };
