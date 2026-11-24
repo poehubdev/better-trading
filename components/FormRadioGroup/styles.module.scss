@@ -19,7 +19,7 @@ $segment-transition-duration: 0.2s;
   margin-bottom: 6px;
   font-family: variables.$primary-font;
   font-size: $segment-font-size;
-  color: variables.$gray-alt;
+  color: variables.$white; // same as FormCheckbox labels
 }
 
 // Options share one outlined strip; long labels wrap inside their segment
@@ -50,22 +50,24 @@ $segment-transition-duration: 0.2s;
   font-size: $segment-font-size;
   line-height: 1.1;
   text-align: center;
-  color: variables.$gray-alt;
-  transition:
-    color $segment-transition-duration ease,
-    background-color $segment-transition-duration ease;
+  color: variables.$white;
+  // Only the hover tint fades; the selection switches instantly, a fading fill reads as lag
+  transition: background-color $segment-transition-duration ease;
 
   .option + .option & {
     border-left: 0;
   }
 
+  // Hover and selection colors follow the RootPageMenu tabs
   .option:hover & {
-    color: variables.$white;
+    background-color: #533e22;
+    color: variables.$gold-light;
   }
 
   .input:checked + & {
     background-color: variables.$gold;
-    color: variables.$white;
+    color: variables.$gold-light;
+    transition: none;
   }
 
   .input:focus-visible + & {
