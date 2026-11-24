@@ -679,7 +679,7 @@ describe('Mod lines that read unlike the stat data', () => {
 describe('Disabled Filters for item properties', () => {
   it('adds item level, sockets, links, defences and influences of a rare, all disabled', async () => {
     const query = await tradeOf('righteous-fire-chieftain-3.30.txt', 'Helmet — Foe Corona');
-    expect(query.filters.misc_filters).toEqual({ disabled: true, filters: { ilvl: { min: 85 } } });
+    expect(query.filters.misc_filters).toEqual({ disabled: true, filters: { ilvl: { min: 82 } } });
     expect(query.filters.socket_filters).toEqual({
       disabled: true,
       filters: { sockets: { min: 4 }, links: { min: 4 } },
@@ -713,13 +713,13 @@ describe('Disabled Filters for item properties', () => {
     const query = await tradeOf('ice-trap-assasin-3.30.txt', 'Jewel — Viper Eye');
     expect(query.filters.misc_filters).toEqual({
       disabled: true,
-      filters: { ilvl: { min: 84 }, corrupted: { option: 'true' } },
+      filters: { ilvl: { min: 1 }, corrupted: { option: 'true' } },
     });
   });
 
   it('leaves out properties the item does not have', async () => {
     const query = await tradeOf('righteous-fire-chieftain-3.30.txt', 'Ring 1 — Hypnotic Circle');
-    expect(query.filters.misc_filters).toEqual({ disabled: true, filters: { ilvl: { min: 84 } } });
+    expect(query.filters.misc_filters).toEqual({ disabled: true, filters: { ilvl: { min: 30 } } });
     expect(query.filters.socket_filters).toBeUndefined();
     expect(query.filters.armour_filters).toBeUndefined();
     const and = query.stats.filter((group: any) => group.type === 'and');
@@ -731,6 +731,46 @@ describe('Disabled Filters for item properties', () => {
   it('adds none to uniques', async () => {
     const query = await tradeOf('righteous-fire-chieftain-3.30.txt', "Unique Body Armour — Kaom's Heart");
     expect(query.filters).toBeUndefined();
+  });
+});
+
+describe('Item level filter', () => {
+  const ilvlOf = async (itemText: string) => {
+    const { filters } = (await singleItem(itemText)).trades[0]!.query;
+    return { disabled: filters?.misc_filters?.disabled, ilvl: filters?.misc_filters?.filters.ilvl };
+  };
+
+  it("asks for the highest Tier level among a gear item's rolls, bench Tiers included, ignoring PoB's item level", async () => {
+    // Tiers on a Leather Belt: 44% fire resistance is level 72, 50 Strength 74, a crafted 45 life 81 (an explicit
+    // 45 life would be level 18)
+    expect(
+      await ilvlOf(`Rarity: RARE\nDoom Cord\nLeather Belt\nItem Level: 60\nImplicits: 0
++44% to Fire Resistance\n+50 to Strength\n{crafted}+45 to maximum Life`),
+    ).toEqual({ disabled: true, ilvl: { min: 81 } });
+  });
+
+  it('skips a roll above every Tier, as a pure and a hybrid mod summed into one line', async () => {
+    expect(
+      await ilvlOf(`Rarity: RARE\nDoom Cord\nLeather Belt\nItem Level: 60\nImplicits: 0
++44% to Fire Resistance\n+300 to maximum Life`),
+    ).toEqual({ disabled: true, ilvl: { min: 72 } });
+  });
+
+  it("falls back to PoB's item level when no roll has a Tier", async () => {
+    expect(await ilvlOf('Rarity: RARE\nDoom Cord\nLeather Belt\nItem Level: 70\nImplicits: 0')).toEqual({
+      disabled: true,
+      ilvl: { min: 70 },
+    });
+  });
+
+  it.each([
+    ['1 Added Passive Skill is Martial Mastery', { min: 50, max: 67 }],
+    ['1 Added Passive Skill is Master of Fire', { min: 75, max: 83 }],
+    ['Added Small Passive Skills also grant: 3% increased Attack Speed', { min: 84 }],
+  ])('gives a cluster jewel with "%s" a range up to the next level that unlocks more', async (line, ilvl) => {
+    expect(
+      await ilvlOf(`Rarity: RARE\nOblivion Stone\nLarge Cluster Jewel\nItem Level: 84\nImplicits: 0\n${line}`),
+    ).toEqual({ disabled: true, ilvl });
   });
 });
 

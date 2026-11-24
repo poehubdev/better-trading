@@ -1,7 +1,7 @@
 // Ported from pob2bt (src/index.ts): Build Code to a BT Export String. Skill Gem Trades (`--gems`) are left out
 import { decodeBuild } from './build';
 import { matchMod, matchTimeless, uniqueInfo } from './mods';
-import { affixesOf, inPool, modPool, tierMaxes } from './pools';
+import { affixesOf, inPool, modPool, tiers } from './pools';
 import { Base64 } from 'js-base64';
 import type { BuildItem, Influence, Item, Mod } from './build';
 import type { ModMatch } from './mods';
@@ -150,7 +150,11 @@ const statFilter = (id: string, value: StatValue): StatFilter => {
 const passiveCount = (text: string, base: string, id: string): StatValue => {
   const count = Number(/^Adds (\d+) Passive Skills$/.exec(text)?.[1]);
   if (!count) return undefined;
-  const fewest = Math.min(...tierMaxes(base, id).filter(Boolean));
+  const fewest = Math.min(
+    ...tiers(base, 'enchant', id.split('.')[1])
+      .map(([, max]) => max)
+      .filter(Boolean),
+  );
   return count <= fewest && Number.isFinite(fewest) ? { max: count } : { min: count };
 };
 
@@ -294,10 +298,45 @@ const rareStatGroups = (mods: Mod[], influences: StatFilter[], reportUnmatched: 
   ]);
 };
 
+/**
+ * The item level a non-unique needs for its rolls: the highest level among the Tiers they fall into (bench Tiers for
+ * crafted mods). A cluster jewel is also wanted below the next level that unlocks more of its Mod Pool, which leaves
+ * fewer competing mods. Undefined when no roll has a Tier (no mods, base missing from the Mod Pools)
+ */
+const itemLevel = (mods: Mod[], base: string | undefined) => {
+  if (!base) return undefined;
+  const cluster = base.endsWith('Cluster Jewel');
+  let min = 0;
+  for (const { match, implicit, enchant, crafted } of matchedMods(mods, () => {})) {
+    const types =
+      enchant || (cluster && implicit)
+        ? ['enchant']
+        : implicit
+          ? ['implicit', 'corruption', 'synthesis']
+          : crafted
+            ? ['crafted']
+            : ['explicit'];
+    const stats = new Set(match.ids.map(id => id.split('|')[0]!.split('.')[1]!));
+    // ponytail: Tiers only know their largest roll, and a stat's Tiers from different mods overlap (essence, Incursion,
+    // hybrid): a roll falls into the tightest Tier that reaches it. A roll above every Tier (a pure and a hybrid mod
+    // summed into one line, quality) says nothing: skipped, so the minimum never asks for more than the rolls need
+    const found = types
+      .flatMap(type => [...stats].flatMap(stat => tiers(base, type, stat)))
+      .sort(([levelA, maxA], [levelB, maxB]) => maxA - maxB || levelA - levelB);
+    const tier = found.find(([, max]) => max >= (match.value ?? -Infinity));
+    if (tier) min = Math.max(min, tier[0]);
+  }
+  if (!min) return undefined;
+  const unlocks = cluster ? tiers(base, 'explicit').filter(([level]) => level > min) : [];
+  return unlocks.length ? { min, max: Math.min(...unlocks.map(([level]) => level)) - 1 } : { min };
+};
+
 /** Disabled Filters for what POB knows about an item beyond its mods */
 const propertyFilters = (item: Item) => {
   const misc: Record<string, unknown> = {};
-  if (item.itemLevel) misc.ilvl = { min: item.itemLevel };
+  // Without Tiers to go by, PoB's item level is the best guess (a crafting base, a base new to the Mod Pools)
+  const ilvl = itemLevel(item.mods, item.base) ?? (item.itemLevel && { min: item.itemLevel });
+  if (ilvl) misc.ilvl = ilvl;
   if (item.corrupted) misc.corrupted = { option: 'true' };
   if (item.influences.includes('Searing Exarch')) misc.searing_item = { option: 'true' };
   if (item.influences.includes('Eater of Worlds')) misc.tangled_item = { option: 'true' };

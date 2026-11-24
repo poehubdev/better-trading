@@ -10,8 +10,11 @@ roll. It writes one compact file that we commit next to `public/pob-stats.ndjson
 patch (ADR 0002). Each pool entry carries a source bitmask, so a later "ignore source X" choice needs no regeneration.
 The pool is checked without the item level: a stat the build item is too low to roll is still possible on the item we
 search for. Corruptions and Synthesis implicits have types of their own in the file but are searched as implicits.
-For now Tiers give only the fewest passives a cluster jewel base allows; the item level filter and normalising weights
-by maximum roll can build on them later.
+Tiers give the fewest passives a cluster jewel base allows and the item level filter: the highest level among the Tiers
+of the build item's rolls (PoB's own item level only when no roll has a Tier), and for a cluster jewel a maximum just below the next level
+that unlocks more of its pool. Tiers carry only their largest roll and a stat's Tiers from different mods overlap
+(essence, Incursion, hybrid), so a roll is taken to fall into the tightest Tier that reaches it; a roll above every
+Tier (pure and hybrid mods summed, quality) is skipped. Normalising weights by maximum roll can build on them later.
 
 ## Considered Options
 

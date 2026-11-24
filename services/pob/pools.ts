@@ -66,12 +66,6 @@ const entryOf = (base: string, id: string): number[] | undefined => {
   return index === undefined ? undefined : asset!.parts[type]![index]![stat];
 };
 
-/** The largest roll of each Tier of a trade ID (`enchant.stat_123`) on a base; empty when the asset does not have it */
-const tierMaxes = (base: string, id: string): number[] =>
-  entryOf(base, id)
-    ?.slice(2)
-    .filter((_, i) => i % 2) ?? [];
-
 /**
  * The affix slots a trade stat number (`stat_123`) takes as a crafted mod on a base, else as an explicit one; both when
  * the asset knows neither
@@ -81,5 +75,19 @@ const affixesOf = (base: string | undefined, stat: string): ('prefix' | 'suffix'
   return (['prefix', 'suffix'] as const).filter((_, i) => code & (1 << i));
 };
 
+/**
+ * The Tiers (`[level, max]`) of a trade stat number (`stat_123`) of a modifier type on a base, or of every stat of
+ * that type when `stat` is left out; empty when the asset does not have them
+ */
+const tiers = (base: string, type: string, stat?: string): [number, number][] => {
+  const key = poolKey(base);
+  const index = key ? asset!.pools[key]![type] : undefined;
+  const part = index === undefined ? {} : asset!.parts[type]![index]!;
+  const rows = stat === undefined ? Object.values(part) : Object.hasOwn(part, stat) ? [part[stat]!] : [];
+  return rows.flatMap(row =>
+    Array.from({ length: (row.length - 2) / 2 }, (_, i) => [row[2 + 2 * i]!, row[3 + 2 * i]!] as [number, number]),
+  );
+};
+
 export type { ModPool, PoolsAsset };
-export { affixesOf, inPool, loadPools, modPool, tierMaxes };
+export { affixesOf, inPool, loadPools, modPool, tiers };
