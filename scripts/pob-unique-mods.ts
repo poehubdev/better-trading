@@ -32,6 +32,7 @@ const fixedStats = (lines: string[]) => {
     enchant: false,
     mutated: false,
     crafted: false,
+    fractured: false,
   }));
   // Joined like the import joins a copy's lines. ponytail: lines that match no trade stat (Has no Sockets, PoB-only
   // wording) are left out; a copy's line of that text is then searched as random, so check unmatched lines on new data

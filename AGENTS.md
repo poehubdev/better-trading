@@ -102,9 +102,15 @@ downloaded at build or test time. Two kinds of lines:
   regenerated `public/pob-stats.ndjson` (`pnpm pob-stats` without an argument re-appends the unique lines to the
   current stat lines) and the test result; nothing is written when no unique line changed.
 
-On a new PoE1 patch: in dat-mcp run `npm run stats -- poe1 <patch>`, here run
+**Mod Pools** (ADR 0003): `public/pob-pools.json` is dat-mcp's pools asset, committed and loaded like the stat data
+(`services/pob/pools.ts`). The import drops every filter whose stat the item's base can never carry (any item level);
+a unique's explicit mods are not checked. A base missing from the asset is imported unchecked, with a console warning.
+
+On a new PoE1 patch: in dat-mcp run `npm run stats -- poe1 <patch>` and `npm run pools -- poe1 <patch>`, here run
 `pnpm pob-stats ~/www/poehubdev/dat-mcp/data/poe1-<patch>-stats.ndjson`, `pnpm pob-unique-mods` and `pnpm pob-stats`
-(the unique lines match against the new stat lines), then `pnpm test`, and commit the regenerated files (snapshot changes are expected only where the new patch changed stat texts or ids).
+(the unique lines match against the new stat lines) and
+`cp ~/www/poehubdev/dat-mcp/data/poe1-<patch>-pools.json public/pob-pools.json`, then `pnpm test`, and commit the
+regenerated files (snapshot changes are expected only where the new patch changed stat texts, ids or Mod Pools).
 
 **Storybook**: stories run the real contexts and services; `.storybook/chrome-storage-mock.ts` is an in-memory
 `chrome.storage.local`, and `.storybook/mock-providers.tsx` has mock providers (`MockTradeHistoryProvider`, …) for

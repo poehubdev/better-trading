@@ -2,9 +2,11 @@
 import { toExportString } from './index';
 import { decodeBuild } from './build';
 import { matchMod } from './mods';
+import { inPool, modPool } from './pools';
 import { decodeExportString, fixture } from './test-utils';
-import { describe, expect, it } from 'vitest';
+import { describe, expect, it, vi } from 'vitest';
 import { deflateSync } from 'node:zlib';
+import type { ImportOptions } from './index';
 
 const FIXTURES = {
   'elemental-hit-slayer-3.30.txt': { title: 'Elemental Hit Slayer', icon: 'slayer' },
@@ -19,18 +21,19 @@ const FIXTURES = {
 };
 
 const CLUSTER_ENCHANT = 'enchant.stat_3948993189';
-const folderOf = async (name: string) => decodeExportString((await toExportString(await fixture(name))).exportString);
-const tradeOf = async (name: string, title: string) => {
-  const trade = (await folderOf(name)).trades.find(trade => trade.title === title);
+const folderOf = async (name: string, options?: ImportOptions) =>
+  decodeExportString((await toExportString(await fixture(name), options)).exportString);
+const tradeOf = async (name: string, title: string, options?: ImportOptions) => {
+  const trade = (await folderOf(name, options)).trades.find(trade => trade.title === title);
   if (!trade) throw new Error(`No Trade "${title}" in ${name}`);
   return trade.query;
 };
 
 /** A Folder of one Build Item made from POB item text, in a belt slot */
-const singleItem = async (itemText: string) => {
+const singleItem = async (itemText: string, options?: ImportOptions) => {
   const xml = `<PathOfBuilding><Build className="Witch" level="90"/><Items activeItemSet="1"><Item id="1">${itemText}</Item>
     <ItemSet id="1"><Slot name="Belt" itemId="1"/></ItemSet></Items></PathOfBuilding>`;
-  return decodeExportString((await toExportString(deflateSync(xml).toString('base64url'))).exportString);
+  return decodeExportString((await toExportString(deflateSync(xml).toString('base64url'), options)).exportString);
 };
 
 describe.each(Object.entries(FIXTURES))('%s', (name, expected) => {
@@ -289,9 +292,10 @@ describe('Minimum values', () => {
       )
     ).trades[0]!;
     const [pseudo, count, weight] = query.stats;
-    expect(pseudo.filters).toEqual([{ id: 'pseudo.pseudo_total_fire_resistance', value: { min: 10 } }]);
+    expect(pseudo.filters[0]).toEqual({ id: 'pseudo.pseudo_total_fire_resistance', value: { min: 10 } });
     expect(count.filters.map((filter: any) => filter.value)).toEqual(Array(count.filters.length).fill({ min: 9 }));
-    expect(weight.value).toEqual({ min: 9.6 });
+    // 80% of 13 * 2.08 + 12 * 1.32
+    expect(weight.value).toEqual({ min: 34.3 });
   });
 
   it('keeps a minimum of at least 1 for a stat that rolled 1 or more', async () => {
@@ -300,7 +304,10 @@ describe('Minimum values', () => {
         `Rarity: RARE\nDoom Eye\nCoral Ring\nItem Level: 80\nImplicits: 0\n1% increased Mana Regeneration Rate`,
       )
     ).trades[0]!;
-    expect(query.stats[0].filters[0].value).toEqual({ min: 1 });
+    const mana = query.stats
+      .flatMap((group: any) => group.filters)
+      .find((f: any) => f.id === 'explicit.stat_789117908');
+    expect(mana.value).toEqual({ min: 1 });
   });
 });
 
@@ -367,10 +374,14 @@ describe('Cluster jewel enchants', () => {
     ).not.toContainEqual(expect.stringMatching(/^enchant\./));
   });
 
-  it('turns the explicit mods into count groups that are on', async () => {
-    const groups = (await cluster('Large Cluster Jewel', 'Adds 12 Passive Skills')).filter(
-      (group: any) => group.type === 'count',
-    );
+  it('turns the explicit mods into count groups that are on, with the weighted sum off', async () => {
+    const { stats } = (
+      await singleItem(
+        `Rarity: RARE\nOblivion Stone\nLarge Cluster Jewel\nCluster Jewel Skill: affliction_axe_and_sword_damage\nItem Level: 84\nImplicits: 1\n{crafted}Adds 12 Passive Skills\nAdded Small Passive Skills also grant: +2 to Dexterity\n1 Added Passive Skill is Fuel the Fight`,
+        { weightedSum: false },
+      )
+    ).trades[0]!.query;
+    const groups = stats.filter((group: any) => group.type === 'count');
     expect(groups.length).toBeGreaterThan(0);
     expect(groups.every((group: any) => group.disabled === false)).toBe(true);
   });
@@ -435,7 +446,10 @@ describe('Base jewel mod types', () => {
     `Rarity: RARE\nBramble Joy\nViridian Jewel\nItem Level: 81\nImplicits: 1\nCorrupted Blood cannot be inflicted on you\n10% increased Melee Damage\nCorrupted`,
   ).then(item => item.trades[0]!.query.stats);
   const idsOf = async (stat: string) =>
-    (await jewel).find((group: any) => group.filters[0].id.endsWith(stat)).filters.map((filter: any) => filter.id);
+    (await jewel)
+      .filter((group: any) => group.type !== 'weight')
+      .flatMap((group: any) => group.filters.map((filter: any) => filter.id))
+      .filter((id: string) => id.endsWith(stat));
 
   it('searches the corrupted implicit as an implicit only', async () => {
     expect(await idsOf('stat_1658498488')).toEqual(['implicit.stat_1658498488']);
@@ -443,6 +457,140 @@ describe('Base jewel mod types', () => {
 
   it('searches an explicit as an explicit or fractured mod: a jewel has no crafted mods, enchants or implicits of that kind', async () => {
     expect(await idsOf('stat_1002362373')).toEqual(['explicit.stat_1002362373', 'fractured.stat_1002362373']);
+  });
+});
+
+describe('Mod Pool', () => {
+  const belt = (implicits: string[], base = 'Leather Belt') =>
+    singleItem(
+      `Rarity: RARE\nDoom Lock\n${base}\nItem Level: 84\nImplicits: ${implicits.length}\n${implicits.join('\n')}`,
+    ).then(folder => folder.trades[0]!.query);
+  const idsOf = (query: any): string[] =>
+    (query.stats ?? []).flatMap((group: any) => group.filters.map((filter: any) => filter.id));
+
+  it("leaves out another base's implicit", async () => {
+    // Has # Abyssal Sockets is a Stygian Vise implicit, never a Leather Belt one
+    expect(idsOf(await belt(['Has 1 Abyssal Socket']))).not.toContain('implicit.stat_3527617737');
+    expect(idsOf(await belt(['Has 1 Abyssal Socket'], 'Stygian Vise'))).toContain('implicit.stat_3527617737');
+  });
+
+  it('keeps the corruptions the base can roll and leaves out the others', async () => {
+    // +# to Level of all Fire Spell Skill Gems is a weapon corruption
+    const ids = idsOf(await belt(['Bleeding cannot be inflicted on you', '+1 to Level of all Fire Spell Skill Gems']));
+    expect(ids).toContain('implicit.stat_1901158930');
+    expect(ids.some(id => id.endsWith('stat_591105508'))).toBe(false);
+  });
+
+  it('keeps the enchants the base can have and leaves out the others', async () => {
+    const ids = idsOf(
+      await belt([
+        '{crafted}Recover 2% of Life when you Kill an Enemy while you have Rage',
+        '{crafted}Regenerate 1% of Life per second if you were Hit Recently',
+      ]),
+    );
+    expect(ids).toContain('enchant.stat_3305072079');
+    expect(ids.some(id => id.endsWith('stat_1122635070'))).toBe(false);
+  });
+
+  it('searches the flask-local twin of a stat on a flask and the global one elsewhere', async () => {
+    const mod = '20% chance to gain a Flask Charge when you deal a Critical Strike';
+    const idsOn = async (item: string) =>
+      idsOf((await singleItem(`${item}\nItem Level: 84\nImplicits: 0\n${mod}`)).trades[0]!.query);
+    const flaskIds = await idsOn('Rarity: MAGIC\nDivine Life Flask of Gluttony');
+    expect(flaskIds).toContain('explicit.stat_2858921304');
+    expect(flaskIds).not.toContain('explicit.stat_3738001379');
+    const beltIds = await idsOn('Rarity: RARE\nDoom Lock\nLeather Belt');
+    expect(beltIds).toContain('explicit.stat_3738001379');
+    expect(beltIds).not.toContain('explicit.stat_2858921304');
+  });
+
+  it('finds the Mod Pool of a base PoB names with a variant', async () => {
+    expect(modPool('Two-Stone Ring (Fire/Lightning)')).toBe(modPool('Two-Stone Ring'));
+    expect(modPool('Two-Stone Ring')).toBeDefined();
+  });
+
+  it('checks nothing on a base missing from the Mod Pools, and warns', async () => {
+    const warn = vi.spyOn(console, 'warn').mockImplementation(() => {});
+    const ids = idsOf(await belt(['Has 1 Abyssal Socket'], 'Imaginary Belt'));
+    expect(ids).toContain('implicit.stat_3527617737');
+    expect(warn).toHaveBeenCalledWith(expect.stringContaining('Imaginary Belt'));
+    warn.mockRestore();
+  });
+
+  it("checks a unique's implicits and enchants, not its explicit mods", async () => {
+    const { trades } = await singleItem(
+      `Rarity: UNIQUE\nWatcher's Eye\nPrismatic Jewel\nItem Level: 84\nImplicits: 2\nCorrupted Blood cannot be inflicted on you\n+1 to Maximum Endurance Charges\n6% increased maximum Life\nCorrupted`,
+    );
+    const ids = idsOf(trades[0]!.query);
+    expect(ids).toContain('implicit.stat_1658498488');
+    expect(ids.some(id => id.endsWith('stat_1515657623'))).toBe(false);
+    expect(ids).toContain('explicit.stat_983749596');
+  });
+});
+
+describe('Crafted and fractured mods', () => {
+  const stats = (...mods: string[]) =>
+    singleItem(
+      `Rarity: RARE\nDoom Lock\nLeather Belt\nItem Level: 84\nImplicits: 0\n${mods.join('\n')}\n15% increased Flask Effect Duration`,
+    ).then(folder => folder.trades[0]!.query.stats as any[]);
+  const groupOf = (groups: any[], stat: string) =>
+    groups.find(group => group.type !== 'weight' && group.filters.some((filter: any) => filter.id.endsWith(stat)));
+
+  it('searches a crafted prefix in any rolled or crafted form, or an empty prefix to craft it', async () => {
+    const groups = await stats('{crafted}+40 to maximum Life');
+    expect(groupOf(groups, 'stat_3299347043')).toEqual({
+      type: 'count',
+      value: { min: 1 },
+      disabled: false,
+      filters: [
+        { id: 'explicit.stat_3299347043', value: { min: 32 } },
+        { id: 'fractured.stat_3299347043', value: { min: 32 } },
+        { id: 'crafted.stat_3299347043', value: { min: 32 } },
+        { id: 'pseudo.pseudo_number_of_empty_prefix_mods', value: { min: 1 } },
+      ],
+    });
+    // Not folded into the total life, which is only suggested
+    expect(groups[0].filters.filter((filter: any) => filter.id === 'pseudo.pseudo_total_life')).toEqual([
+      { id: 'pseudo.pseudo_total_life', disabled: true },
+    ]);
+  });
+
+  it('offers an empty suffix for a crafted suffix', async () => {
+    const filters = groupOf(await stats('{crafted}+25% to Fire Resistance'), 'stat_3372524247').filters;
+    expect(filters.at(-1)).toEqual({ id: 'pseudo.pseudo_number_of_empty_suffix_mods', value: { min: 1 } });
+    expect(filters.map((filter: any) => filter.id)).not.toContain('pseudo.pseudo_number_of_empty_prefix_mods');
+  });
+
+  it('leaves a crafted mod out of the weighted sum', async () => {
+    const weight = (await stats('{crafted}+40 to maximum Life', '+100 to Armour')).find(
+      group => group.type === 'weight',
+    );
+    expect(weight.filters.map((filter: any) => filter.id)).not.toContain('crafted.stat_3299347043');
+    expect(weight.filters.some((filter: any) => filter.id.endsWith('stat_3299347043'))).toBe(false);
+    // Only Armour and the flask duration line count
+    const uncrafted = (await stats('+100 to Armour')).find(group => group.type === 'weight');
+    expect(weight.value).toEqual(uncrafted.value);
+  });
+
+  it('leaves a crafted mod out of the identity of a unique', async () => {
+    const { trades } = await singleItem(
+      // Every explicit mod of a Bound By Destiny is random, so it would be searched
+      `Rarity: UNIQUE\nBound By Destiny\nLeather Belt\nItem Level: 84\nImplicits: 0\n{crafted}+25% to Fire Resistance`,
+    );
+    expect(trades[0]!.query).toEqual({ status: { option: 'securable' }, name: 'Bound By Destiny' });
+  });
+
+  it('searches a fractured mod as an explicit or fractured one', async () => {
+    expect(groupOf(await stats('{fractured}+100 to Armour'), 'stat_809229260')).toEqual({
+      type: 'count',
+      value: { min: 1 },
+      // Off: the weight group covers it
+      disabled: true,
+      filters: [
+        { id: 'explicit.stat_809229260', value: { min: 80 } },
+        { id: 'fractured.stat_809229260', value: { min: 80 } },
+      ],
+    });
   });
 });
 
@@ -573,7 +721,7 @@ describe('Mod lines that read unlike the stat data', () => {
 describe('Disabled Filters for item properties', () => {
   it('adds item level, sockets, links, defences and influences of a rare, all disabled', async () => {
     const query = await tradeOf('righteous-fire-chieftain-3.30.txt', 'Helmet — Foe Corona');
-    expect(query.filters.misc_filters).toEqual({ disabled: true, filters: { ilvl: { min: 85 } } });
+    expect(query.filters.misc_filters).toEqual({ disabled: true, filters: { ilvl: { min: 82 } } });
     expect(query.filters.socket_filters).toEqual({
       disabled: true,
       filters: { sockets: { min: 4 }, links: { min: 4 } },
@@ -607,13 +755,13 @@ describe('Disabled Filters for item properties', () => {
     const query = await tradeOf('ice-trap-assasin-3.30.txt', 'Jewel — Viper Eye');
     expect(query.filters.misc_filters).toEqual({
       disabled: true,
-      filters: { ilvl: { min: 84 }, corrupted: { option: 'true' } },
+      filters: { ilvl: { min: 1 }, corrupted: { option: 'true' } },
     });
   });
 
   it('leaves out properties the item does not have', async () => {
     const query = await tradeOf('righteous-fire-chieftain-3.30.txt', 'Ring 1 — Hypnotic Circle');
-    expect(query.filters.misc_filters).toEqual({ disabled: true, filters: { ilvl: { min: 84 } } });
+    expect(query.filters.misc_filters).toEqual({ disabled: true, filters: { ilvl: { min: 30 } } });
     expect(query.filters.socket_filters).toBeUndefined();
     expect(query.filters.armour_filters).toBeUndefined();
     const and = query.stats.filter((group: any) => group.type === 'and');
@@ -625,6 +773,46 @@ describe('Disabled Filters for item properties', () => {
   it('adds none to uniques', async () => {
     const query = await tradeOf('righteous-fire-chieftain-3.30.txt', "Unique Body Armour — Kaom's Heart");
     expect(query.filters).toBeUndefined();
+  });
+});
+
+describe('Item level filter', () => {
+  const ilvlOf = async (itemText: string) => {
+    const { filters } = (await singleItem(itemText)).trades[0]!.query;
+    return { disabled: filters?.misc_filters?.disabled, ilvl: filters?.misc_filters?.filters.ilvl };
+  };
+
+  it("asks for the highest Tier level among a gear item's rolls, bench Tiers included, ignoring PoB's item level", async () => {
+    // Tiers on a Leather Belt: 44% fire resistance is level 72, 50 Strength 74, a crafted 45 life 81 (an explicit
+    // 45 life would be level 18)
+    expect(
+      await ilvlOf(`Rarity: RARE\nDoom Cord\nLeather Belt\nItem Level: 60\nImplicits: 0
++44% to Fire Resistance\n+50 to Strength\n{crafted}+45 to maximum Life`),
+    ).toEqual({ disabled: true, ilvl: { min: 81 } });
+  });
+
+  it('skips a roll above every Tier, as a pure and a hybrid mod summed into one line', async () => {
+    expect(
+      await ilvlOf(`Rarity: RARE\nDoom Cord\nLeather Belt\nItem Level: 60\nImplicits: 0
++44% to Fire Resistance\n+300 to maximum Life`),
+    ).toEqual({ disabled: true, ilvl: { min: 72 } });
+  });
+
+  it("falls back to PoB's item level when no roll has a Tier", async () => {
+    expect(await ilvlOf('Rarity: RARE\nDoom Cord\nLeather Belt\nItem Level: 70\nImplicits: 0')).toEqual({
+      disabled: true,
+      ilvl: { min: 70 },
+    });
+  });
+
+  it.each([
+    ['1 Added Passive Skill is Martial Mastery', { min: 50, max: 67 }],
+    ['1 Added Passive Skill is Master of Fire', { min: 75, max: 83 }],
+    ['Added Small Passive Skills also grant: 3% increased Attack Speed', { min: 84 }],
+  ])('gives a cluster jewel with "%s" a range up to the next level that unlocks more', async (line, ilvl) => {
+    expect(
+      await ilvlOf(`Rarity: RARE\nOblivion Stone\nLarge Cluster Jewel\nItem Level: 84\nImplicits: 0\n${line}`),
+    ).toEqual({ disabled: true, ilvl });
   });
 });
 
@@ -655,7 +843,7 @@ describe('Weapon swap', () => {
 
 describe('Stat Filters', () => {
   it('turns an explicit mod into a count group that is on over all its type variants', async () => {
-    const { stats } = await tradeOf('righteous-fire-chieftain-3.30.txt', 'Helmet — Foe Corona');
+    const { stats } = await tradeOf('righteous-fire-chieftain-3.30.txt', 'Helmet — Foe Corona', { weightedSum: false });
     expect(stats).toContainEqual({
       type: 'count',
       value: { min: 1 },
@@ -667,8 +855,10 @@ describe('Stat Filters', () => {
     });
   });
 
-  it('switches both implicit and explicit groups on', async () => {
-    const { stats } = await tradeOf('righteous-fire-chieftain-3.30.txt', 'Ring 1 — Hypnotic Circle');
+  it('switches both implicit and explicit groups on, with the weighted sum off', async () => {
+    const { stats } = await tradeOf('righteous-fire-chieftain-3.30.txt', 'Ring 1 — Hypnotic Circle', {
+      weightedSum: false,
+    });
     const group = (id: string) => stats.find((group: any) => group.filters.some((filter: any) => filter.id === id));
     // The implicit is a plain filter of the and group, switched on; the explicit alternatives are a count group, on
     expect(group('implicit.stat_3182714256')?.type).toBe('and');
@@ -735,12 +925,14 @@ describe('Aggregate Jewel Trade', () => {
     const [group, ...others] = trade!.query.stats;
     expect(others.map((other: any) => other.type)).toEqual(['weight']);
     expect(group.type).toBe('count');
-    // Each distinct mod in its explicit and fractured variants (an implicit is only on a corrupted jewel), with no value
-    const expected = [...new Set([LIFE, CRIT, SPEED, RES].flatMap(line => matchMod(line)!.ids))].filter(id =>
-      /^(explicit|fractured)\./.test(id),
+    // Each distinct mod in its explicit and fractured variants, and as an implicit where a jewel can have it (attack
+    // speed and lightning resistance are Synthesis implicits), with no value
+    const pool = modPool('Viridian Jewel')!;
+    const expected = [...new Set([LIFE, CRIT, SPEED, RES].flatMap(line => matchMod(line)!.ids))].filter(
+      id => /^(explicit|fractured)\./.test(id) || (id.startsWith('implicit.') && inPool(pool, id)),
     );
     expect(group.filters).toEqual(expected.map(id => ({ id })));
-    expect(new Set(ids(group).map((id: string) => id.split('.')[0]))).toEqual(new Set(['explicit', 'fractured']));
+    expect(ids(group)).toContain('implicit.stat_681332047');
   });
 
   it('adds the implicit variant only of the mods a corrupted jewel can have as an implicit', async () => {
@@ -765,11 +957,38 @@ describe('Aggregate Jewel Trade', () => {
   it('adds a weight group of the explicit mods, worth the most valuable jewel', async () => {
     const [trade] = await aggregate(jewelBuild([base('A', [LIFE]), base('B', [LIFE, CRIT])]));
     const weight = trade!.query.stats.find((group: any) => group.type === 'weight');
-    // Without the implicit variants, each with weight 1
-    const expected = [LIFE, CRIT].flatMap(line => matchMod(line)!.ids).filter(id => /^(explicit|fractured)\./.test(id));
-    expect(weight.filters).toEqual(expected.map(id => ({ id, value: { weight: 1 } })));
-    // B's values 5 + 15, at 80%
-    expect(weight.value).toEqual({ min: 16 });
+    // Without the implicit variants, each weighed 100 / its largest roll on the jewel: Life 7%, the multiplier 15%
+    const weights = [
+      [LIFE, 14.29],
+      [CRIT, 6.67],
+    ] as const;
+    expect(weight.filters).toEqual(
+      weights.flatMap(([line, weight]) =>
+        matchMod(line)!
+          .ids.filter(id => /^(explicit|fractured)\./.test(id))
+          .map(id => ({ id, value: { weight } })),
+      ),
+    );
+    // B's values, at 80%: 5 * 14.29 + 15 * 6.67
+    expect(weight.value).toEqual({ min: 137.2 });
+  });
+
+  it('weighs a stat alike on every jewel, by its largest roll on any base jewel', async () => {
+    // Trap Throwing Speed rolls up to 22% on a Cobalt Jewel, 8% on a Viridian one: 100 / 22 for both
+    const TRAP = '6% increased Trap Throwing Speed';
+    const code = jewelBuild([base('A', [TRAP]), ['B', 'Cobalt Jewel', 'RARE', [TRAP]]]);
+    const [trade] = await aggregate(code);
+    const weight = trade!.query.stats.find((group: any) => group.type === 'weight');
+    expect(weight.filters.map((filter: any) => filter.value.weight)).toEqual(Array(weight.filters.length).fill(4.55));
+    expect(weight.value).toEqual({ min: 21.84 });
+  });
+
+  it('leaves the weight group out with the weighted sum off', async () => {
+    const code = jewelBuild([base('A', [LIFE, CRIT])]);
+    const [trade] = decodeExportString((await toExportString(code, { weightedSum: false })).exportString).trades.filter(
+      trade => trade.title === TITLE,
+    );
+    expect(trade!.query.stats.map((group: any) => group.type)).toEqual(['count']);
   });
 
   it('takes min from the most matched mods on one jewel, clamped to 2-4', async () => {
@@ -830,6 +1049,7 @@ describe('Pseudo totals', () => {
         { id: 'pseudo.pseudo_total_life', value: { min: 97 } },
         { id: 'pseudo.pseudo_total_fire_resistance', value: { min: 37 } },
         { id: 'pseudo.pseudo_total_chaos_resistance', value: { min: 23 } },
+        { id: 'pseudo.pseudo_total_elemental_resistance', value: { min: 37 }, disabled: true },
       ],
     });
   });
@@ -847,19 +1067,24 @@ describe('Pseudo totals', () => {
       { id: 'pseudo.pseudo_total_life', value: { min: 29 } },
       { id: 'pseudo.pseudo_total_dexterity', value: { min: 8 } },
       { id: 'pseudo.pseudo_total_intelligence', value: { min: 8 } },
+      // Suggested: an abyss jewel can carry them
+      { id: 'pseudo.pseudo_total_elemental_resistance', disabled: true },
+      { id: 'pseudo.pseudo_total_chaos_resistance', disabled: true },
     ]);
   });
 
-  it('keeps influences in the same and group, disabled, next to the mods that are on', async () => {
+  it('keeps influences in the same and group, disabled, next to the totals that are on', async () => {
     const { stats } = await tradeOf('righteous-fire-chieftain-3.30.txt', 'Helmet — Foe Corona');
     expect(stats.filter((group: any) => group.type === 'and')).toEqual([
       {
         type: 'and',
         filters: [
           { id: 'pseudo.pseudo_total_life', value: { min: 113 } },
+          { id: 'pseudo.pseudo_total_elemental_resistance', disabled: true },
+          { id: 'pseudo.pseudo_total_chaos_resistance', disabled: true },
           { id: 'pseudo.pseudo_has_elder_influence', disabled: true },
-          // A mod of a single stat is a filter of the group too, on like its count group
-          { id: 'explicit.effect_1200122555', value: { min: 16 } },
+          // A mod of a single stat is a filter of the group too, off like its count group: the weight group covers it
+          { id: 'explicit.effect_1200122555', value: { min: 16 }, disabled: true },
         ],
       },
     ]);
@@ -867,31 +1092,142 @@ describe('Pseudo totals', () => {
 });
 
 describe('Weight Group', () => {
-  it('weighs every explicit mod not folded into pseudo, in all its variants, against the scaled sum', async () => {
+  it('weighs every explicit mod not folded into pseudo, in all its variants', async () => {
     const { stats } = await tradeOf('righteous-fire-chieftain-3.30.txt', 'Amulet — Corruption Rosary');
-    expect(stats.at(-1)).toEqual({
-      type: 'weight',
-      value: { min: 35.2 },
-      filters: ['explicit', 'implicit', 'fractured', 'enchant'].map(type => ({
-        id: `${type}.stat_3988349707`,
-        value: { weight: 1 },
-      })),
-    });
-  });
-
-  it('sums the values of several mods', async () => {
-    const { stats } = await tradeOf('righteous-fire-chieftain-3.30.txt', 'Gloves — Honour Mitts');
-    const weight = stats.find((group: any) => group.type === 'weight');
-    // Life regeneration rate 20, area of effect 16, area damage 20, damage during flask effect 28
-    expect(weight.value).toEqual({ min: 67.2 });
-    expect(weight.filters.every((filter: any) => filter.value.weight === 1)).toBe(true);
+    const weight = stats.at(-1);
+    expect(weight.type).toBe('weight');
+    // An amulet cannot have it as an implicit or enchant: those variants are left out. It rolls up to 26%
+    expect(weight.filters.filter((filter: any) => filter.id.endsWith('stat_3988349707'))).toEqual(
+      ['explicit', 'fractured'].map(type => ({ id: `${type}.stat_3988349707`, value: { weight: 3.85 } })),
+    );
   });
 
   it('leaves out implicits and mods without a value', async () => {
     const { stats } = await tradeOf('righteous-fire-chieftain-3.30.txt', 'Ring 1 — Hypnotic Circle');
     const weight = stats.find((group: any) => group.type === 'weight');
-    // Damage over time multiplier 23, physical damage against you 8 (average), increased damage 37; minus mana has no value
-    expect(weight.value).toEqual({ min: 54.4 });
     expect(JSON.stringify(weight)).not.toMatch(/implicit\.stat_3182714256|stat_1050105434/);
+  });
+});
+
+describe('Weighted sum', () => {
+  /** The stat groups of a rare Coral Ring with these mod lines */
+  const ring = async (lines: string[], options?: ImportOptions, base = 'Coral Ring') =>
+    (await singleItem(`Rarity: RARE\nDoom Eye\n${base}\nItem Level: 80\nImplicits: 0\n${lines.join('\n')}`, options))
+      .trades[0]!.query.stats as any[];
+  const weightGroup = (stats: any[]) => stats.find(group => group.type === 'weight');
+  const weightOf = (stats: any[], id: string) =>
+    weightGroup(stats).filters.find((filter: any) => filter.id === id)?.value.weight;
+  const filtersOf = (stats: any[], stat: string) =>
+    stats.flatMap(group => group.filters.map((filter: any) => ({ ...filter, group }))).filter(f => f.id.endsWith(stat));
+  const MANA_REGEN = '12% increased Mana Regeneration Rate';
+
+  it('weighs a mod by 100 / its largest roll on the base', async () => {
+    const stats = await ring([MANA_REGEN]);
+    // Mana Regeneration Rate rolls up to 76% on a ring: 100 / 76
+    expect(weightGroup(stats).filters).toContainEqual({ id: 'explicit.stat_789117908', value: { weight: 1.32 } });
+    expect(weightGroup(stats).value).toEqual({ min: 12.67 });
+  });
+
+  it('weighs the broadest pseudo totals, attributes each apart', async () => {
+    const stats = await ring([
+      '+13% to Fire Resistance',
+      '+10% to Cold Resistance',
+      '+20 to maximum Life',
+      '+10 to Strength',
+      '+5 to all Attributes',
+    ]);
+    // Resistances roll up to 48%, Life to 114 and attributes to 58 on a ring
+    expect(weightOf(stats, 'pseudo.pseudo_total_elemental_resistance')).toBe(2.08);
+    expect(weightOf(stats, 'pseudo.pseudo_total_life')).toBe(0.88);
+    for (const attribute of ['strength', 'dexterity', 'intelligence']) {
+      expect(weightOf(stats, `pseudo.pseudo_total_${attribute}`)).toBe(1.72);
+    }
+    expect(weightOf(stats, 'pseudo.pseudo_total_fire_resistance')).toBeUndefined();
+    expect(JSON.stringify(weightGroup(stats))).not.toMatch(/explicit\./);
+    // 80% of 23 * 2.08 + (20 + 15 / 2) * 0.88 + (15 + 5 + 5) * 1.72: the site's total Life counts Strength / 2
+    expect(weightGroup(stats).value).toEqual({ min: 92.03 });
+  });
+
+  it('leaves the weight group out when nothing the build item has is weighed', async () => {
+    expect(weightGroup(await ring(['Cannot be Frozen']))).toBeUndefined();
+  });
+
+  it('keeps per-element totals in the and group, with a disabled total elemental resistance', async () => {
+    const [and] = await ring(['+13% to Fire Resistance', '+10% to Cold Resistance']);
+    expect(and.type).toBe('and');
+    expect(and.filters).toEqual(
+      expect.arrayContaining([
+        { id: 'pseudo.pseudo_total_fire_resistance', value: { min: 10 } },
+        { id: 'pseudo.pseudo_total_cold_resistance', value: { min: 8 } },
+        { id: 'pseudo.pseudo_total_elemental_resistance', value: { min: 18 }, disabled: true },
+      ]),
+    );
+  });
+
+  it('suggests the totals the base can carry and the item lacks: disabled, weighed, not raising the minimum', async () => {
+    const stats = await ring(['+13% to Fire Resistance']);
+    expect(stats[0].filters).toEqual(
+      expect.arrayContaining([
+        { id: 'pseudo.pseudo_total_life', disabled: true },
+        { id: 'pseudo.pseudo_total_chaos_resistance', disabled: true },
+      ]),
+    );
+    expect(weightOf(stats, 'pseudo.pseudo_total_life')).toBe(0.88);
+    expect(weightOf(stats, 'pseudo.pseudo_total_chaos_resistance')).toBe(2.86);
+    // 80% of the fire resistance alone: 13 * 2.08
+    expect(weightGroup(stats).value).toEqual({ min: 21.63 });
+  });
+
+  it('suggests no total the base can never carry', async () => {
+    // A jewel rolls no flat Life
+    const stats = await ring(['+13% to Fire Resistance'], undefined, 'Cobalt Jewel');
+    expect(filtersOf(stats, 'pseudo_total_life')).toEqual([]);
+    expect(filtersOf(stats, 'pseudo_total_chaos_resistance')).not.toEqual([]);
+  });
+
+  it('switches the weight group on and the groups of the weighed mods off by default', async () => {
+    const stats = await ring([MANA_REGEN, '+13% to Fire Resistance', 'Cannot be Frozen']);
+    expect(weightGroup(stats).disabled).toBeUndefined();
+    const mana = filtersOf(stats, 'stat_789117908').filter(f => f.group.type !== 'weight');
+    expect(mana.length).toBeGreaterThan(0);
+    expect(mana.every(f => f.disabled || f.group.disabled)).toBe(true);
+    // Pseudo totals stay on, and so does a mod the weight group does not cover
+    expect(filtersOf(stats, 'pseudo_total_fire_resistance')[0].disabled).toBeUndefined();
+    const frozen = filtersOf(stats, matchMod('Cannot be Frozen')!.ids[0]!.split('.')[1]!);
+    expect(frozen.some(f => !f.disabled && !f.group.disabled)).toBe(true);
+  });
+
+  it('with the weighted sum off, switches the per-mod groups on and leaves the weight group out', async () => {
+    const stats = await ring([MANA_REGEN, '+13% to Fire Resistance'], { weightedSum: false });
+    expect(weightGroup(stats)).toBeUndefined();
+    const mana = filtersOf(stats, 'stat_789117908');
+    expect(mana.every(f => !f.disabled && !f.group.disabled)).toBe(true);
+    expect(filtersOf(stats, 'pseudo_total_fire_resistance')[0].disabled).toBeUndefined();
+  });
+
+  it('keeps cluster jewel enchants on in either mode', async () => {
+    for (const weightedSum of [true, false]) {
+      const { stats } = (
+        await singleItem(
+          `Rarity: RARE\nOblivion Stone\nLarge Cluster Jewel\nCluster Jewel Skill: affliction_axe_and_sword_damage\nItem Level: 84\nImplicits: 1\n{crafted}Adds 12 Passive Skills\nAdded Small Passive Skills also grant: +2 to Dexterity`,
+          { weightedSum },
+        )
+      ).trades[0]!.query;
+      expect(filtersOf(stats, 'stat_3086156145')).toEqual([
+        expect.objectContaining({ id: 'enchant.stat_3086156145', value: { min: 12 } }),
+      ]);
+      expect(filtersOf(stats, 'stat_3086156145')[0].disabled).toBeUndefined();
+    }
+  });
+
+  it('weighs every stat 1 on a base missing from the Mod Pools, suggesting nothing', async () => {
+    const warn = vi.spyOn(console, 'warn').mockImplementation(() => {});
+    const stats = await ring([MANA_REGEN, '+13% to Fire Resistance'], undefined, 'Unheard Ring');
+    warn.mockRestore();
+    expect(weightGroup(stats).filters.every((filter: any) => filter.value.weight === 1)).toBe(true);
+    expect(weightGroup(stats).value).toEqual({ min: 20 });
+    expect(stats[0].filters.filter((filter: any) => filter.disabled)).toEqual([
+      { id: 'pseudo.pseudo_total_elemental_resistance', value: { min: 10 }, disabled: true },
+    ]);
   });
 });

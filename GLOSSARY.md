@@ -39,7 +39,7 @@ The list of recent searches the user ran on the trade site, recorded automatical
 An item from the trade results that the user pinned to keep it in view across searches.
 
 **Mod Pool**:
-Every trade stat, per modifier type (explicit, implicit, fractured, crafted, enchant), that an item of a given base can carry, from any source (base, influences, crafting, essences, ...). A search filter outside the item's Mod Pool can never match.
+Every trade stat, per modifier type (explicit, implicit, fractured, crafted, enchant, corruption, Synthesis implicit), that an item of a given base can carry, from any source (base, influences, crafting, essences, ...). A search filter outside the item's Mod Pool can never match.
 _Avoid_: mod list, possible mods
 
 **Tier**:

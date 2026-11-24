@@ -833,7 +833,7 @@
 {"unique":"Rolling Flames","fixed":["stat_1351893427","stat_1482194094","stat_24977021","stat_3962278098","stat_480975218"]}
 {"unique":"Romira's Banquet","fixed":["stat_1050105434","stat_1592029809","stat_2735889191","stat_3237948413","stat_3556824919","stat_669069897","stat_691932474","stat_803737631"]}
 {"unique":"Rotblood Promise","fixed":["effect_434885230","stat_1471600638","stat_2965611853","stat_328541901","stat_3407849389","stat_539970476"]}
-{"unique":"Rotgut","fixed":["stat_1256719186","stat_1546046884","stat_3182498570","stat_3738001379","stat_388617051","stat_570159344","stat_661376813"]}
+{"unique":"Rotgut","fixed":["stat_1256719186","stat_1546046884","stat_2858921304","stat_3182498570","stat_3738001379","stat_388617051","stat_570159344","stat_661376813"]}
 {"unique":"Roth's Reach","fixed":["stat_1509134228","stat_1787073323","stat_210067635","stat_3759663284","stat_387439868","stat_681332047"]}
 {"unique":"Rotmother's Mutiny","fixed":["stat_1263695895","stat_2142084156","stat_2901986750","stat_3789103652","stat_3795935347","stat_569299859"]}
 {"unique":"Rotting Legion","fixed":["effect_1933760319","stat_3299347043","stat_3321629045","stat_3868443508","stat_512740886"]}
@@ -945,7 +945,7 @@
 {"unique":"Storm Prison","fixed":["stat_1334060246","stat_1509134228","stat_227523295","stat_2483795307","stat_3336890334","stat_789117908"]}
 {"unique":"Storm Secret","fixed":["stat_1538773178","stat_1964607303","stat_2007062029","stat_2231156303","stat_28299254","stat_328541901"]}
 {"unique":"Storm's Gift","fixed":["stat_1640259660","stat_1671376347","stat_1999113824","stat_209387074","stat_424549222","stat_967627487"]}
-{"unique":"Stormblood","fixed":["stat_1256719186","stat_1546046884","stat_1807432231","stat_2899274448","stat_3738001379"]}
+{"unique":"Stormblood","fixed":["stat_1256719186","stat_1546046884","stat_1807432231","stat_2858921304","stat_2899274448","stat_3738001379"]}
 {"unique":"Stormcharger","fixed":["stat_1484471543","stat_1671376347","stat_2234049899","stat_2250533757","stat_3081816887","stat_3240769289"]}
 {"unique":"Stormfire","fixed":["stat_2870108850","stat_3121133045","stat_3285748758","stat_3441501978","stat_789117908"]}
 {"unique":"Stormseeker","fixed":["stat_1050105434","stat_3489782002","stat_3578946428","stat_4014328139","stat_4052037485","stat_4102393882","stat_898270877"]}
@@ -1024,7 +1024,7 @@
 {"unique":"The Dark Monarch","fixed":["stat_1263695895","stat_2162097452","stat_2923486259","stat_3489782002","stat_4052037485","stat_56473917|10","stat_56473917|11","stat_56473917|12","stat_56473917|13","stat_56473917|14","stat_56473917|15","stat_56473917|16","stat_56473917|2","stat_56473917|3","stat_56473917|4","stat_56473917|5","stat_56473917|6","stat_56473917|7","stat_56473917|8","stat_56473917|9","stat_737980235"]}
 {"unique":"The Dark Seer","fixed":["stat_1064067689","stat_124131830","stat_1982144275","stat_2221570601","stat_2563691316","stat_2621660713","stat_294153754","stat_3864993324","stat_4193902224","stat_819529588"]}
 {"unique":"The Deep One's Hide","fixed":["stat_2451402625","stat_3032590688","stat_3372524247","stat_3477714116","stat_4067062424"]}
-{"unique":"The Desecrated Chalice","fixed":["stat_1509134228","stat_1546046884","stat_2238792070","stat_2375316951","stat_2417314413","stat_3738001379","stat_744082851"]}
+{"unique":"The Desecrated Chalice","fixed":["stat_1509134228","stat_1546046884","stat_2238792070","stat_2375316951","stat_2417314413","stat_2858921304","stat_3738001379","stat_744082851"]}
 {"unique":"The Devourer of Minds","fixed":["stat_1263695895","stat_2162097452","stat_2451402625","stat_2797097751","stat_328541901","stat_3879726065"]}
 {"unique":"The Devouring Diadem","fixed":["stat_1024189516","stat_1050105434","stat_1225383362","stat_1535626285","stat_1840751341","stat_2016708976","stat_2062792091","stat_2067062068","stat_2118708619","stat_2176571093","stat_2262736444","stat_2264295449","stat_2300185227","stat_2551600084","stat_280731498","stat_2843100721","stat_2902845638","stat_3261801346","stat_328541901","stat_3289633055","stat_3299347043","stat_3325883026","stat_3393628375","stat_3465022881","stat_3610263531","stat_3640956958","stat_3753650187","stat_3753680856","stat_378817135","stat_3839620417","stat_3853996752","stat_4015621042","stat_4080418644","stat_4291461939","stat_538848803","stat_586568910","stat_672563185","stat_770672621","stat_829382474","stat_966747987"]}
 {"unique":"The Draugur's Lantern","fixed":["stat_19803471","stat_2084152132","stat_2443492284","stat_3299347043","stat_561307714"]}
@@ -1064,7 +1064,7 @@
 {"unique":"The Halcyon","fixed":["stat_1064477264","stat_1073942215","stat_1623640288","stat_2309614417","stat_3291658075","stat_3865389316","stat_4220027924"]}
 {"unique":"The Hallowed Monarch","fixed":["stat_1062208444","stat_1263695895","stat_1323344255","stat_2866361420","stat_2901986750","stat_3132594008","stat_517280174"]}
 {"unique":"The Hand of Phrecia","fixed":["stat_2901986750","stat_3321629045","stat_3678739763","stat_3995650818"]}
-{"unique":"The Harvest","fixed":["stat_1509134228","stat_1546046884","stat_3081076859","stat_3738001379","stat_958088871"]}
+{"unique":"The Harvest","fixed":["stat_1509134228","stat_1546046884","stat_2858921304","stat_3081076859","stat_3738001379","stat_958088871"]}
 {"unique":"The Hateful Accuser","fixed":["effect_3188237829","stat_2891184298","stat_2923486259","stat_3299347043"]}
 {"unique":"The Hidden Blade","fixed":["stat_1509134228","stat_2752264922","stat_3165215973","stat_3261801346"]}
 {"unique":"The Highwayman","fixed":["stat_1277035917","stat_1526625193","stat_2250533757","stat_3917489142","stat_4069440714","stat_875143443"]}
@@ -1105,7 +1105,7 @@
 {"unique":"The Restless Ward","fixed":["stat_1541516339","stat_1898967950","stat_1999113824","stat_2839036860","stat_3299347043"]}
 {"unique":"The Retch","fixed":["stat_304970526","stat_3299347043","stat_3593843976","stat_3741323227","stat_4220027924","stat_55876295","stat_662803072","stat_768537671"]}
 {"unique":"The Rippling Thoughts","fixed":["effect_1954139129","stat_1334060246","stat_1509134228","stat_280731498","stat_2831165374","stat_2974417149","stat_3336890334","stat_818329660"]}
-{"unique":"The Sacred Chalice","fixed":["stat_128992179","stat_1509134228","stat_1546046884","stat_2375316951","stat_270706555","stat_3738001379","stat_4015395070"]}
+{"unique":"The Sacred Chalice","fixed":["stat_128992179","stat_1509134228","stat_1546046884","stat_2375316951","stat_270706555","stat_2858921304","stat_3738001379","stat_4015395070"]}
 {"unique":"The Sands of Time","fixed":["stat_1004011302","stat_1518586897","stat_1925643497","stat_239144","stat_2974417149","stat_789117908"]}
 {"unique":"The Saviour","fixed":["stat_1509134228","stat_1940865751","stat_210067635","stat_2375316951","stat_3451043685","stat_681332047","stat_960081730"]}
 {"unique":"The Scales of Justice","fixed":["stat_1050105434","stat_2716882575","stat_3109875952","stat_3299347043","stat_753801406"]}

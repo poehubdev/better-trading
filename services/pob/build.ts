@@ -26,8 +26,10 @@ interface Mod {
   enchant: boolean;
   /** Tagged {mutated}: differs on a Foulborn unique from the regular unique */
   mutated: boolean;
-  /** An explicit tagged {crafted}: a bench craft the player added */
+  /** A mod outside the implicit block tagged {crafted}: made on the crafting bench */
   crafted: boolean;
+  /** Tagged {fractured} */
+  fractured: boolean;
 }
 
 interface Item {
@@ -138,6 +140,7 @@ const parseMods = (lines: string[], selected: Set<number>): Mod[] => {
             enchant: i < implicits && tags.includes('{crafted}'),
             mutated: tags.includes('{mutated}'),
             crafted: i >= implicits && tags.includes('{crafted}'),
+            fractured: tags.includes('{fractured}'),
           },
         ];
       })

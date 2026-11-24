@@ -3,3 +3,4 @@ dist
 .output
 .idea
 pnpm-lock.yaml
+public/pob-pools.json
