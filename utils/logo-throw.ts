@@ -7,6 +7,7 @@ type LogoThrow = 'none' | 'logo' | 'currency';
 
 const LOGO_THROWS: LogoThrow[] = ['none', 'logo', 'currency'];
 const STORAGE_KEY = 'logo-throw';
+const HELD_CURRENCY_KEY = 'logo-held-currency';
 const MIRROR_IMAGE = 'Mirror_of_Kalandra.png';
 
 interface CurrencyImage {
@@ -19,7 +20,7 @@ interface CurrencyImage {
 // ponytail: hardcoded list, the content script can't list a folder; generate it if the list gets long
 const CURRENCY_IMAGES: Record<TradeSiteVersion, CurrencyImage[]> = {
   '1': [
-    { file: 'Divine_Orb.png', weight: 4000 }, // 1 in 2.5
+    { file: 'Divine_Orb.png', weight: 3850 }, // 1 in 2.6
     { file: 'Tainted_Divine_Teardrop.png', weight: 800 },
     { file: 'Veiled_Exalted_Orb.png', weight: 800 },
     { file: 'Tailoring_Orb.png', weight: 800 },
@@ -30,6 +31,7 @@ const CURRENCY_IMAGES: Record<TradeSiteVersion, CurrencyImage[]> = {
     { file: 'Reflecting_Mist.png', weight: 450 },
     { file: 'Refracting_Fog.png', weight: 450 },
     { file: 'Fracturing_Orb.png', weight: 180 },
+    { file: 'Crystallised_Rancour.png', weight: 150 }, // ~1.7 divine
     { file: 'Soul_Core_of_Intellect.png', weight: 90 },
     { file: 'Soul_Core_of_Finesse.png', weight: 90 },
     { file: 'Soul_Core_of_Might.png', weight: 90 },
@@ -69,6 +71,16 @@ const getCurrencyImagePaths = (): string[] => {
   return CURRENCY_IMAGES[version].map(({ file }) => `/assets/images/currency/poe${version}/${file}`);
 };
 
+/** The currency held in the logo's spot, kept across page loads; null if none or not one of the current game's */
+const getHeldCurrency = (): string | null => {
+  const stored = getLocalValue(HELD_CURRENCY_KEY);
+  return stored && getCurrencyImagePaths().includes(stored) ? stored : null;
+};
+
+const setHeldCurrency = (path: string | null): void => {
+  if (path) setLocalValue(HELD_CURRENCY_KEY, path);
+};
+
 /** 'Soul_Core_of_Might.png' path -> 'Soul Core of Might' */
 const getCurrencyName = (path: string): string =>
   (path.split('/').pop() ?? path).replace(/\.png$/, '').replaceAll('_', ' ');
@@ -81,6 +93,8 @@ export {
   pickCurrencyImage,
   getCurrencyImagePaths,
   getCurrencyName,
+  getHeldCurrency,
+  setHeldCurrency,
   pickWeighted,
 };
 export type { LogoThrow };

@@ -104,10 +104,3 @@
     transform: translateX(3px);
   }
 }
-
-// Logo clone dropped by the brand click easter egg (positioned inline, moved by a rAF physics loop)
-.ball {
-  position: fixed;
-  z-index: 10000;
-  pointer-events: none;
-}
