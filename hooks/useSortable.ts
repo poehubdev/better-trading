@@ -19,6 +19,8 @@ interface SortableOptions {
   onPreview: (fromIndex: number, toIndex: number) => void;
   /** The drag was cancelled (Esc, dropped outside every drop target): show the original order again */
   onCancel: () => void;
+  /** Drag only by the handle (default). Otherwise the whole item drags; its links need `draggable={false}` */
+  handleOnly?: boolean;
 }
 
 /**
@@ -104,6 +106,7 @@ const useSortable = <TItem extends HTMLElement, THandle extends HTMLElement>({
   onMove,
   onPreview,
   onCancel,
+  handleOnly = true,
 }: SortableOptions) => {
   const itemRef = useRef<TItem>(null);
   const handleRef = useRef<THandle>(null);
@@ -127,7 +130,7 @@ const useSortable = <TItem extends HTMLElement, THandle extends HTMLElement>({
     return combine(
       draggable({
         element,
-        dragHandle,
+        dragHandle: handleOnly ? dragHandle : undefined,
         getInitialData: () => {
           const data = { listId, index: latestRef.current.index };
           dragDataRef.current = data;
@@ -163,7 +166,7 @@ const useSortable = <TItem extends HTMLElement, THandle extends HTMLElement>({
         },
       }),
     );
-  }, [listId]);
+  }, [listId, handleOnly]);
 
   // Moving the DOM node blurs the handle: give focus back once the item renders at its new index
   const refocusRef = useRef(false);

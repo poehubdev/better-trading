@@ -13,6 +13,7 @@ import FolderImport from './FolderImport';
 import styles from './styles.module.scss';
 import TradeDeletion from './TradeDeletion';
 import TradeEdition from './TradeEdition';
+import AngleDownIcon from '@/assets/icons/filled/angle-down.svg?react';
 import ArchiveIcon from '@/assets/icons/filled/archive.svg?react';
 import BookmarkIcon from '@/assets/icons/filled/bookmark.svg?react';
 import CloseIcon from '@/assets/icons/filled/close.svg?react';
@@ -66,6 +67,7 @@ interface PageBookmarksProps {
   showArchivedLabel: string;
   showUnarchivedLabel: string;
   createFolderLabel: string;
+  importMenuLabel: string;
   importFolderLabel: string;
   importPobLabel: string;
   importFolderHint: string;
@@ -134,6 +136,7 @@ const PageBookmarks: React.FC<PageBookmarksProps> = ({
   showArchivedLabel,
   showUnarchivedLabel,
   createFolderLabel,
+  importMenuLabel,
   importFolderLabel,
   importPobLabel,
   importFolderHint,
@@ -374,6 +377,18 @@ const PageBookmarks: React.FC<PageBookmarksProps> = ({
       ? [{ kind: 'pob' as const, icon: ImportPobIcon, label: importPobLabel, hint: importPobHint }]
       : []),
   ];
+
+  // The imports hang off "New folder" as a native popover (light dismiss, Escape, top layer), opened right-aligned
+  // under the split button
+  const importMenuId = useId();
+  const addRowSplitRef = useRef<HTMLDivElement>(null);
+  const importMenuRef = useRef<HTMLDivElement>(null);
+  const placeImportMenu = () => {
+    const split = addRowSplitRef.current?.getBoundingClientRect();
+    if (!split || !importMenuRef.current) return;
+    importMenuRef.current.style.top = `${split.bottom + 2}px`;
+    importMenuRef.current.style.right = `${document.documentElement.clientWidth - split.right}px`;
+  };
 
   const handleCancelImportFolder = () => {
     setImporting(null);
@@ -624,19 +639,32 @@ const PageBookmarks: React.FC<PageBookmarksProps> = ({
 
       {/* Adding at the end of the list, where new Folders land: create one empty, or import it below */}
       {!isShowingArchivedFolders && !searchMatches && (
-        <div className={styles.addRow}>
+        <div ref={addRowSplitRef} className={styles.addRow}>
           <button type="button" className={styles.addRowCreate} onClick={handleCreateFolder}>
             <FolderPlusIcon className={styles.addRowIcon} aria-hidden />
             {createFolderLabel}
           </button>
-          <div className={styles.addRowImports}>
+          <button
+            type="button"
+            className={styles.addRowMore}
+            popoverTarget={importMenuId}
+            aria-label={importMenuLabel}
+            title={importMenuLabel}
+            onClick={placeImportMenu}>
+            <AngleDownIcon aria-hidden />
+          </button>
+          <div ref={importMenuRef} id={importMenuId} popover="auto" role="menu" className={styles.addRowMenu}>
             {importOptions.map(({ kind, icon: Icon, label, hint }) => (
               <button
                 key={kind}
                 type="button"
-                className={styles.addRowImport}
+                role="menuitem"
+                className={styles.addRowMenuItem}
                 title={hint}
-                onClick={() => startImport(kind)}>
+                onClick={() => {
+                  importMenuRef.current?.hidePopover();
+                  startImport(kind);
+                }}>
                 <Icon className={styles.addRowIcon} aria-hidden />
                 {label}
               </button>

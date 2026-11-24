@@ -74,6 +74,7 @@ pageHistoryEmpty: The search history is currently empty.
 pageHistoryClearSuccessFlash: The search history has been cleared.
 
 pageBookmarksCreateFolder: New folder
+pageBookmarksImportMenu: Import
 pageBookmarksImportFolder: Import folder
 pageBookmarksImportPob: Import PoB
 pageBookmarksImportFolderHint: A folder code someone shared, or one you exported.

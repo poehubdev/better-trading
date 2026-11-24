@@ -55,6 +55,11 @@ pageHistoryClear: "Effacer l'historique"
 pageHistoryEmpty: "L'historique de recherche est actuellement vide."
 pageHistoryClearSuccessFlash: "L'historique de recherche a été effacé."
 pageBookmarksCreateFolder: 'Nouveau dossier'
+pageBookmarksImportMenu: 'Importer'
+pageBookmarksImportFolder: 'Importer un dossier'
+pageBookmarksImportPob: 'Importer PoB'
+pageBookmarksImportFolderHint: 'Un code de dossier partagé par quelqu’un, ou que vous avez exporté.'
+pageBookmarksImportPobHint: 'Des recherches pour l’équipement d’un build Path of Building.'
 pageBookmarksEmptyTitle: 'Aucun favori pour l’instant'
 pageBookmarksEmptyHint: 'Rangez vos recherches dans des dossiers pour les retrouver en un clic.'
 pageBookmarksCollapseAll: 'Réduire les dossiers'
@@ -104,3 +109,6 @@ pageBookmarksFolderEditionSave: 'Enregistrer'
 pageBookmarksFolderImportModalTitle: 'Importer un dossier de favoris'
 pageBookmarksFolderImportImportCodeLabel: "Code d'importation"
 pageBookmarksFolderImportInvalidCode: 'Le code saisi semble invalide, essayez-en un autre.'
+pageBookmarksPobImportModalTitle: 'Importer un build Path of Building'
+pageBookmarksPobImportCodeLabel: 'Code Path of Building'
+pageBookmarksPobImportInvalidCode: "Ce n'est pas un code de build Path of Building, essayez-en un autre."

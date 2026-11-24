@@ -83,6 +83,11 @@ html #better-trading-container {
   font-family: 'FontinSmallCaps', Verdana, Arial, Helvetica, sans-serif;
   font-size-adjust: 0.54;
   font-weight: normal;
+
+  // The trade site's Bootstrap rings every focused link, mouse clicks included: keep it for the keyboard only
+  a:focus:not(:focus-visible) {
+    outline: none;
+  }
 }
 
 html[lang='zh-CN'] #better-trading-container {

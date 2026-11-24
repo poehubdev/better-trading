@@ -1,4 +1,6 @@
 @use '@/styles/variables';
+@use '@/styles/mixins/fade-in';
+@use '@/styles/mixins/gradient-hover';
 @use 'sass:color';
 
 // Search on the left, view controls on the right
@@ -8,30 +10,23 @@
   gap: 5px;
 }
 
-// An underlined field rather than a box: it filters the list below, it isn't a form
+// Matches the trade site's own "Search Items..." box (.multiselect__tags), plus a magnifier
 .search {
   display: flex;
   flex: 1 1 auto;
   align-items: center;
   gap: 6px;
   min-width: 0;
-  height: 30px;
-  padding: 0 2px 0 4px;
-  border-bottom: 1px solid variables.$gray;
-  color: variables.$gray-alt;
-  transition:
-    border-color 0.2s ease,
-    color 0.2s ease;
-
-  &:focus-within {
-    border-bottom-color: variables.$gold-alt;
-    color: variables.$gold-light;
-  }
+  height: 34px;
+  padding: 0 4px 0 8px;
+  border: 1px solid #000;
+  background: #1e2124;
+  color: #e2e2e2;
 }
 
 .searchIcon {
   flex-shrink: 0;
-  font-size: 15px;
+  font-size: 14px;
 }
 
 .searchInput {
@@ -43,11 +38,11 @@
   background: transparent;
   outline: none;
   font-family: variables.$primary-font;
-  font-size: 15px;
-  color: variables.$white;
+  font-size: 14.3px;
+  color: #e2e2e2;
 
   &::placeholder {
-    color: variables.$gray-alt;
+    color: #e2e2e2;
     opacity: 1;
   }
 
@@ -113,38 +108,27 @@
   }
 }
 
-// Adding: "New folder" as the gold button across the top, the imports as an outlined pair underneath
+// Adding: a split button, "New folder" with the imports in a menu off its arrow
 .addRow {
   display: flex;
-  flex-direction: column;
-  gap: 6px;
 }
 
-.addRowImports {
+.addRowCreate {
   display: flex;
-  gap: 6px;
-}
-
-.addRowCreate,
-.addRowImport {
-  display: flex;
+  flex: 1;
   justify-content: center;
   align-items: center;
   gap: 8px;
   min-height: 36px;
   padding: 4px 8px;
   border: 1px solid variables.$gold-alt;
-  background-color: transparent;
+  background-color: variables.$gold;
   color: variables.$white;
   font-family: variables.$primary-font;
+  font-size: 15px;
   text-align: center;
   cursor: pointer;
   transition: background-color 0.2s ease;
-}
-
-.addRowCreate {
-  background-color: variables.$gold;
-  font-size: 15px;
 
   &:hover,
   &:focus-visible {
@@ -152,15 +136,56 @@
   }
 }
 
-// Equal halves; a long label wraps inside its half
-.addRowImport {
-  flex: 1 1 0;
-  font-size: 13px;
+.addRowMore {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  width: 36px;
+  padding: 0;
+  border: 1px solid variables.$gold-alt;
+  border-left: 0;
+  background-color: variables.$gold;
+  color: variables.$white;
+  font-size: 14px;
+  cursor: pointer;
+  transition: background-color 0.2s ease;
 
   &:hover,
-  &:focus-visible {
-    background-color: variables.$gold;
+  &:focus-visible,
+  &:has(+ .addRowMenu:popover-open) {
+    background-color: color.adjust(variables.$gold, $lightness: 5%);
   }
+}
+
+// Looks like the Folder and Trade contextual menus; placed by placeImportMenu under the split button's right edge
+.addRowMenu {
+  @include fade-in.fade-in;
+
+  position: fixed;
+  inset: auto;
+  min-width: 180px;
+  margin: 0;
+  padding: 0;
+  border: 1px solid variables.$gray-alt;
+  background-color: variables.$gray;
+}
+
+.addRowMenuItem {
+  @include gradient-hover.gradient-hover(variables.$gray-alt);
+
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  width: 100%;
+  padding: 6px 10px;
+  border: 0;
+  background: none;
+  color: variables.$white;
+  font-family: variables.$primary-font;
+  font-size: 14px;
+  text-align: left;
+  white-space: nowrap;
+  cursor: pointer;
 }
 
 .addRowIcon {
@@ -225,12 +250,22 @@
   color: variables.$gray-alt;
 }
 
+// A sunken pocket, like an inventory panel, so the list reads apart from the toolbar and the add block
 .foldersWrapper {
-  margin: 5px 0;
+  margin: 10px 0;
+  padding: 3px 6px;
+  border: 1px solid #241b0f;
+  background-color: #070707;
+  box-shadow: inset 0 1px 6px #000;
+
+  // No Folders shown (empty page, no search matches): no empty pocket
+  &:empty {
+    display: none;
+  }
 }
 
 .folderWrapper {
-  padding: 5px 0;
+  padding: 3px 0;
 }
 
 .foldersWarning {

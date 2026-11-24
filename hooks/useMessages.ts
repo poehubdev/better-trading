@@ -118,6 +118,7 @@ const buildMessages = () => ({
     showArchivedLabel: i18n.t('pageBookmarksShowArchivedFolders'),
     showUnarchivedLabel: i18n.t('pageBookmarksShowUnarchivedFolders'),
     createFolderLabel: i18n.t('pageBookmarksCreateFolder'),
+    importMenuLabel: i18n.t('pageBookmarksImportMenu'),
     importFolderLabel: i18n.t('pageBookmarksImportFolder'),
     importPobLabel: i18n.t('pageBookmarksImportPob'),
     importFolderHint: i18n.t('pageBookmarksImportFolderHint'),

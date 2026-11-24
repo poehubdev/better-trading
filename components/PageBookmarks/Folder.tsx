@@ -61,6 +61,7 @@ const SortableTrade: React.FC<SortableTradeProps> = ({
     onMove,
     onPreview,
     onCancel,
+    handleOnly: false,
   });
 
   return (
@@ -293,7 +294,7 @@ const Folder: React.FC<FolderProps> = ({
                     ]}
                   />
                 }>
-                <a href={getTradeUrl(trade, league)} className={styles.tradeLink}>
+                <a href={getTradeUrl(trade, league)} className={styles.tradeLink} draggable={false}>
                   {trade.completedAt && (
                     <span className={styles.tradeLinkCompleted}>
                       <CheckIcon />
