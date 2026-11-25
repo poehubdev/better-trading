@@ -7,9 +7,14 @@ import type { BuildItem, Influence, Item, Mod } from './build';
 import type { MatchedMod } from './mods';
 import type { ModPool } from './pools';
 
+/** How far below the build item's roll a filter's minimum sits: the roll itself, a percentage of it, or no minimum */
+type RollFloor = { kind: 'exact' } | { kind: 'percent'; percent: number } | { kind: 'none' };
+
 interface ImportOptions {
   /** A weight group on and the per-mod groups it covers off (default), or the per-mod groups on and no weight group */
   weightedSum?: boolean;
+  /** The minimum of modifier rolls, pseudo totals and the weighted sum (default 80%); enchants stay exact */
+  rollFloor?: RollFloor;
 }
 
 interface Result {
@@ -138,11 +143,25 @@ const SLOT_CATEGORIES: Record<string, string> = {
   Belt: 'accessory.belt',
 };
 
-const MIN_FACTOR = 0.8;
-// Trade stats take whole numbers: round down, but never to 0 for a stat that rolled 1 or more
-const scaled = (value: number) => Math.max(Math.floor(value * MIN_FACTOR), Math.min(1, Math.floor(value)));
-// A weight group sums fractions, so its minimum stays fractional
-const scaledSum = (value: number) => Math.round(value * MIN_FACTOR * 100) / 100;
+/** The minimum a Roll Floor sets for a roll (or a sum of rolls); undefined for no minimum */
+type Floor = (value: number | undefined) => { min: number } | undefined;
+
+interface Floors {
+  roll: Floor;
+  sum: Floor;
+}
+
+const floorsOf = (rollFloor: RollFloor): Floors => {
+  const factor = rollFloor.kind === 'exact' ? 1 : rollFloor.kind === 'percent' ? rollFloor.percent / 100 : undefined;
+  if (factor === undefined) return { roll: () => undefined, sum: () => undefined };
+  return {
+    // Trade stats take whole numbers: round down, but never to 0 for a stat that rolled 1 or more
+    roll: value =>
+      value === undefined ? undefined : { min: Math.max(Math.floor(value * factor), Math.min(1, Math.floor(value))) },
+    // A weight group sums fractions, so its minimum stays fractional
+    sum: value => (value === undefined ? undefined : { min: Math.round(value * factor * 100) / 100 }),
+  };
+};
 
 /** 100 / the largest roll of any of these stats (`stat_123`) on any of the bases, so a full roll weighs 100; 1 when unknown */
 const weightOf = (bases: (string | undefined)[], stats: string[]) => {
@@ -192,9 +211,9 @@ const passiveCount = (text: string, base: string, id: string): StatValue => {
  * A unique's `count` group per matched mod, all on. Its mod is of one known type, so it is a single stat; the base's Mod
  * Pool checks only its implicits and enchants, since a unique's explicit mods are its own
  */
-const statGroups = (matched: MatchedMod[], pool: ModPool | undefined): StatGroup[] =>
+const statGroups = (matched: MatchedMod[], pool: ModPool | undefined, floors: Floors): StatGroup[] =>
   matched.flatMap(({ match, implicit }) => {
-    const value = match.value === undefined ? undefined : { min: scaled(match.value) };
+    const value = floors.roll(match.value);
     const ids = possible(onlyTypes(match.ids, [implicit ? 'implicit' : 'explicit']), pool, ['implicit', 'enchant']);
     return ids.length
       ? [{ type: 'count' as const, value: { min: 1 }, disabled: false, filters: ids.map(id => statFilter(id, value)) }]
@@ -231,6 +250,7 @@ const rareStatGroups = (
   reportUnmatched: Report,
   base: string | undefined,
   weightedSum: boolean,
+  floors: Floors,
 ) => {
   const jewel = !!base?.endsWith('Jewel');
   const cluster = !!base?.endsWith('Cluster Jewel');
@@ -271,7 +291,7 @@ const rareStatGroups = (
     }
     const min =
       (cluster && passiveCount(text, base!, ids[0]!)) ||
-      (value === undefined ? undefined : { min: enchant ? value : scaled(value) });
+      (enchant ? (value === undefined ? undefined : { min: value }) : floors.roll(value));
     if (enchant) {
       // A flask's enchant is a bonus, not a requirement: switched off
       enchants.push(...ids.map(id => ({ ...statFilter(id, min), ...(base?.endsWith('Flask') && { disabled: true }) })));
@@ -312,10 +332,10 @@ const rareStatGroups = (
     }
   }
   const and = [
-    ...[...totals].map(([total, sum]) => ({ id: `pseudo.pseudo_total_${total}`, value: { min: scaled(sum) } })),
+    ...[...totals].map(([total, sum]) => statFilter(`pseudo.pseudo_total_${total}`, floors.roll(sum))),
     // The per-element totals are on; one switch swaps them for their sum
     ...(elemental
-      ? [{ id: 'pseudo.pseudo_total_elemental_resistance', value: { min: scaled(elemental) }, disabled: true }]
+      ? [{ ...statFilter('pseudo.pseudo_total_elemental_resistance', floors.roll(elemental)), disabled: true }]
       : []),
     ...suggested.map(total => ({ id: `pseudo.pseudo_total_${total}`, disabled: true })),
     ...enchants,
@@ -325,7 +345,7 @@ const rareStatGroups = (
     ...(and.length ? [{ type: 'and' as const, filters: and }] : []),
     ...groups,
     ...(weightSum > 0
-      ? [{ type: 'weight' as const, value: { min: scaledSum(weightSum) }, filters: [...weighted.values()] }]
+      ? [{ type: 'weight' as const, value: floors.sum(weightSum), filters: [...weighted.values()] }]
       : []),
   ]);
 };
@@ -413,7 +433,7 @@ const tradeCategory = (slot: string, type: string | undefined): string | undefin
   return SLOT_CATEGORIES[slot];
 };
 
-const searchQuery = ({ slot, item }: BuildItem, reportUnmatched: Report, weightedSum: boolean) => {
+const searchQuery = ({ slot, item }: BuildItem, reportUnmatched: Report, weightedSum: boolean, floors: Floors) => {
   const query: Record<string, unknown> = { status: { option: 'securable' } };
   if (item.rarity === 'UNIQUE' || item.rarity === 'RELIC') {
     const name = item.name.replace(/^Foulborn /, '');
@@ -445,7 +465,7 @@ const searchQuery = ({ slot, item }: BuildItem, reportUnmatched: Report, weighte
       mod => candidate(mod) && (mod.mutated || jewel || !mod.match.ids.some(id => fixed?.has(id.split('.')[1]!))),
     );
     const pool = item.base ? modPool(item.base) : undefined;
-    const stats = statGroups(identity, pool);
+    const stats = statGroups(identity, pool, floors);
     // A flask's enchant is not part of its identity but makes a find worth more: the exact value, switched off
     const enchants = slot.startsWith('Flask')
       ? [
@@ -478,7 +498,7 @@ const searchQuery = ({ slot, item }: BuildItem, reportUnmatched: Report, weighte
       const id = INFLUENCE_STATS[influence];
       return id ? [{ id, disabled: true }] : [];
     });
-    const stats = rareStatGroups(item.mods, influences, reportUnmatched, item.base, weightedSum);
+    const stats = rareStatGroups(item.mods, influences, reportUnmatched, item.base, weightedSum, floors);
     if (stats.length) query.stats = stats;
   }
   return query;
@@ -494,7 +514,7 @@ const aggregateIds = (ids: string[], pool: ModPool | undefined) =>
     : ids.filter(id => /^(explicit|fractured)\./.test(id));
 
 /** The Aggregate Jewel: one Trade for any base jewel with enough of the mods found on the build's base jewels */
-const aggregateJewel = (items: BuildItem[], weightedSum: boolean) => {
+const aggregateJewel = (items: BuildItem[], weightedSum: boolean, floors: Floors) => {
   const union = new Set<string>();
   const weighted = new Map<string, StatFilter>();
   let most = 0;
@@ -537,7 +557,7 @@ const aggregateJewel = (items: BuildItem[], weightedSum: boolean) => {
         filters: [...union].map(id => statFilter(id, undefined)),
       },
       ...(weightedSum && weighted.size
-        ? [{ type: 'weight', value: { min: scaledSum(weightSum) }, filters: [...weighted.values()] }]
+        ? [{ type: 'weight', value: floors.sum(weightSum), filters: [...weighted.values()] }]
         : []),
     ],
   };
@@ -576,7 +596,11 @@ const trade = (tit: string, query: object) => ({
 });
 
 /** Build Code to a BT Export String (format 3) holding one Folder; the stats must be loaded first */
-const toExportString = async (buildCode: string, { weightedSum = true }: ImportOptions = {}): Promise<Result> => {
+const toExportString = async (
+  buildCode: string,
+  { weightedSum = true, rollFloor = { kind: 'percent', percent: 80 } }: ImportOptions = {},
+): Promise<Result> => {
+  const floors = floorsOf(rollFloor);
   const build = await decodeBuild(buildCode);
   const name = build.ascendancy ?? build.className;
   const icon = name.toLowerCase();
@@ -589,13 +613,13 @@ const toExportString = async (buildCode: string, { weightedSum = true }: ImportO
     trs: dedupe([
       ...build.items.map(buildItem => {
         const tit = titleOf(buildItem);
-        return { tit, query: searchQuery(buildItem, line => unmatched.push(`${tit}: ${line}`), weightedSum) };
+        return { tit, query: searchQuery(buildItem, line => unmatched.push(`${tit}: ${line}`), weightedSum, floors) };
       }),
-      ...aggregateJewel(build.items, weightedSum),
+      ...aggregateJewel(build.items, weightedSum, floors),
     ]).map(({ tit, query }) => trade(tit, query)),
   };
   return { exportString: `3:${Base64.encode(JSON.stringify(folder))}`, unmatched };
 };
 
-export type { ImportOptions };
+export type { ImportOptions, RollFloor };
 export { toExportString };

@@ -6,7 +6,7 @@ import { inPool, modPool } from './pools';
 import { decodeExportString, fixture } from './test-utils';
 import { describe, expect, it, vi } from 'vitest';
 import { deflateSync } from 'node:zlib';
-import type { ImportOptions } from './index';
+import type { ImportOptions, RollFloor } from './index';
 
 const FIXTURES = {
   'elemental-hit-slayer-3.30.txt': { title: 'Elemental Hit Slayer', icon: 'slayer' },
@@ -131,7 +131,7 @@ describe('Search Query', () => {
     expect(stats[0].filters).toContainEqual({ id: 'explicit.stat_346029096' });
   });
 
-  it('scales a Mutated Mod by the Min Factor, keeping a minimum of 1', async () => {
+  it('scales a Mutated Mod by the Roll Floor, keeping a minimum of 1', async () => {
     const { stats } = await tradeOf('ice-trap-assasin-3.30.txt', "Unique Ring — Foulborn Romira's Banquet");
     expect(stats).toHaveLength(1);
     expect(stats[0].filters.map((filter: any) => filter.value)).toEqual(
@@ -1229,5 +1229,61 @@ describe('Weighted sum', () => {
     expect(stats[0].filters.filter((filter: any) => filter.disabled)).toEqual([
       { id: 'pseudo.pseudo_total_elemental_resistance', value: { min: 10 }, disabled: true },
     ]);
+  });
+});
+
+describe('Roll Floor', () => {
+  const RING = `Rarity: RARE\nDoom Eye\nCoral Ring\nItem Level: 80\nImplicits: 0\n+13% to Fire Resistance\n12% increased Mana Regeneration Rate`;
+  const CLUSTER = `Rarity: RARE\nOblivion Stone\nLarge Cluster Jewel\nCluster Jewel Skill: affliction_axe_and_sword_damage\nItem Level: 84\nImplicits: 2\n{crafted}Adds 8 Passive Skills\n{crafted}2 Added Passive Skills are Jewel Sockets\nAdded Small Passive Skills also grant: +2 to Dexterity`;
+  const MODES: RollFloor[] = [{ kind: 'exact' }, { kind: 'percent', percent: 50 }, { kind: 'none' }];
+  /** The minima of the fire resistance total, the mana regeneration roll and the weight group of a rare ring */
+  const minima = async (rollFloor?: RollFloor) => {
+    const stats = (await singleItem(RING, { rollFloor })).trades[0]!.query.stats as any[];
+    const filters = stats.flatMap(group => group.filters);
+    return {
+      total: filters.find((f: any) => f.id === 'pseudo.pseudo_total_fire_resistance').value,
+      roll: filters.find((f: any) => f.id === 'explicit.stat_789117908' && !f.value?.weight).value,
+      weight: stats.find(group => group.type === 'weight').value,
+    };
+  };
+
+  it.each([
+    // 13 * 2.08 + 12 * 1.32
+    [{ kind: 'exact' }, { total: { min: 13 }, roll: { min: 12 }, weight: { min: 42.88 } }],
+    [
+      { kind: 'percent', percent: 50 },
+      { total: { min: 6 }, roll: { min: 6 }, weight: { min: 21.44 } },
+    ],
+    [{ kind: 'none' }, { total: undefined, roll: undefined, weight: undefined }],
+  ] as [RollFloor, object][])(
+    'sets the minima of rolls, totals and the weight group in %j',
+    async (rollFloor, expected) => {
+      expect(await minima(rollFloor)).toEqual(expected);
+    },
+  );
+
+  it('defaults to 80% of the roll', async () => {
+    expect(await minima()).toEqual(await minima({ kind: 'percent', percent: 80 }));
+    const name = 'righteous-fire-chieftain-3.30.txt';
+    expect(await folderOf(name)).toEqual(await folderOf(name, { rollFloor: { kind: 'percent', percent: 80 } }));
+  });
+
+  it.each(MODES)('keeps enchants exact and the cluster passive count in %j', async rollFloor => {
+    const stats = (await singleItem(CLUSTER, { rollFloor })).trades[0]!.query.stats as any[];
+    const enchants = stats.flatMap(group => group.filters).filter((f: any) => f.id.startsWith('enchant.'));
+    expect(enchants).toEqual(
+      expect.arrayContaining([
+        { id: 'enchant.stat_3086156145', value: { max: 8 } },
+        { id: 'enchant.stat_4079888060', value: { min: 2 } },
+      ]),
+    );
+  });
+
+  it.each(MODES)('applies to the mods of a unique in %j', async rollFloor => {
+    const exact = rollFloor.kind === 'none' ? undefined : expect.objectContaining({ min: expect.any(Number) });
+    const { stats } = await tradeOf('ice-trap-assasin-3.30.txt', "Unique Ring — Foulborn Romira's Banquet", {
+      rollFloor,
+    });
+    for (const filter of stats[0].filters) expect(filter.value).toEqual(exact);
   });
 });
