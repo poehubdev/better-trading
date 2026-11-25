@@ -33,6 +33,7 @@ import { useTradeLocation } from '@/hooks/useTradeLocation';
 import { searchBookmarks } from '@/utils/bookmarks-search';
 import { copyToClipboard } from '@/utils/copy-to-clipboard';
 import { convertPobBuildCode } from '@/utils/extension-background';
+import { getPobImportOptions } from '@/utils/pob-import-options';
 import { recommendTitle } from '@/utils/search-panel';
 import { getTradeUrl } from '@/utils/trade-location';
 import { reorder } from '@atlaskit/pragmatic-drag-and-drop/utils/reorder';
@@ -397,7 +398,7 @@ const PageBookmarks: React.FC<PageBookmarksProps> = ({
   const { deserializeFolder } = bookmarks;
   const handleDeserializePob = useCallback(
     async (buildCode: string) => {
-      const folderExportString = buildCode.trim() && (await convertPobBuildCode(buildCode));
+      const folderExportString = buildCode.trim() && (await convertPobBuildCode(buildCode, getPobImportOptions()));
       return folderExportString ? deserializeFolder(folderExportString) : null;
     },
     [deserializeFolder],

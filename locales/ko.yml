@@ -18,6 +18,14 @@ pageSettingsLogoThrowCurrency: 화폐
 pageSettingsLogoSound: 소리 재생
 pageSettingsLogoSoundVolume: 음량
 pageSettingsPilferingRingResetHint: 길게 눌러 초기화
+pageSettingsPobImportTitle: 'Path of Building 가져오기'
+pageSettingsPobImportDescription: '다음에 가져오는 빌드에 적용됩니다. 이미 가져온 폴더의 검색은 바뀌지 않습니다.'
+pageSettingsPobImportRollFloor: '최솟값'
+pageSettingsPobImportRollFloorExact: '정확히'
+pageSettingsPobImportRollFloorPercent: '비율'
+pageSettingsPobImportRollFloorNone: '없음'
+pageSettingsPobImportRollFloorPercentValue: '수치 대비 비율'
+pageSettingsPobImportWeightedSum: '저항, 생명력, 능력치를 가중치 필터 하나로 합산'
 pageSettingsBackupTitle: 백업 도구
 pageSettingsBackupDescription: 모든 북마크를 파일로 저장하거나 파일에서 복원합니다.
 pageSettingsBackupGenerateButton: 파일 저장

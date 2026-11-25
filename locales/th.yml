@@ -18,6 +18,14 @@ pageSettingsLogoThrowCurrency: สกุลเงิน
 pageSettingsLogoSound: เล่นเสียง
 pageSettingsLogoSoundVolume: ระดับเสียง
 pageSettingsPilferingRingResetHint: กดค้างไว้เพื่อรีเซ็ต
+pageSettingsPobImportTitle: 'นำเข้าจาก Path of Building'
+pageSettingsPobImportDescription: 'ใช้กับบิลด์ที่นำเข้าครั้งถัดไป โฟลเดอร์ที่นำเข้าแล้วยังคงการค้นหาเดิม'
+pageSettingsPobImportRollFloor: 'ค่าต่ำสุด'
+pageSettingsPobImportRollFloorExact: 'ตรงตัว'
+pageSettingsPobImportRollFloorPercent: 'เปอร์เซ็นต์'
+pageSettingsPobImportRollFloorNone: 'ไม่มี'
+pageSettingsPobImportRollFloorPercentValue: 'สัดส่วนของค่า'
+pageSettingsPobImportWeightedSum: 'รวมค่าต้านทาน พลังชีวิต และค่าสถานะในตัวกรองถ่วงน้ำหนักเดียว'
 pageSettingsBackupTitle: เครื่องมือสำรองข้อมูล
 pageSettingsBackupDescription: บันทึกบุ๊กมาร์กทั้งหมดลงไฟล์ หรือกู้คืนจากไฟล์
 pageSettingsBackupGenerateButton: บันทึกไฟล์

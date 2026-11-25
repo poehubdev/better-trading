@@ -1,3 +1,5 @@
+import type { ImportOptions } from '@/services/pob';
+
 // Type guard to safely access chrome/browser APIs
 declare const chrome: typeof browser;
 
@@ -23,9 +25,9 @@ const fetchPoeNinjaResource = async (resource: string): Promise<unknown> =>
   });
 
 /** Converts a Path of Building Build Code to an Export String in the background script; null when it is not a build */
-const convertPobBuildCode = async (buildCode: string): Promise<string | null> =>
+const convertPobBuildCode = async (buildCode: string, options?: ImportOptions): Promise<string | null> =>
   new Promise(resolve => {
-    chrome.runtime.sendMessage({ query: 'pob-import', buildCode }, (exportString: string | null) =>
+    chrome.runtime.sendMessage({ query: 'pob-import', buildCode, options }, (exportString: string | null) =>
       resolve(exportString ?? null),
     );
   });

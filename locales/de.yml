@@ -18,6 +18,14 @@ pageSettingsLogoThrowCurrency: Währung
 pageSettingsLogoSound: Töne abspielen
 pageSettingsLogoSoundVolume: Lautstärke
 pageSettingsPilferingRingResetHint: Zum Zurücksetzen gedrückt halten
+pageSettingsPobImportTitle: 'Path-of-Building-Import'
+pageSettingsPobImportDescription: 'Gilt für die nächsten importierten Builds; bereits importierte Ordner behalten ihre Suchen.'
+pageSettingsPobImportRollFloor: 'Mindestwert'
+pageSettingsPobImportRollFloorExact: 'Exakt'
+pageSettingsPobImportRollFloorPercent: 'Prozent'
+pageSettingsPobImportRollFloorNone: 'Keiner'
+pageSettingsPobImportRollFloorPercentValue: 'Anteil am Wert'
+pageSettingsPobImportWeightedSum: 'Widerstände, Leben und Attribute in einem gewichteten Filter summieren'
 pageSettingsBackupTitle: Sicherungswerkzeuge
 pageSettingsBackupDescription: Alle Lesezeichen in einer Datei sichern oder aus einer Datei wiederherstellen.
 pageSettingsBackupGenerateButton: Datei speichern

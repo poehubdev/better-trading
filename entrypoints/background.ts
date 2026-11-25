@@ -1,6 +1,7 @@
 import { toExportString } from '@/services/pob';
 import { loadStats } from '@/services/pob/mods';
 import { loadPools } from '@/services/pob/pools';
+import type { ImportOptions } from '@/services/pob';
 
 interface PoeNinjaMessage {
   query: 'poe-ninja';
@@ -10,6 +11,7 @@ interface PoeNinjaMessage {
 interface PobImportMessage {
   query: 'pob-import';
   buildCode: string;
+  options?: ImportOptions;
 }
 
 type MessageRequest = PoeNinjaMessage | PobImportMessage;
@@ -40,7 +42,7 @@ const handlePoeNinjaRequest = async (resource: string): Promise<unknown> => {
 let pobStats: Promise<void> | undefined;
 
 /** Path of Building Build Code to an Export String; null when the code is not a build */
-const handlePobImport = async (buildCode: string): Promise<string | null> => {
+const handlePobImport = async (buildCode: string, options?: ImportOptions): Promise<string | null> => {
   pobStats ??= Promise.all([
     fetch(browser.runtime.getURL('/pob-stats.ndjson'))
       .then(response => response.text())
@@ -59,7 +61,7 @@ const handlePobImport = async (buildCode: string): Promise<string | null> => {
 
   try {
     await pobStats;
-    return (await toExportString(buildCode)).exportString;
+    return (await toExportString(buildCode, options)).exportString;
   } catch (error) {
     console.error('[pob-import] Conversion error:', error);
     return null;
@@ -81,7 +83,7 @@ export default defineBackground(() => {
     }
 
     if (request.query === 'pob-import') {
-      handlePobImport(request.buildCode).then(sendResponse);
+      handlePobImport(request.buildCode, request.options).then(sendResponse);
       return true;
     }
 

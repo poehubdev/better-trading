@@ -18,6 +18,14 @@ pageSettingsLogoThrowCurrency: Валюта
 pageSettingsLogoSound: Воспроизводить звуки
 pageSettingsLogoSoundVolume: Громкость
 pageSettingsPilferingRingResetHint: Удерживайте, чтобы сбросить
+pageSettingsPobImportTitle: 'Импорт из Path of Building'
+pageSettingsPobImportDescription: 'Действует на следующие импортированные билды; уже импортированные папки не меняются.'
+pageSettingsPobImportRollFloor: 'Минимальное значение'
+pageSettingsPobImportRollFloorExact: 'Точное'
+pageSettingsPobImportRollFloorPercent: 'Процент'
+pageSettingsPobImportRollFloorNone: 'Нет'
+pageSettingsPobImportRollFloorPercentValue: 'Доля от значения'
+pageSettingsPobImportWeightedSum: 'Суммировать сопротивления, здоровье и характеристики в одном взвешенном фильтре'
 pageSettingsBackupTitle: Резервное копирование
 pageSettingsBackupDescription: Сохраните все закладки в файл или восстановите их из файла.
 pageSettingsBackupGenerateButton: Сохранить файл

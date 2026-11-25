@@ -17,10 +17,20 @@ import {
 import { LOGO_THROWS, getLogoThrow, setLogoThrow } from '@/utils/logo-throw';
 import { getIsPanelBlurEnabled, setIsPanelBlurEnabled } from '@/utils/panel-blur';
 import { getIsPanelScrollbarVisible, setIsPanelScrollbarVisible } from '@/utils/panel-scrollbar';
+import {
+  ROLL_FLOOR_KINDS,
+  getRollFloorKind,
+  getRollFloorPercent,
+  getWeightedSum,
+  setRollFloorKind,
+  setRollFloorPercent,
+  setWeightedSum,
+} from '@/utils/pob-import-options';
 import classnames from 'classnames';
 import { useState } from 'react';
 import type { ChangelogData } from '@/components/ChangelogBanner';
 import type { LogoThrow } from '@/utils/logo-throw';
+import type { RollFloorKind } from '@/utils/pob-import-options';
 
 interface Enhancer {
   slug: string;
@@ -54,6 +64,12 @@ interface PageSettingsProps {
   logoSoundLabel: string;
   logoSoundVolumeLabel: string;
   formatVolume: (volume: number) => string;
+  pobImportTitle: string;
+  pobImportDescription: string;
+  rollFloorLabel: string;
+  rollFloorOptionLabels: Record<RollFloorKind, string>;
+  rollFloorPercentLabel: string;
+  weightedSumLabel: string;
   pilferingRingTitle: string;
   pilferingRingResetHint: string;
   backupTitle: string;
@@ -112,6 +128,12 @@ const PageSettings = ({
   logoSoundLabel,
   logoSoundVolumeLabel,
   formatVolume,
+  pobImportTitle,
+  pobImportDescription,
+  rollFloorLabel,
+  rollFloorOptionLabels,
+  rollFloorPercentLabel,
+  weightedSumLabel,
   pilferingRingTitle,
   pilferingRingResetHint,
   backupTitle,
@@ -157,6 +179,25 @@ const PageSettings = ({
   const changeLogoSoundVolume = (newVolume: number) => {
     setLogoSoundVolume(newVolume);
     setLogoSoundVolumeState(newVolume);
+  };
+
+  const [rollFloorKind, setRollFloorKindState] = useState(getRollFloorKind);
+  const [rollFloorPercent, setRollFloorPercentState] = useState(getRollFloorPercent);
+  const [isWeightedSumOn, setIsWeightedSumOnState] = useState(getWeightedSum);
+
+  const changeRollFloorKind = (kind: RollFloorKind) => {
+    setRollFloorKind(kind);
+    setRollFloorKindState(kind);
+  };
+
+  const changeRollFloorPercent = (percent: number) => {
+    setRollFloorPercent(percent);
+    setRollFloorPercentState(percent);
+  };
+
+  const toggleWeightedSum = (isOn: boolean) => {
+    setWeightedSum(isOn);
+    setIsWeightedSumOnState(isOn);
   };
 
   return (
@@ -223,6 +264,37 @@ const PageSettings = ({
             </>
           )}
         </section>
+        <section className={styles.section}>
+          <h1 className={styles.sectionTitle}>{pobImportTitle}</h1>
+
+          <p className={styles.sectionDescription}>{pobImportDescription}</p>
+
+          <FormRadioGroup
+            className={styles.enhancerCheckbox}
+            label={rollFloorLabel}
+            options={ROLL_FLOOR_KINDS.map(value => ({ value, label: rollFloorOptionLabels[value] }))}
+            value={rollFloorKind}
+            onChange={changeRollFloorKind}
+          />
+
+          <FormRange
+            className={styles.enhancerCheckbox}
+            label={rollFloorPercentLabel}
+            value={rollFloorPercent}
+            step={5}
+            valueText={formatVolume(rollFloorPercent)}
+            disabled={rollFloorKind !== 'percent'}
+            onChange={changeRollFloorPercent}
+          />
+
+          <FormCheckbox
+            className={styles.enhancerCheckbox}
+            value={isWeightedSumOn}
+            label={weightedSumLabel}
+            onChange={toggleWeightedSum}
+          />
+        </section>
+
         <section className={styles.section}>
           <h1 className={styles.sectionTitle}>{backupTitle}</h1>
 

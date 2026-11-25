@@ -50,6 +50,14 @@ pageSettingsLogoSound: Play sounds
 pageSettingsLogoSoundVolume: Volume
 pageSettingsPilferingRingTitle: Exile's Pilfering Ring
 pageSettingsPilferingRingResetHint: Hold to reset
+pageSettingsPobImportTitle: 'Path of Building import'
+pageSettingsPobImportDescription: 'Applies to builds you import next; folders already imported keep their searches.'
+pageSettingsPobImportRollFloor: 'Minimum roll'
+pageSettingsPobImportRollFloorExact: 'Exact'
+pageSettingsPobImportRollFloorPercent: 'Percent'
+pageSettingsPobImportRollFloorNone: 'None'
+pageSettingsPobImportRollFloorPercentValue: 'Share of the roll'
+pageSettingsPobImportWeightedSum: 'Sum resistances, life and attributes in one weighted filter'
 pageSettingsBackupTitle: Backup tools
 pageSettingsBackupDescription: Save all your bookmarks to a file, or restore them from one.
 pageSettingsBackupGenerateButton: Save file

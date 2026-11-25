@@ -18,6 +18,14 @@ pageSettingsLogoThrowCurrency: カレンシー
 pageSettingsLogoSound: 効果音を鳴らす
 pageSettingsLogoSoundVolume: 音量
 pageSettingsPilferingRingResetHint: 長押しでリセット
+pageSettingsPobImportTitle: 'Path of Building インポート'
+pageSettingsPobImportDescription: '次にインポートするビルドに適用されます。インポート済みのフォルダーは変更されません。'
+pageSettingsPobImportRollFloor: '最小値'
+pageSettingsPobImportRollFloorExact: '完全一致'
+pageSettingsPobImportRollFloorPercent: '割合'
+pageSettingsPobImportRollFloorNone: 'なし'
+pageSettingsPobImportRollFloorPercentValue: '値に対する割合'
+pageSettingsPobImportWeightedSum: '耐性・ライフ・能力値を重み付きフィルター1つで合計する'
 pageSettingsBackupTitle: バックアップツール
 pageSettingsBackupDescription: すべてのブックマークをファイルに保存、またはファイルから復元します。
 pageSettingsBackupGenerateButton: ファイルを保存

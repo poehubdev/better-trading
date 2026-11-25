@@ -18,6 +18,14 @@ pageSettingsLogoThrowCurrency: Moneda
 pageSettingsLogoSound: Reproducir sonidos
 pageSettingsLogoSoundVolume: Volumen
 pageSettingsPilferingRingResetHint: Mantén pulsado para restablecer
+pageSettingsPobImportTitle: 'Importación de Path of Building'
+pageSettingsPobImportDescription: 'Se aplica a las próximas builds que importes; las carpetas ya importadas conservan sus búsquedas.'
+pageSettingsPobImportRollFloor: 'Valor mínimo'
+pageSettingsPobImportRollFloorExact: 'Exacto'
+pageSettingsPobImportRollFloorPercent: 'Porcentaje'
+pageSettingsPobImportRollFloorNone: 'Ninguno'
+pageSettingsPobImportRollFloorPercentValue: 'Parte del valor'
+pageSettingsPobImportWeightedSum: 'Sumar resistencias, vida y atributos en un filtro ponderado'
 pageSettingsBackupTitle: Herramientas de copia de seguridad
 pageSettingsBackupDescription: Guarda todos tus marcadores en un archivo o restáuralos desde uno.
 pageSettingsBackupGenerateButton: Guardar archivo

@@ -80,6 +80,16 @@ const buildMessages = () => ({
     logoSoundVolumeLabel: i18n.t('pageSettingsLogoSoundVolume'),
     // ponytail: plain "60%"; use Intl percent formatting when locales/ grows
     formatVolume: (volume: number) => `${volume}%`,
+    pobImportTitle: i18n.t('pageSettingsPobImportTitle'),
+    pobImportDescription: i18n.t('pageSettingsPobImportDescription'),
+    rollFloorLabel: i18n.t('pageSettingsPobImportRollFloor'),
+    rollFloorOptionLabels: {
+      exact: i18n.t('pageSettingsPobImportRollFloorExact'),
+      percent: i18n.t('pageSettingsPobImportRollFloorPercent'),
+      none: i18n.t('pageSettingsPobImportRollFloorNone'),
+    },
+    rollFloorPercentLabel: i18n.t('pageSettingsPobImportRollFloorPercentValue'),
+    weightedSumLabel: i18n.t('pageSettingsPobImportWeightedSum'),
     pilferingRingTitle: i18n.t('pageSettingsPilferingRingTitle'),
     pilferingRingResetHint: i18n.t('pageSettingsPilferingRingResetHint'),
     backupTitle: i18n.t('pageSettingsBackupTitle'),
