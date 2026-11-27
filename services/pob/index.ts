@@ -588,7 +588,7 @@ const titleOf = ({ slot, item }: BuildItem) => {
 };
 
 /** Keeps the first of the Trades that search the same thing: equal queries, ignoring rolls (`min` / `max`) on non-uniques */
-const dedupe = (trades: { tit: string; query: Record<string, unknown> }[]) => {
+const dedupe = <T extends { query: Record<string, unknown> }>(trades: T[]) => {
   const seen = new Set<string>();
   return trades.filter(({ query }) => {
     const key = JSON.stringify(query, (k, v) => (!query.name && (k === 'min' || k === 'max') ? undefined : v));
@@ -602,7 +602,10 @@ const trade = (tit: string, query: object) => ({
   loc: `1:search:?q=${encodeURIComponent(JSON.stringify({ query }))}`,
 });
 
-/** Build Code to a BT Export String (format 3) holding one Folder; the stats must be loaded first */
+/**
+ * Build Code to a BT Export String (format 3) holding one Folder with the Trades of every Loadout, in progression order;
+ * with several Loadouts each Trade title starts with its Loadout's. The stats must be loaded first
+ */
 const toExportString = async (
   buildCode: string,
   { weightedSum = true, rollFloor = { kind: 'percent', percent: 80 } }: ImportOptions = {},
@@ -613,17 +616,44 @@ const toExportString = async (
   const icon = name.toLowerCase();
 
   const unmatched: string[] = [];
+  const prefixed = build.loadouts.length > 1;
+  // Across Loadouts a Trade is skipped only for a fully equal query, rolls included: a roll upgrade is worth buying.
+  // Switched-off filters are left out of the comparison, as the site does not search them (a relinked item stays)
+  const earlier = new Set<string>();
+  const searched = (query: object) =>
+    JSON.stringify(query, (_, value) => (value?.disabled === true ? undefined : value));
+  const trs = build.loadouts.flatMap(({ title, items }) => {
+    const prefix = prefixed ? `${title} — ` : '';
+    const candidates = [
+      ...items.map(buildItem => {
+        const tit = `${prefix}${titleOf(buildItem)}`;
+        const lines: string[] = [];
+        return {
+          tit,
+          query: searchQuery(buildItem, line => lines.push(`${tit}: ${line}`), weightedSum, floors),
+          lines,
+        };
+      }),
+      ...aggregateJewel(items, weightedSum, floors).map(({ tit, query }) => ({
+        tit: `${prefix}${tit}`,
+        query,
+        lines: [],
+      })),
+    ];
+    const trades = dedupe(candidates.filter(({ query }) => !earlier.has(searched(query))));
+    // Every search of the Loadout counts as had, merged ones too: their item is found by the Trade kept
+    for (const { query } of candidates) earlier.add(searched(query));
+    // A skipped Trade's lines were reported with the Trade it repeats
+    return trades.map(({ tit, query, lines }) => {
+      unmatched.push(...lines);
+      return trade(tit, query);
+    });
+  });
   const folder = {
     icn: ICONS.has(icon) ? icon : null,
     tit: build.mainSkill || name,
     ver: '1',
-    trs: dedupe([
-      ...build.items.map(buildItem => {
-        const tit = titleOf(buildItem);
-        return { tit, query: searchQuery(buildItem, line => unmatched.push(`${tit}: ${line}`), weightedSum, floors) };
-      }),
-      ...aggregateJewel(build.items, weightedSum, floors),
-    ]).map(({ tit, query }) => trade(tit, query)),
+    trs,
   };
   return { exportString: `3:${Base64.encode(JSON.stringify(folder))}`, unmatched };
 };

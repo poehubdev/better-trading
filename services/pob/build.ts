@@ -59,13 +59,21 @@ interface BuildItem {
   item: Item;
 }
 
+/** An Item Set with the passive tree (Spec) of the same title */
+interface Loadout {
+  /** `Loadout N` when untitled, N its 1-based place in the progression */
+  title: string;
+  /** Equipment (weapon swap included), flasks and abyss jewels of the Item Set, then jewels socketed in its tree */
+  items: BuildItem[];
+}
+
 interface Build {
   className: string;
   ascendancy: string | undefined;
   /** Active gem of POB's main skill group, the build's DPS skill; undefined when POB has none */
   mainSkill: string | undefined;
-  /** Equipment (weapon swap included), flasks and abyss jewels of the active Item Set, then jewels socketed in the tree */
-  items: BuildItem[];
+  /** Every Loadout, in progression order */
+  loadouts: Loadout[];
 }
 
 type Attrs = Record<string, string | undefined>;
@@ -73,8 +81,11 @@ type PobSkill = Attrs & { Gem?: Attrs[] };
 interface PobXml {
   PathOfBuilding?: {
     Build?: Attrs;
-    Items?: Attrs & { Item?: (Attrs & { '#text': string })[]; ItemSet?: { id?: string; Slot?: Attrs[] }[] };
-    Tree?: Attrs & { Spec?: { nodes?: string; Sockets?: { Socket?: Attrs[] } }[] };
+    Items?: Attrs & {
+      Item?: (Attrs & { '#text': string })[];
+      ItemSet?: { id?: string; title?: string; Slot?: Attrs[] }[];
+    };
+    Tree?: Attrs & { Spec?: { title?: string; nodes?: string; Sockets?: { Socket?: Attrs[] } }[] };
     Skills?: Attrs & { SkillSet?: (Attrs & { Skill?: PobSkill[] })[]; Skill?: PobSkill[] };
   };
 }
@@ -211,26 +222,39 @@ const decodeBuild = async (buildCode: string): Promise<Build> => {
   if (!pob?.Build) throw new Error('Not a Path of Building Build Code');
 
   const itemsById = new Map((pob.Items?.Item ?? []).map(node => [node.id, node['#text']]));
-  const items: BuildItem[] = [];
-  const add = (slot: string, itemId: string | undefined) => {
-    const text = itemId && itemId !== '0' ? itemsById.get(itemId) : undefined;
-    const item = text && parseItem(text);
-    if (item) items.push({ slot, item });
-  };
-
-  const sets = pob.Items?.ItemSet ?? [];
-  const activeSet = sets.find(set => set.id === pob.Items?.activeItemSet) ?? sets[0];
-  const slots = (activeSet?.Slot ?? []).filter(({ name }) => name);
-  slots.sort((a, b) => slotRank(a.name!) - slotRank(b.name!) || a.name!.localeCompare(b.name!));
-  for (const { name, itemId } of slots) add(name!, itemId);
-
   const specs = pob.Tree?.Spec ?? [];
   const activeSpec = specs[Number(pob.Tree?.activeSpec ?? 1) - 1] ?? specs[0];
-  // POB keeps jewels in deallocated sockets: only allocated nodes count
-  const allocated = new Set(activeSpec?.nodes?.split(','));
-  for (const { nodeId, itemId } of activeSpec?.Sockets?.Socket ?? []) {
-    if (nodeId && allocated.has(nodeId)) add('Jewel', itemId);
-  }
+  const allocatedOf = (spec: (typeof specs)[number] | undefined) => new Set(spec?.nodes?.split(',').filter(Boolean));
+
+  const sets = pob.Items?.ItemSet ?? [];
+  // A build without Item Sets is one Loadout of the jewels in its tree
+  const loadouts = (sets.length ? sets : [{ title: undefined, Slot: [] }]).map((set, position) => {
+    // A Spec of the same title, else of the same position when every Item Set has one, else the active one: a single
+    // Item Set with levelling trees goes with the tree PoB shows
+    const spec =
+      specs.find(({ title }) => title && title === set.title) ??
+      (specs.length === sets.length ? specs[position] : undefined) ??
+      activeSpec;
+    const allocated = allocatedOf(spec);
+    const items: BuildItem[] = [];
+    const add = (slot: string, itemId: string | undefined) => {
+      const text = itemId && itemId !== '0' ? itemsById.get(itemId) : undefined;
+      const item = text && parseItem(text);
+      if (item) items.push({ slot, item });
+    };
+    const slots = (set.Slot ?? []).filter(({ name }) => name);
+    slots.sort((a, b) => slotRank(a.name!) - slotRank(b.name!) || a.name!.localeCompare(b.name!));
+    for (const { name, itemId } of slots) add(name!, itemId);
+    // POB keeps jewels in deallocated sockets: only allocated nodes count
+    for (const { nodeId, itemId } of spec?.Sockets?.Socket ?? []) {
+      if (nodeId && allocated.has(nodeId)) add('Jewel', itemId);
+    }
+    return { title: set.title, items, passives: allocated.size };
+  });
+  // Progression order is the number of allocated passives (a stable sort: ties keep Build Code order). Build Codes may
+  // list Loadouts out of order, and titles are never parsed for a level: PoB stores the character level once per build,
+  // "(lvl 43)" is only how Time Machine PoB names them
+  loadouts.sort((a, b) => a.passives - b.passives);
 
   const skillSets = pob.Skills?.SkillSet;
   // Builds from before Skill Sets keep their skills directly under <Skills>
@@ -249,9 +273,9 @@ const decodeBuild = async (buildCode: string): Promise<Build> => {
     className,
     ascendancy: ascendClassName && ascendClassName !== 'None' ? ascendClassName : undefined,
     mainSkill,
-    items,
+    loadouts: loadouts.map(({ title, items }, i) => ({ title: title || `Loadout ${i + 1}`, items })),
   };
 };
 
-export type { BuildItem, Influence, Item, Mod };
+export type { BuildItem, Influence, Item, Loadout, Mod };
 export { decodeBuild };

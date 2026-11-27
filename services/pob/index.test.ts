@@ -5,7 +5,7 @@ import { matchMod } from './mods';
 import { inPool, modPool } from './pools';
 import { decodeExportString, fixture } from './test-utils';
 import { afterEach, describe, expect, it, vi } from 'vitest';
-import { deflateSync } from 'node:zlib';
+import { deflateSync, inflateSync } from 'node:zlib';
 import type { ImportOptions, RollFloor } from './index';
 
 const FIXTURES = {
@@ -59,7 +59,9 @@ describe.each(Object.entries(FIXTURES))('%s', (name, expected) => {
 
   it('either matches every mod line of a non-unique item or reports it', async () => {
     const { unmatched } = await toExportString(await fixture(name));
-    const items = (await decodeBuild(await fixture(name))).items.filter(({ slot }) => !slot.includes('Swap'));
+    const items = (await decodeBuild(await fixture(name))).loadouts[0]!.items.filter(
+      ({ slot }) => !slot.includes('Swap'),
+    );
     items.forEach(({ slot, item }) => {
       if (item.rarity === 'UNIQUE' || item.rarity === 'RELIC') return;
       const title = `${slot} — ${item.name}`;
@@ -847,6 +849,125 @@ describe('Duplicate Trades', () => {
       <ItemSet id="1"><Slot name="Ring 1" itemId="1"/><Slot name="Ring 2" itemId="2"/></ItemSet></Items></PathOfBuilding>`;
     const { trades } = decodeExportString((await toExportString(deflateSync(xml).toString('base64url'))).exportString);
     expect(trades.map(trade => trade.title)).toEqual(['Ring 1 — Doom Eye']);
+  });
+});
+
+describe('Loadouts', () => {
+  const PROGRESSION = 'venom-gyre-deadeye-progression-3.30.txt';
+  const STAGES = [
+    'Hour 3 (lvl 43)',
+    'Hour 6 (lvl 67)',
+    'Hour 12 (lvl 93)',
+    'Hour 18 (lvl 94)',
+    'Day 1 (lvl 94)',
+    'Day 2 (lvl 95)',
+    'Day 3 (lvl 95)',
+    'Day 4 (lvl 95)',
+    'Day 6 (lvl 95)',
+    'Week 1 (lvl 96)',
+  ];
+  const ring = (name: string, life: number) =>
+    `Rarity: RARE\n${name}\nCoral Ring\nItem Level: 80\nImplicits: 0\n${life}% increased maximum Life`;
+  const jewel = (name: string, life: number) =>
+    `Rarity: RARE\n${name}\nCobalt Jewel\nItem Level: 80\nImplicits: 0\n${life}% increased maximum Life`;
+  /** A Build Code of Item Sets (each `[title, xml of its Slots]`) and optional Tree and items */
+  const code = (sets: [string | undefined, string][], items: string[], tree = '') => {
+    const xml = `<PathOfBuilding><Build className="Witch" level="90"/><Items activeItemSet="1">
+      ${items.map((text, i) => `<Item id="${i + 1}">${text}</Item>`).join('')}
+      ${sets.map(([title, slots], i) => `<ItemSet id="${i + 1}"${title ? ` title="${title}"` : ''}>${slots}</ItemSet>`).join('')}
+      </Items>${tree}</PathOfBuilding>`;
+    return deflateSync(xml).toString('base64url');
+  };
+  const titlesOf = async (buildCode: string) =>
+    decodeExportString((await toExportString(buildCode)).exportString).trades.map(trade => trade.title);
+  const stagesOf = (titles: string[]) => [...new Set(titles.map(title => title.split(' — ')[0]))];
+
+  it('imports every Loadout into one Folder, in progression order, each Trade prefixed with its title', async () => {
+    const { title, trades } = await folderOf(PROGRESSION);
+    expect(title).toBe('Venom Gyre Deadeye');
+    expect((await decodeBuild(await fixture(PROGRESSION))).loadouts.map(loadout => loadout.title)).toEqual(STAGES);
+    // Day 3 and Week 1 change nothing a search sees
+    expect(stagesOf(trades.map(trade => trade.title))).toEqual(
+      STAGES.filter(stage => stage !== 'Day 3 (lvl 95)' && stage !== 'Week 1 (lvl 96)'),
+    );
+  });
+
+  it('orders Loadouts by allocated passives, not by their place in the Build Code', async () => {
+    const xml = inflateSync(Buffer.from(await fixture(PROGRESSION), 'base64url')).toString();
+    const sets = xml.match(/<ItemSet\b[\s\S]*?<\/ItemSet>/g)!;
+    // Loadouts with as many passives keep their Build Code order: Hour 18 and Day 1, Day 2 to Day 6
+    const shuffled = xml.replace(sets.join(''), [9, 5, 6, 7, 8, 0, 3, 4, 2, 1].map(i => sets[i]).join(''));
+    expect(shuffled).not.toBe(xml);
+    expect((await folderOf(PROGRESSION)).trades).toEqual(
+      decodeExportString((await toExportString(deflateSync(shuffled).toString('base64url'))).exportString).trades,
+    );
+  });
+
+  it("takes each Loadout's jewels from its own passive tree", async () => {
+    const tree = `<Tree activeSpec="2">
+      <Spec title="First" nodes="1"><Sockets><Socket nodeId="1" itemId="2"/><Socket nodeId="2" itemId="3"/></Sockets></Spec>
+      <Spec title="Second" nodes="1,2"><Sockets><Socket nodeId="2" itemId="3"/></Sockets></Spec></Tree>`;
+    const titles = await titlesOf(
+      code(
+        [
+          ['Second', ''],
+          ['First', '<Slot name="Ring 1" itemId="1"/>'],
+        ],
+        [ring('Doom Eye', 5), jewel('Glow Eye', 5), jewel('Vivid Eye', 9)],
+        tree,
+      ),
+    );
+    expect(titles).toEqual([
+      'First — Ring 1 — Doom Eye',
+      'First — Jewel — Glow Eye',
+      'First — Jewels — combined',
+      'Second — Jewel — Vivid Eye',
+      'Second — Jewels — combined',
+    ]);
+  });
+
+  it('takes the active passive tree for a single Item Set', async () => {
+    const tree = `<Tree activeSpec="2">
+      <Spec title="Levelling" nodes="1"><Sockets><Socket nodeId="1" itemId="1"/></Sockets></Spec>
+      <Spec title="Endgame" nodes="2"><Sockets><Socket nodeId="2" itemId="2"/></Sockets></Spec></Tree>`;
+    expect(await titlesOf(code([[undefined, '']], [jewel('Glow Eye', 5), jewel('Vivid Eye', 9)], tree))).toEqual([
+      'Jewel — Vivid Eye',
+      'Jewels — combined',
+    ]);
+  });
+
+  it('skips a Trade an earlier Loadout already has, rolls included', async () => {
+    const titles = (await folderOf(PROGRESSION)).trades
+      .map(trade => trade.title)
+      .filter(title => title.endsWith('Empyrean Trail'));
+    // Hour 18 relinked the boots (a switched-off filter) under a new PoB id; Day 1 changed their implicit
+    expect(titles).toEqual(['Hour 12 (lvl 93) — Boots — Empyrean Trail', 'Day 1 (lvl 94) — Boots — Empyrean Trail']);
+  });
+
+  it('keeps a roll-only upgrade in a later Loadout, while merging such items inside one Loadout', async () => {
+    const titles = await titlesOf(
+      code(
+        [
+          ['Early', '<Slot name="Ring 1" itemId="1"/>'],
+          ['Late', '<Slot name="Ring 1" itemId="2"/><Slot name="Ring 2" itemId="3"/>'],
+        ],
+        [ring('Doom Eye', 5), ring('Gloom Eye', 7), ring('Storm Eye', 8)],
+      ),
+    );
+    expect(titles).toEqual(['Early — Ring 1 — Doom Eye', 'Late — Ring 1 — Gloom Eye']);
+  });
+
+  it('calls an untitled Loadout by its place in the progression', async () => {
+    const titles = await titlesOf(
+      code(
+        [
+          ['Early', '<Slot name="Ring 1" itemId="1"/>'],
+          [undefined, '<Slot name="Ring 1" itemId="2"/>'],
+        ],
+        [ring('Doom Eye', 5), ring('Gloom Eye', 7)],
+      ),
+    );
+    expect(titles).toEqual(['Early — Ring 1 — Doom Eye', 'Loadout 2 — Ring 1 — Gloom Eye']);
   });
 });
 
