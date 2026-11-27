@@ -543,6 +543,21 @@ const PageBookmarks: React.FC<PageBookmarksProps> = ({
     }
   };
 
+  const handleMoveTrade = async (
+    trade: BookmarksTradeStruct,
+    fromFolderId: string,
+    toFolderId: string,
+    beforeTradeId?: string,
+  ) => {
+    try {
+      await bookmarks.moveTrade(trade, fromFolderId, toFolderId, beforeTradeId);
+    } catch {
+      addFlash(genericAlertMessage, 'alert');
+      // Refreshing the Folders reloads the Trades from storage, dropping the move shown optimistically
+      await refreshFolders();
+    }
+  };
+
   const handleGetTradeUrl = (trade: BookmarksTradeStruct, currentLeague: string | null) => {
     if (!currentLeague) return '#';
     return getTradeUrl(trade.location.version, trade.location.type, trade.location.slug, currentLeague);
@@ -638,6 +653,9 @@ const PageBookmarks: React.FC<PageBookmarksProps> = ({
                 onPreview={previewFolder}
                 onCancel={cancelFolderPreview}
                 onReorderTrades={trades => handleReorderTrades(trades, folderId)}
+                onMoveTradeHere={(trade, fromFolderId, beforeTradeId) =>
+                  void handleMoveTrade(trade, fromFolderId, folderId, beforeTradeId)
+                }
                 onExpansionToggle={() => !search && handleToggleFolderExpansion(folderId)}
                 onEdit={() => handleStageFolder(folder)}
                 onDelete={() => handleDeleteFolder(folder)}

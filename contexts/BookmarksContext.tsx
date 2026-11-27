@@ -23,6 +23,12 @@ interface BookmarksContextValue {
   persistTrade: (trade: BookmarksTradeStruct, folderId: string) => Promise<string>;
   persistTrades: (trades: BookmarksTradeStruct[], folderId: string) => Promise<void>;
   deleteTrade: (trade: BookmarksTradeStruct, folderId: string) => Promise<void>;
+  moveTrade: (
+    trade: BookmarksTradeStruct,
+    fromFolderId: string,
+    toFolderId: string,
+    beforeTradeId?: string,
+  ) => Promise<void>;
   deleteFolder: (folder: BookmarksFolderStruct) => Promise<void>;
   toggleTradeCompletion: (trade: BookmarksTradeStruct, folderId: string) => Promise<string>;
   toggleFolderArchive: (folder: BookmarksFolderStruct) => Promise<string>;
@@ -138,6 +144,14 @@ const BookmarksProvider = ({ children }: BookmarksProviderProps) => {
       if (!trade.id) return;
 
       await bookmarksStorage.deleteTrade(trade.id, folderId);
+      await refreshFolders();
+    },
+    [refreshFolders],
+  );
+
+  const moveTrade = useCallback(
+    async (trade: BookmarksTradeStruct, fromFolderId: string, toFolderId: string, beforeTradeId?: string) => {
+      await bookmarksStorage.moveTrade(trade, fromFolderId, toFolderId, beforeTradeId);
       await refreshFolders();
     },
     [refreshFolders],
@@ -268,6 +282,7 @@ const BookmarksProvider = ({ children }: BookmarksProviderProps) => {
       persistTrade,
       persistTrades,
       deleteTrade,
+      moveTrade,
       deleteFolder,
       toggleTradeCompletion,
       toggleFolderArchive,
@@ -291,6 +306,7 @@ const BookmarksProvider = ({ children }: BookmarksProviderProps) => {
       persistTrade,
       persistTrades,
       deleteTrade,
+      moveTrade,
       deleteFolder,
       toggleTradeCompletion,
       toggleFolderArchive,

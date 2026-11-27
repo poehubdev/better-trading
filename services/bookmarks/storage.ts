@@ -112,6 +112,24 @@ class BookmarksStorage {
     await this.persistTrades(updatedTrades, folderId);
   }
 
+  /**
+   * Moves the Trade into the Folder `toFolderId`, before the Trade `beforeTradeId` (at the end without one, or when it
+   * is gone). Writes the target first: a failure duplicates the Trade, never loses it.
+   */
+  async moveTrade(
+    trade: BookmarksTradeStruct,
+    fromFolderId: string,
+    toFolderId: string,
+    beforeTradeId?: string,
+  ): Promise<void> {
+    if (!trade.id || fromFolderId === toFolderId) return;
+    const targetTrades = (await this.fetchTradesByFolderId(toFolderId)).filter(t => t.id !== trade.id);
+    const index = targetTrades.findIndex(t => t.id === beforeTradeId);
+    targetTrades.splice(index === -1 ? targetTrades.length : index, 0, trade);
+    await this.persistTrades(targetTrades, toFolderId);
+    await this.deleteTrade(trade.id, fromFolderId);
+  }
+
   initializeFolderStruct(version: TradeSiteVersion): BookmarksFolderStruct {
     return {
       version,

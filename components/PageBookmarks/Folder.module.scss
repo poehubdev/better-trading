@@ -72,6 +72,11 @@
   font-size: 15px;
   color: variables.$white;
   transition: background-color 0.2s ease;
+
+  // A Trade of another Folder hovers it: dropping moves the Trade here
+  &.isTradeDropTarget {
+    background-color: variables.$blue-alt;
+  }
 }
 
 .headerIcon {

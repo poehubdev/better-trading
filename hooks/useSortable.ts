@@ -21,7 +21,12 @@ interface SortableOptions {
   onCancel: () => void;
   /** Drag only by the handle (default). Otherwise the whole item drags; its links need `draggable={false}` */
   handleOnly?: boolean;
+  /** Extra drag data, for drop targets outside the list (see `TAKES_ITEM`) */
+  data?: Record<string, unknown>;
 }
+
+/** Drop target data key: the target takes the dropped item away, so the list keeps its original order */
+const TAKES_ITEM = 'takesItem';
 
 /**
  * Order of a list while one of its items is dragged: `items` is the preview, the original order when not dragging.
@@ -84,6 +89,7 @@ const useSortableZone = ({ listId, listRef, onPreview }: SortableZoneOptions) =>
         element: document.documentElement,
         canDrop: ({ source }) => zones.has(source.data.listId as string),
         onDrag: ({ source, location }) =>
+          !location.current.dropTargets[0]?.data[TAKES_ITEM] &&
           zones.get(source.data.listId as string)?.(location.current.input.clientY, source),
       });
     }
@@ -107,6 +113,7 @@ const useSortable = <TItem extends HTMLElement, THandle extends HTMLElement>({
   onPreview,
   onCancel,
   handleOnly = true,
+  data,
 }: SortableOptions) => {
   const itemRef = useRef<TItem>(null);
   const handleRef = useRef<THandle>(null);
@@ -114,11 +121,11 @@ const useSortable = <TItem extends HTMLElement, THandle extends HTMLElement>({
   const startIndexRef = useRef(0);
 
   // Read at drag time, so the registration below survives re-renders mid-drag
-  const latestRef = useRef({ index, onMove, onPreview, onCancel });
+  const latestRef = useRef({ index, onMove, onPreview, onCancel, data });
   // Drop targets read the dragged item's current position from the drag data, which `getInitialData` made once
   const dragDataRef = useRef<{ index: number }>(null);
   useLayoutEffect(() => {
-    latestRef.current = { index, onMove, onPreview, onCancel };
+    latestRef.current = { index, onMove, onPreview, onCancel, data };
     if (dragDataRef.current) dragDataRef.current.index = index;
   });
 
@@ -132,9 +139,9 @@ const useSortable = <TItem extends HTMLElement, THandle extends HTMLElement>({
         element,
         dragHandle: handleOnly ? dragHandle : undefined,
         getInitialData: () => {
-          const data = { listId, index: latestRef.current.index };
-          dragDataRef.current = data;
-          return data;
+          const dragData = { ...latestRef.current.data, listId, index: latestRef.current.index };
+          dragDataRef.current = dragData;
+          return dragData;
         },
         onDragStart: () => {
           startIndexRef.current = latestRef.current.index;
@@ -145,6 +152,7 @@ const useSortable = <TItem extends HTMLElement, THandle extends HTMLElement>({
           dragDataRef.current = null;
           // Dropped over no item of the list (Esc included)
           if (location.current.dropTargets.length === 0) return latestRef.current.onCancel();
+          if (location.current.dropTargets[0]?.data[TAKES_ITEM]) return latestRef.current.onCancel();
           const toIndex = latestRef.current.index;
           if (toIndex === startIndexRef.current) return latestRef.current.onCancel();
           latestRef.current.onMove(startIndexRef.current, toIndex);
@@ -189,4 +197,4 @@ const useSortable = <TItem extends HTMLElement, THandle extends HTMLElement>({
   return { itemRef, handleProps, isDragging };
 };
 
-export { usePreviewOrder, useSortable, useSortableZone };
+export { TAKES_ITEM, usePreviewOrder, useSortable, useSortableZone };
