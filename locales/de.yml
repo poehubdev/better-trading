@@ -25,7 +25,7 @@ pageSettingsPobImportRollFloorExact: 'Exakt'
 pageSettingsPobImportRollFloorPercent: 'Prozent'
 pageSettingsPobImportRollFloorNone: 'Keiner'
 pageSettingsPobImportRollFloorPercentValue: 'Anteil am Wert'
-pageSettingsPobImportWeightedSum: 'Widerstände, Leben und Attribute in einem gewichteten Filter summieren'
+pageSettingsPobImportWeightedSum: 'Alle Mods mit Wert in einem gewichteten Filter suchen'
 pageSettingsBackupTitle: Sicherungswerkzeuge
 pageSettingsBackupDescription: Alle Lesezeichen in einer Datei sichern oder aus einer Datei wiederherstellen.
 pageSettingsBackupGenerateButton: Datei speichern

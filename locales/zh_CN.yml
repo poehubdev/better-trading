@@ -25,7 +25,7 @@ pageSettingsPobImportRollFloorExact: '精确'
 pageSettingsPobImportRollFloorPercent: '百分比'
 pageSettingsPobImportRollFloorNone: '无'
 pageSettingsPobImportRollFloorPercentValue: '占数值的比例'
-pageSettingsPobImportWeightedSum: '将抗性、生命和属性合计为一个加权筛选'
+pageSettingsPobImportWeightedSum: '将所有带数值的词缀合并为一个加权筛选来搜索'
 pageSettingsBackupTitle: 备份工具
 pageSettingsBackupDescription: 将所有书签保存到文件，或从文件恢复。
 pageSettingsBackupGenerateButton: 保存文件

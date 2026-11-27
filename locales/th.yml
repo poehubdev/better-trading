@@ -25,7 +25,7 @@ pageSettingsPobImportRollFloorExact: 'ตรงตัว'
 pageSettingsPobImportRollFloorPercent: 'เปอร์เซ็นต์'
 pageSettingsPobImportRollFloorNone: 'ไม่มี'
 pageSettingsPobImportRollFloorPercentValue: 'สัดส่วนของค่า'
-pageSettingsPobImportWeightedSum: 'รวมค่าต้านทาน พลังชีวิต และค่าสถานะในตัวกรองถ่วงน้ำหนักเดียว'
+pageSettingsPobImportWeightedSum: 'ค้นหาม็อดทุกตัวที่มีค่าในตัวกรองถ่วงน้ำหนักเดียว'
 pageSettingsBackupTitle: เครื่องมือสำรองข้อมูล
 pageSettingsBackupDescription: บันทึกบุ๊กมาร์กทั้งหมดลงไฟล์ หรือกู้คืนจากไฟล์
 pageSettingsBackupGenerateButton: บันทึกไฟล์

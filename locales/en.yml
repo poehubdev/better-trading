@@ -57,7 +57,7 @@ pageSettingsPobImportRollFloorExact: 'Exact'
 pageSettingsPobImportRollFloorPercent: 'Percent'
 pageSettingsPobImportRollFloorNone: 'None'
 pageSettingsPobImportRollFloorPercentValue: 'Share of the roll'
-pageSettingsPobImportWeightedSum: 'Sum resistances, life and attributes in one weighted filter'
+pageSettingsPobImportWeightedSum: 'Search every mod with a value in one weighted filter'
 pageSettingsBackupTitle: Backup tools
 pageSettingsBackupDescription: Save all your bookmarks to a file, or restore them from one.
 pageSettingsBackupGenerateButton: Save file

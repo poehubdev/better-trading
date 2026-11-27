@@ -25,7 +25,7 @@ pageSettingsPobImportRollFloorExact: '정확히'
 pageSettingsPobImportRollFloorPercent: '비율'
 pageSettingsPobImportRollFloorNone: '없음'
 pageSettingsPobImportRollFloorPercentValue: '수치 대비 비율'
-pageSettingsPobImportWeightedSum: '저항, 생명력, 능력치를 가중치 필터 하나로 합산'
+pageSettingsPobImportWeightedSum: '값이 있는 모든 모드를 가중치 필터 하나로 검색'
 pageSettingsBackupTitle: 백업 도구
 pageSettingsBackupDescription: 모든 북마크를 파일로 저장하거나 파일에서 복원합니다.
 pageSettingsBackupGenerateButton: 파일 저장

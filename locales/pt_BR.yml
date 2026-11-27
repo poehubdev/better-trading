@@ -25,7 +25,7 @@ pageSettingsPobImportRollFloorExact: 'Exato'
 pageSettingsPobImportRollFloorPercent: 'Porcentagem'
 pageSettingsPobImportRollFloorNone: 'Nenhum'
 pageSettingsPobImportRollFloorPercentValue: 'Parte do valor'
-pageSettingsPobImportWeightedSum: 'Somar resistências, vida e atributos em um filtro ponderado'
+pageSettingsPobImportWeightedSum: 'Buscar todos os mods com valor em um filtro ponderado'
 pageSettingsBackupTitle: Ferramentas de backup
 pageSettingsBackupDescription: Salve todos os seus favoritos em um arquivo ou restaure-os a partir de um.
 pageSettingsBackupGenerateButton: Salvar arquivo

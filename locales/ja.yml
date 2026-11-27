@@ -25,7 +25,7 @@ pageSettingsPobImportRollFloorExact: '完全一致'
 pageSettingsPobImportRollFloorPercent: '割合'
 pageSettingsPobImportRollFloorNone: 'なし'
 pageSettingsPobImportRollFloorPercentValue: '値に対する割合'
-pageSettingsPobImportWeightedSum: '耐性・ライフ・能力値を重み付きフィルター1つで合計する'
+pageSettingsPobImportWeightedSum: '数値のあるMODをすべて重み付きフィルター1つで検索'
 pageSettingsBackupTitle: バックアップツール
 pageSettingsBackupDescription: すべてのブックマークをファイルに保存、またはファイルから復元します。
 pageSettingsBackupGenerateButton: ファイルを保存

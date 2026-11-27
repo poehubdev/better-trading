@@ -25,7 +25,7 @@ pageSettingsPobImportRollFloorExact: 'Точное'
 pageSettingsPobImportRollFloorPercent: 'Процент'
 pageSettingsPobImportRollFloorNone: 'Нет'
 pageSettingsPobImportRollFloorPercentValue: 'Доля от значения'
-pageSettingsPobImportWeightedSum: 'Суммировать сопротивления, здоровье и характеристики в одном взвешенном фильтре'
+pageSettingsPobImportWeightedSum: 'Искать все моды со значением в одном взвешенном фильтре'
 pageSettingsBackupTitle: Резервное копирование
 pageSettingsBackupDescription: Сохраните все закладки в файл или восстановите их из файла.
 pageSettingsBackupGenerateButton: Сохранить файл

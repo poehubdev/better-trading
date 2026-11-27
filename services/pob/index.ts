@@ -11,7 +11,7 @@ import type { ModPool } from './pools';
 type RollFloor = { kind: 'exact' } | { kind: 'percent'; percent: number } | { kind: 'none' };
 
 interface ImportOptions {
-  /** A weight group on and the per-mod groups it covers off (default), or the per-mod groups on and no weight group */
+  /** Every rolled value of a non-unique in one weight group and nowhere else (default), or a filter per mod and total */
   weightedSum?: boolean;
   /** The minimum of modifier rolls, pseudo totals and the weighted sum (default 80%); enchants stay exact */
   rollFloor?: RollFloor;
@@ -163,10 +163,13 @@ const floorsOf = (rollFloor: RollFloor): Floors => {
   };
 };
 
-/** 100 / the largest roll of any of these stats (`stat_123`) on any of the bases, so a full roll weighs 100; 1 when unknown */
-const weightOf = (bases: (string | undefined)[], stats: string[]) => {
+/**
+ * 100 / the largest roll of any of these stats (`stat_123`) of this modifier type on any of the bases, so a full roll
+ * weighs 100; 1 when unknown
+ */
+const weightOf = (bases: (string | undefined)[], stats: string[], type = 'explicit') => {
   const rolls = bases.flatMap(base =>
-    (base ? stats.flatMap(stat => tiers(base, 'explicit', stat)) : []).map(([, max]) => max),
+    (base ? stats.flatMap(stat => tiers(base, type, stat)) : []).map(([, max]) => max),
   );
   const max = Math.max(0, ...rolls);
   return max > 0 ? Math.round(10000 / max) / 100 : 1;
@@ -238,11 +241,12 @@ const andFirst = (groups: StatGroup[]): StatGroup[] => {
 };
 
 /**
- * Rare, magic and flask stats: an `and` group of pseudo totals and cluster enchants (on), suggestions and influences
- * (off), `count` groups for the other mods, and a `weight` group of the explicit ones and the broadest totals. With the
- * weighted sum on, the `count` groups the weight group covers are off; with it off, there is no weight group. A crafted
- * mod is wanted in any rolled or crafted form, or as an empty affix slot to craft it, and stays out of the totals and the
- * weighted sum; a fractured one is wanted as an explicit or fractured mod
+ * Rare, magic and flask stats. With the weighted sum on (default), every mod with a positive value, crafted and implicit
+ * ones included, is searched only in one `weight` group with the broadest pseudo totals it folds into; an `and` group
+ * keeps the enchants (on) and influences (off), and `count` groups the mods that cannot be weighed (no value, an option,
+ * a negative roll). With it off, there is no weight group: an `and` group of pseudo totals (on) and suggested totals
+ * (off), and a `count` group per other mod, where a crafted mod is wanted in any rolled or crafted form, or as an empty
+ * affix slot to craft it, and stays out of the totals. A fractured mod is wanted as an explicit or fractured mod
  */
 const rareStatGroups = (
   mods: Mod[],
@@ -284,7 +288,8 @@ const rareStatGroups = (
     const value = match.value;
     // ponytail: negative rolls have no value and stay single-mod groups, so a total may overshoot such an item
     const stat = ids[0]!.split('|')[0]!.split('.')[1]!;
-    const folded = !enchant && !crafted && value !== undefined && PSEUDO_TOTALS[stat];
+    // A found item's totals count its crafted mods, so with the weighted sum on a crafted mod folds in too
+    const folded = !enchant && (weightedSum || !crafted) && value !== undefined && PSEUDO_TOTALS[stat];
     if (folded) {
       for (const total of folded) totals.set(total, (totals.get(total) ?? 0) + value);
       continue;
@@ -297,23 +302,23 @@ const rareStatGroups = (
       enchants.push(...ids.map(id => ({ ...statFilter(id, min), ...(base?.endsWith('Flask') && { disabled: true }) })));
       continue;
     }
+    if (weightedSum && value !== undefined && value > 0 && !ids.some(id => id.includes('|'))) {
+      const weight = weightOf([base], statsOf(ids), implicit && !crafted ? 'implicit' : 'explicit');
+      for (const id of ids) weighted.set(id, { id, value: { weight } });
+      weightSum += weight * value;
+      continue;
+    }
     // ponytail: each crafted mod asks for one empty slot, so one slot also stands in for several crafts (multimod);
     // count the crafts per affix if that lets bad bases through
     const emptySlots = crafted
       ? affixesOf(base, stat).map(affix => ({ id: `pseudo.pseudo_number_of_empty_${affix}_mods`, value: { min: 1 } }))
       : [];
-    const weighed = weightedSum && !implicit && !crafted && value !== undefined && !ids.some(id => id.includes('|'));
     groups.push({
       type: 'count',
       value: { min: 1 },
-      disabled: weighed,
+      disabled: false,
       filters: [...ids.map(id => statFilter(id, min)), ...emptySlots],
     });
-    if (weighed) {
-      const weight = weightOf([base], statsOf(ids));
-      for (const id of ids) weighted.set(id, { id, value: { weight } });
-      weightSum += weight * value;
-    }
   }
   const elemental = ELEMENTS.reduce((sum, element) => sum + (totals.get(element) ?? 0), 0);
   const broad = new Map([...totals].filter(([total]) => !ELEMENTS.includes(total)));
@@ -331,16 +336,18 @@ const rareStatGroups = (
       weightSum += weight * ((broad.get(total) ?? 0) + (total === 'life' ? strength : 0));
     }
   }
-  const and = [
-    ...[...totals].map(([total, sum]) => statFilter(`pseudo.pseudo_total_${total}`, floors.roll(sum))),
-    // The per-element totals are on; one switch swaps them for their sum
-    ...(elemental
-      ? [{ ...statFilter('pseudo.pseudo_total_elemental_resistance', floors.roll(elemental)), disabled: true }]
-      : []),
-    ...suggested.map(total => ({ id: `pseudo.pseudo_total_${total}`, disabled: true })),
-    ...enchants,
-    ...influences,
-  ];
+  // With the weighted sum on, the weight group holds the totals
+  const totalFilters = weightedSum
+    ? []
+    : [
+        ...[...totals].map(([total, sum]) => statFilter(`pseudo.pseudo_total_${total}`, floors.roll(sum))),
+        // The per-element totals are on; one switch swaps them for their sum
+        ...(elemental
+          ? [{ ...statFilter('pseudo.pseudo_total_elemental_resistance', floors.roll(elemental)), disabled: true }]
+          : []),
+        ...suggested.map(total => ({ id: `pseudo.pseudo_total_${total}`, disabled: true })),
+      ];
+  const and = [...totalFilters, ...enchants, ...influences];
   return andFirst([
     ...(and.length ? [{ type: 'and' as const, filters: and }] : []),
     ...groups,
