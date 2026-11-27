@@ -38,6 +38,10 @@ The list of recent searches the user ran on the trade site, recorded automatical
 **Pinned Item**:
 An item from the trade results that the user pinned to keep it in view across searches.
 
+**Loadout**:
+One named stage of a build in a PoB Build Code: its own items, passive tree and skills under one title. A Build Code can hold several, e.g. a character's progression from levelling to endgame.
+_Avoid_: stage, layout, tree (for the whole stage)
+
 **Mod Pool**:
 Every trade stat, per modifier type (explicit, implicit, fractured, crafted, enchant, corruption, Synthesis implicit), that an item of a given base can carry, from any source (base, influences, crafting, essences, ...). A search filter outside the item's Mod Pool can never match.
 _Avoid_: mod list, possible mods
