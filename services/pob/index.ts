@@ -117,8 +117,6 @@ const WEIGHED_TOTALS: Record<string, string[]> = {
   dexterity: ['stat_3261801346'],
   intelligence: ['stat_328541901'],
 };
-/** The totals suggested, disabled, when the base can carry them and the build item lacks them */
-const SUGGESTED_TOTALS = ['elemental_resistance', 'chaos_resistance', 'life'];
 const ELEMENTS = ['fire_resistance', 'cold_resistance', 'lightning_resistance'];
 
 const BASE_JEWELS = new Set(['Cobalt Jewel', 'Crimson Jewel', 'Viridian Jewel', 'Prismatic Jewel']);
@@ -251,8 +249,7 @@ const andFirst = (groups: StatGroup[]): StatGroup[] => {
  * Rare, magic and flask stats. With the weighted sum on (default), every mod with a positive value, crafted and implicit
  * ones included, is searched only in one `weight` group with the broadest pseudo totals it folds into; an `and` group
  * keeps the enchants (on) and influences (off), and `count` groups the mods that cannot be weighed (no value, an option,
- * a negative roll). With it off, there is no weight group: an `and` group of pseudo totals (on) and suggested totals
- * (off), and a `count` group per other mod, where a crafted mod is wanted in any rolled or crafted form, or as an empty
+ * a negative roll). With it off, there is no weight group: an `and` group of pseudo totals (on), and a `count` group per other mod, where a crafted mod is wanted in any rolled or crafted form, or as an empty
  * affix slot to craft it, and stays out of the totals. A fractured mod is wanted as an explicit or fractured mod
  */
 const rareStatGroups = (
@@ -330,17 +327,15 @@ const rareStatGroups = (
   const elemental = ELEMENTS.reduce((sum, element) => sum + (totals.get(element) ?? 0), 0);
   const broad = new Map([...totals].filter(([total]) => !ELEMENTS.includes(total)));
   if (elemental) broad.set('elemental_resistance', elemental);
-  const suggested = SUGGESTED_TOTALS.filter(
-    total => pool && !broad.has(total) && WEIGHED_TOTALS[total]!.some(stat => pool.explicit?.has(stat)),
-  );
+  // Only the totals the build item's own stats fold into: one it has nothing of would only rank unrelated items higher
   if (weightedSum) {
-    // A suggestion is weighed but adds nothing to the minimum: the build item does not have it. The site's total life
-    // counts Strength / 2, so the build item's does too here, or Strength would score twice on the items found
+    // The site's total life counts Strength / 2, so the build item's does too here, or Strength would score twice on
+    // the items found
     const strength = (broad.get('strength') ?? 0) / 2;
-    for (const total of [...broad.keys(), ...suggested]) {
+    for (const [total, sum] of broad) {
       const weight = weightOf([base], WEIGHED_TOTALS[total]!);
       weighted.set(`pseudo.pseudo_total_${total}`, { id: `pseudo.pseudo_total_${total}`, value: { weight } });
-      weightSum += weight * ((broad.get(total) ?? 0) + (total === 'life' ? strength : 0));
+      weightSum += weight * (sum + (total === 'life' ? strength : 0));
     }
   }
   // With the weighted sum on, the weight group holds the totals
@@ -352,7 +347,6 @@ const rareStatGroups = (
         ...(elemental
           ? [{ ...statFilter('pseudo.pseudo_total_elemental_resistance', floors.roll(elemental)), disabled: true }]
           : []),
-        ...suggested.map(total => ({ id: `pseudo.pseudo_total_${total}`, disabled: true })),
       ];
   const and = [...totalFilters, ...enchants, ...influences];
   return andFirst([

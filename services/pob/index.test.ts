@@ -571,10 +571,10 @@ describe('Crafted and fractured mods', () => {
         { id: 'pseudo.pseudo_number_of_empty_prefix_mods', value: { min: 1 } },
       ],
     });
-    // Not folded into the total life, which is only suggested
-    expect(groups[0].filters.filter((filter: any) => filter.id === 'pseudo.pseudo_total_life')).toEqual([
-      { id: 'pseudo.pseudo_total_life', disabled: true },
-    ]);
+    // Not folded into the total life, which is then not searched at all
+    expect(groups.flatMap((group: any) => group.filters).map((filter: any) => filter.id)).not.toContain(
+      'pseudo.pseudo_total_life',
+    );
   });
 
   it('offers an empty suffix for a crafted suffix', async () => {
@@ -1302,9 +1302,6 @@ describe('Pseudo totals', () => {
       { id: 'pseudo.pseudo_total_life', value: { min: 29 } },
       { id: 'pseudo.pseudo_total_dexterity', value: { min: 8 } },
       { id: 'pseudo.pseudo_total_intelligence', value: { min: 8 } },
-      // Suggested: an abyss jewel can carry them
-      { id: 'pseudo.pseudo_total_elemental_resistance', disabled: true },
-      { id: 'pseudo.pseudo_total_chaos_resistance', disabled: true },
     ]);
   });
 
@@ -1315,8 +1312,6 @@ describe('Pseudo totals', () => {
         type: 'and',
         filters: [
           { id: 'pseudo.pseudo_total_life', value: { min: 113 } },
-          { id: 'pseudo.pseudo_total_elemental_resistance', disabled: true },
-          { id: 'pseudo.pseudo_total_chaos_resistance', disabled: true },
           { id: 'pseudo.pseudo_has_elder_influence', disabled: true },
           // A mod of a single stat is a filter of the group too
           { id: 'explicit.effect_1200122555', value: { min: 16 } },
@@ -1399,25 +1394,14 @@ describe('Weighted sum', () => {
     );
   });
 
-  it('suggests the totals the base can carry and the item lacks: disabled, weighed, not raising the minimum', async () => {
-    const stats = await ring(['+13% to Fire Resistance']);
-    expect((await ring(['+13% to Fire Resistance'], { weightedSum: false }))[0].filters).toEqual(
-      expect.arrayContaining([
-        { id: 'pseudo.pseudo_total_life', disabled: true },
-        { id: 'pseudo.pseudo_total_chaos_resistance', disabled: true },
-      ]),
-    );
-    expect(weightOf(stats, 'pseudo.pseudo_total_life')).toBe(0.88);
-    expect(weightOf(stats, 'pseudo.pseudo_total_chaos_resistance')).toBe(2.86);
-    // 80% of the fire resistance alone: 13 * 2.08
-    expect(weightGroup(stats).value).toEqual({ min: 21.63 });
-  });
-
-  it('suggests no total the base can never carry', async () => {
-    // A jewel rolls no flat Life
-    const stats = await ring(['+13% to Fire Resistance'], { weightedSum: false }, 'Cobalt Jewel');
-    expect(filtersOf(stats, 'pseudo_total_life')).toEqual([]);
-    expect(filtersOf(stats, 'pseudo_total_chaos_resistance')).not.toEqual([]);
+  it('searches no total the item has no stat of, in either mode', async () => {
+    for (const weightedSum of [true, false]) {
+      const stats = await ring(['+13% to Fire Resistance'], { weightedSum });
+      expect(filtersOf(stats, 'pseudo_total_life')).toEqual([]);
+      expect(filtersOf(stats, 'pseudo_total_chaos_resistance')).toEqual([]);
+    }
+    // 80% of the fire resistance: 13 * 2.08
+    expect(weightGroup(await ring(['+13% to Fire Resistance'])).value).toEqual({ min: 21.63 });
   });
 
   it('by default searches every weighed stat in the weight group only', async () => {
@@ -1426,7 +1410,7 @@ describe('Weighted sum', () => {
     // No per-mod group and no pseudo total of its own, not even a disabled one
     expect(filtersOf(stats, 'stat_789117908').every(f => f.group.type === 'weight')).toBe(true);
     expect(filtersOf(stats, 'pseudo_total_fire_resistance')).toEqual([]);
-    expect(filtersOf(stats, 'pseudo_total_life').every(f => f.group.type === 'weight')).toBe(true);
+    expect(filtersOf(stats, 'pseudo_total_elemental_resistance').every(f => f.group.type === 'weight')).toBe(true);
     // A mod without a value cannot be weighed: it stays a filter that is on
     const frozen = filtersOf(stats, matchMod('Cannot be Frozen')!.ids[0]!.split('.')[1]!);
     expect(frozen.some(f => !f.disabled && !f.group.disabled)).toBe(true);
@@ -1466,13 +1450,12 @@ describe('Weighted sum', () => {
     }
   });
 
-  it('weighs every stat 1 on a base missing from the Mod Pools, suggesting nothing', async () => {
+  it('weighs every stat 1 on a base missing from the Mod Pools', async () => {
     const warn = vi.spyOn(console, 'warn').mockImplementation(() => {});
     const stats = await ring([MANA_REGEN, '+13% to Fire Resistance'], undefined, 'Unheard Ring');
     warn.mockRestore();
     expect(weightGroup(stats).filters.every((filter: any) => filter.value.weight === 1)).toBe(true);
     expect(weightGroup(stats).value).toEqual({ min: 20 });
-    expect(weightGroup(stats).filters.map((filter: any) => filter.id)).not.toContain('pseudo.pseudo_total_life');
   });
 });
 
