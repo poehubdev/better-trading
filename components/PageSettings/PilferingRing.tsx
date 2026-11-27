@@ -16,7 +16,7 @@ const DECAY_MS = 700;
 // Same size as the header logo (`.logo` height), so the currency flies out as big as the logo throws it
 const BALL_SIZE = 30;
 // Time over which the thrown currency leaves the button, first to last
-const THROW_SPREAD_MS = 100;
+const THROW_SPREAD_MS = 150;
 const MAX_SOUNDS = 6;
 // Channel progress at which the first icon tears off, the spread of the rest, and how long each flies. They all hold
 // on until the very end and go nearly together: the last lands at 0.9 + 0.04 + 0.05 = 0.99, right before the burst
@@ -124,7 +124,7 @@ const throwCurrency = (from: Element, counts: CurrencyCounts) => {
         // The rest quieter, so they read as the first hit's echo
         if (index % soundEvery === 0) void playLogoSound(1, false, index === 0 ? 1 : 0.35);
       },
-      THROW_SPREAD_MS * (index / paths.length) ** 1.6,
+      THROW_SPREAD_MS * (index / paths.length) ** 1.8,
     );
   });
 };
