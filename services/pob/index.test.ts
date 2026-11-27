@@ -884,7 +884,7 @@ describe('Loadouts', () => {
 
   it('imports every Loadout into one Folder, in progression order, each Trade prefixed with its title', async () => {
     const { title, trades } = await folderOf(PROGRESSION);
-    expect(title).toBe('Venom Gyre Deadeye');
+    expect(title).toBe('Venom Gyre');
     expect((await decodeBuild(await fixture(PROGRESSION))).loadouts.map(loadout => loadout.title)).toEqual(STAGES);
     // Day 3 and Week 1 change nothing a search sees
     expect(stagesOf(trades.map(trade => trade.title))).toEqual(
