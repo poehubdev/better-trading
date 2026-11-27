@@ -54,10 +54,12 @@ class EquivalentPricingsEnhancer {
     const chaosValue = this.chaosRatios[currencySlug];
     const normalizedCurrencyValue = this.chaosRatios[NORMALIZED_CURRENCY_SLUG];
 
-    if (chaosValue && currencyValue) {
+    // Chaos is checked first: the exchange ratios list it too (at 1)
+    if (currencySlug === CHAOS_SLUG) {
+      if (normalizedCurrencyValue)
+        this.handleChaosPricedItem(pricingContainerElement, currencyValue, normalizedCurrencyValue);
+    } else if (chaosValue) {
       this.handleNonChaosPricedItem(pricingContainerElement, currencyImageElement, currencyValue, chaosValue);
-    } else if (currencySlug === CHAOS_SLUG && normalizedCurrencyValue) {
-      this.handleChaosPricedItem(pricingContainerElement, currencyValue, normalizedCurrencyValue);
     }
   }
 

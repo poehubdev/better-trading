@@ -2,17 +2,21 @@ import { fetchPoeNinjaResource } from '@/utils/extension-background';
 import { slugify } from '@/utils/slugify';
 import { getValue, setEphemeralValue } from '@/utils/storage';
 
-interface PoeNinjaCurrenciesPayload {
-  lines: { currencyTypeName: string; chaosEquivalent: number }[];
+interface PoeNinjaExchangePayload {
+  items: { id: string; name: string }[];
+  /** `primaryValue` is the chaos value of one unit */
+  lines: { id: string; primaryValue: number }[];
 }
 
 /** Chaos value of one unit of each currency, keyed by currency slug (e.g. `divine-orb`) */
 type PoeNinjaCurrenciesRatios = Record<string, number>;
 
-// The PoE 1 stash economy endpoint; the old `/api/data/currencyoverview` one is gone (404)
-const CURRENCIES_RESOURCE_URI = '/poe1/api/economy/stash/current/currency/overview?type=Currency';
+// The PoE 1 Currency Exchange endpoint poe.ninja's currency page shows; the stash one averages thin listing data
+// (divine at 79c against 145c on the exchange)
+const CURRENCIES_RESOURCE_URI = '/poe1/api/economy/exchange/current/overview?type=Currency';
 const RATIOS_CACHE_DURATION = 3600000; // 1 hour
-const RATIOS_CACHE_KEY = 'poe-ninja-chaos-ratios-cache';
+// Renamed with the switch to the exchange endpoint, so ratios cached from the stash one are not read
+const RATIOS_CACHE_KEY = 'poe-ninja-exchange-ratios-cache';
 
 /** Fetches the chaos ratios of a PoE 1 league through the background script, cached for an hour per league */
 const fetchChaosRatios = async (league: string): Promise<PoeNinjaCurrenciesRatios> => {
@@ -20,10 +24,14 @@ const fetchChaosRatios = async (league: string): Promise<PoeNinjaCurrenciesRatio
   if (cachedRatios) return cachedRatios;
 
   const uri = `${CURRENCIES_RESOURCE_URI}&league=${encodeURIComponent(league)}`;
-  const payload = (await fetchPoeNinjaResource(uri)) as PoeNinjaCurrenciesPayload;
+  const payload = (await fetchPoeNinjaResource(uri)) as PoeNinjaExchangePayload;
 
+  const names = new Map(payload.items.map(({ id, name }) => [id, name]));
   const ratios = Object.fromEntries(
-    payload.lines.map(({ currencyTypeName, chaosEquivalent }) => [slugify(currencyTypeName), chaosEquivalent]),
+    payload.lines.flatMap(({ id, primaryValue }) => {
+      const name = names.get(id);
+      return name ? [[slugify(name), primaryValue]] : [];
+    }),
   );
   await setEphemeralValue(RATIOS_CACHE_KEY, ratios, new Date(Date.now() + RATIOS_CACHE_DURATION), league);
 
