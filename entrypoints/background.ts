@@ -41,8 +41,8 @@ const handlePoeNinjaRequest = async (resource: string): Promise<unknown> => {
 // Stat data and Mod Pools, loaded on the first import only; a failed load is retried on the next one
 let pobStats: Promise<void> | undefined;
 
-/** Path of Building Build Code to an Export String; null when the code is not a build */
-const handlePobImport = async (buildCode: string, options?: ImportOptions): Promise<string | null> => {
+/** Path of Building Build Code to Export Strings, one per Folder; null when the code is not a build */
+const handlePobImport = async (buildCode: string, options?: ImportOptions): Promise<string[] | null> => {
   pobStats ??= Promise.all([
     fetch(browser.runtime.getURL('/pob-stats.ndjson'))
       .then(response => response.text())
@@ -61,7 +61,7 @@ const handlePobImport = async (buildCode: string, options?: ImportOptions): Prom
 
   try {
     await pobStats;
-    return (await toExportString(buildCode, options)).exportString;
+    return (await toExportString(buildCode, options)).exportStrings;
   } catch (error) {
     console.error('[pob-import] Conversion error:', error);
     return null;

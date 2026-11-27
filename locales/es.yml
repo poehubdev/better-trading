@@ -27,6 +27,9 @@ pageSettingsPobImportRollFloorNone: 'Ninguno'
 pageSettingsPobImportRollFloorPercentValue: 'Parte del valor'
 pageSettingsPobImportWeightedSum: 'Buscar todos los mods con valor en un filtro ponderado'
 pageSettingsPobImportSkipEarlierLoadouts: 'Omitir objetos de Loadouts anteriores'
+pageSettingsPobImportFolders: 'Carpetas'
+pageSettingsPobImportFoldersSingle: 'Una'
+pageSettingsPobImportFoldersPerLoadout: 'Una por Loadout'
 pageSettingsBackupTitle: Herramientas de copia de seguridad
 pageSettingsBackupDescription: Guarda todos tus marcadores en un archivo o restáuralos desde uno.
 pageSettingsBackupGenerateButton: Guardar archivo
@@ -82,6 +85,7 @@ pageBookmarksDeleteFolderSuccessFlash: 'Se ha eliminado la carpeta "$1".'
 pageBookmarksUpdateFolderSuccessFlash: 'Se ha actualizado la carpeta "$1".'
 pageBookmarksCreateFolderSuccessFlash: 'Se ha creado la carpeta "$1".'
 pageBookmarksImportFolderSuccessFlash: 'Se ha importado la carpeta "$1".'
+pageBookmarksImportFoldersSuccessFlash: 'Se han importado $1 carpetas.'
 pageBookmarksFolderEditFolder: 'Editar'
 pageBookmarksFolderDeleteFolder: 'Eliminar'
 pageBookmarksFolderArchiveFolder: 'Archivar'

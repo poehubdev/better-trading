@@ -27,6 +27,9 @@ pageSettingsPobImportRollFloorNone: 'ไม่มี'
 pageSettingsPobImportRollFloorPercentValue: 'สัดส่วนของค่า'
 pageSettingsPobImportWeightedSum: 'ค้นหาม็อดทุกตัวที่มีค่าในตัวกรองถ่วงน้ำหนักเดียว'
 pageSettingsPobImportSkipEarlierLoadouts: 'ข้ามไอเทมจากโหลดเอาต์ก่อนหน้า'
+pageSettingsPobImportFolders: 'โฟลเดอร์'
+pageSettingsPobImportFoldersSingle: 'โฟลเดอร์เดียว'
+pageSettingsPobImportFoldersPerLoadout: 'หนึ่งโฟลเดอร์ต่อ Loadout'
 pageSettingsBackupTitle: เครื่องมือสำรองข้อมูล
 pageSettingsBackupDescription: บันทึกบุ๊กมาร์กทั้งหมดลงไฟล์ หรือกู้คืนจากไฟล์
 pageSettingsBackupGenerateButton: บันทึกไฟล์
@@ -82,6 +85,7 @@ pageBookmarksDeleteFolderSuccessFlash: 'ลบโฟลเดอร์ "$1" แ�
 pageBookmarksUpdateFolderSuccessFlash: 'อัปเดตโฟลเดอร์ "$1" แล้ว'
 pageBookmarksCreateFolderSuccessFlash: 'สร้างโฟลเดอร์ "$1" แล้ว'
 pageBookmarksImportFolderSuccessFlash: 'นำเข้าโฟลเดอร์ "$1" แล้ว'
+pageBookmarksImportFoldersSuccessFlash: 'นำเข้า $1 โฟลเดอร์แล้ว'
 pageBookmarksFolderEditFolder: 'แก้ไข'
 pageBookmarksFolderDeleteFolder: 'ลบ'
 pageBookmarksFolderArchiveFolder: 'เก็บถาวร'

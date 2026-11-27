@@ -27,6 +27,9 @@ pageSettingsPobImportRollFloorNone: 'Нет'
 pageSettingsPobImportRollFloorPercentValue: 'Доля от значения'
 pageSettingsPobImportWeightedSum: 'Искать все моды со значением в одном взвешенном фильтре'
 pageSettingsPobImportSkipEarlierLoadouts: 'Пропускать предметы из прошлых лоадаутов'
+pageSettingsPobImportFolders: 'Папки'
+pageSettingsPobImportFoldersSingle: 'Одна'
+pageSettingsPobImportFoldersPerLoadout: 'По одной на Loadout'
 pageSettingsBackupTitle: Резервное копирование
 pageSettingsBackupDescription: Сохраните все закладки в файл или восстановите их из файла.
 pageSettingsBackupGenerateButton: Сохранить файл
@@ -82,6 +85,7 @@ pageBookmarksDeleteFolderSuccessFlash: 'Папка «$1» удалена.'
 pageBookmarksUpdateFolderSuccessFlash: 'Папка «$1» обновлена.'
 pageBookmarksCreateFolderSuccessFlash: 'Папка «$1» создана.'
 pageBookmarksImportFolderSuccessFlash: 'Папка «$1» импортирована.'
+pageBookmarksImportFoldersSuccessFlash: 'Импортировано папок: $1.'
 pageBookmarksFolderEditFolder: 'Редактировать'
 pageBookmarksFolderDeleteFolder: 'Удалить'
 pageBookmarksFolderArchiveFolder: 'Архивировать'

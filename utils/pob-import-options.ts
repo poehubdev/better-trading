@@ -1,5 +1,5 @@
 import { deleteLocalValue, getLocalValue, setLocalValue } from '@/utils/storage';
-import type { ImportOptions, RollFloor } from '@/services/pob';
+import type { FolderLayout, ImportOptions, RollFloor } from '@/services/pob';
 
 type RollFloorKind = RollFloor['kind'];
 
@@ -12,6 +12,9 @@ const WEIGHTED_SUM_DISABLED_KEY = 'pob-weighted-sum-disabled';
 // Skipping earlier Loadouts' Trades is the default too
 const SKIP_EARLIER_LOADOUTS_DISABLED_KEY = 'pob-skip-earlier-loadouts-disabled';
 const DEFAULT_PERCENT = 80;
+const FOLDER_LAYOUTS: FolderLayout[] = ['single', 'perLoadout'];
+// One Folder is the default, so only the per-Loadout choice is stored
+const FOLDER_LAYOUT_KEY = 'pob-folder-layout';
 
 const getRollFloorKind = (): RollFloorKind => {
   const stored = getLocalValue(ROLL_FLOOR_KEY);
@@ -42,6 +45,14 @@ const setSkipEarlierLoadouts = (isOn: boolean): void => {
   else setLocalValue(SKIP_EARLIER_LOADOUTS_DISABLED_KEY, 'true');
 };
 
+const getFolderLayout = (): FolderLayout =>
+  getLocalValue(FOLDER_LAYOUT_KEY) === 'perLoadout' ? 'perLoadout' : 'single';
+
+const setFolderLayout = (layout: FolderLayout): void => {
+  if (layout === 'single') deleteLocalValue(FOLDER_LAYOUT_KEY);
+  else setLocalValue(FOLDER_LAYOUT_KEY, layout);
+};
+
 /** The import's options from the settings; read when the player imports a build */
 const getPobImportOptions = (): Required<ImportOptions> => {
   const kind = getRollFloorKind();
@@ -49,16 +60,20 @@ const getPobImportOptions = (): Required<ImportOptions> => {
     weightedSum: getWeightedSum(),
     skipEarlierLoadouts: getSkipEarlierLoadouts(),
     rollFloor: kind === 'percent' ? { kind, percent: getRollFloorPercent() } : { kind },
+    folders: getFolderLayout(),
   };
 };
 
 export {
+  FOLDER_LAYOUTS,
   ROLL_FLOOR_KINDS,
+  getFolderLayout,
   getPobImportOptions,
   getRollFloorKind,
   getRollFloorPercent,
   getSkipEarlierLoadouts,
   getWeightedSum,
+  setFolderLayout,
   setRollFloorKind,
   setRollFloorPercent,
   setSkipEarlierLoadouts,

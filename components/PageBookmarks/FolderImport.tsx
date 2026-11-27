@@ -10,6 +10,11 @@ import { useRef, useState } from 'react';
 import type { BookmarksFolderStruct, BookmarksTradeStruct } from '@/types/bookmarks';
 import type React from 'react';
 
+interface ImportedFolder {
+  folder: BookmarksFolderStruct;
+  trades: BookmarksTradeStruct[];
+}
+
 interface FolderImportProps {
   modalTitle: string;
   modalCloseLabel: string;
@@ -19,13 +24,9 @@ interface FolderImportProps {
   invalidCodeMessage: string;
   saveLabel: string;
   onCancel: () => void;
-  onSubmit: (data: { folder: BookmarksFolderStruct; trades: BookmarksTradeStruct[] }) => Promise<void>;
-  onDeserialize: (
-    input: string,
-  ) =>
-    | [BookmarksFolderStruct, BookmarksTradeStruct[]]
-    | null
-    | Promise<[BookmarksFolderStruct, BookmarksTradeStruct[]] | null>;
+  /** Every Folder previewed, in order */
+  onSubmit: (folders: ImportedFolder[]) => Promise<void>;
+  onDeserialize: (input: string) => ImportedFolder[] | null | Promise<ImportedFolder[] | null>;
 }
 
 const FolderImport: React.FC<FolderImportProps> = ({
@@ -40,11 +41,10 @@ const FolderImport: React.FC<FolderImportProps> = ({
   onSubmit,
   onDeserialize,
 }) => {
-  const [stagedFolder, setStagedFolder] = useState<BookmarksFolderStruct | null>(null);
-  const [stagedTrades, setStagedTrades] = useState<BookmarksTradeStruct[]>([]);
+  const [stagedFolders, setStagedFolders] = useState<ImportedFolder[]>([]);
   const [isInvalid, setIsInvalid] = useState(false);
 
-  const canSubmit = Boolean(stagedFolder);
+  const canSubmit = stagedFolders.length > 0;
 
   // An async deserialization may finish after a newer input's: only the latest input's result counts
   const latestInput = useRef('');
@@ -54,37 +54,31 @@ const FolderImport: React.FC<FolderImportProps> = ({
     const result = await onDeserialize(input);
     if (latestInput.current !== input) return;
 
-    if (result) {
-      const [folder, trades] = result;
-      setIsInvalid(false);
-      setStagedFolder(folder);
-      setStagedTrades(trades);
-    } else {
-      setIsInvalid(true);
-      setStagedFolder(null);
-      setStagedTrades([]);
-    }
+    setIsInvalid(!result?.length);
+    setStagedFolders(result ?? []);
   };
 
   return (
     <Modal title={modalTitle} closeLabel={modalCloseLabel} logoAlt={logoAlt} onClose={onCancel} isOpen={true}>
       <FormContainer
         onSubmit={() => {
-          if (stagedFolder) {
-            return onSubmit({ folder: stagedFolder, trades: stagedTrades });
-          }
+          if (canSubmit) return onSubmit(stagedFolders);
         }}
         canSubmit={canSubmit}>
         <FormInput label={importCodeLabel} value="" autofocus={true} onChange={handleInput} />
 
-        {stagedFolder && (
-          <div className={styles.importPreview}>
-            {stagedFolder.icon && <BookmarkFolderIcon icon={stagedFolder.icon} />}
-            <div className={styles.importPreviewTitle}>{previewLabel(stagedFolder.title, stagedTrades.length)}</div>
-          </div>
+        {stagedFolders.length > 0 && (
+          <ul className={styles.importPreviews}>
+            {stagedFolders.map(({ folder, trades }, index) => (
+              <li key={index} className={styles.importPreview}>
+                {folder.icon && <BookmarkFolderIcon icon={folder.icon} />}
+                <div className={styles.importPreviewTitle}>{previewLabel(folder.title, trades.length)}</div>
+              </li>
+            ))}
+          </ul>
         )}
 
-        {!stagedFolder && isInvalid && <AlertMessage message={invalidCodeMessage} type="alert" />}
+        {isInvalid && <AlertMessage message={invalidCodeMessage} type="alert" />}
 
         <Button type="submit" theme="gold" label={saveLabel} icon={SaveIcon} />
       </FormContainer>
@@ -92,4 +86,5 @@ const FolderImport: React.FC<FolderImportProps> = ({
   );
 };
 
+export type { ImportedFolder };
 export default FolderImport;

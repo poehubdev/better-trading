@@ -27,6 +27,9 @@ pageSettingsPobImportRollFloorNone: 'Aucune'
 pageSettingsPobImportRollFloorPercentValue: 'Part de la valeur'
 pageSettingsPobImportWeightedSum: 'Chercher tous les mods à valeur dans un filtre pondéré'
 pageSettingsPobImportSkipEarlierLoadouts: 'Ignorer les objets des Loadouts précédents'
+pageSettingsPobImportFolders: 'Dossiers'
+pageSettingsPobImportFoldersSingle: 'Un seul'
+pageSettingsPobImportFoldersPerLoadout: 'Un par Loadout'
 pageSettingsBackupTitle: Outils de sauvegarde
 pageSettingsBackupDescription: Enregistrez tous vos favoris dans un fichier ou restaurez-les depuis un fichier.
 pageSettingsBackupGenerateButton: Enregistrer le fichier
@@ -82,6 +85,7 @@ pageBookmarksDeleteFolderSuccessFlash: 'Le dossier « $1 » a été supprimé.'
 pageBookmarksUpdateFolderSuccessFlash: 'Le dossier « $1 » a été mis à jour.'
 pageBookmarksCreateFolderSuccessFlash: 'Le dossier « $1 » a été créé.'
 pageBookmarksImportFolderSuccessFlash: 'Le dossier « $1 » a été importé.'
+pageBookmarksImportFoldersSuccessFlash: '$1 dossiers ont été importés.'
 pageBookmarksFolderEditFolder: 'Modifier'
 pageBookmarksFolderDeleteFolder: 'Supprimer'
 pageBookmarksFolderArchiveFolder: 'Archiver'

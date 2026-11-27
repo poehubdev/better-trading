@@ -42,10 +42,22 @@ import {
   autoScrollWindowForElements,
 } from '@atlaskit/pragmatic-drag-and-drop-auto-scroll/element';
 import { useState, useCallback, useEffect, useId, useRef } from 'react';
+import type { ImportedFolder } from './FolderImport';
 import type { BookmarksFolderStruct, BookmarksTradeStruct } from '@/types/bookmarks';
 import type React from 'react';
 
 const FOLDERS_WARNING_THRESHOLD = 10;
+
+/** Every Export String's Folder; null when there is none or one is invalid */
+const importedFolders = (
+  exportStrings: string[],
+  deserialize: (exportString: string) => [BookmarksFolderStruct, BookmarksTradeStruct[]] | null,
+): ImportedFolder[] | null => {
+  const folders = exportStrings.map(deserialize);
+  return folders.length && folders.every(Boolean)
+    ? folders.map(folder => ({ folder: folder![0], trades: folder![1] }))
+    : null;
+};
 
 /** A Trade being created or edited in the Folder `folderId` */
 interface StagedTrade {
@@ -123,6 +135,7 @@ interface PageBookmarksProps {
   createFolderSuccessMessage: (title: string) => string;
   updateFolderSuccessMessage: (title: string) => string;
   importFolderSuccessMessage: (title: string) => string;
+  importFoldersSuccessMessage: (count: number) => string;
   copyTradeSuccessMessage: (title: string) => string;
   genericAlertMessage: string;
   modalCloseLabel: string;
@@ -190,6 +203,7 @@ const PageBookmarks: React.FC<PageBookmarksProps> = ({
   createFolderSuccessMessage,
   updateFolderSuccessMessage,
   importFolderSuccessMessage,
+  importFoldersSuccessMessage,
   copyTradeSuccessMessage,
   genericAlertMessage,
   modalCloseLabel,
@@ -315,19 +329,39 @@ const PageBookmarks: React.FC<PageBookmarksProps> = ({
   );
 
   const handlePersistImportedFolder = useCallback(
-    async (data: { folder: BookmarksFolderStruct; trades: BookmarksTradeStruct[] }) => {
+    async (imported: ImportedFolder[]) => {
+      // One after the other: each new Folder goes to the end, so they keep their order
+      const folderIds: string[] = [];
       try {
-        const folderId = await bookmarks.persistFolder(data.folder);
-        await bookmarks.persistTrades(data.trades, folderId);
-        toggleFolderExpansion(folderId);
-        addFlash(importFolderSuccessMessage(data.folder.title), 'success');
+        for (const { folder, trades } of imported) {
+          const folderId = await bookmarks.persistFolder(folder);
+          folderIds.push(folderId);
+          await bookmarks.persistTrades(trades, folderId);
+        }
+        if (imported.length === 1) {
+          toggleFolderExpansion(folderIds[0]!);
+          addFlash(importFolderSuccessMessage(imported[0]!.folder.title), 'success');
+        } else {
+          addFlash(importFoldersSuccessMessage(imported.length), 'success');
+        }
       } catch {
+        // A failed import leaves nothing behind, so trying again creates no duplicates
+        await Promise.allSettled(
+          folderIds.map((id, index) => bookmarks.deleteFolder({ ...imported[index]!.folder, id })),
+        );
         addFlash(genericAlertMessage, 'alert');
       } finally {
         setImporting(null);
       }
     },
-    [bookmarks, toggleFolderExpansion, importFolderSuccessMessage, genericAlertMessage, addFlash],
+    [
+      bookmarks,
+      toggleFolderExpansion,
+      importFolderSuccessMessage,
+      importFoldersSuccessMessage,
+      genericAlertMessage,
+      addFlash,
+    ],
   );
 
   const handleExportFolder = async (folder: BookmarksFolderStruct & { id: string }) => {
@@ -398,9 +432,13 @@ const PageBookmarks: React.FC<PageBookmarksProps> = ({
   const { deserializeFolder } = bookmarks;
   const handleDeserializePob = useCallback(
     async (buildCode: string) => {
-      const folderExportString = buildCode.trim() && (await convertPobBuildCode(buildCode, getPobImportOptions()));
-      return folderExportString ? deserializeFolder(folderExportString) : null;
+      const exportStrings = buildCode.trim() ? await convertPobBuildCode(buildCode, getPobImportOptions()) : null;
+      return importedFolders(exportStrings ?? [], deserializeFolder);
     },
+    [deserializeFolder],
+  );
+  const handleDeserializeFolder = useCallback(
+    (input: string) => importedFolders([input], deserializeFolder),
     [deserializeFolder],
   );
 
@@ -746,7 +784,7 @@ const PageBookmarks: React.FC<PageBookmarksProps> = ({
           saveLabel={saveLabel}
           onCancel={handleCancelImportFolder}
           onSubmit={handlePersistImportedFolder}
-          onDeserialize={importing === 'pob' ? handleDeserializePob : bookmarks.deserializeFolder}
+          onDeserialize={importing === 'pob' ? handleDeserializePob : handleDeserializeFolder}
         />
       )}
     </LoadingContainer>

@@ -59,6 +59,9 @@ pageSettingsPobImportRollFloorNone: 'None'
 pageSettingsPobImportRollFloorPercentValue: 'Share of the roll'
 pageSettingsPobImportWeightedSum: 'Search every mod with a value in one weighted filter'
 pageSettingsPobImportSkipEarlierLoadouts: 'Skip items from earlier Loadouts'
+pageSettingsPobImportFolders: 'Folders'
+pageSettingsPobImportFoldersSingle: 'One'
+pageSettingsPobImportFoldersPerLoadout: 'One per Loadout'
 pageSettingsBackupTitle: Backup tools
 pageSettingsBackupDescription: Save all your bookmarks to a file, or restore them from one.
 pageSettingsBackupGenerateButton: Save file
@@ -101,6 +104,7 @@ pageBookmarksDeleteFolderSuccessFlash: 'The folder "$1" has been deleted.'
 pageBookmarksUpdateFolderSuccessFlash: 'The folder "$1" has been updated.'
 pageBookmarksCreateFolderSuccessFlash: 'The folder "$1" has been created.'
 pageBookmarksImportFolderSuccessFlash: 'The folder "$1" has been imported.'
+pageBookmarksImportFoldersSuccessFlash: 'Imported $1 folders.'
 pageBookmarksFolderEditFolder: Edit
 pageBookmarksFolderDeleteFolder: Delete
 pageBookmarksFolderArchiveFolder: Archive

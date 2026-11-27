@@ -27,6 +27,9 @@ pageSettingsPobImportRollFloorNone: 'Keiner'
 pageSettingsPobImportRollFloorPercentValue: 'Anteil am Wert'
 pageSettingsPobImportWeightedSum: 'Alle Mods mit Wert in einem gewichteten Filter suchen'
 pageSettingsPobImportSkipEarlierLoadouts: 'Gegenstände aus früheren Loadouts überspringen'
+pageSettingsPobImportFolders: 'Ordner'
+pageSettingsPobImportFoldersSingle: 'Einer'
+pageSettingsPobImportFoldersPerLoadout: 'Einer pro Loadout'
 pageSettingsBackupTitle: Sicherungswerkzeuge
 pageSettingsBackupDescription: Alle Lesezeichen in einer Datei sichern oder aus einer Datei wiederherstellen.
 pageSettingsBackupGenerateButton: Datei speichern
@@ -82,6 +85,7 @@ pageBookmarksDeleteFolderSuccessFlash: 'Der Ordner „$1“ wurde gelöscht.'
 pageBookmarksUpdateFolderSuccessFlash: 'Der Ordner „$1“ wurde aktualisiert.'
 pageBookmarksCreateFolderSuccessFlash: 'Der Ordner „$1“ wurde erstellt.'
 pageBookmarksImportFolderSuccessFlash: 'Der Ordner „$1“ wurde importiert.'
+pageBookmarksImportFoldersSuccessFlash: '$1 Ordner wurden importiert.'
 pageBookmarksFolderEditFolder: 'Bearbeiten'
 pageBookmarksFolderDeleteFolder: 'Löschen'
 pageBookmarksFolderArchiveFolder: 'Archivieren'

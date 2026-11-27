@@ -17,10 +17,15 @@ interface ImportOptions {
   rollFloor?: RollFloor;
   /** Leave out a Trade an earlier Loadout already has (default), so each Loadout lists only what changed */
   skipEarlierLoadouts?: boolean;
+  /** One Folder for every Loadout (default), or a Folder per Loadout that has Trades */
+  folders?: FolderLayout;
 }
 
+type FolderLayout = 'single' | 'perLoadout';
+
 interface Result {
-  exportString: string;
+  /** One per Folder, in progression order */
+  exportStrings: string[];
   /** Mod lines that could not be matched to a trade stat */
   unmatched: string[];
 }
@@ -605,26 +610,33 @@ const trade = (tit: string, query: object) => ({
 });
 
 /**
- * Build Code to a BT Export String (format 3) holding one Folder with the Trades of every Loadout, in progression order;
- * with several Loadouts each Trade title starts with its Loadout's. The stats must be loaded first
+ * Build Code to BT Export Strings (format 3), in progression order: one Folder with the Trades of every Loadout, each
+ * Trade title then starting with its Loadout's, or a Folder per Loadout with Trades. The stats must be loaded first
  */
 const toExportString = async (
   buildCode: string,
-  { weightedSum = true, rollFloor = { kind: 'percent', percent: 80 }, skipEarlierLoadouts = true }: ImportOptions = {},
+  {
+    weightedSum = true,
+    rollFloor = { kind: 'percent', percent: 80 },
+    skipEarlierLoadouts = true,
+    folders = 'single',
+  }: ImportOptions = {},
 ): Promise<Result> => {
   const floors = floorsOf(rollFloor);
   const build = await decodeBuild(buildCode);
   const name = build.ascendancy ?? build.className;
   const icon = name.toLowerCase();
+  const skill = build.mainSkill || name;
 
   const unmatched: string[] = [];
-  const prefixed = build.loadouts.length > 1;
+  const several = build.loadouts.length > 1;
+  const prefixed = several && folders === 'single';
   // Across Loadouts a Trade is skipped only for a fully equal query, rolls included: a roll upgrade is worth buying.
   // Switched-off filters are left out of the comparison, as the site does not search them (a relinked item stays)
   const earlier = new Set<string>();
   const searched = (query: object) =>
     JSON.stringify(query, (_, value) => (value?.disabled === true ? undefined : value));
-  const trs = build.loadouts.flatMap(({ title, items }) => {
+  const loadouts = build.loadouts.map(({ title, items }) => {
     const prefix = prefixed ? `${title} — ` : '';
     const candidates = [
       ...items.map(buildItem => {
@@ -648,19 +660,29 @@ const toExportString = async (
     // Every search of the Loadout counts as had, merged ones too: their item is found by the Trade kept
     for (const { query } of candidates) earlier.add(searched(query));
     // A skipped Trade's lines were reported with the Trade it repeats
-    return trades.map(({ tit, query, lines }) => {
+    const trs = trades.map(({ tit, query, lines }) => {
       unmatched.push(...lines);
       return trade(tit, query);
     });
+    return { tit: `${skill} — ${title}`, trs };
   });
-  const folder = {
-    icn: ICONS.has(icon) ? icon : null,
-    tit: build.mainSkill || name,
-    ver: '1',
-    trs,
-  };
-  return { exportString: `3:${Base64.encode(JSON.stringify(folder))}`, unmatched };
+  const folderOf = (tit: string, trs: ReturnType<typeof trade>[]) =>
+    `3:${Base64.encode(JSON.stringify({ icn: ICONS.has(icon) ? icon : null, tit, ver: '1', trs }))}`;
+  const perLoadout =
+    several && folders === 'perLoadout'
+      ? loadouts.filter(({ trs }) => trs.length).map(({ tit, trs }) => folderOf(tit, trs))
+      : [];
+  // ponytail: a Build Code whose Loadouts all lack Trades still imports its one (empty) Folder
+  const exportStrings = perLoadout.length
+    ? perLoadout
+    : [
+        folderOf(
+          skill,
+          loadouts.flatMap(({ trs }) => trs),
+        ),
+      ];
+  return { exportStrings, unmatched };
 };
 
-export type { ImportOptions, RollFloor };
+export type { FolderLayout, ImportOptions, RollFloor };
 export { toExportString };

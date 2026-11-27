@@ -27,6 +27,9 @@ pageSettingsPobImportRollFloorNone: 'なし'
 pageSettingsPobImportRollFloorPercentValue: '値に対する割合'
 pageSettingsPobImportWeightedSum: '数値のあるMODをすべて重み付きフィルター1つで検索'
 pageSettingsPobImportSkipEarlierLoadouts: '前のロードアウトにあるアイテムを除外'
+pageSettingsPobImportFolders: 'フォルダー'
+pageSettingsPobImportFoldersSingle: '1つ'
+pageSettingsPobImportFoldersPerLoadout: 'Loadoutごとに1つ'
 pageSettingsBackupTitle: バックアップツール
 pageSettingsBackupDescription: すべてのブックマークをファイルに保存、またはファイルから復元します。
 pageSettingsBackupGenerateButton: ファイルを保存
@@ -82,6 +85,7 @@ pageBookmarksDeleteFolderSuccessFlash: 'フォルダ「$1」を削除しまし�
 pageBookmarksUpdateFolderSuccessFlash: 'フォルダ「$1」を更新しました。'
 pageBookmarksCreateFolderSuccessFlash: 'フォルダ「$1」を作成しました。'
 pageBookmarksImportFolderSuccessFlash: 'フォルダ「$1」をインポートしました。'
+pageBookmarksImportFoldersSuccessFlash: '$1個のフォルダをインポートしました。'
 pageBookmarksFolderEditFolder: '編集'
 pageBookmarksFolderDeleteFolder: '削除'
 pageBookmarksFolderArchiveFolder: 'アーカイブ'

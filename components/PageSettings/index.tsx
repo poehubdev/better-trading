@@ -18,11 +18,14 @@ import { LOGO_THROWS, getLogoThrow, setLogoThrow } from '@/utils/logo-throw';
 import { getIsPanelBlurEnabled, setIsPanelBlurEnabled } from '@/utils/panel-blur';
 import { getIsPanelScrollbarVisible, setIsPanelScrollbarVisible } from '@/utils/panel-scrollbar';
 import {
+  FOLDER_LAYOUTS,
   ROLL_FLOOR_KINDS,
+  getFolderLayout,
   getRollFloorKind,
   getRollFloorPercent,
   getSkipEarlierLoadouts,
   getWeightedSum,
+  setFolderLayout,
   setRollFloorKind,
   setRollFloorPercent,
   setSkipEarlierLoadouts,
@@ -31,6 +34,7 @@ import {
 import classnames from 'classnames';
 import { useState } from 'react';
 import type { ChangelogData } from '@/components/ChangelogBanner';
+import type { FolderLayout } from '@/services/pob';
 import type { LogoThrow } from '@/utils/logo-throw';
 import type { RollFloorKind } from '@/utils/pob-import-options';
 
@@ -73,6 +77,8 @@ interface PageSettingsProps {
   rollFloorPercentLabel: string;
   weightedSumLabel: string;
   skipEarlierLoadoutsLabel: string;
+  folderLayoutLabel: string;
+  folderLayoutOptionLabels: Record<FolderLayout, string>;
   pilferingRingTitle: string;
   pilferingRingResetHint: string;
   backupTitle: string;
@@ -138,6 +144,8 @@ const PageSettings = ({
   rollFloorPercentLabel,
   weightedSumLabel,
   skipEarlierLoadoutsLabel,
+  folderLayoutLabel,
+  folderLayoutOptionLabels,
   pilferingRingTitle,
   pilferingRingResetHint,
   backupTitle,
@@ -189,6 +197,12 @@ const PageSettings = ({
   const [rollFloorPercent, setRollFloorPercentState] = useState(getRollFloorPercent);
   const [isWeightedSumOn, setIsWeightedSumOnState] = useState(getWeightedSum);
   const [isSkipEarlierLoadoutsOn, setIsSkipEarlierLoadoutsOnState] = useState(getSkipEarlierLoadouts);
+  const [folderLayout, setFolderLayoutState] = useState(getFolderLayout);
+
+  const changeFolderLayout = (layout: FolderLayout) => {
+    setFolderLayout(layout);
+    setFolderLayoutState(layout);
+  };
 
   const changeRollFloorKind = (kind: RollFloorKind) => {
     setRollFloorKind(kind);
@@ -302,6 +316,14 @@ const PageSettings = ({
             value={isWeightedSumOn}
             label={weightedSumLabel}
             onChange={toggleWeightedSum}
+          />
+
+          <FormRadioGroup
+            className={styles.enhancerCheckbox}
+            label={folderLayoutLabel}
+            options={FOLDER_LAYOUTS.map(value => ({ value, label: folderLayoutOptionLabels[value] }))}
+            value={folderLayout}
+            onChange={changeFolderLayout}
           />
 
           <FormCheckbox

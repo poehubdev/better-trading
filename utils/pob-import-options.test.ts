@@ -1,9 +1,11 @@
 import {
+  getFolderLayout,
   getPobImportOptions,
   getRollFloorKind,
   getRollFloorPercent,
   getSkipEarlierLoadouts,
   getWeightedSum,
+  setFolderLayout,
   setRollFloorKind,
   setRollFloorPercent,
   setSkipEarlierLoadouts,
@@ -31,6 +33,7 @@ describe('PoB import options', () => {
       weightedSum: true,
       skipEarlierLoadouts: true,
       rollFloor: { kind: 'percent', percent: 80 },
+      folders: 'single',
     });
   });
 
@@ -42,6 +45,7 @@ describe('PoB import options', () => {
       weightedSum: false,
       skipEarlierLoadouts: false,
       rollFloor: { kind: 'percent', percent: 65 },
+      folders: 'single',
     });
     // Only the opt-out is stored
     setSkipEarlierLoadouts(true);
@@ -51,6 +55,16 @@ describe('PoB import options', () => {
     expect(getPobImportOptions().rollFloor).toEqual({ kind: 'exact' });
     setRollFloorKind('none');
     expect(getPobImportOptions().rollFloor).toEqual({ kind: 'none' });
+  });
+
+  it('stores only a Folder per Loadout, the deviation from one Folder', () => {
+    expect(getFolderLayout()).toBe('single');
+    setFolderLayout('perLoadout');
+    expect(getPobImportOptions().folders).toBe('perLoadout');
+    setFolderLayout('single');
+    expect(store.size).toBe(0);
+    store.set('bt-pob-folder-layout', 'future');
+    expect(getFolderLayout()).toBe('single');
   });
 
   it('keeps the percent while another mode is chosen', () => {

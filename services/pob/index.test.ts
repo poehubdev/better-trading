@@ -22,7 +22,7 @@ const FIXTURES = {
 
 const CLUSTER_ENCHANT = 'enchant.stat_3948993189';
 const folderOf = async (name: string, options?: ImportOptions) =>
-  decodeExportString((await toExportString(await fixture(name), options)).exportString);
+  decodeExportString((await toExportString(await fixture(name), options)).exportStrings[0]!);
 const tradeOf = async (name: string, title: string, options?: ImportOptions) => {
   const trade = (await folderOf(name, options)).trades.find(trade => trade.title === title);
   if (!trade) throw new Error(`No Trade "${title}" in ${name}`);
@@ -33,13 +33,13 @@ const tradeOf = async (name: string, title: string, options?: ImportOptions) => 
 const singleItem = async (itemText: string, options?: ImportOptions) => {
   const xml = `<PathOfBuilding><Build className="Witch" level="90"/><Items activeItemSet="1"><Item id="1">${itemText}</Item>
     <ItemSet id="1"><Slot name="Belt" itemId="1"/></ItemSet></Items></PathOfBuilding>`;
-  return decodeExportString((await toExportString(deflateSync(xml).toString('base64url'), options)).exportString);
+  return decodeExportString((await toExportString(deflateSync(xml).toString('base64url'), options)).exportStrings[0]!);
 };
 
 describe('Folder title without a main skill', () => {
   const folderOfBuild = async (build: string) => {
     const xml = `<PathOfBuilding>${build}<Items activeItemSet="1"><ItemSet id="1"/></Items></PathOfBuilding>`;
-    return decodeExportString((await toExportString(deflateSync(xml).toString('base64url'))).exportString);
+    return decodeExportString((await toExportString(deflateSync(xml).toString('base64url'))).exportStrings[0]!);
   };
 
   it('is the ascendancy', async () => {
@@ -54,7 +54,7 @@ describe('Folder title without a main skill', () => {
 
 describe.each(Object.entries(FIXTURES))('%s', (name, expected) => {
   it('returns an Export String', async () => {
-    expect((await toExportString(await fixture(name))).exportString).toMatch(/^3:/);
+    expect((await toExportString(await fixture(name))).exportStrings[0]!).toMatch(/^3:/);
   });
 
   it('either matches every mod line of a non-unique item or reports it', async () => {
@@ -847,7 +847,9 @@ describe('Duplicate Trades', () => {
     const xml = `<PathOfBuilding><Build className="Witch" level="90"/><Items activeItemSet="1">
       <Item id="1">${ring('Doom Eye', 5)}</Item><Item id="2">${ring('Gloom Eye', 7)}</Item>
       <ItemSet id="1"><Slot name="Ring 1" itemId="1"/><Slot name="Ring 2" itemId="2"/></ItemSet></Items></PathOfBuilding>`;
-    const { trades } = decodeExportString((await toExportString(deflateSync(xml).toString('base64url'))).exportString);
+    const { trades } = decodeExportString(
+      (await toExportString(deflateSync(xml).toString('base64url'))).exportStrings[0]!,
+    );
     expect(trades.map(trade => trade.title)).toEqual(['Ring 1 — Doom Eye']);
   });
 });
@@ -879,7 +881,7 @@ describe('Loadouts', () => {
     return deflateSync(xml).toString('base64url');
   };
   const titlesOf = async (buildCode: string, options?: ImportOptions) =>
-    decodeExportString((await toExportString(buildCode, options)).exportString).trades.map(trade => trade.title);
+    decodeExportString((await toExportString(buildCode, options)).exportStrings[0]!).trades.map(trade => trade.title);
   const stagesOf = (titles: string[]) => [...new Set(titles.map(title => title.split(' — ')[0]))];
 
   it('imports every Loadout into one Folder, in progression order, each Trade prefixed with its title', async () => {
@@ -899,7 +901,7 @@ describe('Loadouts', () => {
     const shuffled = xml.replace(sets.join(''), [9, 5, 6, 7, 8, 0, 3, 4, 2, 1].map(i => sets[i]).join(''));
     expect(shuffled).not.toBe(xml);
     expect((await folderOf(PROGRESSION)).trades).toEqual(
-      decodeExportString((await toExportString(deflateSync(shuffled).toString('base64url'))).exportString).trades,
+      decodeExportString((await toExportString(deflateSync(shuffled).toString('base64url'))).exportStrings[0]!).trades,
     );
   });
 
@@ -989,6 +991,70 @@ describe('Loadouts', () => {
     );
     expect(titles).toEqual(['Early — Ring 1 — Doom Eye', 'Loadout 2 — Ring 1 — Gloom Eye']);
   });
+
+  describe('one Folder per Loadout', () => {
+    const PER_LOADOUT: ImportOptions = { folders: 'perLoadout' };
+    const foldersOf = async (buildCode: string, options: ImportOptions = PER_LOADOUT) =>
+      (await toExportString(buildCode, options)).exportStrings.map(decodeExportString);
+
+    it('creates a Folder per Loadout with Trades, in progression order, with unprefixed Trade titles', async () => {
+      const folders = await foldersOf(await fixture(PROGRESSION));
+      // Day 3 and Week 1 change nothing a search sees, so they create no Folder
+      expect(folders.map(folder => folder.title)).toEqual(
+        STAGES.filter(stage => stage !== 'Day 3 (lvl 95)' && stage !== 'Week 1 (lvl 96)').map(
+          stage => `Venom Gyre — ${stage}`,
+        ),
+      );
+      expect(new Set(folders.map(folder => folder.icon))).toEqual(new Set(['deadeye']));
+      const trades = folders.flatMap(folder => folder.trades);
+      expect(trades.filter(trade => trade.title.endsWith('Empyrean Trail')).map(trade => trade.title)).toEqual([
+        'Boots — Empyrean Trail',
+        'Boots — Empyrean Trail',
+      ]);
+      // The same Trades as the one Folder layout, without the Loadout prefix
+      expect(trades).toEqual(
+        (await folderOf(PROGRESSION)).trades.map(trade => ({
+          ...trade,
+          title: trade.title.split(' — ').slice(1).join(' — '),
+        })),
+      );
+    });
+
+    it('creates a Folder for every Loadout when earlier Loadouts are not skipped', async () => {
+      const folders = await foldersOf(await fixture(PROGRESSION), { ...PER_LOADOUT, skipEarlierLoadouts: false });
+      expect(folders.map(folder => folder.title)).toEqual(STAGES.map(stage => `Venom Gyre — ${stage}`));
+      expect(folders.flatMap(folder => folder.trades.map(trade => trade.title))).toEqual(
+        (await folderOf(PROGRESSION, { skipEarlierLoadouts: false })).trades.map(trade =>
+          trade.title.split(' — ').slice(1).join(' — '),
+        ),
+      );
+    });
+
+    it('creates no Folder for a Loadout without Trades', async () => {
+      const folders = await foldersOf(
+        code(
+          [
+            ['Early', '<Slot name="Ring 1" itemId="1"/>'],
+            ['Empty', ''],
+            ['Same', '<Slot name="Ring 1" itemId="1"/>'],
+            ['Late', '<Slot name="Ring 1" itemId="2"/>'],
+          ],
+          [ring('Doom Eye', 5), ring('Gloom Eye', 7)],
+        ),
+      );
+      expect(folders.map(folder => [folder.title, folder.trades.map(trade => trade.title)])).toEqual([
+        ['Witch — Early', ['Ring 1 — Doom Eye']],
+        ['Witch — Late', ['Ring 1 — Gloom Eye']],
+      ]);
+    });
+
+    it('still creates one Folder titled after the main skill for a single Loadout', async () => {
+      const name = 'venom-gyre-gladiator-3.30.txt';
+      const single = await foldersOf(await fixture(name), { folders: 'single' });
+      expect(single.map(folder => folder.title)).toEqual(['Venom Gyre']);
+      expect(await foldersOf(await fixture(name))).toEqual(single);
+    });
+  });
 });
 
 describe('Weapon swap', () => {
@@ -1066,7 +1132,7 @@ describe('Aggregate Jewel Trade', () => {
     return deflateSync(xml).toString('base64url');
   };
   const aggregate = async (code: string) =>
-    decodeExportString((await toExportString(code)).exportString).trades.filter(trade => trade.title === TITLE);
+    decodeExportString((await toExportString(code)).exportStrings[0]!).trades.filter(trade => trade.title === TITLE);
   const ids = (group: any) => group.filters.map((filter: any) => filter.id);
 
   const LIFE = '5% increased maximum Life';
@@ -1148,9 +1214,9 @@ describe('Aggregate Jewel Trade', () => {
 
   it('leaves the weight group out with the weighted sum off', async () => {
     const code = jewelBuild([base('A', [LIFE, CRIT])]);
-    const [trade] = decodeExportString((await toExportString(code, { weightedSum: false })).exportString).trades.filter(
-      trade => trade.title === TITLE,
-    );
+    const [trade] = decodeExportString(
+      (await toExportString(code, { weightedSum: false })).exportStrings[0]!,
+    ).trades.filter(trade => trade.title === TITLE);
     expect(trade!.query.stats.map((group: any) => group.type)).toEqual(['count']);
   });
 

@@ -24,11 +24,14 @@ const fetchPoeNinjaResource = async (resource: string): Promise<unknown> =>
     });
   });
 
-/** Converts a Path of Building Build Code to an Export String in the background script; null when it is not a build */
-const convertPobBuildCode = async (buildCode: string, options?: ImportOptions): Promise<string | null> =>
+/**
+ * Converts a Path of Building Build Code to Export Strings, one per Folder, in the background script; null when it is
+ * not a build
+ */
+const convertPobBuildCode = async (buildCode: string, options?: ImportOptions): Promise<string[] | null> =>
   new Promise(resolve => {
-    chrome.runtime.sendMessage({ query: 'pob-import', buildCode, options }, (exportString: string | null) =>
-      resolve(exportString ?? null),
+    chrome.runtime.sendMessage({ query: 'pob-import', buildCode, options }, (exportStrings: string[] | null) =>
+      resolve(exportStrings ?? null),
     );
   });
 

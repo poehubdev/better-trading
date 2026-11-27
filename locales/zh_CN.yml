@@ -27,6 +27,9 @@ pageSettingsPobImportRollFloorNone: '无'
 pageSettingsPobImportRollFloorPercentValue: '占数值的比例'
 pageSettingsPobImportWeightedSum: '将所有带数值的词缀合并为一个加权筛选来搜索'
 pageSettingsPobImportSkipEarlierLoadouts: '跳过之前配置方案中已有的物品'
+pageSettingsPobImportFolders: '文件夹'
+pageSettingsPobImportFoldersSingle: '一个'
+pageSettingsPobImportFoldersPerLoadout: '每个 Loadout 一个'
 pageSettingsBackupTitle: 备份工具
 pageSettingsBackupDescription: 将所有书签保存到文件，或从文件恢复。
 pageSettingsBackupGenerateButton: 保存文件
@@ -82,6 +85,7 @@ pageBookmarksDeleteFolderSuccessFlash: '文件夹“$1”已删除。'
 pageBookmarksUpdateFolderSuccessFlash: '文件夹“$1”已更新。'
 pageBookmarksCreateFolderSuccessFlash: '文件夹“$1”已创建。'
 pageBookmarksImportFolderSuccessFlash: '文件夹“$1”已导入。'
+pageBookmarksImportFoldersSuccessFlash: '已导入 $1 个文件夹。'
 pageBookmarksFolderEditFolder: '编辑'
 pageBookmarksFolderDeleteFolder: '删除'
 pageBookmarksFolderArchiveFolder: '存档'
