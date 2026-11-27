@@ -615,7 +615,7 @@ const toExportString = async (
   const unmatched: string[] = [];
   const folder = {
     icn: ICONS.has(icon) ? icon : null,
-    tit: build.mainSkill ? `${build.mainSkill} ${name}` : name,
+    tit: build.mainSkill || name,
     ver: '1',
     trs: dedupe([
       ...build.items.map(buildItem => {

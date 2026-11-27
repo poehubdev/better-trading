@@ -9,15 +9,15 @@ import { deflateSync } from 'node:zlib';
 import type { ImportOptions, RollFloor } from './index';
 
 const FIXTURES = {
-  'elemental-hit-slayer-3.30.txt': { title: 'Elemental Hit Slayer', icon: 'slayer' },
-  'eviscirate-elementalist-3.30.txt': { title: 'Eviscerate Elementalist', icon: 'elementalist' },
-  'flicker-strike-slayer-3.30.txt': { title: 'Flicker Strike Slayer', icon: 'slayer' },
-  'frost-blades-champion-3.30.txt': { title: 'Frost Blades Champion', icon: 'champion' },
-  'ice-trap-assasin-3.30.txt': { title: 'Ice Trap Assassin', icon: 'assassin' },
-  'kinetic-blast-warden-3.30.txt': { title: 'Kinetic Blast Warden', icon: 'warden' },
-  'righteous-fire-chieftain-3.30.txt': { title: 'Righteous Fire Chieftain', icon: 'chieftain' },
-  'static-strike-luminary-3.30.txt': { title: 'Static Strike Luminary', icon: 'luminary' },
-  'venom-gyre-gladiator-3.30.txt': { title: 'Venom Gyre Gladiator', icon: 'gladiator' },
+  'elemental-hit-slayer-3.30.txt': { title: 'Elemental Hit', icon: 'slayer' },
+  'eviscirate-elementalist-3.30.txt': { title: 'Eviscerate', icon: 'elementalist' },
+  'flicker-strike-slayer-3.30.txt': { title: 'Flicker Strike', icon: 'slayer' },
+  'frost-blades-champion-3.30.txt': { title: 'Frost Blades', icon: 'champion' },
+  'ice-trap-assasin-3.30.txt': { title: 'Ice Trap', icon: 'assassin' },
+  'kinetic-blast-warden-3.30.txt': { title: 'Kinetic Blast', icon: 'warden' },
+  'righteous-fire-chieftain-3.30.txt': { title: 'Righteous Fire', icon: 'chieftain' },
+  'static-strike-luminary-3.30.txt': { title: 'Static Strike', icon: 'luminary' },
+  'venom-gyre-gladiator-3.30.txt': { title: 'Venom Gyre', icon: 'gladiator' },
 };
 
 const CLUSTER_ENCHANT = 'enchant.stat_3948993189';
@@ -35,6 +35,22 @@ const singleItem = async (itemText: string, options?: ImportOptions) => {
     <ItemSet id="1"><Slot name="Belt" itemId="1"/></ItemSet></Items></PathOfBuilding>`;
   return decodeExportString((await toExportString(deflateSync(xml).toString('base64url'), options)).exportString);
 };
+
+describe('Folder title without a main skill', () => {
+  const folderOfBuild = async (build: string) => {
+    const xml = `<PathOfBuilding>${build}<Items activeItemSet="1"><ItemSet id="1"/></Items></PathOfBuilding>`;
+    return decodeExportString((await toExportString(deflateSync(xml).toString('base64url'))).exportString);
+  };
+
+  it('is the ascendancy', async () => {
+    const { title, icon } = await folderOfBuild('<Build className="Ranger" ascendClassName="Deadeye" level="90"/>');
+    expect({ title, icon }).toEqual({ title: 'Deadeye', icon: 'deadeye' });
+  });
+
+  it('is the class when there is no ascendancy', async () => {
+    expect((await folderOfBuild('<Build className="Witch" ascendClassName="None" level="1"/>')).title).toBe('Witch');
+  });
+});
 
 describe.each(Object.entries(FIXTURES))('%s', (name, expected) => {
   it('returns an Export String', async () => {
@@ -58,7 +74,7 @@ describe.each(Object.entries(FIXTURES))('%s', (name, expected) => {
     });
   });
 
-  it('builds one PoE 1 Folder titled with main skill and ascendancy', async () => {
+  it('builds one PoE 1 Folder titled with the main skill', async () => {
     const { title, icon, version } = await folderOf(name);
     expect({ title, icon, version }).toEqual({ ...expected, version: '1' });
   });
