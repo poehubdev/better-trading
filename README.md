@@ -123,6 +123,13 @@ Export String, …) in [`GLOSSARY.md`](GLOSSARY.md). Contributions welcome: pick
 [issue](https://github.com/poehubdev/better-trading/issues), build the UI in Storybook first, and keep `pnpm lint`,
 `pnpm compile` and `pnpm test` green.
 
+### Releasing
+
+1. Point `changelog` in `package.json` at a new slug, write `changelogs/<slug>.md` (the in-app changelog) and commit.
+2. `pnpm release patch` (or `minor`, `major`, `prerelease`, an exact version). It bumps the version, tags `vX.Y.Z`
+   and pushes; the tag makes GitHub Actions build Chrome and Firefox and publish a
+   [release](https://github.com/poehubdev/better-trading/releases) with the zips.
+
 ## Credits
 
 Originally created by **InfaMc** ([@pboutin](https://github.com/pboutin)) and maintained by **brosmike**

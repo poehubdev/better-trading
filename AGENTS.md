@@ -35,7 +35,8 @@ commits. It does not run the tests.
 
 **Releasing:** set `changelog` in `package.json` to a new slug and write `changelogs/<slug>.md` (shown in the
 in-app changelog banner; WXT takes the manifest version from `package.json`), commit, then
-`npm version patch|minor|major` (bumps `version`, commits, tags `vX.Y.Z`) and `git push --follow-tags`. The tag
+`pnpm release <patch|minor|major|prerelease|x.y.z>` (`scripts/release.sh`: checks you're on a clean `main` and the
+changelog file exists, pulls, runs `npm version` to bump, commit and tag `vX.Y.Z`, then `git push --follow-tags`). The tag
 triggers `.github/workflows/build.yml`, which builds both browsers and creates a GitHub Release with the zips
 (incl. the sources zip AMO asks for). The job fails if the tag doesn't match `package.json` `version`.
 
