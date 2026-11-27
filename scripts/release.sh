@@ -6,7 +6,8 @@ set -euo pipefail
 bump=${1:?usage: pnpm release <patch|minor|major|prerelease|x.y.z>}
 
 [[ $(git branch --show-current) == main ]] || { echo "release from main only" >&2; exit 1; }
-[[ -z $(git status --porcelain) ]] || { echo "working tree not clean" >&2; exit 1; }
+# Untracked files never reach the tag, so only tracked changes block a release.
+[[ -z $(git status --porcelain --untracked-files=no) ]] || { echo "uncommitted changes to tracked files" >&2; exit 1; }
 
 slug=$(node -p "require('./package.json').changelog")
 [[ -f changelogs/$slug.md ]] || { echo "changelogs/$slug.md missing (package.json changelog)" >&2; exit 1; }
