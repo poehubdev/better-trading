@@ -80,7 +80,7 @@ pageBookmarksClearSearch: 'Effacer la recherche'
 pageBookmarksNoMatches: 'Aucun dossier ni échange ne correspond à « $1 »'
 pageBookmarksShowArchivedFolders: 'Afficher les archives'
 pageBookmarksShowUnarchivedFolders: 'Revenir aux dossiers actifs'
-pageBookmarksFoldersWarning: "Avoir beaucoup de dossiers peut ralentir le site.<br>Sauvegardez les dossiers inutiles avec la fonction d'exportation, puis supprimez-les."
+pageBookmarksFoldersWarning: "Trop de dossiers actifs ralentissent le site d'échange. Archivez ceux que vous n'utilisez pas."
 pageBookmarksDeleteFolderSuccessFlash: 'Le dossier « $1 » a été supprimé.'
 pageBookmarksUpdateFolderSuccessFlash: 'Le dossier « $1 » a été mis à jour.'
 pageBookmarksCreateFolderSuccessFlash: 'Le dossier « $1 » a été créé.'

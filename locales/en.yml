@@ -99,7 +99,7 @@ pageBookmarksClearSearch: Clear search
 pageBookmarksNoMatches: 'No folders or trades match "$1"'
 pageBookmarksShowArchivedFolders: Show archive
 pageBookmarksShowUnarchivedFolders: Return to active folders
-pageBookmarksFoldersWarning: Having a lot of folders can slow down the website.<br>Backup unnecessary folders using the export feature, then delete them.
+pageBookmarksFoldersWarning: "Many active folders slow the trade site down. Archive the ones you're not using."
 pageBookmarksDeleteFolderSuccessFlash: 'The folder "$1" has been deleted.'
 pageBookmarksUpdateFolderSuccessFlash: 'The folder "$1" has been updated.'
 pageBookmarksCreateFolderSuccessFlash: 'The folder "$1" has been created.'

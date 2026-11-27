@@ -269,5 +269,10 @@
 }
 
 .foldersWarning {
-  margin-top: 10px;
+  margin: 8px 4px 0;
+  font-family: variables.$primary-font;
+  font-size: 13px;
+  line-height: 1.4;
+  text-align: center;
+  color: color.adjust(variables.$gold-light, $lightness: -25%);
 }

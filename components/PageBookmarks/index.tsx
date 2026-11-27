@@ -23,7 +23,6 @@ import ReturnToActiveFoldersIcon from '@/assets/icons/filled/return-to-active-fo
 import SearchIcon from '@/assets/icons/filled/search.svg?react';
 import FileImportIcon from '@/assets/icons/solid/file-import.svg?react';
 import FolderPlusIcon from '@/assets/icons/solid/folder-plus.svg?react';
-import AlertMessage from '@/components/AlertMessage';
 import LoadingContainer from '@/components/LoadingContainer';
 import { useFlashMessagesContext } from '@/contexts/FlashMessagesContext';
 import { useBookmarks } from '@/hooks/useBookmarks';
@@ -713,7 +712,9 @@ const PageBookmarks: React.FC<PageBookmarksProps> = ({
       )}
 
       {foldersWarningIsVisible && (
-        <AlertMessage className={styles.foldersWarning} type="warning" message={foldersWarningMessage} />
+        <p className={styles.foldersWarning} role="note">
+          {foldersWarningMessage}
+        </p>
       )}
 
       {stagedFolder && (
