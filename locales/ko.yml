@@ -26,6 +26,7 @@ pageSettingsPobImportRollFloorPercent: '비율'
 pageSettingsPobImportRollFloorNone: '없음'
 pageSettingsPobImportRollFloorPercentValue: '수치 대비 비율'
 pageSettingsPobImportWeightedSum: '값이 있는 모든 모드를 가중치 필터 하나로 검색'
+pageSettingsPobImportSkipEarlierLoadouts: '이전 로드아웃의 아이템 건너뛰기'
 pageSettingsBackupTitle: 백업 도구
 pageSettingsBackupDescription: 모든 북마크를 파일로 저장하거나 파일에서 복원합니다.
 pageSettingsBackupGenerateButton: 파일 저장

@@ -21,9 +21,11 @@ import {
   ROLL_FLOOR_KINDS,
   getRollFloorKind,
   getRollFloorPercent,
+  getSkipEarlierLoadouts,
   getWeightedSum,
   setRollFloorKind,
   setRollFloorPercent,
+  setSkipEarlierLoadouts,
   setWeightedSum,
 } from '@/utils/pob-import-options';
 import classnames from 'classnames';
@@ -70,6 +72,7 @@ interface PageSettingsProps {
   rollFloorOptionLabels: Record<RollFloorKind, string>;
   rollFloorPercentLabel: string;
   weightedSumLabel: string;
+  skipEarlierLoadoutsLabel: string;
   pilferingRingTitle: string;
   pilferingRingResetHint: string;
   backupTitle: string;
@@ -134,6 +137,7 @@ const PageSettings = ({
   rollFloorOptionLabels,
   rollFloorPercentLabel,
   weightedSumLabel,
+  skipEarlierLoadoutsLabel,
   pilferingRingTitle,
   pilferingRingResetHint,
   backupTitle,
@@ -184,6 +188,7 @@ const PageSettings = ({
   const [rollFloorKind, setRollFloorKindState] = useState(getRollFloorKind);
   const [rollFloorPercent, setRollFloorPercentState] = useState(getRollFloorPercent);
   const [isWeightedSumOn, setIsWeightedSumOnState] = useState(getWeightedSum);
+  const [isSkipEarlierLoadoutsOn, setIsSkipEarlierLoadoutsOnState] = useState(getSkipEarlierLoadouts);
 
   const changeRollFloorKind = (kind: RollFloorKind) => {
     setRollFloorKind(kind);
@@ -198,6 +203,11 @@ const PageSettings = ({
   const toggleWeightedSum = (isOn: boolean) => {
     setWeightedSum(isOn);
     setIsWeightedSumOnState(isOn);
+  };
+
+  const toggleSkipEarlierLoadouts = (isOn: boolean) => {
+    setSkipEarlierLoadouts(isOn);
+    setIsSkipEarlierLoadoutsOnState(isOn);
   };
 
   return (
@@ -292,6 +302,13 @@ const PageSettings = ({
             value={isWeightedSumOn}
             label={weightedSumLabel}
             onChange={toggleWeightedSum}
+          />
+
+          <FormCheckbox
+            className={styles.enhancerCheckbox}
+            value={isSkipEarlierLoadoutsOn}
+            label={skipEarlierLoadoutsLabel}
+            onChange={toggleSkipEarlierLoadouts}
           />
         </section>
 

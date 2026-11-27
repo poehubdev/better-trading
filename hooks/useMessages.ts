@@ -90,6 +90,7 @@ const buildMessages = () => ({
     },
     rollFloorPercentLabel: i18n.t('pageSettingsPobImportRollFloorPercentValue'),
     weightedSumLabel: i18n.t('pageSettingsPobImportWeightedSum'),
+    skipEarlierLoadoutsLabel: i18n.t('pageSettingsPobImportSkipEarlierLoadouts'),
     pilferingRingTitle: i18n.t('pageSettingsPilferingRingTitle'),
     pilferingRingResetHint: i18n.t('pageSettingsPilferingRingResetHint'),
     backupTitle: i18n.t('pageSettingsBackupTitle'),

@@ -26,6 +26,7 @@ pageSettingsPobImportRollFloorPercent: 'Процент'
 pageSettingsPobImportRollFloorNone: 'Нет'
 pageSettingsPobImportRollFloorPercentValue: 'Доля от значения'
 pageSettingsPobImportWeightedSum: 'Искать все моды со значением в одном взвешенном фильтре'
+pageSettingsPobImportSkipEarlierLoadouts: 'Пропускать предметы из прошлых лоадаутов'
 pageSettingsBackupTitle: Резервное копирование
 pageSettingsBackupDescription: Сохраните все закладки в файл или восстановите их из файла.
 pageSettingsBackupGenerateButton: Сохранить файл

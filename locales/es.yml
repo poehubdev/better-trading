@@ -26,6 +26,7 @@ pageSettingsPobImportRollFloorPercent: 'Porcentaje'
 pageSettingsPobImportRollFloorNone: 'Ninguno'
 pageSettingsPobImportRollFloorPercentValue: 'Parte del valor'
 pageSettingsPobImportWeightedSum: 'Buscar todos los mods con valor en un filtro ponderado'
+pageSettingsPobImportSkipEarlierLoadouts: 'Omitir objetos de Loadouts anteriores'
 pageSettingsBackupTitle: Herramientas de copia de seguridad
 pageSettingsBackupDescription: Guarda todos tus marcadores en un archivo o restáuralos desde uno.
 pageSettingsBackupGenerateButton: Guardar archivo

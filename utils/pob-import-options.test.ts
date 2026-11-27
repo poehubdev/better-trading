@@ -2,9 +2,11 @@ import {
   getPobImportOptions,
   getRollFloorKind,
   getRollFloorPercent,
+  getSkipEarlierLoadouts,
   getWeightedSum,
   setRollFloorKind,
   setRollFloorPercent,
+  setSkipEarlierLoadouts,
   setWeightedSum,
 } from '@/utils/pob-import-options';
 import { beforeEach, describe, expect, it, vi } from 'vitest';
@@ -20,17 +22,30 @@ vi.stubGlobal('localStorage', {
 describe('PoB import options', () => {
   beforeEach(() => store.clear());
 
-  it('defaults to an 80% Roll Floor and the weighted sum on', () => {
+  it('defaults to an 80% Roll Floor, the weighted sum on and earlier Loadouts skipped', () => {
     expect(getRollFloorKind()).toBe('percent');
     expect(getRollFloorPercent()).toBe(80);
     expect(getWeightedSum()).toBe(true);
-    expect(getPobImportOptions()).toEqual({ weightedSum: true, rollFloor: { kind: 'percent', percent: 80 } });
+    expect(getSkipEarlierLoadouts()).toBe(true);
+    expect(getPobImportOptions()).toEqual({
+      weightedSum: true,
+      skipEarlierLoadouts: true,
+      rollFloor: { kind: 'percent', percent: 80 },
+    });
   });
 
   it('passes the stored choices to the import', () => {
     setRollFloorPercent(65);
     setWeightedSum(false);
-    expect(getPobImportOptions()).toEqual({ weightedSum: false, rollFloor: { kind: 'percent', percent: 65 } });
+    setSkipEarlierLoadouts(false);
+    expect(getPobImportOptions()).toEqual({
+      weightedSum: false,
+      skipEarlierLoadouts: false,
+      rollFloor: { kind: 'percent', percent: 65 },
+    });
+    // Only the opt-out is stored
+    setSkipEarlierLoadouts(true);
+    expect(store.has('bt-pob-skip-earlier-loadouts-disabled')).toBe(false);
 
     setRollFloorKind('exact');
     expect(getPobImportOptions().rollFloor).toEqual({ kind: 'exact' });

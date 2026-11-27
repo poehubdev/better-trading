@@ -878,8 +878,8 @@ describe('Loadouts', () => {
       </Items>${tree}</PathOfBuilding>`;
     return deflateSync(xml).toString('base64url');
   };
-  const titlesOf = async (buildCode: string) =>
-    decodeExportString((await toExportString(buildCode)).exportString).trades.map(trade => trade.title);
+  const titlesOf = async (buildCode: string, options?: ImportOptions) =>
+    decodeExportString((await toExportString(buildCode, options)).exportString).trades.map(trade => trade.title);
   const stagesOf = (titles: string[]) => [...new Set(titles.map(title => title.split(' — ')[0]))];
 
   it('imports every Loadout into one Folder, in progression order, each Trade prefixed with its title', async () => {
@@ -942,6 +942,26 @@ describe('Loadouts', () => {
       .filter(title => title.endsWith('Empyrean Trail'));
     // Hour 18 relinked the boots (a switched-off filter) under a new PoB id; Day 1 changed their implicit
     expect(titles).toEqual(['Hour 12 (lvl 93) — Boots — Empyrean Trail', 'Day 1 (lvl 94) — Boots — Empyrean Trail']);
+  });
+
+  it('imports every Loadout in full when skipping earlier Loadouts is off', async () => {
+    const { trades } = await folderOf(PROGRESSION, { skipEarlierLoadouts: false });
+    const titles = trades.map(trade => trade.title);
+    expect(titles).toContain('Hour 12 (lvl 93) — Boots — Empyrean Trail');
+    expect(titles).toContain('Hour 18 (lvl 94) — Boots — Empyrean Trail');
+    expect(stagesOf(titles)).toEqual(STAGES);
+    // Deduplication inside one Loadout stays on
+    const twice = code(
+      [
+        ['Early', '<Slot name="Ring 1" itemId="1"/>'],
+        ['Late', '<Slot name="Ring 1" itemId="1"/><Slot name="Ring 2" itemId="2"/>'],
+      ],
+      [ring('Doom Eye', 5), ring('Gloom Eye', 7)],
+    );
+    expect(await titlesOf(twice, { skipEarlierLoadouts: false })).toEqual([
+      'Early — Ring 1 — Doom Eye',
+      'Late — Ring 1 — Doom Eye',
+    ]);
   });
 
   it('keeps a roll-only upgrade in a later Loadout, while merging such items inside one Loadout', async () => {

@@ -26,6 +26,7 @@ pageSettingsPobImportRollFloorPercent: '割合'
 pageSettingsPobImportRollFloorNone: 'なし'
 pageSettingsPobImportRollFloorPercentValue: '値に対する割合'
 pageSettingsPobImportWeightedSum: '数値のあるMODをすべて重み付きフィルター1つで検索'
+pageSettingsPobImportSkipEarlierLoadouts: '前のロードアウトにあるアイテムを除外'
 pageSettingsBackupTitle: バックアップツール
 pageSettingsBackupDescription: すべてのブックマークをファイルに保存、またはファイルから復元します。
 pageSettingsBackupGenerateButton: ファイルを保存

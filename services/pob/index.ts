@@ -15,6 +15,8 @@ interface ImportOptions {
   weightedSum?: boolean;
   /** The minimum of modifier rolls, pseudo totals and the weighted sum (default 80%); enchants stay exact */
   rollFloor?: RollFloor;
+  /** Leave out a Trade an earlier Loadout already has (default), so each Loadout lists only what changed */
+  skipEarlierLoadouts?: boolean;
 }
 
 interface Result {
@@ -608,7 +610,7 @@ const trade = (tit: string, query: object) => ({
  */
 const toExportString = async (
   buildCode: string,
-  { weightedSum = true, rollFloor = { kind: 'percent', percent: 80 } }: ImportOptions = {},
+  { weightedSum = true, rollFloor = { kind: 'percent', percent: 80 }, skipEarlierLoadouts = true }: ImportOptions = {},
 ): Promise<Result> => {
   const floors = floorsOf(rollFloor);
   const build = await decodeBuild(buildCode);
@@ -640,7 +642,9 @@ const toExportString = async (
         lines: [],
       })),
     ];
-    const trades = dedupe(candidates.filter(({ query }) => !earlier.has(searched(query))));
+    const trades = dedupe(
+      skipEarlierLoadouts ? candidates.filter(({ query }) => !earlier.has(searched(query))) : candidates,
+    );
     // Every search of the Loadout counts as had, merged ones too: their item is found by the Trade kept
     for (const { query } of candidates) earlier.add(searched(query));
     // A skipped Trade's lines were reported with the Trade it repeats

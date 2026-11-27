@@ -58,6 +58,7 @@ pageSettingsPobImportRollFloorPercent: 'Percent'
 pageSettingsPobImportRollFloorNone: 'None'
 pageSettingsPobImportRollFloorPercentValue: 'Share of the roll'
 pageSettingsPobImportWeightedSum: 'Search every mod with a value in one weighted filter'
+pageSettingsPobImportSkipEarlierLoadouts: 'Skip items from earlier Loadouts'
 pageSettingsBackupTitle: Backup tools
 pageSettingsBackupDescription: Save all your bookmarks to a file, or restore them from one.
 pageSettingsBackupGenerateButton: Save file

@@ -9,6 +9,8 @@ const ROLL_FLOOR_KEY = 'pob-roll-floor';
 const ROLL_FLOOR_PERCENT_KEY = 'pob-roll-floor-percent';
 // The weighted sum is the default, so only the opt-out is stored
 const WEIGHTED_SUM_DISABLED_KEY = 'pob-weighted-sum-disabled';
+// Skipping earlier Loadouts' Trades is the default too
+const SKIP_EARLIER_LOADOUTS_DISABLED_KEY = 'pob-skip-earlier-loadouts-disabled';
 const DEFAULT_PERCENT = 80;
 
 const getRollFloorKind = (): RollFloorKind => {
@@ -33,11 +35,19 @@ const setWeightedSum = (isOn: boolean): void => {
   else setLocalValue(WEIGHTED_SUM_DISABLED_KEY, 'true');
 };
 
+const getSkipEarlierLoadouts = (): boolean => !getLocalValue(SKIP_EARLIER_LOADOUTS_DISABLED_KEY);
+
+const setSkipEarlierLoadouts = (isOn: boolean): void => {
+  if (isOn) deleteLocalValue(SKIP_EARLIER_LOADOUTS_DISABLED_KEY);
+  else setLocalValue(SKIP_EARLIER_LOADOUTS_DISABLED_KEY, 'true');
+};
+
 /** The import's options from the settings; read when the player imports a build */
 const getPobImportOptions = (): Required<ImportOptions> => {
   const kind = getRollFloorKind();
   return {
     weightedSum: getWeightedSum(),
+    skipEarlierLoadouts: getSkipEarlierLoadouts(),
     rollFloor: kind === 'percent' ? { kind, percent: getRollFloorPercent() } : { kind },
   };
 };
@@ -47,9 +57,11 @@ export {
   getPobImportOptions,
   getRollFloorKind,
   getRollFloorPercent,
+  getSkipEarlierLoadouts,
   getWeightedSum,
   setRollFloorKind,
   setRollFloorPercent,
+  setSkipEarlierLoadouts,
   setWeightedSum,
 };
 export type { RollFloorKind };

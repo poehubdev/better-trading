@@ -26,6 +26,7 @@ pageSettingsPobImportRollFloorPercent: 'เปอร์เซ็นต์'
 pageSettingsPobImportRollFloorNone: 'ไม่มี'
 pageSettingsPobImportRollFloorPercentValue: 'สัดส่วนของค่า'
 pageSettingsPobImportWeightedSum: 'ค้นหาม็อดทุกตัวที่มีค่าในตัวกรองถ่วงน้ำหนักเดียว'
+pageSettingsPobImportSkipEarlierLoadouts: 'ข้ามไอเทมจากโหลดเอาต์ก่อนหน้า'
 pageSettingsBackupTitle: เครื่องมือสำรองข้อมูล
 pageSettingsBackupDescription: บันทึกบุ๊กมาร์กทั้งหมดลงไฟล์ หรือกู้คืนจากไฟล์
 pageSettingsBackupGenerateButton: บันทึกไฟล์
