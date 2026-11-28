@@ -41,24 +41,31 @@ const handlePoeNinjaRequest = async (resource: string): Promise<unknown> => {
   }
 };
 
-// Each game's data files
-const POB_DATA: Record<TradeSiteVersion, { stats: PublicPath; pools: PublicPath }> = {
-  '1': { stats: '/pob-stats.ndjson', pools: '/pob-pools.json' },
-  '2': { stats: '/pob-stats-poe2.ndjson', pools: '/pob-pools-poe2.json' },
+// Each game's data files, gzipped by the build (see wxt.config.ts)
+const POB_DATA: Record<TradeSiteVersion, { stats: string; pools: string }> = {
+  '1': { stats: '/pob-stats.ndjson.gz', pools: '/pob-pools.json.gz' },
+  '2': { stats: '/pob-stats-poe2.ndjson.gz', pools: '/pob-pools-poe2.json.gz' },
 };
 // A game's stat data and Mod Pools, loaded on its first import only; a failed load is retried on the next one
 const pobData = new Map<TradeSiteVersion, Promise<void>>();
+
+/** Fetches a gzipped data file of the extension, inflated */
+const fetchData = async (path: string) => {
+  const response = await fetch(browser.runtime.getURL(path as PublicPath));
+  if (!response.ok || !response.body) throw new Error(`${path}: HTTP ${response.status}`);
+  return new Response(response.body.pipeThrough(new DecompressionStream('gzip')));
+};
 
 const loadPobData = (game: TradeSiteVersion) => {
   const { stats, pools } = POB_DATA[game];
   const loading =
     pobData.get(game) ??
     Promise.all([
-      fetch(browser.runtime.getURL(stats))
+      fetchData(stats)
         .then(response => response.text())
         .then(ndjson => loadStats(ndjson, game)),
       // Without Mod Pools the import still works, unchecked
-      fetch(browser.runtime.getURL(pools))
+      fetchData(pools)
         .then(response => response.json())
         .then(json => loadPools(json, game))
         .catch(error => console.warn('[pob-import] Mod Pools not loaded', error)),

@@ -114,7 +114,8 @@ pnpm storybook     # build UI components in isolation on :6006
 
 The Path of Building import reads `public/pob-stats.ndjson`, which is committed. Its stat lines are generated from
 the game files by [dat-mcp](https://github.com/poehubdev/dat-mcp): on a new patch, run
-`npm run stats -- poe1 <patch>` there and `pnpm pob-stats <dat-mcp>/data/poe1-<patch>-stats.ndjson` here. Its unique
+`npm run stats -- poe1 <patch>` there and `pnpm pob-stats <dat-mcp>/data/poe1-<patch>-stats.ndjson` here (pruned to
+Character Stats and gzipped by the build, [ADR 0004](docs/adr/0004-per-game-compressed-pob-data.md)). Its unique
 lines come from [Awakened PoE Trade](https://github.com/SnosMe/awakened-poe-trade): a weekly workflow opens a PR when
 they change there. Details in `AGENTS.md` and [ADR 0002](docs/adr/0002-pob-stat-data-from-dat-mcp.md).
 

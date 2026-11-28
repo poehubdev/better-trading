@@ -1,4 +1,3 @@
-{"better":1,"matchers":[{"string":"# additional Rare Monsters are spawned from Abysses in Map"}],"trade":{"ids":{"explicit":["explicit.stat_243380454"],"desecrated":["desecrated.stat_243380454"]}}}
 {"stats":[{"better":1,"matchers":[{"string":"# Charm Slot"},{"string":"# Charm Slots"}],"trade":{"ids":{"explicit":["explicit.stat_2582079000"]}}},{"better":1,"matchers":[{"string":"# Charm Slot"},{"string":"# Charm Slots"}],"trade":{"ids":{"explicit":["explicit.stat_554899692"],"rune":["rune.stat_554899692"]}}}]}
 {"better":1,"matchers":[{"string":"# Crafted Modifiers"}],"trade":{"ids":{"pseudo":["pseudo.pseudo_number_of_crafted_mods"]}}}
 {"better":1,"matchers":[{"string":"# Desecrated Modifiers"}],"trade":{"ids":{"pseudo":["pseudo.pseudo_number_of_desecrated_mods"]}}}
@@ -9,7 +8,6 @@
 {"better":1,"matchers":[{"string":"# Empty Prefix Modifiers"}],"trade":{"ids":{"pseudo":["pseudo.pseudo_number_of_empty_prefix_mods"]}}}
 {"better":1,"matchers":[{"string":"# Empty Suffix Modifiers"}],"trade":{"ids":{"pseudo":["pseudo.pseudo_number_of_empty_suffix_mods"]}}}
 {"better":1,"matchers":[{"string":"# Enchant Modifiers"}],"trade":{"ids":{"pseudo":["pseudo.pseudo_number_of_enchant_mods"]}}}
-{"better":1,"matchers":[{"string":"# extra pack of Monsters around Vaal Beacons in Map"},{"string":"# extra packs of Monsters around Vaal Beacons in Map"}],"trade":{"ids":{"explicit":["explicit.stat_3294218801"]}}}
 {"better":1,"matchers":[{"string":"# Fractured Modifiers"}],"trade":{"ids":{"pseudo":["pseudo.pseudo_number_of_fractured_mods"]}}}
 {"better":1,"matchers":[{"string":"# Implicit Modifiers"}],"trade":{"ids":{"pseudo":["pseudo.pseudo_number_of_implicit_mods"]}}}
 {"better":1,"matchers":[{"string":"# Intelligence Requirement"}],"trade":{"ids":{"explicit":["explicit.stat_2153364323"],"implicit":["implicit.stat_2153364323"],"rune":["rune.stat_2153364323"]}}}
@@ -29,7 +27,6 @@
 {"better":1,"matchers":[{"string":"# Physical Damage taken on Minion Death"}],"trade":{"ids":{"explicit":["explicit.stat_4176970656"]}}}
 {"better":1,"matchers":[{"string":"# Prefix Modifier allowed"},{"string":"# Prefix Modifiers allowed"}],"trade":{"ids":{"explicit":["explicit.stat_3182714256"],"implicit":["implicit.stat_3182714256"],"fractured":["fractured.stat_3182714256"],"crafted":["crafted.stat_3182714256"]}}}
 {"better":1,"matchers":[{"string":"# Prefix Modifiers"}],"trade":{"ids":{"pseudo":["pseudo.pseudo_number_of_prefix_mods"]}}}
-{"better":1,"matchers":[{"string":"# Resolve Aegis"}],"trade":{"ids":{"explicit":["sanctum.stat_2410906123"]}}}
 {"better":1,"matchers":[{"string":"# Strength Requirement"}],"trade":{"ids":{"explicit":["explicit.stat_2833226514"]}}}
 {"better":1,"matchers":[{"string":"# Suffix Modifier allowed"},{"string":"# Suffix Modifiers allowed"}],"trade":{"ids":{"explicit":["explicit.stat_718638445"],"implicit":["implicit.stat_718638445"],"fractured":["fractured.stat_718638445"],"crafted":["crafted.stat_718638445"],"rune":["rune.stat_718638445"]}}}
 {"better":1,"matchers":[{"string":"# Suffix Modifiers"}],"trade":{"ids":{"pseudo":["pseudo.pseudo_number_of_suffix_mods"]}}}
@@ -98,7 +95,6 @@
 {"better":1,"matchers":[{"string":"# to maximum Life per 8 Armour on Equipped Helmet"}],"trade":{"ids":{"rune":["rune.stat_2785209416"]}}}
 {"better":1,"matchers":[{"string":"# to maximum Life per Socket filled"}],"trade":{"ids":{"explicit":["explicit.stat_150391334"]}}}
 {"better":1,"matchers":[{"string":"# to maximum Mana"}],"trade":{"ids":{"explicit":["explicit.stat_1050105434"],"implicit":["implicit.stat_1050105434"],"fractured":["fractured.stat_1050105434"],"enchant":["enchant.stat_1050105434"],"crafted":["crafted.stat_1050105434"],"rune":["rune.stat_1050105434"],"desecrated":["desecrated.stat_1050105434"]}}}
-{"better":1,"matchers":[{"string":"# to maximum Mana per 2 Item Energy Shield on Equipped Helmet"}],"trade":{"ids":{"rune":["rune.stat_280497929"]}}}
 {"better":1,"matchers":[{"string":"# to maximum Mana per 3 Item Armour on Equipped Helmet"}],"trade":{"ids":{"rune":["rune.stat_995044379"]}}}
 {"better":1,"matchers":[{"string":"# to maximum Mana per Socket filled"}],"trade":{"ids":{"explicit":["explicit.stat_1036267537"]}}}
 {"better":1,"matchers":[{"string":"# to maximum number of Elemental Infusions"}],"trade":{"ids":{"explicit":["explicit.stat_4097212302"],"fractured":["fractured.stat_4097212302"],"crafted":["crafted.stat_4097212302"],"desecrated":["desecrated.stat_4097212302"]}}}
@@ -127,26 +123,20 @@
 {"better":1,"matchers":[{"string":"# Unrevealed Suffix Modifiers"}],"trade":{"ids":{"pseudo":["pseudo.pseudo_number_of_unrevealed_suffix_mods"]}}}
 {"better":1,"matchers":[{"string":"# uses remaining (Tablets)"}],"trade":{"ids":{"pseudo":["pseudo.pseudo_number_of_uses_remaining"]}}}
 {"better":1,"matchers":[{"string":"#% additional Physical Damage Reduction"}],"trade":{"ids":{"explicit":["explicit.stat_3771516363"],"fractured":["fractured.stat_3771516363"],"enchant":["enchant.stat_3771516363"],"desecrated":["desecrated.stat_3771516363"]}}}
-{"better":1,"matchers":[{"string":"#% chance for an extra packs of Monsters around Vaal Beacons in Map"}],"trade":{"ids":{"explicit":["explicit.stat_1359775981"]}}}
 {"better":1,"matchers":[{"string":"#% chance for Charms you use to not consume Charges"}],"trade":{"ids":{"explicit":["explicit.stat_501873429"],"desecrated":["desecrated.stat_501873429"]}}}
-{"better":1,"matchers":[{"string":"#% chance for each of your Keys to upgrade on completing a Floor"},{"string":"Your Keys to upgrade on completing a Floor","value":100}],"trade":{"ids":{"explicit":["sanctum.stat_2155917449"]}}}
 {"better":1,"matchers":[{"string":"#% chance for Energy Shield Recharge to start when you Kill an Enemy"}],"trade":{"ids":{"explicit":["explicit.stat_1618482990"]}}}
 {"better":1,"matchers":[{"string":"#% chance for Flasks you use to not consume Charges"}],"trade":{"ids":{"explicit":["explicit.stat_311641062"],"desecrated":["desecrated.stat_311641062"]}}}
 {"better":1,"matchers":[{"string":"#% chance for Lightning Damage with Hits to be Lucky"}],"trade":{"ids":{"explicit":["explicit.stat_2466011626"],"desecrated":["desecrated.stat_2466011626"]}}}
 {"better":1,"matchers":[{"string":"#% chance for Lightning Skills to Chain an additional time"}],"trade":{"ids":{"implicit":["implicit.stat_3112931530"]}}}
 {"better":1,"matchers":[{"string":"#% chance for Mace Slam Skills you use yourself to cause an additional Aftershock"},{"string":"Mace Slam Skills you use yourself cause an additional Aftershock","value":100}],"trade":{"ids":{"explicit":["explicit.stat_3950000557"],"desecrated":["desecrated.stat_3950000557"]}}}
 {"better":1,"matchers":[{"string":"#% chance for Remnants you pick up to count as picking up an additional Remnant"}],"trade":{"ids":{"explicit":["explicit.stat_3422093970"],"fractured":["fractured.stat_3422093970"]}}}
-{"better":1,"matchers":[{"string":"#% chance for Resolve Mitigation to be doubled when Hit by an Enemy"}],"trade":{"ids":{"explicit":["sanctum.stat_774484840"]}}}
 {"better":1,"matchers":[{"string":"#% chance for Skills to retain 40% of Glory on use"},{"string":"Skills to retain 40% of Glory on use","value":100}],"trade":{"ids":{"explicit":["explicit.stat_2749595652"],"crafted":["crafted.stat_2749595652"],"desecrated":["desecrated.stat_2749595652"]}}}
-{"better":1,"matchers":[{"string":"#% chance for Slam Skills to cause an additional Aftershock"},{"string":"Slam Skills cause an additional Aftershock","value":100}],"trade":{"ids":{"explicit":["explicit.stat_1157523820"]}}}
 {"better":1,"matchers":[{"string":"#% chance for Slam Skills you use yourself to cause an additional Aftershock"},{"string":"Slam Skills you use yourself cause an additional Aftershock","value":100}],"trade":{"ids":{"explicit":["explicit.stat_2045949233"],"rune":["rune.stat_2045949233"]}}}
 {"better":1,"matchers":[{"string":"#% chance for Spell Damage with Critical Hits to be Lucky"}],"trade":{"ids":{"explicit":["explicit.stat_1133346493"]}}}
 {"better":1,"matchers":[{"string":"#% chance for Spell Skills to fire 2 additional Projectiles"}],"trade":{"ids":{"explicit":["explicit.stat_2910761524"],"implicit":["implicit.stat_2910761524"],"rune":["rune.stat_2910761524"],"desecrated":["desecrated.stat_2910761524"]}}}
 {"better":1,"matchers":[{"string":"#% chance for Spell Skills to fire 8 additional Projectiles in a circle"}],"trade":{"ids":{"explicit":["explicit.stat_4224832423"]}}}
 {"better":1,"matchers":[{"string":"#% chance for Trigger skills to refund half of Energy Spent"},{"string":"Trigger skills refund half of Energy spent","value":100}],"trade":{"ids":{"explicit":["explicit.stat_599320227"],"desecrated":["desecrated.stat_599320227"]}}}
-{"better":1,"matchers":[{"string":"#% chance if you were to lose all your Honour to have 1 Honour instead"}],"trade":{"ids":{"explicit":["sanctum.stat_3870327403"]}}}
 {"better":1,"matchers":[{"string":"#% chance that if you would gain Rage on Hit, you instead gain up to your maximum Rage"}],"trade":{"ids":{"explicit":["explicit.stat_2710292678"]}}}
-{"better":1,"matchers":[{"string":"#% chance to add a Vaal Beacon Unique Monster to the Map"}],"trade":{"ids":{"explicit":["explicit.stat_3937291366"]}}}
 {"better":1,"matchers":[{"string":"#% chance to Aggravate Bleeding on Hit"}],"trade":{"ids":{"explicit":["explicit.stat_1009412152"]}}}
 {"better":1,"matchers":[{"string":"#% chance to Aggravate Bleeding on targets you Critically Hit with Attacks"},{"string":"Aggravate Bleeding on targets you Critically Hit with Attacks","value":100}],"trade":{"ids":{"explicit":["explicit.stat_2438634449"],"rune":["rune.stat_2438634449"]}}}
 {"better":1,"matchers":[{"string":"#% chance to Aggravate Bleeding on targets you Hit with Attacks"}],"trade":{"ids":{"explicit":["explicit.stat_2705185939"],"desecrated":["desecrated.stat_2705185939"]}}}
@@ -154,12 +144,9 @@
 {"better":1,"matchers":[{"string":"#% chance to Avoid Cold Damage from Hits"},{"string":"Avoid Cold Damage from Hits","value":100}],"trade":{"ids":{"explicit":["explicit.stat_3743375737"]}}}
 {"better":1,"matchers":[{"string":"#% chance to Avoid Death from Hits"}],"trade":{"ids":{"explicit":["explicit.stat_1689729380"]}}}
 {"better":1,"matchers":[{"string":"#% chance to Avoid Fire Damage from Hits"},{"string":"Avoid Fire Damage from Hits","value":100}],"trade":{"ids":{"explicit":["explicit.stat_42242677"]}}}
-{"better":1,"matchers":[{"string":"#% chance to Avoid gaining an Affliction"},{"string":"Cannot gain Afflictions","value":100}],"trade":{"ids":{"explicit":["sanctum.stat_1960517795"]}}}
-{"better":1,"matchers":[{"string":"#% chance to Avoid Honour loss from Enemy Hits if you've been Hit Recently"}],"trade":{"ids":{"explicit":["sanctum.stat_2284543592"]}}}
 {"better":1,"matchers":[{"string":"#% chance to Avoid Lightning Damage from Hits"},{"string":"Avoid Lightning Damage from Hits","value":100}],"trade":{"ids":{"explicit":["explicit.stat_2889664727"]}}}
 {"better":1,"matchers":[{"string":"#% chance to Avoid Physical Damage from Hits"},{"string":"Avoid Physical Damage from Hits","value":100}],"trade":{"ids":{"explicit":["explicit.stat_2415497478"]}}}
 {"better":1,"matchers":[{"string":"#% chance to avoid Projectiles"},{"string":"Avoid Projectiles","value":100}],"trade":{"ids":{"explicit":["explicit.stat_3452269808"]}}}
-{"better":1,"matchers":[{"string":"#% chance to Avoid Resolve loss from Enemy Hits"}],"trade":{"ids":{"explicit":["sanctum.stat_2878762585"]}}}
 {"better":1,"matchers":[{"string":"#% chance to be inflicted with Bleeding when Hit"}],"trade":{"ids":{"explicit":["explicit.stat_3423694372"]}}}
 {"better":1,"matchers":[{"string":"#% chance to be Poisoned"}],"trade":{"ids":{"explicit":["explicit.stat_4250009622"]}}}
 {"better":1,"matchers":[{"string":"#% chance to Blind Enemies on hit"}],"trade":{"ids":{"enchant":["enchant.stat_2301191210"]}}}
@@ -173,7 +160,6 @@
 {"better":1,"matchers":[{"string":"#% Chance to gain a Charge when you kill an enemy"}],"trade":{"ids":{"explicit":["explicit.stat_828533480"]}}}
 {"better":1,"matchers":[{"string":"#% chance to gain a Power Charge on Critical Hit"},{"string":"Gain a Power Charge on Critical Hit","value":100}],"trade":{"ids":{"explicit":["explicit.stat_3814876985"]}}}
 {"better":1,"matchers":[{"string":"#% chance to gain a Power Charge on Hit"}],"trade":{"ids":{"explicit":["explicit.stat_1453197917"]}}}
-{"better":1,"matchers":[{"string":"#% chance to gain an additional Crystal from Vaal Beacons in Map"}],"trade":{"ids":{"explicit":["explicit.stat_1940774881"]}}}
 {"better":1,"matchers":[{"string":"#% chance to gain an additional random Charge when you gain a Charge"},{"string":"Gain an additional random Charge when you gain a Charge","value":100}],"trade":{"ids":{"explicit":["explicit.stat_504210122"]}}}
 {"better":1,"matchers":[{"string":"#% chance to Gain Arcane Surge when you deal a Critical Hit"},{"string":"Gain Arcane Surge when you deal a Critical Hit","value":100}],"trade":{"ids":{"explicit":["explicit.stat_446027070"],"desecrated":["desecrated.stat_446027070"]}}}
 {"better":1,"matchers":[{"string":"#% chance to gain Nature's Archon when your Plants Overgrow"}],"trade":{"ids":{"explicit":["explicit.stat_3518449420"],"fractured":["fractured.stat_3518449420"],"crafted":["crafted.stat_3518449420"]}}}
@@ -209,9 +195,7 @@
 {"better":1,"matchers":[{"string":"#% increased Accuracy Rating with Bows"},{"string":"#% reduced Accuracy Rating with Bows","negate":true}],"trade":{"ids":{"explicit":["explicit.stat_169946467"],"fractured":["fractured.stat_169946467"],"desecrated":["desecrated.stat_169946467"]}}}
 {"better":1,"matchers":[{"string":"#% increased amount of Life Leeched"},{"string":"#% reduced amount of Life Leeched","negate":true}],"trade":{"ids":{"explicit":["explicit.stat_2112395885"],"fractured":["fractured.stat_2112395885"],"desecrated":["desecrated.stat_2112395885"]}}}
 {"better":1,"matchers":[{"string":"#% increased amount of Life Leeched if you've consumed a Frenzy Charge Recently"},{"string":"#% reduced amount of Life Leeched if you've consumed a Frenzy Charge Recently","negate":true}],"trade":{"ids":{"explicit":["explicit.stat_3843204146"]}}}
-{"better":1,"matchers":[{"string":"#% increased amount of Magic Chests"},{"string":"#% reduced amount of Magic Chests","negate":true}],"trade":{"ids":{"explicit":["explicit.stat_2898517796"]}}}
 {"better":1,"matchers":[{"string":"#% increased amount of Mana Leeched"},{"string":"#% reduced amount of Mana Leeched","negate":true}],"trade":{"ids":{"explicit":["explicit.stat_2839066308"],"fractured":["fractured.stat_2839066308"],"desecrated":["desecrated.stat_2839066308"]}}}
-{"better":1,"matchers":[{"string":"#% increased amount of Rare Chests"},{"string":"#% reduced amount of Rare Chests","negate":true}],"trade":{"ids":{"explicit":["explicit.stat_798469000"]}}}
 {"better":1,"matchers":[{"string":"#% increased Amount Recovered"},{"string":"#% reduced Amount Recovered","negate":true}],"trade":{"ids":{"explicit":["explicit.stat_700317374"]}}}
 {"better":1,"matchers":[{"string":"#% increased Archon Buff duration"},{"string":"#% reduced Archon Buff duration","negate":true}],"trade":{"ids":{"explicit":["explicit.stat_2158617060"],"fractured":["fractured.stat_2158617060"],"crafted":["crafted.stat_2158617060"],"desecrated":["desecrated.stat_2158617060"]}}}
 {"better":1,"matchers":[{"string":"#% increased Area of Effect"},{"string":"#% reduced Area of Effect","negate":true}],"trade":{"ids":{"explicit":["explicit.stat_280731498"],"fractured":["fractured.stat_280731498"],"enchant":["enchant.stat_280731498"],"crafted":["crafted.stat_280731498"],"rune":["rune.stat_280731498"],"desecrated":["desecrated.stat_280731498"]}}}
@@ -241,7 +225,6 @@
 {"better":1,"matchers":[{"string":"#% increased Attack Speed per 10 Dexterity"},{"string":"#% reduced Attack Speed per 10 Dexterity","negate":true}],"trade":{"ids":{"explicit":["explicit.stat_889691035"]}}}
 {"better":1,"matchers":[{"string":"#% increased Attack Speed per 20 Dexterity"},{"string":"#% reduced Attack Speed per 20 Dexterity","negate":true}],"trade":{"ids":{"explicit":["explicit.stat_720908147"]}}}
 {"better":1,"matchers":[{"string":"#% increased Attack Speed per 20 Spirit"},{"string":"#% reduced Attack Speed per 20 Spirit","negate":true}],"trade":{"ids":{"explicit":["explicit.stat_324579579"]}}}
-{"better":1,"matchers":[{"string":"#% increased Attack Speed per 25 Dexterity"}],"trade":{"ids":{"explicit":["explicit.stat_2241560081"]}}}
 {"better":1,"matchers":[{"string":"#% increased Attack Speed while a Rare or Unique Enemy is in your Presence"},{"string":"#% reduced Attack Speed while a Rare or Unique is in your Presence","negate":true}],"trade":{"ids":{"explicit":["explicit.stat_314741699"],"desecrated":["desecrated.stat_314741699"]}}}
 {"better":1,"matchers":[{"string":"#% increased Attack Speed while missing Runic Ward"},{"string":"#% reduced Attack Speed while missing Runic Ward","negate":true}],"trade":{"ids":{"explicit":["explicit.stat_325171970"],"fractured":["fractured.stat_325171970"],"crafted":["crafted.stat_325171970"]}}}
 {"better":1,"matchers":[{"string":"#% increased Attack Speed while on Full Mana"},{"string":"#% reduced Attack Speed while on Full Mana","negate":true}],"trade":{"ids":{"explicit":["explicit.stat_4145314483"]}}}
@@ -272,18 +255,12 @@
 {"better":1,"matchers":[{"string":"#% increased Cast Speed when on Full Life"},{"string":"#% reduced Cast Speed when on Full Life","negate":true}],"trade":{"ids":{"explicit":["explicit.stat_656291658"],"desecrated":["desecrated.stat_656291658"]}}}
 {"better":1,"matchers":[{"string":"#% increased Cast Speed when on Low Life"},{"string":"#% reduced Cast Speed when on Low Life","negate":true}],"trade":{"ids":{"explicit":["explicit.stat_1136768410"],"desecrated":["desecrated.stat_1136768410"]}}}
 {"better":1,"matchers":[{"string":"#% increased Cast Speed while on Full Mana"},{"string":"#% reduced Cast Speed while on Full Mana","negate":true}],"trade":{"ids":{"explicit":["explicit.stat_1914226331"],"desecrated":["desecrated.stat_1914226331"]}}}
-{"better":1,"matchers":[{"string":"#% increased chance for Abyssal monsters in Map to have Abyssal Modifiers"},{"string":"#% reduced chance for Abyssal monsters in Map to have Abyssal Modifiers","negate":true}],"trade":{"ids":{"explicit":["explicit.stat_2789248444"]}}}
-{"better":1,"matchers":[{"string":"#% increased chance for Desecrated Currency from Abysses in Map"},{"string":"#% reduced chance for Desecrated Currency from Abysses in Map","negate":true}],"trade":{"ids":{"explicit":["explicit.stat_1710200734"]}}}
-{"better":1,"matchers":[{"string":"#% increased chance to avoid Honour loss from Enemy Melee Hits"},{"string":"#% reduced chance to avoid Honour loss from Enemy Melee Hits","negate":true}],"trade":{"ids":{"explicit":["sanctum.stat_3134588943"]}}}
-{"better":1,"matchers":[{"string":"#% increased chance to Avoid Resolve Loss from Enemy Projectile Hits"}],"trade":{"ids":{"explicit":["sanctum.stat_1798691236"]}}}
 {"better":1,"matchers":[{"string":"#% increased Chance to be afflicted by Ailments when Hit"},{"string":"#% reduced Chance to be afflicted by Ailments when Hit","negate":true}],"trade":{"ids":{"explicit":["explicit.stat_892489594"]}}}
 {"better":1,"matchers":[{"string":"#% increased chance to inflict Ailments"},{"string":"#% reduced chance to inflict Ailments","negate":true}],"trade":{"ids":{"explicit":["explicit.stat_1772247089"],"fractured":["fractured.stat_1772247089"],"desecrated":["desecrated.stat_1772247089"]}}}
 {"better":1,"matchers":[{"string":"#% increased chance to inflict Ailments against Enemies affected by Abyssal Wasting"},{"string":"#% reduced chance to inflict Ailments against Enemies affected by Abyssal Wasting","negate":true}],"trade":{"ids":{"explicit":["explicit.stat_2760643568"]}}}
 {"better":1,"matchers":[{"string":"#% increased chance to inflict Bleeding"},{"string":"#% reduced chance to inflict Bleeding","negate":true}],"trade":{"ids":{"explicit":["explicit.stat_242637938"],"desecrated":["desecrated.stat_242637938"]}}}
 {"better":1,"matchers":[{"string":"#% increased chance to Poison"},{"string":"#% reduced chance to Poison","negate":true}],"trade":{"ids":{"explicit":["explicit.stat_3481083201"],"desecrated":["desecrated.stat_3481083201"]}}}
 {"better":1,"matchers":[{"string":"#% increased chance to Shock"},{"string":"#% reduced chance to Shock","negate":true}],"trade":{"ids":{"explicit":["explicit.stat_293638271"],"fractured":["fractured.stat_293638271"],"enchant":["enchant.stat_293638271"],"rune":["rune.stat_293638271"],"desecrated":["desecrated.stat_293638271"]}}}
-{"better":1,"matchers":[{"string":"#% increased chance Vaal Beacon Chests are Rare in Map"}],"trade":{"ids":{"explicit":["explicit.stat_2514439422"]}}}
-{"better":1,"matchers":[{"string":"#% increased chance Vaal Beacons summon additional Monsters in Map"}],"trade":{"ids":{"explicit":["explicit.stat_632698321"]}}}
 {"better":1,"matchers":[{"string":"#% increased Chaos Damage"},{"string":"#% reduced Chaos Damage","negate":true}],"trade":{"ids":{"explicit":["explicit.stat_736967255"],"implicit":["implicit.stat_736967255"],"fractured":["fractured.stat_736967255"],"crafted":["crafted.stat_736967255"],"desecrated":["desecrated.stat_736967255"]}}}
 {"better":1,"matchers":[{"string":"#% increased Chaos Damage for each Corrupted Item Equipped"},{"string":"#% reduced Chaos Damage for each Corrupted Item Equipped","negate":true}],"trade":{"ids":{"implicit":["implicit.stat_4004011170"]}}}
 {"better":1,"matchers":[{"string":"#% increased Charges"},{"string":"#% reduced Charges","negate":true}],"trade":{"ids":{"explicit":["explicit.stat_1366840608"]}}}
@@ -342,7 +319,6 @@
 {"better":1,"matchers":[{"string":"#% increased Damage with Quarterstaves"},{"string":"#% reduced Damage with Quarterstaves","negate":true}],"trade":{"ids":{"explicit":["explicit.stat_4045894391"],"fractured":["fractured.stat_4045894391"],"desecrated":["desecrated.stat_4045894391"]}}}
 {"better":1,"matchers":[{"string":"#% increased Damage with Spears"},{"string":"#% reduced Damage with Spears","negate":true}],"trade":{"ids":{"explicit":["explicit.stat_2696027455"],"fractured":["fractured.stat_2696027455"],"desecrated":["desecrated.stat_2696027455"]}}}
 {"better":1,"matchers":[{"string":"#% increased Damage with Warcries"},{"string":"#% reduced Damage with Warcries","negate":true}],"trade":{"ids":{"explicit":["explicit.stat_1594812856"],"fractured":["fractured.stat_1594812856"],"desecrated":["desecrated.stat_1594812856"]}}}
-{"better":1,"matchers":[{"string":"#% increased Daze Buildup"},{"string":"#% reduced Daze Buildup","negate":true}],"trade":{"ids":{"explicit":["explicit.stat_1949833742"]}}}
 {"better":1,"matchers":[{"string":"#% increased Deflection Rating"},{"string":"#% reduced Deflection Rating","negate":true}],"trade":{"ids":{"explicit":["explicit.stat_3040571529"],"rune":["rune.stat_3040571529"],"desecrated":["desecrated.stat_3040571529"]}}}
 {"better":1,"matchers":[{"string":"#% increased Deflection Rating while moving"},{"string":"#% reduced Deflection Rating while moving"}],"trade":{"ids":{"explicit":["explicit.stat_1382805233"],"rune":["rune.stat_1382805233"]}}}
 {"better":1,"matchers":[{"string":"#% increased Desecrated Modifier magnitudes"}],"trade":{"ids":{"explicit":["explicit.stat_586037801"]}}}
@@ -357,7 +333,6 @@
 {"better":1,"matchers":[{"string":"#% increased Duration of Poisons you inflict when you've consumed a Frenzy Charge Recently"},{"string":"#% reduced Duration of Poisons you inflict when you've consumed a Frenzy Charge Recently","negate":true}],"trade":{"ids":{"explicit":["explicit.stat_3841138199"]}}}
 {"better":1,"matchers":[{"string":"#% increased effect of Arcane Surge on you"},{"string":"#% reduced effect of Arcane Surge on you","negate":true}],"trade":{"ids":{"explicit":["explicit.stat_2103650854"],"implicit":["implicit.stat_2103650854"],"fractured":["fractured.stat_2103650854"],"rune":["rune.stat_2103650854"],"desecrated":["desecrated.stat_2103650854"]}}}
 {"better":1,"matchers":[{"string":"#% increased effect of Archon Buffs on you"},{"string":"#% reduced effect of Archon Buffs on you","negate":true}],"trade":{"ids":{"explicit":["explicit.stat_1180552088"],"fractured":["fractured.stat_1180552088"],"crafted":["crafted.stat_1180552088"],"desecrated":["desecrated.stat_1180552088"]}}}
-{"better":1,"matchers":[{"string":"#% increased Effect of Expedition Remnants in Map"},{"string":"#% reduced Effect of Expedition Remnants in Map"}],"trade":{"ids":{"explicit":["explicit.stat_3078574625"]}}}
 {"better":1,"matchers":[{"string":"#% increased effect of Fully Broken Armour"}],"trade":{"ids":{"explicit":["explicit.stat_1879206848"],"implicit":["implicit.stat_1879206848"],"fractured":["fractured.stat_1879206848"],"rune":["rune.stat_1879206848"],"desecrated":["desecrated.stat_1879206848"]}}}
 {"better":1,"matchers":[{"string":"#% increased Effect of Jewel Socket Passive Skills\ncontaining Corrupted Magic Jewels"},{"string":"#% reduced Effect of Jewel Socket Passive Skills\ncontaining Corrupted Magic Jewels","negate":true}],"trade":{"ids":{"explicit":["explicit.stat_461663422"]}}}
 {"better":1,"matchers":[{"string":"#% increased Effect of Jewel Socket Passive Skills\ncontaining Corrupted Rare Jewels"},{"string":"#% reduced Effect of Jewel Socket Passive Skills\ncontaining Corrupted Rare Jewels","negate":true}],"trade":{"ids":{"explicit":["explicit.stat_3128077011"]}}}
@@ -370,7 +345,6 @@
 {"better":1,"matchers":[{"string":"#% increased effect of Socketed Soul Cores"},{"string":"#% reduced effect of Socketed Soul Cores","negate":true}],"trade":{"ids":{"explicit":["explicit.stat_4065505214"]}}}
 {"better":1,"matchers":[{"string":"#% increased Effect of Suffixes"},{"string":"#% reduced Effect of Suffixes","negate":true}],"trade":{"ids":{"explicit":["explicit.stat_2475221757"],"fractured":["fractured.stat_2475221757"],"crafted":["crafted.stat_2475221757"]}}}
 {"better":1,"matchers":[{"string":"#% increased Effect of your Mark Skills"},{"string":"#% reduced Effect of your Mark Skills","negate":true}],"trade":{"ids":{"explicit":["explicit.stat_712554801"],"fractured":["fractured.stat_712554801"],"crafted":["crafted.stat_712554801"],"desecrated":["desecrated.stat_712554801"]}}}
-{"better":1,"matchers":[{"string":"#% increased Effectiveness of Rare Breach Monsters in Map"},{"string":"#% reduced Effectiveness of Rare Breach Monsters in Map","negate":true}],"trade":{"ids":{"explicit":["explicit.stat_2895378479"]}}}
 {"better":1,"matchers":[{"string":"#% increased Elemental Ailment Threshold"},{"string":"#% reduced Elemental Ailment Threshold","negate":true}],"trade":{"ids":{"explicit":["explicit.stat_3544800472"],"implicit":["implicit.stat_3544800472"],"fractured":["fractured.stat_3544800472"],"rune":["rune.stat_3544800472"],"desecrated":["desecrated.stat_3544800472"]}}}
 {"better":1,"matchers":[{"string":"#% increased Elemental Damage"},{"string":"#% reduced Elemental Damage","negate":true}],"trade":{"ids":{"explicit":["explicit.stat_3141070085"],"fractured":["fractured.stat_3141070085"],"crafted":["crafted.stat_3141070085"],"desecrated":["desecrated.stat_3141070085"]}}}
 {"better":1,"matchers":[{"string":"#% increased Elemental Damage with Attacks"},{"string":"#% reduced Elemental Damage with Attacks","negate":true}],"trade":{"ids":{"explicit":["explicit.stat_387439868"],"fractured":["fractured.stat_387439868"],"enchant":["enchant.stat_387439868"],"rune":["rune.stat_387439868"],"desecrated":["desecrated.stat_387439868"]}}}
@@ -390,12 +364,7 @@
 {"better":1,"matchers":[{"string":"#% increased Evasion Rating if you've Dodge Rolled Recently"},{"string":"#% reduced Evasion Rating if you've Dodge Rolled Recently","negate":true}],"trade":{"ids":{"explicit":["explicit.stat_1040569494"]}}}
 {"better":1,"matchers":[{"string":"#% increased Evasion Rating when on Full Life"},{"string":"#% reduced Evasion Rating when on Full Life","negate":true}],"trade":{"ids":{"explicit":["explicit.stat_88817332"],"rune":["rune.stat_88817332"]}}}
 {"better":1,"matchers":[{"string":"#% increased Evasion Rating while Sprinting"},{"string":"#% reduced Evasion Rating while Sprinting","negate":true}],"trade":{"ids":{"explicit":["explicit.stat_1586136369"]}}}
-{"better":1,"matchers":[{"string":"#% increased Expedition Explosive Area of Effect in Map"}],"trade":{"ids":{"explicit":["explicit.stat_3039133122"]}}}
-{"better":1,"matchers":[{"string":"#% increased Expedition Explosive Placement Range in Map"},{"string":"#% reduced Expedition Explosive Placement Range in Map"}],"trade":{"ids":{"explicit":["explicit.stat_1539368271"],"implicit":["implicit.stat_1539368271"]}}}
-{"better":1,"matchers":[{"string":"#% increased Expedition Explosive Radius in Map"}],"trade":{"ids":{"explicit":["explicit.stat_3289828378"],"implicit":["implicit.stat_3289828378"]}}}
-{"better":1,"matchers":[{"string":"#% increased Expedition Monster Rarity in Map"}],"trade":{"ids":{"explicit":["explicit.stat_2905096233"]}}}
 {"better":1,"matchers":[{"string":"#% increased Experience gain"},{"string":"#% reduced Experience gain","negate":true}],"trade":{"ids":{"explicit":["explicit.stat_3666934677"],"rune":["rune.stat_3666934677"]}}}
-{"better":1,"matchers":[{"string":"#% increased Experience gain in Map"},{"string":"#% reduced Experience gain in Map","negate":true}],"trade":{"ids":{"explicit":["explicit.stat_57434274"],"fractured":["fractured.stat_57434274"]}}}
 {"better":1,"matchers":[{"string":"#% increased Explicit Chaos Modifier magnitudes"},{"string":"#% reduced Explicit Chaos Modifier magnitudes","negate":true}],"trade":{"ids":{"explicit":["explicit.stat_3196512240"],"fractured":["fractured.stat_3196512240"],"desecrated":["desecrated.stat_3196512240"]}}}
 {"better":1,"matchers":[{"string":"#% increased Explicit Cold Modifier magnitudes"},{"string":"#% reduced Explicit Cold Modifier magnitudes","negate":true}],"trade":{"ids":{"explicit":["explicit.stat_3206904707"],"fractured":["fractured.stat_3206904707"],"desecrated":["desecrated.stat_3206904707"]}}}
 {"better":1,"matchers":[{"string":"#% increased Explicit Critical Modifier magnitudes"},{"string":"#% reduced Explicit Critical Modifier magnitudes","negate":true}],"trade":{"ids":{"explicit":["explicit.stat_2393315299"],"fractured":["fractured.stat_2393315299"],"desecrated":["desecrated.stat_2393315299"]}}}
@@ -425,11 +394,9 @@
 {"better":1,"matchers":[{"string":"#% increased Global Physical Damage"},{"string":"#% reduced Global Physical Damage","negate":true}],"trade":{"ids":{"explicit":["explicit.stat_1310194496"],"fractured":["fractured.stat_1310194496"],"crafted":["crafted.stat_1310194496"],"desecrated":["desecrated.stat_1310194496"]}}}
 {"better":1,"matchers":[{"string":"#% increased Glory generation"},{"string":"#% reduced Glory generation","negate":true}],"trade":{"ids":{"explicit":["explicit.stat_3143918757"],"fractured":["fractured.stat_3143918757"],"rune":["rune.stat_3143918757"],"desecrated":["desecrated.stat_3143918757"]}}}
 {"better":1,"matchers":[{"string":"#% increased Glory generation for Banner Skills"}],"trade":{"ids":{"explicit":["explicit.stat_1869147066"],"fractured":["fractured.stat_1869147066"],"desecrated":["desecrated.stat_1869147066"]}}}
-{"stats":[{"better":1,"matchers":[{"string":"#% increased Gold found in this Area"},{"string":"#% reduced Gold found in this Area","negate":true}],"trade":{"ids":{"explicit":["explicit.stat_1276056105"],"fractured":["fractured.stat_1276056105"]}}},{"better":1,"matchers":[{"string":"#% increased Gold found in this Area"},{"string":"#% reduced Gold found in this Area","negate":true}],"trade":{"ids":{"explicit":["explicit.stat_1133965702"]}}}]}
 {"better":1,"matchers":[{"string":"#% increased Grenade Damage"},{"string":"#% reduced Grenade Damage","negate":true}],"trade":{"ids":{"explicit":["explicit.stat_3131442032"],"desecrated":["desecrated.stat_3131442032"]}}}
 {"better":1,"matchers":[{"string":"#% increased Grenade Duration"},{"string":"#% reduced Grenade Duration","negate":true}],"trade":{"ids":{"explicit":["explicit.stat_1365232741"],"desecrated":["desecrated.stat_1365232741"]}}}
 {"better":1,"matchers":[{"string":"#% increased Hazard Damage"},{"string":"#% reduced Hazard Damage","negate":true}],"trade":{"ids":{"explicit":["explicit.stat_1697951953"],"fractured":["fractured.stat_1697951953"],"desecrated":["desecrated.stat_1697951953"]}}}
-{"better":1,"matchers":[{"string":"#% increased Honour restored"},{"string":"#% reduced Honour restored","negate":true}],"trade":{"ids":{"explicit":["sanctum.stat_1583320325"]}}}
 {"better":1,"matchers":[{"string":"#% increased Ice Crystal Life"},{"string":"#% reduced Ice Crystal Life","negate":true}],"trade":{"ids":{"explicit":["explicit.stat_3274422940"],"desecrated":["desecrated.stat_3274422940"]}}}
 {"better":1,"matchers":[{"string":"#% increased Ignite Duration on Enemies"},{"string":"#% reduced Ignite Duration on Enemies","negate":true}],"trade":{"ids":{"explicit":["explicit.stat_1086147743"]}}}
 {"better":1,"matchers":[{"string":"#% increased Ignite Magnitude"},{"string":"#% reduced Ignite Magnitude","negate":true}],"trade":{"ids":{"explicit":["explicit.stat_3791899485"],"implicit":["implicit.stat_3791899485"],"fractured":["fractured.stat_3791899485"],"enchant":["enchant.stat_3791899485"],"rune":["rune.stat_3791899485"],"desecrated":["desecrated.stat_3791899485"]}}}
@@ -450,7 +417,6 @@
 {"better":1,"matchers":[{"string":"#% increased Light Radius"},{"string":"#% reduced Light Radius","negate":true}],"trade":{"ids":{"explicit":["explicit.stat_1263695895"],"fractured":["fractured.stat_1263695895"],"desecrated":["desecrated.stat_1263695895"]}}}
 {"better":1,"matchers":[{"string":"#% increased Lightning Damage"},{"string":"#% reduced Lightning Damage","negate":true}],"trade":{"ids":{"explicit":["explicit.stat_2231156303"],"implicit":["implicit.stat_2231156303"],"fractured":["fractured.stat_2231156303"],"crafted":["crafted.stat_2231156303"],"desecrated":["desecrated.stat_2231156303"]}}}
 {"better":1,"matchers":[{"string":"#% increased Lightning Damage if you've collected a Lightning Infusion in the last 8 seconds"}],"trade":{"ids":{"explicit":["explicit.stat_797289402"],"crafted":["crafted.stat_797289402"],"desecrated":["desecrated.stat_797289402"]}}}
-{"better":1,"matchers":[{"string":"#% increased Magic Pack Size"},{"string":"#% reduced Magic Pack Size","negate":true}],"trade":{"ids":{"explicit":["explicit.stat_1714706956"],"fractured":["fractured.stat_1714706956"]}}}
 {"better":1,"matchers":[{"string":"#% increased Magnitude of Abyssal Wasting you inflict"},{"string":"#% reduced Magnitude of Abyssal Wasting you inflict","negate":true}],"trade":{"ids":{"explicit":["explicit.stat_4043376133"],"desecrated":["desecrated.stat_4043376133"]}}}
 {"better":1,"matchers":[{"string":"#% increased Magnitude of Ailments you inflict"},{"string":"#% reduced Magnitude of Ailments you inflict","negate":true}],"trade":{"ids":{"explicit":["explicit.stat_1303248024"],"fractured":["fractured.stat_1303248024"],"crafted":["crafted.stat_1303248024"],"desecrated":["desecrated.stat_1303248024"]}}}
 {"better":1,"matchers":[{"string":"#% increased Magnitude of Bleeding you inflict"},{"string":"#% reduced Magnitude of Bleeding you inflict","negate":true}],"trade":{"ids":{"explicit":["explicit.stat_3166958180"],"implicit":["implicit.stat_3166958180"],"fractured":["fractured.stat_3166958180"],"rune":["rune.stat_3166958180"],"desecrated":["desecrated.stat_3166958180"]}}}
@@ -485,7 +451,6 @@
 {"better":1,"matchers":[{"string":"#% increased maximum Divinity"},{"string":"#% reduced maximum Divinity","negate":true}],"trade":{"ids":{"explicit":["explicit.stat_878697053"]}}}
 {"better":1,"matchers":[{"string":"#% increased maximum Divinity per Corrupted Item Equipped"},{"string":"#% reduced maximum Divinity per Corrupted Item Equipped","negate":true}],"trade":{"ids":{"explicit":["explicit.stat_2189090852"]}}}
 {"better":1,"matchers":[{"string":"#% increased maximum Energy Shield"},{"string":"#% reduced maximum Energy Shield","negate":true}],"trade":{"ids":{"explicit":["explicit.stat_2482852589"],"fractured":["fractured.stat_2482852589"],"enchant":["enchant.stat_2482852589"],"crafted":["crafted.stat_2482852589"],"desecrated":["desecrated.stat_2482852589"]}}}
-{"better":1,"matchers":[{"string":"#% increased maximum Honour"},{"string":"#% reduced maximum Honour","negate":true}],"trade":{"ids":{"explicit":["sanctum.stat_3970123360"]}}}
 {"stats":[{"better":1,"matchers":[{"string":"#% increased maximum Life"},{"string":"#% reduced maximum Life","negate":true}],"trade":{"ids":{"explicit":["explicit.stat_983749596"],"implicit":["implicit.stat_983749596"],"fractured":["fractured.stat_983749596"],"crafted":["crafted.stat_983749596"],"rune":["rune.stat_983749596"],"desecrated":["desecrated.stat_983749596"]}}},{"better":1,"matchers":[{"string":"#% increased maximum Life"},{"string":"#% reduced maximum Life","negate":true}],"trade":{"ids":{"explicit":["sanctum.stat_1200789871"]}}}]}
 {"better":1,"matchers":[{"string":"#% increased Maximum Life for each Corrupted Item Equipped"},{"string":"#% reduced Maximum Life for each Corrupted Item Equipped","negate":true}],"trade":{"ids":{"implicit":["implicit.stat_4169430079"],"rune":["rune.stat_4169430079"]}}}
 {"better":1,"matchers":[{"string":"#% increased Maximum Life per Socket filled"},{"string":"#% reduced Maximum Life per Socket filled","negate":true}],"trade":{"ids":{"explicit":["explicit.stat_2702182380"]}}}
@@ -497,14 +462,9 @@
 {"better":1,"matchers":[{"string":"#% increased Melee Damage against Heavy Stunned enemies"},{"string":"#% reduced Melee Damage against Heavy Stunned enemies","negate":true}],"trade":{"ids":{"explicit":["explicit.stat_2677352961"]}}}
 {"better":1,"matchers":[{"string":"#% increased Melee Damage if you've dealt a Projectile Attack Hit in the past eight seconds"},{"string":"#% reduced Melee Damage if you've dealt a Projectile Attack Hit in the past eight seconds","negate":true}],"trade":{"ids":{"explicit":["explicit.stat_3028809864"],"fractured":["fractured.stat_3028809864"],"desecrated":["desecrated.stat_3028809864"]}}}
 {"better":1,"matchers":[{"string":"#% increased Melee Strike Range with this weapon"},{"string":"#% reduced Melee Strike Range with this weapon"}],"trade":{"ids":{"explicit":["explicit.stat_548198834"],"implicit":["implicit.stat_548198834"],"enchant":["enchant.stat_548198834"]}}}
-{"better":1,"matchers":[{"string":"#% increased Merchant Prices"},{"string":"#% reduced Merchant Prices","negate":true}],"trade":{"ids":{"explicit":["sanctum.stat_3096446459"]}}}
 {"better":1,"matchers":[{"string":"#% increased Minion Accuracy Rating"},{"string":"#% reduced Minion Accuracy Rating","negate":true}],"trade":{"ids":{"explicit":["explicit.stat_1718147982"],"fractured":["fractured.stat_1718147982"]}}}
 {"better":1,"matchers":[{"string":"#% increased Minion Damage per different Command Skill used in the past 15 seconds"},{"string":"#% reduced Minion Damage per different Command Skill used in the past 15 seconds","negate":true}],"trade":{"ids":{"explicit":["explicit.stat_3526763442"],"crafted":["crafted.stat_3526763442"],"desecrated":["desecrated.stat_3526763442"]}}}
 {"better":1,"matchers":[{"string":"#% increased Minion Duration"},{"string":"#% reduced Minion Duration","negate":true}],"trade":{"ids":{"explicit":["explicit.stat_999511066"],"crafted":["crafted.stat_999511066"],"desecrated":["desecrated.stat_999511066"]}}}
-{"better":1,"matchers":[{"string":"#% increased Monster Attack Speed"}],"trade":{"ids":{"explicit":["explicit.stat_1913583994"],"fractured":["fractured.stat_1913583994"],"desecrated":["desecrated.stat_1913583994"]}}}
-{"better":1,"matchers":[{"string":"#% increased Monster Cast Speed"}],"trade":{"ids":{"explicit":["explicit.stat_2488361432"],"fractured":["fractured.stat_2488361432"],"desecrated":["desecrated.stat_2488361432"]}}}
-{"better":1,"matchers":[{"string":"#% increased Monster Damage"}],"trade":{"ids":{"explicit":["explicit.stat_1890519597","sanctum.stat_1890519597"],"fractured":["fractured.stat_1890519597"],"desecrated":["desecrated.stat_1890519597"]}}}
-{"better":1,"matchers":[{"string":"#% increased Monster Movement Speed"},{"string":"#% reduced Monster Movement Speed","negate":true}],"trade":{"ids":{"explicit":["explicit.stat_2306522833"],"fractured":["fractured.stat_2306522833"],"desecrated":["desecrated.stat_2306522833"]}}}
 {"stats":[{"better":1,"matchers":[{"string":"#% increased Movement Speed"},{"string":"#% reduced Movement Speed","negate":true}],"trade":{"ids":{"explicit":["explicit.stat_2250533757"],"implicit":["implicit.stat_2250533757"],"fractured":["fractured.stat_2250533757"],"enchant":["enchant.stat_2250533757"],"crafted":["crafted.stat_2250533757"],"rune":["rune.stat_2250533757"],"desecrated":["desecrated.stat_2250533757"],"pseudo":["pseudo.pseudo_increased_movement_speed"]}}},{"better":1,"matchers":[{"string":"#% increased Movement Speed"},{"string":"#% reduced Movement Speed","negate":true}],"trade":{"ids":{"explicit":["sanctum.stat_1416455556"]}}}]}
 {"better":1,"matchers":[{"string":"#% increased Movement Speed Penalty from using Skills while moving"},{"string":"#% reduced Movement Speed Penalty from using Skills while moving","negate":true}],"trade":{"ids":{"explicit":["explicit.stat_2590797182"],"implicit":["implicit.stat_2590797182"],"rune":["rune.stat_2590797182"],"desecrated":["desecrated.stat_2590797182"]}}}
 {"better":1,"matchers":[{"string":"#% increased Movement Speed per 15 Spirit, up to a maximum of 40%\nOther Modifiers to Movement Speed except for Sprinting do not apply"}],"trade":{"ids":{"rune":["rune.stat_2703838669"]}}}
@@ -514,11 +474,6 @@
 {"better":1,"matchers":[{"string":"#% increased Movement Speed while affected by an Ailment"},{"string":"#% reduced Movement Speed while affected by an Ailment","negate":true}],"trade":{"ids":{"explicit":["explicit.stat_610276769"]}}}
 {"better":1,"matchers":[{"string":"#% increased Movement Speed while Sprinting"},{"string":"#% reduced Movement Speed while Sprinting","negate":true}],"trade":{"ids":{"explicit":["explicit.stat_3107707789"],"fractured":["fractured.stat_3107707789"],"rune":["rune.stat_3107707789"],"desecrated":["desecrated.stat_3107707789"]}}}
 {"better":1,"matchers":[{"string":"#% increased Movement Speed while Sprinting per Persistent Minion"},{"string":"#% reduced Movement Speed while Sprinting per Persistent Minion","negate":true}],"trade":{"ids":{"rune":["rune.stat_3639405795"]}}}
-{"better":1,"matchers":[{"string":"#% increased number of Expedition Explosives"}],"trade":{"ids":{"implicit":["implicit.stat_3051490307"]}}}
-{"better":1,"matchers":[{"string":"#% increased number of Monster Packs"},{"string":"#% reduced number of Monster Packs","negate":true}],"trade":{"ids":{"explicit":["explicit.stat_2624927319"]}}}
-{"better":1,"matchers":[{"string":"#% increased number of Rare Expedition Monsters in Map"},{"string":"#% reduced number of Rare Expedition Monsters in Map"}],"trade":{"ids":{"explicit":["explicit.stat_2694800111"]}}}
-{"better":1,"matchers":[{"string":"#% increased Pack Size for Monsters around Vaal Beacons in Map"}],"trade":{"ids":{"explicit":["explicit.stat_890040946"]}}}
-{"better":1,"matchers":[{"string":"#% increased Pack Size in Map"},{"string":"#% reduced Pack Size in Map"}],"trade":{"ids":{"explicit":["explicit.stat_2017682521"],"enchant":["enchant.stat_2017682521"]}}}
 {"better":1,"matchers":[{"string":"#% increased Parried Debuff Duration"},{"string":"#% reduced Parried Debuff Duration","negate":true}],"trade":{"ids":{"explicit":["explicit.stat_3401186585"],"fractured":["fractured.stat_3401186585"],"desecrated":["desecrated.stat_3401186585"]}}}
 {"better":1,"matchers":[{"string":"#% increased Parried Debuff Magnitude"},{"string":"#% reduced Parried Debuff Magnitude","negate":true}],"trade":{"ids":{"explicit":["explicit.stat_818877178"],"rune":["rune.stat_818877178"],"desecrated":["desecrated.stat_818877178"]}}}
 {"better":1,"matchers":[{"string":"#% increased Parry Damage"},{"string":"#% reduced Parry Damage","negate":true}],"trade":{"ids":{"explicit":["explicit.stat_1569159338"],"fractured":["fractured.stat_1569159338"],"desecrated":["desecrated.stat_1569159338"]}}}
@@ -535,21 +490,9 @@
 {"better":1,"matchers":[{"string":"#% increased Projectile Speed"},{"string":"#% reduced Projectile Speed","negate":true}],"trade":{"ids":{"explicit":["explicit.stat_3759663284"],"fractured":["fractured.stat_3759663284"],"rune":["rune.stat_3759663284"],"desecrated":["desecrated.stat_3759663284"]}}}
 {"better":1,"matchers":[{"string":"#% increased Projectile Speed for Spell Skills"},{"string":"#% reduced Projectile Speed for Spell Skills","negate":true}],"trade":{"ids":{"explicit":["explicit.stat_3359797958"]}}}
 {"better":1,"matchers":[{"string":"#% increased Projectile Speed with this Weapon"},{"string":"#% reduced Projectile Speed with this Weapon"}],"trade":{"ids":{"explicit":["explicit.stat_535217483"],"implicit":["implicit.stat_535217483"]}}}
-{"better":1,"matchers":[{"string":"#% increased Quantity of Breach Splinters dropped by Breach Monsters in Map"},{"string":"#% reduced Quantity of Breach Splinters dropped by Breach Monsters in Map","negate":true}],"trade":{"ids":{"explicit":["explicit.stat_624534143"]}}}
-{"better":1,"matchers":[{"string":"#% increased quantity of Expedition Artifacts dropped by Monsters in Map"},{"string":"#% reduced quantity of Expedition Artifacts dropped by Monsters in Map"}],"trade":{"ids":{"explicit":["explicit.stat_4219583418"],"implicit":["implicit.stat_4219583418"]}}}
-{"better":1,"matchers":[{"string":"#% increased Quantity of Expedition Logbooks dropped by Runic Monsters in Map"},{"string":"#% reduced Quantity of Expedition Logbooks dropped by Runic Monsters in Map"}],"trade":{"ids":{"explicit":["explicit.stat_1083387327"]}}}
 {"better":1,"matchers":[{"string":"#% increased Quantity of Gold Dropped by Slain Enemies"},{"string":"#% reduced Quantity of Gold Dropped by Slain Enemies","negate":true}],"trade":{"ids":{"explicit":["explicit.stat_3175163625"],"fractured":["fractured.stat_3175163625"],"enchant":["enchant.stat_3175163625"],"crafted":["crafted.stat_3175163625"],"rune":["rune.stat_3175163625"]}}}
-{"better":1,"matchers":[{"string":"#% increased Quantity of Hiveblood found in Map"},{"string":"#% reduced Quantity of Hiveblood found in Map","negate":true}],"trade":{"ids":{"explicit":["explicit.stat_2778285247"]}}}
-{"better":1,"matchers":[{"string":"#% increased Quantity of Items dropped by Map Bosses"},{"string":"#% reduced Quantity of Items dropped by Map Bosses","negate":true}],"trade":{"ids":{"explicit":["explicit.stat_3119172063"]}}}
-{"better":1,"matchers":[{"string":"#% increased Quantity of Items found in Map"},{"string":"#% reduced Quantity of Items found in Map","negate":true}],"trade":{"ids":{"explicit":["explicit.stat_2390685262"]}}}
-{"better":1,"matchers":[{"string":"#% increased quantity of Keys dropped by Monsters"},{"string":"#% reduced quantity of Keys dropped by Monsters","negate":true}],"trade":{"ids":{"explicit":["sanctum.stat_729354668"]}}}
-{"better":1,"matchers":[{"string":"#% increased quantity of Relics dropped by Monsters"},{"string":"#% reduced quantity of Relics dropped by Monsters","negate":true}],"trade":{"ids":{"explicit":["sanctum.stat_1680962389"]}}}
-{"better":1,"matchers":[{"string":"#% increased Quantity of Waystones dropped by Map Bosses"},{"string":"#% reduced Quantity of Waystones dropped by Map Bosses","negate":true}],"trade":{"ids":{"explicit":["explicit.stat_1457896329"]}}}
-{"better":1,"matchers":[{"string":"#% increased Quantity of Waystones found in Map"}],"trade":{"ids":{"explicit":["explicit.stat_2777224821"]}}}
-{"better":1,"matchers":[{"string":"#% increased Quantity of Wombgifts found in Map"},{"string":"#% reduced Quantity of Wombgifts found in Map","negate":true}],"trade":{"ids":{"explicit":["explicit.stat_472809816"]}}}
 {"better":1,"matchers":[{"string":"#% increased Rage Cost Efficiency"},{"string":"#% reduced Rage Cost Efficiency","negate":true}],"trade":{"ids":{"explicit":["explicit.stat_2416650879"],"fractured":["fractured.stat_2416650879"],"desecrated":["desecrated.stat_2416650879"]}}}
 {"better":1,"matchers":[{"string":"#% increased Rarity of Items Dropped by Enemies killed with a Critical Hit"},{"string":"#% reduced Rarity of Items Dropped by Enemies killed with a Critical Hit","negate":true}],"trade":{"ids":{"explicit":["explicit.stat_21824003"]}}}
-{"better":1,"matchers":[{"string":"#% increased Rarity of Items dropped by Map Bosses"},{"string":"#% reduced Rarity of Items dropped by Map Bosses","negate":true}],"trade":{"ids":{"explicit":["explicit.stat_4255069232"]}}}
 {"better":1,"matchers":[{"string":"#% increased Rarity of Items found"},{"string":"#% reduced Rarity of Items found","negate":true}],"trade":{"ids":{"explicit":["explicit.stat_3917489142"],"implicit":["implicit.stat_3917489142"],"fractured":["fractured.stat_3917489142"],"enchant":["enchant.stat_3917489142"],"crafted":["crafted.stat_3917489142"],"rune":["rune.stat_3917489142"],"desecrated":["desecrated.stat_3917489142"]}}}
 {"stats":[{"better":1,"matchers":[{"string":"#% increased Rarity of Items found\nYour other Modifiers to Rarity of Items found do not apply"},{"string":"#% reduced Rarity of Items found\nYour other Modifiers to Rarity of Items found do not apply","negate":true}],"trade":{"ids":{"explicit":["explicit.stat_1602191394"]}}},{"better":1,"matchers":[{"string":"#% increased Rarity of Items found\nYour other Modifiers to Rarity of Items found do not apply"},{"string":"#% reduced Rarity of Items found\nYour other Modifiers to Rarity of Items found do not apply","negate":true}],"trade":{"ids":{"explicit":["explicit.stat_2261942307"]}}}]}
 {"better":1,"matchers":[{"string":"#% increased Rarity of Items found in Map"},{"string":"#% reduced Rarity of Items found in Map","negate":true}],"trade":{"ids":{"explicit":["explicit.stat_2306002879"],"enchant":["enchant.stat_2306002879"]}}}
@@ -562,7 +505,6 @@
 {"better":1,"matchers":[{"string":"#% increased Reservation Efficiency of Minion Skills"},{"string":"#% reduced Reservation Efficiency of Minion Skills","negate":true}],"trade":{"ids":{"explicit":["explicit.stat_1805633363"],"fractured":["fractured.stat_1805633363"],"crafted":["crafted.stat_1805633363"],"rune":["rune.stat_1805633363"],"desecrated":["desecrated.stat_1805633363"]}}}
 {"better":1,"matchers":[{"string":"#% increased Reservation Efficiency of Remnant Skills"},{"string":"#% reduced Reservation Efficiency of Remnant Skills","negate":true}],"trade":{"ids":{"explicit":["explicit.stat_1350127730"]}}}
 {"better":1,"matchers":[{"string":"#% increased Reservation Efficiency of Skills which create Undead Minions"},{"string":"#% reduced Reservation Efficiency of Skills which create Undead Minions","negate":true}],"trade":{"ids":{"explicit":["explicit.stat_2308632835"]}}}
-{"better":1,"matchers":[{"string":"#% increased Resolve Aegis"},{"string":"#% reduced Resolve Aegis","negate":true}],"trade":{"ids":{"explicit":["sanctum.stat_1388771661"]}}}
 {"better":1,"matchers":[{"string":"#% increased Runic Ward"},{"string":"#% reduced Runic Ward","negate":true}],"trade":{"ids":{"explicit":["explicit.stat_830161081"],"fractured":["fractured.stat_830161081"],"crafted":["crafted.stat_830161081"],"rune":["rune.stat_830161081"]}}}
 {"better":1,"matchers":[{"string":"#% increased Runic Ward Regeneration Rate"},{"string":"#% reduced Runic Ward Regeneration Rate","negate":true}],"trade":{"ids":{"explicit":["explicit.stat_2392260628"],"implicit":["implicit.stat_2392260628"],"crafted":["crafted.stat_2392260628"],"rune":["rune.stat_2392260628"]}}}
 {"better":1,"matchers":[{"string":"#% increased Runic Ward Regeneration Rate while Sprinting"},{"string":"#% reduced Runic Ward Regeneration Rate while Sprinting","negate":true}],"trade":{"ids":{"rune":["rune.stat_2441825294"]}}}
@@ -592,7 +534,6 @@
 {"better":1,"matchers":[{"string":"#% increased Spirit per socketed Grand Spectrum"}],"trade":{"ids":{"explicit":["explicit.stat_1430165758"]}}}
 {"better":1,"matchers":[{"string":"#% increased Spirit Reservation Efficiency"},{"string":"#% increased Spirit Reservation Efficiency of Skills"},{"string":"#% reduced Spirit Reservation Efficiency of Skills","negate":true}],"trade":{"ids":{"explicit":["explicit.stat_53386210"],"desecrated":["desecrated.stat_53386210"]}}}
 {"better":1,"matchers":[{"string":"#% increased Spirit Reservation Efficiency of Buff Skills per 100 Maximum Life"},{"string":"#% reduced Spirit Reservation Efficiency of Buff Skills per 100 Maximum Life","negate":true}],"trade":{"ids":{"explicit":["explicit.stat_3581035970"]}}}
-{"better":1,"matchers":[{"string":"#% increased Stack size of Simulacrum Splinters found in Map"},{"string":"#% reduced Stack size of Simulacrum Splinters found in Map"}],"trade":{"ids":{"explicit":["explicit.stat_3836551197"],"enchant":["enchant.stat_3836551197"]}}}
 {"better":1,"matchers":[{"string":"#% increased Strength"},{"string":"#% reduced Strength","negate":true}],"trade":{"ids":{"explicit":["explicit.stat_734614379"],"fractured":["fractured.stat_734614379"],"crafted":["crafted.stat_734614379"],"desecrated":["desecrated.stat_734614379"]}}}
 {"better":1,"matchers":[{"string":"No Strength Requirement","value":-100},{"string":"#% increased Strength Requirement"},{"string":"#% reduced Strength Requirement","negate":true}],"trade":{"ids":{"explicit":["explicit.stat_295075366"]}}}
 {"better":1,"matchers":[{"string":"#% increased Stun Buildup"},{"string":"#% reduced Stun Buildup","negate":true}],"trade":{"ids":{"explicit":["explicit.stat_239367161"],"implicit":["implicit.stat_239367161"],"fractured":["fractured.stat_239367161"],"desecrated":["desecrated.stat_239367161"]}}}
@@ -604,8 +545,6 @@
 {"better":1,"matchers":[{"string":"#% increased Stun Threshold if you've been Stunned Recently"},{"string":"#% reduced Stun Threshold if you've been Stunned Recently","negate":true}],"trade":{"ids":{"rune":["rune.stat_751944209"]}}}
 {"better":1,"matchers":[{"string":"#% increased Stun Threshold while Parrying"},{"string":"#% reduced Stun Threshold while Parrying","negate":true}],"trade":{"ids":{"explicit":["explicit.stat_1911237468"],"fractured":["fractured.stat_1911237468"],"desecrated":["desecrated.stat_1911237468"]}}}
 {"better":1,"matchers":[{"string":"#% increased Surrounded Area of Effect"},{"string":"#% reduced Surrounded Area of Effect"}],"trade":{"ids":{"explicit":["explicit.stat_909236563"]}}}
-{"better":1,"matchers":[{"string":"#% increased Tablets found in Area"},{"string":"#% reduced Tablets found in Area"}],"trade":{"ids":{"enchant":["enchant.stat_3138466258"]}}}
-{"better":1,"matchers":[{"string":"#% increased Thorns Critical Hit Chance"},{"string":"#% reduced Thorns Critical Hit Chance","negate":true}],"trade":{"ids":{"rune":["rune.stat_915264788"]}}}
 {"better":1,"matchers":[{"string":"#% increased Thorns damage"},{"string":"#% reduced Thorns damage","negate":true}],"trade":{"ids":{"explicit":["explicit.stat_1315743832"],"fractured":["fractured.stat_1315743832"],"enchant":["enchant.stat_1315743832"],"desecrated":["desecrated.stat_1315743832"]}}}
 {"better":1,"matchers":[{"string":"#% increased Thorns damage if you've consumed an Endurance Charge Recently"},{"string":"#% reduced Thorns damage if you've consumed an Endurance Charge Recently","negate":true}],"trade":{"ids":{"explicit":["explicit.stat_806994543"]}}}
 {"better":1,"matchers":[{"string":"#% increased total Power counted by Warcries"},{"string":"#% reduced total Power counted by Warcries","negate":true}],"trade":{"ids":{"explicit":["explicit.stat_2663359259"],"fractured":["fractured.stat_2663359259"],"rune":["rune.stat_2663359259"],"desecrated":["desecrated.stat_2663359259"]}}}
@@ -623,7 +562,6 @@
 {"better":-1,"matchers":[{"string":"#% less Armour, Evasion and Energy Shield","negate":true},{"string":"#% more Armour, Evasion and Energy Shield"}],"trade":{"ids":{"explicit":["explicit.stat_1803659985"]},"inverted":true}}
 {"better":-1,"matchers":[{"string":"#% less Damage","negate":true},{"string":"#% more Damage"}],"trade":{"ids":{"explicit":["explicit.stat_1274947822"]},"inverted":true}}
 {"better":-1,"matchers":[{"string":"#% more Damage taken if you have not been Hit Recently"},{"string":"#% less Damage taken if you have not been Hit Recently","negate":true}],"trade":{"ids":{"explicit":["explicit.stat_67637087"]},"inverted":true}}
-{"better":-1,"matchers":[{"string":"#% more effect of Curses on Monsters"},{"string":"#% less effect of Curses on Monsters","negate":true}],"trade":{"ids":{"explicit":["explicit.stat_3796523155"],"fractured":["fractured.stat_3796523155"],"desecrated":["desecrated.stat_3796523155"]},"inverted":true}}
 {"better":1,"matchers":[{"string":"#% less Flask Charges used"},{"string":"#% more Flask Charges used","negate":true}],"trade":{"ids":{"explicit":["explicit.stat_3749630567"]}}}
 {"better":-1,"matchers":[{"string":"#% more Mana Regeneration Rate"},{"string":"#% less Mana Regeneration Rate","negate":true}],"trade":{"ids":{"rune":["rune.stat_762761075"]},"inverted":true}}
 {"better":-1,"matchers":[{"string":"#% less maximum Life","negate":true},{"string":"#% more maximum Life"}],"trade":{"ids":{"explicit":["explicit.stat_1633735772"]},"inverted":true}}
@@ -633,13 +571,11 @@
 {"better":-1,"matchers":[{"string":"#% less Movement Speed","negate":true},{"string":"#% more Movement Speed"}],"trade":{"ids":{"explicit":["explicit.stat_2146799605"]},"inverted":true}}
 {"better":-1,"matchers":[{"string":"#% less Spirit","negate":true},{"string":"#% more Spirit"}],"trade":{"ids":{"explicit":["explicit.stat_537850431"]},"inverted":true}}
 {"better":1,"matchers":[{"string":"#% Life Recovery from Flasks also applies to Runic Ward"}],"trade":{"ids":{"implicit":["implicit.stat_2650263616"],"rune":["rune.stat_2650263616"]}}}
-{"better":1,"matchers":[{"string":"#% maximum Player Resistances"}],"trade":{"ids":{"explicit":["explicit.stat_3376488707","sanctum.stat_3376488707"],"fractured":["fractured.stat_3376488707"],"desecrated":["desecrated.stat_3376488707"]}}}
 {"better":1,"matchers":[{"string":"#% more Attack Damage"},{"string":"#% less Attack Damage","negate":true}],"trade":{"ids":{"explicit":["explicit.stat_412462523"],"rune":["rune.stat_412462523"]}}}
 {"better":1,"matchers":[{"string":"Magnitudes of Curses you inflict are zero","value":-100},{"string":"#% more Curse Magnitudes"},{"string":"#% less Curse Magnitudes","negate":true}],"trade":{"ids":{"explicit":["explicit.stat_2939415499"]}}}
 {"better":1,"matchers":[{"string":"#% more Life Flask Recovery"},{"string":"#% less Life Flask Recovery","negate":true}],"trade":{"ids":{"explicit":["explicit.stat_1972661424"]}}}
 {"better":1,"matchers":[{"string":"#% more Life Recovered"},{"string":"#% less Life Recovered","negate":true}],"trade":{"ids":{"explicit":["explicit.stat_1726753705"]}}}
 {"better":1,"matchers":[{"string":"#% more maximum Physical Attack Damage"},{"string":"#% less maximum Physical Attack Damage","negate":true}],"trade":{"ids":{"explicit":["explicit.stat_3735888493"]}}}
-{"better":1,"matchers":[{"string":"#% more Monster Life"},{"string":"#% less Monster Life","negate":true}],"trade":{"ids":{"explicit":["explicit.stat_95249895"],"fractured":["fractured.stat_95249895"],"desecrated":["desecrated.stat_95249895"]}}}
 {"better":1,"matchers":[{"string":"#% more Recovery if used while on Low Life"}],"trade":{"ids":{"explicit":["explicit.stat_886931978"]}}}
 {"better":1,"matchers":[{"string":"#% more Recovery if used while on Low Mana"}],"trade":{"ids":{"explicit":["explicit.stat_3276224428"]}}}
 {"better":1,"matchers":[{"string":"#% of Armour also applies to Chaos Damage"}],"trade":{"ids":{"explicit":["explicit.stat_3972229254"],"rune":["rune.stat_3972229254"],"desecrated":["desecrated.stat_3972229254"]}}}
@@ -710,7 +646,6 @@
 {"better":-1,"matchers":[{"string":"#% increased effect of Curses on you"},{"string":"#% reduced effect of Curses on you","negate":true}],"trade":{"ids":{"explicit":["explicit.stat_3407849389"],"rune":["rune.stat_3407849389"],"desecrated":["desecrated.stat_3407849389"]},"inverted":true}}
 {"better":-1,"matchers":[{"string":"#% increased effect of Shock on you"},{"string":"#% reduced effect of Shock on you","negate":true}],"trade":{"ids":{"explicit":["explicit.stat_3801067695"],"rune":["rune.stat_3801067695"]},"inverted":true}}
 {"better":1,"matchers":[{"string":"#% reduced Elemental Ailment Duration on you"},{"string":"#% increased Elemental Ailment Duration on you","negate":true}],"trade":{"ids":{"implicit":["implicit.stat_1745952865"]}}}
-{"better":1,"matchers":[{"string":"#% reduced Enemy Stun Threshold"},{"string":"#% increased Enemy Stun Threshold","negate":true}],"trade":{"ids":{"implicit":["implicit.stat_1443060084"]}}}
 {"better":-1,"matchers":[{"string":"#% increased Flask Charges used"},{"string":"#% reduced Flask Charges used","negate":true}],"trade":{"ids":{"explicit":["explicit.stat_644456512"],"implicit":["implicit.stat_644456512"],"fractured":["fractured.stat_644456512"],"desecrated":["desecrated.stat_644456512"]},"inverted":true}}
 {"better":1,"matchers":[{"string":"#% reduced Freeze Duration on you"},{"string":"#% increased Freeze Duration on you","negate":true}],"trade":{"ids":{"explicit":["explicit.stat_2160282525"],"fractured":["fractured.stat_2160282525"],"desecrated":["desecrated.stat_2160282525"]}}}
 {"better":1,"matchers":[{"string":"#% reduced Ignite Duration on you"},{"string":"#% increased Ignite Duration on you","negate":true}],"trade":{"ids":{"explicit":["explicit.stat_986397080"],"fractured":["fractured.stat_986397080"],"desecrated":["desecrated.stat_986397080"]}}}
@@ -718,7 +653,6 @@
 {"better":1,"matchers":[{"string":"#% reduced Mana Cost of Skills"},{"string":"#% increased Mana Cost of Skills","negate":true}],"trade":{"ids":{"explicit":["explicit.stat_474294393"]}}}
 {"better":1,"matchers":[{"string":"#% reduced Shock duration on you"},{"string":"#% increased Shock duration on you","negate":true}],"trade":{"ids":{"explicit":["explicit.stat_99927264"],"fractured":["fractured.stat_99927264"],"desecrated":["desecrated.stat_99927264"]}}}
 {"better":-1,"matchers":[{"string":"#% increased Slowing Potency of Debuffs on You if you've used a Charm Recently"},{"string":"#% reduced Slowing Potency of Debuffs on You if you've used a Charm Recently","negate":true}],"trade":{"ids":{"explicit":["explicit.stat_3839676903"],"desecrated":["desecrated.stat_3839676903"]},"inverted":true}}
-{"better":-1,"matchers":[{"string":"#% Resolve Mitigation from Enemy Hits","negate":true}],"trade":{"ids":{"explicit":["sanctum.stat_142859883"]},"inverted":true}}
 {"better":1,"matchers":[{"string":"#% Surpassing chance to fire an additional Arrow"}],"trade":{"ids":{"explicit":["explicit.stat_2463230181"],"implicit":["implicit.stat_2463230181"],"fractured":["fractured.stat_2463230181"],"rune":["rune.stat_2463230181"],"desecrated":["desecrated.stat_2463230181"]}}}
 {"better":1,"matchers":[{"string":"#% Surpassing chance to fire an additional Projectile"}],"trade":{"ids":{"explicit":["explicit.stat_1347539079"],"fractured":["fractured.stat_1347539079"],"desecrated":["desecrated.stat_1347539079"]}}}
 {"better":1,"matchers":[{"string":"#% Surpassing Chance to gain a Puppet Master stack whenever you use a Command Skill"}],"trade":{"ids":{"explicit":["explicit.stat_2840930496"],"fractured":["fractured.stat_2840930496"],"crafted":["crafted.stat_2840930496"],"desecrated":["desecrated.stat_2840930496"]}}}
@@ -727,7 +661,6 @@
 {"better":1,"matchers":[{"string":"#% to all Elemental Resistances per socketed Grand Spectrum"}],"trade":{"ids":{"explicit":["explicit.stat_242161915"]}}}
 {"better":1,"matchers":[{"string":"#% to all Maximum Elemental Resistances"}],"trade":{"ids":{"explicit":["explicit.stat_1978899297"],"implicit":["implicit.stat_1978899297"],"fractured":["fractured.stat_1978899297"],"enchant":["enchant.stat_1978899297"],"rune":["rune.stat_1978899297"],"desecrated":["desecrated.stat_1978899297"]}}}
 {"better":1,"matchers":[{"string":"#% to all maximum Resistances"}],"trade":{"ids":{"explicit":["explicit.stat_569299859"],"implicit":["implicit.stat_569299859"],"desecrated":["desecrated.stat_569299859"]}}}
-{"better":1,"matchers":[{"string":"#% to All Resistances"}],"trade":{"ids":{"explicit":["sanctum.stat_3128852541"]}}}
 {"better":1,"matchers":[{"string":"#% to all Resistances for each Corrupted Item Equipped"}],"trade":{"ids":{"implicit":["implicit.stat_3100523498"]}}}
 {"better":1,"matchers":[{"string":"#% to Block chance"}],"trade":{"ids":{"explicit":["explicit.stat_1702195217"],"implicit":["implicit.stat_1702195217"],"rune":["rune.stat_1702195217"],"desecrated":["desecrated.stat_1702195217"]}}}
 {"better":1,"matchers":[{"string":"#% to Block Chance while holding a Focus"}],"trade":{"ids":{"explicit":["explicit.stat_3122852693"]}}}
@@ -749,7 +682,6 @@
 {"better":1,"matchers":[{"string":"#% to Fire Resistance while on Low Life"}],"trade":{"ids":{"explicit":["explicit.stat_38301299"]}}}
 {"better":1,"matchers":[{"string":"#% to Fire Spell Critical Hit Chance"}],"trade":{"ids":{"explicit":["explicit.stat_3399401168"],"fractured":["fractured.stat_3399401168"],"crafted":["crafted.stat_3399401168"],"desecrated":["desecrated.stat_3399401168"]}}}
 {"better":1,"matchers":[{"string":"#% to gain Archon of Undeath when you create an Offering"}],"trade":{"ids":{"explicit":["explicit.stat_933355817"],"fractured":["fractured.stat_933355817"],"crafted":["crafted.stat_933355817"],"desecrated":["desecrated.stat_933355817"]}}}
-{"better":1,"matchers":[{"string":"#% to Honour Resistance"}],"trade":{"ids":{"explicit":["sanctum.stat_2287831219"]}}}
 {"better":1,"matchers":[{"string":"#% to Lightning and Chaos Resistances"}],"trade":{"ids":{"explicit":["explicit.stat_3465022881"],"fractured":["fractured.stat_3465022881"],"desecrated":["desecrated.stat_3465022881"]}}}
 {"better":1,"matchers":[{"string":"#% to Lightning Resistance"}],"trade":{"ids":{"explicit":["explicit.stat_1671376347"],"implicit":["implicit.stat_1671376347"],"fractured":["fractured.stat_1671376347"],"enchant":["enchant.stat_1671376347"],"crafted":["crafted.stat_1671376347"],"rune":["rune.stat_1671376347"],"desecrated":["desecrated.stat_1671376347"]}}}
 {"better":1,"matchers":[{"string":"#% to maximum Block chance"}],"trade":{"ids":{"explicit":["explicit.stat_480796730"],"enchant":["enchant.stat_480796730"],"desecrated":["desecrated.stat_480796730"]}}}
@@ -757,14 +689,12 @@
 {"better":1,"matchers":[{"string":"#% to Maximum Chaos Resistance"}],"trade":{"ids":{"explicit":["explicit.stat_1301765461"],"fractured":["fractured.stat_1301765461"],"crafted":["crafted.stat_1301765461"],"desecrated":["desecrated.stat_1301765461"]}}}
 {"better":1,"matchers":[{"string":"#% to Maximum Cold Resistance"}],"trade":{"ids":{"explicit":["explicit.stat_3676141501"],"implicit":["implicit.stat_3676141501"],"fractured":["fractured.stat_3676141501"],"enchant":["enchant.stat_3676141501"],"crafted":["crafted.stat_3676141501"],"rune":["rune.stat_3676141501"],"desecrated":["desecrated.stat_3676141501"]}}}
 {"better":1,"matchers":[{"string":"#% to Maximum Fire Resistance"}],"trade":{"ids":{"explicit":["explicit.stat_4095671657"],"fractured":["fractured.stat_4095671657"],"enchant":["enchant.stat_4095671657"],"crafted":["crafted.stat_4095671657"],"rune":["rune.stat_4095671657"],"desecrated":["desecrated.stat_4095671657"]}}}
-{"better":1,"matchers":[{"string":"#% to Maximum Honour Resistance"}],"trade":{"ids":{"explicit":["sanctum.stat_3096543632"]}}}
 {"better":1,"matchers":[{"string":"#% to Maximum Lightning Resistance"}],"trade":{"ids":{"explicit":["explicit.stat_1011760251"],"fractured":["fractured.stat_1011760251"],"enchant":["enchant.stat_1011760251"],"crafted":["crafted.stat_1011760251"],"rune":["rune.stat_1011760251"],"desecrated":["desecrated.stat_1011760251"]}}}
 {"better":1,"matchers":[{"string":"#% to Maximum Quality"}],"trade":{"ids":{"explicit":["explicit.stat_2039822488"],"implicit":["implicit.stat_2039822488"],"fractured":["fractured.stat_2039822488"],"crafted":["crafted.stat_2039822488"]}}}
 {"better":1,"matchers":[{"string":"#% to Quality of all Skills"}],"trade":{"ids":{"explicit":["explicit.stat_3655769732"],"rune":["rune.stat_3655769732"],"desecrated":["desecrated.stat_3655769732"]}}}
 {"better":1,"matchers":[{"string":"#% to Thorns Critical Hit Chance"}],"trade":{"ids":{"explicit":["explicit.stat_2715190555"],"rune":["rune.stat_2715190555"],"desecrated":["desecrated.stat_2715190555"]}}}
 {"better":1,"matchers":[{"string":"#% to Unarmed Melee Attack Critical Hit Chance"}],"trade":{"ids":{"explicit":["explicit.stat_3613173483"]}}}
 {"better":1,"matchers":[{"string":"#% total increased maximum Energy Shield"}],"trade":{"ids":{"pseudo":["pseudo.pseudo_increased_energy_shield"]}}}
-{"better":1,"matchers":[{"string":"# maximum Rage for each time you've used a Skill that Requires Glory in the past 6 seconds, up to 5 times"}],"trade":{"ids":{"explicit":["explicit.stat_233359425"]}}}
 {"better":1,"matchers":[{"string":"# maximum Rage if you've used a Skill that Requires Glory in the past 20 seconds"}],"trade":{"ids":{"explicit":["explicit.stat_3302775221"]}}}
 {"better":1,"matchers":[{"string":"# maximum stacks of Puppet Master"}],"trade":{"ids":{"explicit":["explicit.stat_1484026495"],"fractured":["fractured.stat_1484026495"],"crafted":["crafted.stat_1484026495"],"desecrated":["desecrated.stat_1484026495"]}}}
 {"better":1,"matchers":[{"string":"# to Deflection Rating per 10 maximum Runic Ward"}],"trade":{"ids":{"rune":["rune.stat_282990844"]}}}
@@ -1019,7 +949,6 @@
 {"better":1,"matchers":[{"string":"# total to Dexterity"}],"trade":{"ids":{"pseudo":["pseudo.pseudo_total_dexterity"]}}}
 {"better":1,"matchers":[{"string":"# total to Intelligence"}],"trade":{"ids":{"pseudo":["pseudo.pseudo_total_intelligence"]}}}
 {"better":1,"matchers":[{"string":"# total to Strength"}],"trade":{"ids":{"pseudo":["pseudo.pseudo_total_strength"]}}}
-{"better":1,"matchers":[{"string":"#% Monster Elemental Resistances"}],"trade":{"ids":{"explicit":["explicit.stat_1054098949"],"fractured":["fractured.stat_1054098949"],"desecrated":["desecrated.stat_1054098949"]}}}
 {"better":1,"matchers":[{"string":"#% to all Elemental Resistances per Socket filled"}],"trade":{"ids":{"explicit":["explicit.stat_2593651571"]}}}
 {"better":1,"matchers":[{"string":"#% total Elemental Resistance"}],"trade":{"ids":{"pseudo":["pseudo.pseudo_total_elemental_resistance"]}}}
 {"better":1,"matchers":[{"string":"#% total Resistance"}],"trade":{"ids":{"pseudo":["pseudo.pseudo_total_resistance"]}}}
@@ -1033,12 +962,6 @@
 {"better":1,"matchers":[{"string":"1% increased Energy Shield Recharge Rate per # maximum Runic Ward"}],"trade":{"ids":{"rune":["rune.stat_162036024"]}}}
 {"better":1,"matchers":[{"string":"1% more Unarmed Damage per # Strength"},{"string":"1% less Unarmed Damage per # Strength","negate":true}],"trade":{"ids":{"explicit":["explicit.stat_3452816629"]}}}
 {"better":1,"matchers":[{"string":"A random Skill that requires Glory generates #% of its maximum Glory when your Marks Activate"}],"trade":{"ids":{"rune":["rune.stat_2231410646"]}}}
-{"better":1,"matchers":[{"string":"Abyss Cracks have #% chance to spawn all Monsters as at least Magic"},{"string":"Abyss Cracks spawn all Monsters as at least Magic","value":100}],"trade":{"ids":{"explicit":["explicit.stat_1388221282"],"desecrated":["desecrated.stat_1388221282"]}}}
-{"better":1,"matchers":[{"string":"Abyss Pits have #% chance to spawn all Monsters as at least Magic"},{"string":"Abyss Pits spawn all Monsters as at least Magic","value":100}],"trade":{"ids":{"explicit":["explicit.stat_4157613372"],"desecrated":["desecrated.stat_4157613372"]}}}
-{"better":1,"matchers":[{"string":"Abyss Pits in Map always have Rewards","value":-100},{"string":"Abyss Pits in Map are twice as likely to have Rewards","value":-50},{"string":"Abyss Pits in Map are #% less likely to have no Rewards"}],"trade":{"ids":{"explicit":["explicit.stat_4256531808"],"desecrated":["desecrated.stat_4256531808"]}}}
-{"better":1,"matchers":[{"string":"Abyssal Monsters grant #% increased Experience"},{"string":"Abyssal Monsters grant #% reduced Experience","negate":true}],"trade":{"ids":{"explicit":["explicit.stat_2975078312"],"desecrated":["desecrated.stat_2975078312"]}}}
-{"better":1,"matchers":[{"string":"Abyssal Monsters have #% increased Effectiveness for each closed Pit, up to 100%"},{"string":"Abyssal Monsters have #% increased Effectiveness for each closed Pit","negate":true}],"trade":{"ids":{"explicit":["explicit.stat_664606484"]}}}
-{"better":1,"matchers":[{"string":"Abyssal Monsters in Map have increased Difficulty and Reward for each closed Pit"}],"trade":{"ids":{"explicit":["explicit.stat_360553763"],"desecrated":["desecrated.stat_360553763"]}}}
 {"better":1,"matchers":[{"string":"Abyssal Wasting also applies #% to Cold Resistance"}],"trade":{"ids":{"explicit":["explicit.stat_3979226081"]}}}
 {"better":1,"matchers":[{"string":"Abyssal Wasting also applies #% to Fire Resistance"}],"trade":{"ids":{"explicit":["explicit.stat_2991563371"]}}}
 {"better":1,"matchers":[{"string":"Abyssal Wasting also applies #% to Lightning Resistance"}],"trade":{"ids":{"explicit":["explicit.stat_1726353460"]}}}
@@ -1046,10 +969,6 @@
 {"better":1,"matchers":[{"string":"Abyssal Wasting you inflict also prevents targets from dealing Critical Hits"}],"trade":{"ids":{"explicit":["explicit.stat_1986082444"]}}}
 {"better":1,"matchers":[{"string":"Abyssal Wasting you inflict also prevents targets from inflicting Elemental Ailments"}],"trade":{"ids":{"explicit":["explicit.stat_4149923257"]}}}
 {"better":1,"matchers":[{"string":"Abyssal Wasting you inflict has Infinite Duration"}],"trade":{"ids":{"explicit":["explicit.stat_1679776108"]}}}
-{"better":1,"matchers":[{"string":"Abysses in Map have #% increased chance to lead to an Abyssal Depths"},{"string":"Abysses in Map have #% reduced chance to lead to an Abyssal Depths"}],"trade":{"ids":{"explicit":["explicit.stat_2722831300"]}}}
-{"better":1,"matchers":[{"string":"Abysses in Map spawn #% increased Monsters"},{"string":"Abysses in Map spawn #% reduced Monsters","negate":true}],"trade":{"ids":{"explicit":["explicit.stat_944630113"],"desecrated":["desecrated.stat_944630113"]}}}
-{"better":1,"matchers":[{"string":"Abysses lead to an Abyssal Boss"}],"trade":{"ids":{"explicit":["explicit.stat_2399592398"],"desecrated":["desecrated.stat_2399592398"]}}}
-{"better":1,"matchers":[{"string":"Abysses lead to an Abyssal Depths"}],"trade":{"ids":{"explicit":["explicit.stat_2278777540"],"desecrated":["desecrated.stat_2278777540"]}}}
 {"better":1,"matchers":[{"string":"Accuracy Rating is Doubled"}],"trade":{"ids":{"explicit":["explicit.stat_2161347476"]}}}
 {"better":1,"matchers":[{"string":"Adds # to # Chaos damage"}],"trade":{"ids":{"explicit":["explicit.stat_2223678961"],"fractured":["fractured.stat_2223678961"],"enchant":["enchant.stat_2223678961"],"crafted":["crafted.stat_2223678961"],"rune":["rune.stat_2223678961"],"desecrated":["desecrated.stat_2223678961"]}}}
 {"better":1,"matchers":[{"string":"Adds # to # Chaos Damage to Attacks"}],"trade":{"ids":{"explicit":["explicit.stat_674553446"]}}}
@@ -1066,13 +985,7 @@
 {"better":1,"matchers":[{"string":"Adds # to # Lightning Damage to Unarmed Melee Hits"}],"trade":{"ids":{"explicit":["explicit.stat_3835522656"]}}}
 {"better":1,"matchers":[{"string":"Adds # to # Physical Damage"}],"trade":{"ids":{"explicit":["explicit.stat_1940865751"],"fractured":["fractured.stat_1940865751"],"crafted":["crafted.stat_1940865751"],"rune":["rune.stat_1940865751"],"desecrated":["desecrated.stat_1940865751"]}}}
 {"better":1,"matchers":[{"string":"Adds # to # Physical Damage to Attacks"}],"trade":{"ids":{"explicit":["explicit.stat_3032590688"],"implicit":["implicit.stat_3032590688"],"fractured":["fractured.stat_3032590688"],"rune":["rune.stat_3032590688"],"desecrated":["desecrated.stat_3032590688"]}}}
-{"better":1,"matchers":[{"string":"Adds a Kalguuran Expedition to a Map \n# use remaining"},{"string":"Adds a Kalguuran Expedition to a Map \n# uses remaining"}],"trade":{"ids":{"implicit":["implicit.stat_1714888636"]}}}
-{"better":1,"matchers":[{"string":"Adds a Mirror of Delirium to a Map \n# use remaining"},{"string":"Adds a Mirror of Delirium to a Map \n# uses remaining"}],"trade":{"ids":{"implicit":["implicit.stat_3879011313"]}}}
-{"better":1,"matchers":[{"string":"Adds Abysses to a Map \n# use remaining"},{"string":"Adds Abysses to a Map \n# uses remaining"}],"trade":{"ids":{"implicit":["implicit.stat_2369421690"]}}}
-{"better":1,"matchers":[{"string":"Adds an Otherworldy Breach to a Map \n# use remaining"},{"string":"Adds an Otherworldy Breach to a Map \n# uses remaining"}],"trade":{"ids":{"implicit":["implicit.stat_2219129443"]}}}
 {"better":1,"matchers":[{"string":"Adds Irradiated to a Map \n# use remaining"},{"string":"Adds Irradiated to a Map \n# uses remaining"}],"trade":{"ids":{"implicit":["implicit.stat_4041853756"]}}}
-{"better":1,"matchers":[{"string":"Adds Ritual Altars to a Map \n# use remaining"},{"string":"Adds Ritual Altars to a Map \n# uses remaining"}],"trade":{"ids":{"implicit":["implicit.stat_3166002380"]}}}
-{"better":1,"matchers":[{"string":"Adds Vaal Beacons to a Map \n# use remaining"},{"string":"Adds Vaal Beacons to a Map \n# uses remaining"}],"trade":{"ids":{"implicit":["implicit.stat_3035440454"]}}}
 {"better":1,"matchers":[{"string":"Aggravate Bleeding on Enemies when they Enter your Presence"}],"trade":{"ids":{"explicit":["explicit.stat_874646180"]}}}
 {"better":1,"matchers":[{"string":"Aggravating any Bleeding with this Weapon also Aggravates all Ignites on the target"}],"trade":{"ids":{"explicit":["explicit.stat_2312741059"]}}}
 {"better":1,"matchers":[{"string":"All Attacks count as Empowered Attacks"}],"trade":{"ids":{"explicit":["explicit.stat_1952324525"]}}}
@@ -1987,31 +1900,9 @@
 {"better":1,"matchers":[{"string":"Alternating every 5 seconds:\nTake #% more Damage from Hits\nTake #% more Damage over time"},{"string":"Alternating every 5 seconds:\nTake #% less Damage from Hits\nTake #% less Damage over time","negate":true}],"trade":{"ids":{"explicit":["explicit.stat_258955603"],"rune":["rune.stat_258955603"]}}}
 {"better":1,"matchers":[{"string":"Always deals Critical Hits against Heavy Stunned Enemies"}],"trade":{"ids":{"explicit":["explicit.stat_2214130968"]}}}
 {"better":1,"matchers":[{"string":"Always Hits"}],"trade":{"ids":{"explicit":["explicit.stat_4126210832"],"implicit":["implicit.stat_4126210832"]}}}
-{"better":1,"matchers":[{"string":"# additional Rooms are revealed on the Trial Map"},{"string":"An additional Room is revealed on the Trial Map","value":1}],"trade":{"ids":{"explicit":["sanctum.stat_386901949"]}}}
 {"better":0,"matchers":[{"string":"Ancestral Bond"}],"trade":{"ids":{"explicit":["explicit.stat_3831171903|1"]}}}
 {"better":1,"matchers":[{"string":"Any number of Poisons from this Weapon can affect a target at the same time"}],"trade":{"ids":{"explicit":["explicit.stat_4021234281"]}}}
 {"better":1,"matchers":[{"string":"Archon recovery period expires #% faster"},{"string":"Archon recovery period expires #% slower","negate":true}],"trade":{"ids":{"explicit":["explicit.stat_2586152168"],"rune":["rune.stat_2586152168"],"desecrated":["desecrated.stat_2586152168"]}}}
-{"better":1,"matchers":[{"string":"Area contains # additional Chest Marker"},{"string":"Area contains # additional Chest Markers"}],"trade":{"ids":{"implicit":["implicit.stat_4160330571"]}}}
-{"better":1,"matchers":[{"string":"Area contains # additional packs of Beasts"}],"trade":{"ids":{"explicit":["explicit.stat_3757259819"],"desecrated":["desecrated.stat_3757259819"]}}}
-{"better":1,"matchers":[{"string":"Area contains # additional packs of Bramble Monsters"}],"trade":{"ids":{"explicit":["explicit.stat_3309089125"],"desecrated":["desecrated.stat_3309089125"]}}}
-{"better":1,"matchers":[{"string":"Area contains # additional packs of Ezomyte Monsters"}],"trade":{"ids":{"explicit":["explicit.stat_1436812886"],"desecrated":["desecrated.stat_1436812886"]}}}
-{"better":1,"matchers":[{"string":"Area contains # additional packs of Faridun Monsters"}],"trade":{"ids":{"explicit":["explicit.stat_4130878258"],"desecrated":["desecrated.stat_4130878258"]}}}
-{"better":1,"matchers":[{"string":"Area contains # additional packs of Iron Guards"}],"trade":{"ids":{"explicit":["explicit.stat_2949706590"],"fractured":["fractured.stat_2949706590"],"desecrated":["desecrated.stat_2949706590"]}}}
-{"better":1,"matchers":[{"string":"Area contains # additional packs of Plagued Monsters"}],"trade":{"ids":{"explicit":["explicit.stat_3592067990"],"desecrated":["desecrated.stat_3592067990"]}}}
-{"better":1,"matchers":[{"string":"Area contains # additional packs of Transcended Monsters"}],"trade":{"ids":{"explicit":["explicit.stat_1689473577"],"desecrated":["desecrated.stat_1689473577"]}}}
-{"better":1,"matchers":[{"string":"Area contains # additional packs of Undead"}],"trade":{"ids":{"explicit":["explicit.stat_240445958"],"desecrated":["desecrated.stat_240445958"]}}}
-{"better":1,"matchers":[{"string":"Area contains # additional packs of Vaal Monsters"}],"trade":{"ids":{"explicit":["explicit.stat_4181857719"],"desecrated":["desecrated.stat_4181857719"]}}}
-{"better":1,"matchers":[{"string":"Area contains #% increased number of Monster Markers"},{"string":"Area contains #% reduced number of Monster Markers"}],"trade":{"ids":{"implicit":["implicit.stat_1915989164"]}}}
-{"better":1,"matchers":[{"string":"Area contains #% increased number of Remnants"}],"trade":{"ids":{"implicit":["implicit.stat_2991413918"]}}}
-{"better":1,"matchers":[{"string":"Area contains # additional Incubator Queens"},{"string":"Area contains an additional Incubator Queen","value":1}],"trade":{"ids":{"explicit":["explicit.stat_1827854662"],"desecrated":["desecrated.stat_1827854662"]}}}
-{"better":1,"matchers":[{"string":"Area contains # additional Magic Chests"},{"string":"Area contains an additional Magic Chest","value":1}],"trade":{"ids":{"explicit":["explicit.stat_2396719220"]}}}
-{"better":1,"matchers":[{"string":"Area has #% chance to contain a Shrine"}],"trade":{"ids":{"explicit":["explicit.stat_2571125745"]}}}
-{"better":1,"matchers":[{"string":"Area has #% chance to contain a Strongbox"}],"trade":{"ids":{"explicit":["explicit.stat_2388936716"]}}}
-{"better":1,"matchers":[{"string":"Area has #% chance to contain an Essence"}],"trade":{"ids":{"explicit":["explicit.stat_4098286334"]}}}
-{"better":1,"matchers":[{"string":"Area has patches of Chilled Ground"}],"trade":{"ids":{"explicit":["explicit.stat_349586058"],"fractured":["fractured.stat_349586058"],"desecrated":["desecrated.stat_349586058"]}}}
-{"better":1,"matchers":[{"string":"Area has patches of Ignited Ground"}],"trade":{"ids":{"explicit":["explicit.stat_133340941"],"fractured":["fractured.stat_133340941"],"desecrated":["desecrated.stat_133340941"]}}}
-{"better":1,"matchers":[{"string":"Area has patches of Mana Siphoning Ground"}],"trade":{"ids":{"explicit":["explicit.stat_3190283174"],"desecrated":["desecrated.stat_3190283174"]}}}
-{"better":1,"matchers":[{"string":"Area has patches of Shocked Ground"}],"trade":{"ids":{"explicit":["explicit.stat_3477720557"],"fractured":["fractured.stat_3477720557"],"desecrated":["desecrated.stat_3477720557"]}}}
 {"better":1,"matchers":[{"string":"Armour is increased by Uncapped Fire Resistance"}],"trade":{"ids":{"explicit":["explicit.stat_713266390"]}}}
 {"better":1,"matchers":[{"string":"Arrows Fork"}],"trade":{"ids":{"explicit":["explicit.stat_2421436896"]}}}
 {"better":1,"matchers":[{"string":"Arrows Pierce all targets after Forking"}],"trade":{"ids":{"explicit":["explicit.stat_2138799639"]}}}
@@ -2040,9 +1931,6 @@
 {"better":1,"matchers":[{"string":"Attacks with this Weapon Penetrate #% Fire Resistance"}],"trade":{"ids":{"explicit":["explicit.stat_3398283493"],"desecrated":["desecrated.stat_3398283493"]}}}
 {"better":1,"matchers":[{"string":"Attacks with this Weapon Penetrate #% Lightning Resistance"}],"trade":{"ids":{"explicit":["explicit.stat_2387539034"],"desecrated":["desecrated.stat_2387539034"]}}}
 {"better":1,"matchers":[{"string":"Aura Skills have #% increased Magnitudes"},{"string":"Aura Skills have #% reduced Magnitudes","negate":true}],"trade":{"ids":{"explicit":["explicit.stat_315791320"],"fractured":["fractured.stat_315791320"],"crafted":["crafted.stat_315791320"],"rune":["rune.stat_315791320"],"desecrated":["desecrated.stat_315791320"]}}}
-{"better":1,"matchers":[{"string":"Aureus Coins are converted to Experience upon defeating the Herald of the Scourge"}],"trade":{"ids":{"explicit":["sanctum.stat_1307773596"]}}}
-{"better":1,"matchers":[{"string":"Aureus Coins are converted to Relics upon defeating the Herald of the Scourge"}],"trade":{"ids":{"explicit":["sanctum.stat_315260783"]}}}
-{"better":1,"matchers":[{"string":"Aureus Coins are converted to Tainted Currency upon defeating the Herald of the Scourge"}],"trade":{"ids":{"explicit":["sanctum.stat_1019656601"]}}}
 {"better":0,"matchers":[{"string":"Avatar of Fire"}],"trade":{"ids":{"explicit":["explicit.stat_3831171903|4"]}}}
 {"better":1,"matchers":[{"string":"Banner Skills have #% increased Area of Effect"},{"string":"Banner Skills have #% reduced Area of Effect","negate":true}],"trade":{"ids":{"explicit":["explicit.stat_429143663"],"fractured":["fractured.stat_429143663"],"desecrated":["desecrated.stat_429143663"]}}}
 {"better":1,"matchers":[{"string":"Banner Skills have #% increased Duration"},{"string":"Banner Skills have #% reduced Duration","negate":true}],"trade":{"ids":{"explicit":["explicit.stat_2720982137"],"fractured":["fractured.stat_2720982137"],"desecrated":["desecrated.stat_2720982137"]}}}
@@ -2274,17 +2162,8 @@
 {"better":1,"matchers":[{"string":"Bonded: Triggered Spells deal #% increased Spell Damage"}],"trade":{"ids":{"rune":["rune.stat_1651083789"]}}}
 {"better":1,"matchers":[{"string":"Bonded: Warcry Skills have #% increased Area of Effect"}],"trade":{"ids":{"rune":["rune.stat_3969727699"]}}}
 {"better":1,"matchers":[{"string":"Bonded: When Volatility on you explodes, you regain an equivalent amount of Volatility"}],"trade":{"ids":{"rune":["rune.stat_2248594298"]}}}
-{"better":1,"matchers":[{"string":"Bosses deal #% increased Damage"},{"string":"Bosses deal #% reduced Damage","negate":true}],"trade":{"ids":{"explicit":["sanctum.stat_2207905451"]}}}
-{"better":1,"matchers":[{"string":"Bosses take #% increased Damage"},{"string":"Bosses take #% reduced Damage","negate":true}],"trade":{"ids":{"explicit":["sanctum.stat_3226329527"]}}}
 {"better":1,"matchers":[{"string":"Bow Attacks consume #% of your maximum Life Flask Charges if possible to deal added Physical damage equal to #% of Flask's Life Recovery amount"}],"trade":{"ids":{"explicit":["explicit.stat_3893788785"]}}}
 {"better":1,"matchers":[{"string":"Bow Attacks fire # additional Arrows"},{"string":"Bow Attacks fire an additional Arrow","value":1}],"trade":{"ids":{"explicit":["explicit.stat_3885405204"],"implicit":["implicit.stat_3885405204"],"fractured":["fractured.stat_3885405204"],"enchant":["enchant.stat_3885405204"],"rune":["rune.stat_3885405204"],"desecrated":["desecrated.stat_3885405204"]}}}
-{"better":1,"matchers":[{"string":"Breach Hives in Map have # additional waves of Hiveborn Monsters"},{"string":"Breach Hives in Map have an additional wave of Hiveborn Monsters","value":1}],"trade":{"ids":{"explicit":["explicit.stat_2734787892"]}}}
-{"better":1,"matchers":[{"string":"Breaches expand to at least # metre in radius\nBreaches remain open while there are alive Breach Monsters"},{"string":"Breaches expand to at least # metres in radius\nBreaches remain open while there are alive Breach Monsters"}],"trade":{"ids":{"explicit":["explicit.stat_1217651243"]}}}
-{"better":1,"matchers":[{"string":"Breaches in Map contain # additional Clasped Hand"},{"string":"Breaches in Map contain # additional Clasped Hands"}],"trade":{"ids":{"explicit":["explicit.stat_2224050171"]}}}
-{"better":1,"matchers":[{"string":"Breaches in Map have #% increased Pack Size"},{"string":"Breaches in Map have #% reduced Pack Size","negate":true}],"trade":{"ids":{"explicit":["explicit.stat_1210760818"]}}}
-{"better":1,"matchers":[{"string":"Breaches in Map open and close #% faster"},{"string":"Breaches in Map open and close #% slower","negate":true}],"trade":{"ids":{"explicit":["explicit.stat_2504358770"]}}}
-{"better":1,"matchers":[{"string":"Breaches in Map spawn #% increased Magic Monsters"},{"string":"Breaches in Map spawn #% reduced Magic Monsters","negate":true}],"trade":{"ids":{"explicit":["explicit.stat_1090596078"]}}}
-{"better":1,"matchers":[{"string":"Breaches in Map spawn # additional Rare Monsters"},{"string":"Breaches in Map spawn an additional Rare Monster","value":1}],"trade":{"ids":{"explicit":["explicit.stat_1653625239"]}}}
 {"better":1,"matchers":[{"string":"Break #% increased Armour"},{"string":"Break #% reduced Armour","negate":true}],"trade":{"ids":{"explicit":["explicit.stat_1776411443"],"fractured":["fractured.stat_1776411443"],"enchant":["enchant.stat_1776411443"],"desecrated":["desecrated.stat_1776411443"]}}}
 {"better":1,"matchers":[{"string":"Break Armour equal to #% of Physical Damage dealt"}],"trade":{"ids":{"explicit":["explicit.stat_1103616075"],"desecrated":["desecrated.stat_1103616075"]}}}
 {"better":1,"matchers":[{"string":"Break Armour on Critical Hit with Spells equal to #% of Physical Damage dealt"}],"trade":{"ids":{"explicit":["explicit.stat_1286199571"],"desecrated":["desecrated.stat_1286199571"]}}}
@@ -2302,8 +2181,6 @@
 {"better":1,"matchers":[{"string":"Can be modified while Corrupted"}],"trade":{"ids":{"explicit":["explicit.stat_1161337167"]}}}
 {"better":1,"matchers":[{"string":"Can have # additional Crafted Modifier"},{"string":"Can have # additional Crafted Modifiers"}],"trade":{"ids":{"rune":["rune.stat_1963398329"]}}}
 {"better":1,"matchers":[{"string":"Can have # additional Instilled Modifiers"},{"string":"Can have a second Instilled Modifier","value":1}],"trade":{"ids":{"explicit":["explicit.stat_1135194732"]}}}
-{"better":1,"matchers":[{"string":"Can only be applied to Precursor Tower Maps\nCompleting the Tower makes all nearby Maps accessible"}],"trade":{"ids":{"explicit":["explicit.stat_3418590244"]}}}
-{"better":1,"matchers":[{"string":"Can Reroll Favours at Ritual Altars in your Maps twice as many times"}],"trade":{"ids":{"explicit":["explicit.stat_2500154144"]}}}
 {"better":1,"matchers":[{"string":"Can roll Berserking modifiers"}],"trade":{"ids":{"rune":["rune.stat_1770091046"]}}}
 {"better":1,"matchers":[{"string":"Can roll Chronomancy modifiers"}],"trade":{"ids":{"rune":["rune.stat_3132681620"]}}}
 {"better":1,"matchers":[{"string":"Can roll Decay modifiers"}],"trade":{"ids":{"rune":["rune.stat_2547063279"]}}}
@@ -2321,16 +2198,13 @@
 {"better":1,"matchers":[{"string":"Cannot be Shocked"}],"trade":{"ids":{"explicit":["explicit.stat_491899612"]}}}
 {"better":1,"matchers":[{"string":"Cannot be Used manually"}],"trade":{"ids":{"explicit":["explicit.stat_1237409891"]}}}
 {"better":1,"matchers":[{"string":"Cannot be used while Manifested"}],"trade":{"ids":{"explicit":["explicit.stat_398335579"]}}}
-{"better":1,"matchers":[{"string":"Cannot be used with Trials below level #"}],"trade":{"ids":{"explicit":["sanctum.stat_1512067281"]}}}
 {"better":1,"matchers":[{"string":"Cannot Block"}],"trade":{"ids":{"explicit":["explicit.stat_1465760952"]}}}
 {"better":1,"matchers":[{"string":"Cannot Evade Enemy Attacks"}],"trade":{"ids":{"explicit":["explicit.stat_474452755"]}}}
-{"better":1,"matchers":[{"string":"Cannot have Boons"}],"trade":{"ids":{"explicit":["sanctum.stat_2283325632"]}}}
 {"better":1,"matchers":[{"string":"Cannot have Energy Shield"}],"trade":{"ids":{"explicit":["explicit.stat_410952253"]}}}
 {"better":1,"matchers":[{"string":"Cannot Immobilise enemies"}],"trade":{"ids":{"explicit":["explicit.stat_4062529591"]}}}
 {"better":1,"matchers":[{"string":"Cannot inflict Elemental Ailments"}],"trade":{"ids":{"explicit":["explicit.stat_4056809290"]}}}
 {"better":1,"matchers":[{"string":"Cannot load or fire Ammunition"}],"trade":{"ids":{"implicit":["implicit.stat_3663551379"]}}}
 {"better":1,"matchers":[{"string":"Cannot Regenerate Mana if you haven't dealt a Critical Hit Recently"}],"trade":{"ids":{"explicit":["explicit.stat_1458880585"]}}}
-{"better":1,"matchers":[{"string":"Cannot restore Honour"}],"trade":{"ids":{"explicit":["sanctum.stat_2545161750"]}}}
 {"better":1,"matchers":[{"string":"Cannot use Life Flasks\nNon-Unique Life Flasks apply their Effects constantly\nRecovery from Life Flasks cannot be Instant\nRecovery from your Life Flasks cannot be applied to anything other than you"}],"trade":{"ids":{"explicit":["explicit.stat_1580426064"]}}}
 {"better":1,"matchers":[{"string":"Cannot use Projectile Attacks"}],"trade":{"ids":{"explicit":["explicit.stat_1961849903"],"implicit":["implicit.stat_1961849903"]}}}
 {"better":1,"matchers":[{"string":"Cannot use Shield Skills"}],"trade":{"ids":{"explicit":["explicit.stat_65135897"]}}}
@@ -2338,7 +2212,6 @@
 {"better":1,"matchers":[{"string":"Catalysts can be applied to this item"}],"trade":{"ids":{"implicit":["implicit.stat_254952842"]}}}
 {"better":1,"matchers":[{"string":"Causes #% increased Stun Buildup"},{"string":"Causes #% reduced Stun Buildup","negate":true}],"trade":{"ids":{"explicit":["explicit.stat_791928121"],"implicit":["implicit.stat_791928121"],"fractured":["fractured.stat_791928121"],"enchant":["enchant.stat_791928121"],"rune":["rune.stat_791928121"],"desecrated":["desecrated.stat_791928121"]}}}
 {"better":1,"matchers":[{"string":"Causes Bleeding on Hit"}],"trade":{"ids":{"explicit":["explicit.stat_2091621414"],"rune":["rune.stat_2091621414"]}}}
-{"better":1,"matchers":[{"string":"Causes Daze buildup equal to #% of Damage dealt"}],"trade":{"ids":{"explicit":["explicit.stat_1559935218"],"implicit":["implicit.stat_1559935218"]}}}
 {"better":1,"matchers":[{"string":"Causes Double Stun Buildup"}],"trade":{"ids":{"explicit":["explicit.stat_769129523"],"rune":["rune.stat_769129523"]}}}
 {"better":1,"matchers":[{"string":"Causes Enemies to Explode on Critical kill, for #% of their Life as Physical Damage"}],"trade":{"ids":{"implicit":["implicit.stat_1541903247"]}}}
 {"better":1,"matchers":[{"string":"Chance to Block Attack Damage is Unlucky","value":-1},{"string":"Chance to Block Damage is Lucky","value":1}],"trade":{"ids":{"explicit":["explicit.stat_2957287092"],"rune":["rune.stat_2957287092"]}}}
@@ -2420,7 +2293,6 @@
 {"better":1,"matchers":[{"string":"Damage Penetrates #% Elemental Resistances"}],"trade":{"ids":{"explicit":["explicit.stat_2101383955"],"fractured":["fractured.stat_2101383955"],"crafted":["crafted.stat_2101383955"]}}}
 {"better":1,"matchers":[{"string":"Damage Penetrates #% Fire Resistance"},{"string":"Your Hits treat Fire Resistance as #% higher than actual value","negate":true}],"trade":{"ids":{"explicit":["explicit.stat_2653955271"],"fractured":["fractured.stat_2653955271"],"enchant":["enchant.stat_2653955271"],"desecrated":["desecrated.stat_2653955271"]}}}
 {"better":1,"matchers":[{"string":"Damage Penetrates #% Lightning Resistance"},{"string":"Your Hits treat Lightning Resistance as #% higher than actual value","negate":true}],"trade":{"ids":{"explicit":["explicit.stat_818778753"],"fractured":["fractured.stat_818778753"],"enchant":["enchant.stat_818778753"],"desecrated":["desecrated.stat_818778753"]}}}
-{"better":1,"matchers":[{"string":"Damage taken cannot be Absorbed"}],"trade":{"ids":{"explicit":["sanctum.stat_2150725270"]}}}
 {"better":1,"matchers":[{"string":"Damage taken Recouped as Life is also Recouped as Energy Shield"}],"trade":{"ids":{"explicit":["explicit.stat_2432200638"]}}}
 {"better":1,"matchers":[{"string":"Damaging Ailments deal damage #% faster"}],"trade":{"ids":{"explicit":["explicit.stat_538241406"],"fractured":["fractured.stat_538241406"],"desecrated":["desecrated.stat_538241406"]}}}
 {"better":0,"matchers":[{"string":"Dance With Death"}],"trade":{"ids":{"explicit":["explicit.stat_3831171903|17"]}}}
@@ -2438,17 +2310,6 @@
 {"better":1,"matchers":[{"string":"Defend with #% of Armour while you have Energy Shield"}],"trade":{"ids":{"explicit":["explicit.stat_1539671749"]}}}
 {"better":1,"matchers":[{"string":"Defend with 200% of Armour"}],"trade":{"ids":{"explicit":["explicit.stat_3387008487"]}}}
 {"better":1,"matchers":[{"string":"Defend with 200% of Armour during effect"}],"trade":{"ids":{"explicit":["explicit.stat_3138344128"]}}}
-{"better":1,"matchers":[{"string":"Deferring Favours at Ritual Altars in Map costs #% increased Tribute"},{"string":"Deferring Favours at Ritual Altars in Map costs #% reduced Tribute","negate":true}],"trade":{"ids":{"explicit":["explicit.stat_1345835998"]}}}
-{"better":1,"matchers":[{"string":"Delirious Monsters Killed in Map provide #% increased Reward Progress"}],"trade":{"ids":{"explicit":["explicit.stat_3428124128"]}}}
-{"better":1,"matchers":[{"string":"Delirium Encounters in affected Map have #% chance to generate an additional Reward"}],"trade":{"ids":{"explicit":["explicit.stat_1770833858"]}}}
-{"better":1,"matchers":[{"string":"Delirium Encounters in Map are #% more likely to spawn Unique Bosses"},{"string":"Delirium Encounters in Map are #% less likely to spawn Unique Bosses","negate":true}],"trade":{"ids":{"explicit":["explicit.stat_3962960008"]}}}
-{"better":1,"matchers":[{"string":"Delirium Fog in Map applies #% increased Deliriousness to Players"},{"string":"Delirium Fog in Map applies #% reduced Deliriousness to Players","negate":true}],"trade":{"ids":{"explicit":["explicit.stat_1769611692"]}}}
-{"better":1,"matchers":[{"string":"Delirium Fog in Map dissipates #% faster"},{"string":"Delirium Fog in Map dissipates #% slower","negate":true}],"trade":{"ids":{"explicit":["explicit.stat_3350944114"]}}}
-{"better":1,"matchers":[{"string":"Delirium Fog in Map lasts # additional seconds before dissipating"}],"trade":{"ids":{"explicit":["explicit.stat_3226351972"]}}}
-{"better":1,"matchers":[{"string":"Delirium Fog in Map spawns #% increased Fracturing Mirrors"},{"string":"Delirium Fog in Map spawns #% reduced Fracturing Mirrors","negate":true}],"trade":{"ids":{"explicit":["explicit.stat_551040294"]}}}
-{"better":1,"matchers":[{"string":"Delirium Fog in Map spawns #% increased Mirror Shards"},{"string":"Delirium Fog in Map spawns #% reduced Mirror Shards","negate":true}],"trade":{"ids":{"explicit":["explicit.stat_900933517"]}}}
-{"better":1,"matchers":[{"string":"Delirium Fog in your Maps never dissipates"}],"trade":{"ids":{"explicit":["explicit.stat_1084853859"]}}}
-{"better":1,"matchers":[{"string":"Delirium Monsters in Map have #% increased Pack Size"},{"string":"Delirium Monsters in Map have #% reduced Pack Size","negate":true}],"trade":{"ids":{"explicit":["explicit.stat_3465791711"]}}}
 {"better":1,"matchers":[{"string":"Destroys all Augment Sockets on the item to create a Jewel Socket"}],"trade":{"ids":{"rune":["rune.stat_1933674044"]}}}
 {"better":1,"matchers":[{"string":"Divine Flight"}],"trade":{"ids":{"explicit":["explicit.stat_2971398565"]}}}
 {"better":1,"matchers":[{"string":"Dodge Roll avoids all Hits"}],"trade":{"ids":{"explicit":["explicit.stat_3518087336"]}}}
@@ -2456,9 +2317,7 @@
 {"better":1,"matchers":[{"string":"Double Stun Threshold while Shield is Raised"}],"trade":{"ids":{"explicit":["explicit.stat_3686997387"],"rune":["rune.stat_3686997387"]}}}
 {"better":1,"matchers":[{"string":"Drop Ignited Ground while moving, which lasts 8 seconds and Ignites as though dealing Fire Damage equal to #% of your maximum Life"}],"trade":{"ids":{"explicit":["explicit.stat_2356156926"]}}}
 {"better":1,"matchers":[{"string":"Drop Shocked Ground while moving, lasting 8 seconds"}],"trade":{"ids":{"explicit":["explicit.stat_65133983"]}}}
-{"better":1,"matchers":[{"string":"Duplicates up to # random Offer Reward upon defeating the Herald of the Scourge"},{"string":"Duplicates up to # random Offer Rewards upon defeating the Herald of the Scourge"}],"trade":{"ids":{"explicit":["sanctum.stat_502549687"]}}}
 {"better":1,"matchers":[{"string":"Each Arrow fired is a Crescendo, Splinter, Reversing, Diamond, Covetous, or Blunt Arrow"}],"trade":{"ids":{"explicit":["explicit.stat_3891922348"]}}}
-{"better":1,"matchers":[{"string":"Each Runic Inscription from your Curse Skills causes you to Regenerate Mana per second equal to #% of that Skill's Mana Cost"}],"trade":{"ids":{"rune":["rune.stat_426207520"]}}}
 {"better":1,"matchers":[{"string":"Eat a Soul when you Hit a Unique Enemy, no more than once every # seconds"},{"string":"Eat a Soul when you Hit a Unique Enemy, no more than once every second","value":1}],"trade":{"ids":{"explicit":["explicit.stat_2103621252"]}}}
 {"better":1,"matchers":[{"string":"Eat a Soul when you Hit an enemy with an Open Weakness"}],"trade":{"ids":{"explicit":["explicit.stat_1393838912"]}}}
 {"better":1,"matchers":[{"string":"Effect is not removed when Unreserved Life is Filled"}],"trade":{"ids":{"explicit":["explicit.stat_2932359713"]}}}
@@ -2469,7 +2328,6 @@
 {"better":1,"matchers":[{"string":"Elemental Damage from Hits Contributes to Flammability, Ignite, and Chill Magnitudes, Freeze Buildup, and Shock Chance"}],"trade":{"ids":{"explicit":["explicit.stat_2678924815"]}}}
 {"better":0,"matchers":[{"string":"Elemental Equilibrium"}],"trade":{"ids":{"explicit":["explicit.stat_3831171903|23"]}}}
 {"better":1,"matchers":[{"string":"Empowered Attacks deal #% increased Damage"},{"string":"Empowered Attacks deal #% reduced Damage","negate":true}],"trade":{"ids":{"explicit":["explicit.stat_1569101201"],"fractured":["fractured.stat_1569101201"],"desecrated":["desecrated.stat_1569101201"]}}}
-{"better":1,"matchers":[{"string":"Empowers the Map Boss of a Map \n# use remaining"},{"string":"Empowers the Map Boss of a Map \n# uses remaining"}],"trade":{"ids":{"implicit":["implicit.stat_3376302538"]}}}
 {"better":1,"matchers":[{"string":"Enemies are Culled on Block"}],"trade":{"ids":{"explicit":["explicit.stat_381470861"]}}}
 {"better":1,"matchers":[{"string":"Enemies Chilled by your Hits can be Shattered as though Frozen"}],"trade":{"ids":{"explicit":["explicit.stat_3119292058"]}}}
 {"better":1,"matchers":[{"string":"Enemies Chilled by your Hits increase damage taken by Chill Magnitude"}],"trade":{"ids":{"explicit":["explicit.stat_1816894864"]}}}
@@ -2527,27 +2385,14 @@
 {"better":1,"matchers":[{"string":"Every second Slam Skill you use while Shapeshifted is Ancestrally Boosted\nEvery second Strike Skill you use while Shapeshifted is Ancestrally Boosted"}],"trade":{"ids":{"explicit":["explicit.stat_2224139044"]}}}
 {"better":1,"matchers":[{"string":"Every # seconds, gain a Verisium Infusion"},{"string":"Every second, gain a Verisium Infusion","value":1}],"trade":{"ids":{"implicit":["implicit.stat_3326854490"]}}}
 {"better":1,"matchers":[{"string":"Every second, inflicts Critical Weakness on enemies in your Presence for # second"},{"string":"Every second, inflicts Critical Weakness on enemies in your Presence for # seconds"}],"trade":{"ids":{"explicit":["explicit.stat_1052498387"]}}}
-{"better":1,"matchers":[{"string":"Excavated Chests have a #% chance to contain twice as many Items"}],"trade":{"ids":{"implicit":["implicit.stat_3239978999"]}}}
 {"better":1,"matchers":[{"string":"Excess Life Recovery added as Guard for # seconds"}],"trade":{"ids":{"explicit":["explicit.stat_636464211"]}}}
 {"better":1,"matchers":[{"string":"Excess Life Recovery from Leech is applied to Energy Shield"}],"trade":{"ids":{"explicit":["explicit.stat_999436592"]}}}
-{"better":1,"matchers":[{"string":"Expedition Monsters in your Maps spawn with half of their Life missing"}],"trade":{"ids":{"explicit":["explicit.stat_144770454"]}}}
-{"better":1,"matchers":[{"string":"Expeditions contain # Additional Bosses encased in ice in Map"},{"string":"Expeditions contain 1 Additional Boss encased in ice in Map","value":1}],"trade":{"ids":{"explicit":["explicit.stat_1183698646"]}}}
-{"better":1,"matchers":[{"string":"Expeditions contain # Additional Verisium Sentries in Map"},{"string":"Expeditions contain 1 Additional Verisium Sentry in Map","value":1}],"trade":{"ids":{"explicit":["explicit.stat_1109460697"]}}}
-{"better":1,"matchers":[{"string":"Expeditions contain # buried Strongboxes in Map"},{"string":"Expeditions contain 1 buried Strongbox in Map","value":1}],"trade":{"ids":{"explicit":["explicit.stat_181823691"]}}}
-{"better":1,"matchers":[{"string":"Expeditions contain # Vaal Relics in Map"},{"string":"Expeditions contain 1 Vaal Relic in Map","value":1}],"trade":{"ids":{"explicit":["explicit.stat_2852112245"]}}}
-{"better":1,"matchers":[{"string":"Expeditions have #% Surpassing chance to contain an additional Verisium Remnant"}],"trade":{"ids":{"explicit":["explicit.stat_3653794255"]}}}
-{"better":1,"matchers":[{"string":"Expeditions have #% Surpassing chance to Duplicate Runic Monsters in Map"}],"trade":{"ids":{"explicit":["explicit.stat_779964546"]}}}
-{"better":1,"matchers":[{"string":"Expeditions in Map have # Remnant"},{"string":"Expeditions in Map have # Remnants"}],"trade":{"ids":{"explicit":["explicit.stat_3753446846"]}}}
-{"better":1,"matchers":[{"string":"Favours at Ritual Altars in Area costs #% increased Tribute"},{"string":"Favours at Ritual Altars in Area costs #% reduced Tribute","negate":true}],"trade":{"ids":{"explicit":["explicit.stat_1228222525"]}}}
-{"better":1,"matchers":[{"string":"Favours Deferred at Ritual Altars in Map reappear #% sooner"}],"trade":{"ids":{"explicit":["explicit.stat_28208665"]}}}
-{"better":1,"matchers":[{"string":"Favours Rerolled at Ritual Altars in Map have #% chance to cost no Tribute"}],"trade":{"ids":{"explicit":["explicit.stat_937291386"]}}}
 {"better":1,"matchers":[{"string":"Fire Damage also Contributes to Bleeding Magnitude"}],"trade":{"ids":{"explicit":["explicit.stat_1221641885"]}}}
 {"better":1,"matchers":[{"string":"Fire Damage from Hits Contributes to Shock Chance instead of Flammability and Ignite Magnitudes"}],"trade":{"ids":{"explicit":["explicit.stat_2949096603"]}}}
 {"better":1,"matchers":[{"string":"Fire Resistance is unaffected by Area Penalties"}],"trade":{"ids":{"explicit":["explicit.stat_3247805335"]}}}
 {"better":1,"matchers":[{"string":"Flammability Magnitude is doubled"}],"trade":{"ids":{"explicit":["explicit.stat_1540254896"],"rune":["rune.stat_1540254896"]}}}
 {"better":1,"matchers":[{"string":"Flasks do not recover Life"}],"trade":{"ids":{"explicit":["explicit.stat_265717301"]}}}
 {"better":1,"matchers":[{"string":"Flasks gain # charges per Second"}],"trade":{"ids":{"explicit":["explicit.stat_731781020"],"implicit":["implicit.stat_731781020"],"fractured":["fractured.stat_731781020"],"crafted":["crafted.stat_731781020"],"rune":["rune.stat_731781020"]}}}
-{"better":1,"matchers":[{"string":"Fountains have #% chance to grant double Sacred Water"}],"trade":{"ids":{"explicit":["sanctum.stat_2363402715"]}}}
 {"better":1,"matchers":[{"string":"Freezes Enemies that are on Full Life"}],"trade":{"ids":{"explicit":["explicit.stat_2260055669"]}}}
 {"better":1,"matchers":[{"string":"Fully Armour Broken enemies you kill with Hits Shatter"}],"trade":{"ids":{"explicit":["explicit.stat_3278008231"]}}}
 {"better":1,"matchers":[{"string":"Gain # Druidic Prowess when you Heavy Stun a Rare or Unique Enemy"}],"trade":{"ids":{"rune":["rune.stat_3444646646"]}}}
@@ -2563,8 +2408,6 @@
 {"better":1,"matchers":[{"string":"Gain # Rage when Hit by an Enemy"}],"trade":{"ids":{"explicit":["explicit.stat_3292710273"],"fractured":["fractured.stat_3292710273"],"rune":["rune.stat_3292710273"],"desecrated":["desecrated.stat_3292710273"]}}}
 {"better":1,"matchers":[{"string":"Gain # Rage when Hit by an Enemy during effect"}],"trade":{"ids":{"explicit":["explicit.stat_555311715"]}}}
 {"better":1,"matchers":[{"string":"Gain # Rage when you kill an enemy affected by Abyssal Wasting"}],"trade":{"ids":{"explicit":["explicit.stat_2934385135"]}}}
-{"better":1,"matchers":[{"string":"Gain # Sacred Water at the start of the Trial"}],"trade":{"ids":{"explicit":["sanctum.stat_2393318075"]}}}
-{"better":1,"matchers":[{"string":"Gain # Sacred Water when you complete a Room"}],"trade":{"ids":{"explicit":["sanctum.stat_4057192895"]}}}
 {"better":1,"matchers":[{"string":"Gain # Volatility when you kill an enemy affected by Abyssal Wasting"}],"trade":{"ids":{"explicit":["explicit.stat_2952939159"]}}}
 {"better":1,"matchers":[{"string":"Gain #% of Cold damage as Extra Fire damage per 1% Chill Magnitude on enemy"}],"trade":{"ids":{"explicit":["explicit.stat_2469544361"]}}}
 {"better":1,"matchers":[{"string":"Gain #% of Damage as Chaos Damage per Undead Minion"}],"trade":{"ids":{"explicit":["explicit.stat_997343726"]}}}
@@ -2595,7 +2438,6 @@
 {"better":1,"matchers":[{"string":"Gain #% of Maximum Mana as Armour"}],"trade":{"ids":{"explicit":["explicit.stat_514290151"],"desecrated":["desecrated.stat_514290151"]}}}
 {"better":1,"matchers":[{"string":"Gain #% of maximum Mana as Extra maximum Energy Shield"}],"trade":{"ids":{"explicit":["explicit.stat_3027830452"]}}}
 {"better":1,"matchers":[{"string":"Gain #% of Physical Damage as Extra Cold Damage"}],"trade":{"ids":{"explicit":["explicit.stat_758893621"],"fractured":["fractured.stat_758893621"],"crafted":["crafted.stat_758893621"],"desecrated":["desecrated.stat_758893621"]}}}
-{"better":1,"matchers":[{"string":"Gain #% of Physical Damage as Extra Damage of a random Element"}],"trade":{"ids":{"explicit":["explicit.stat_915546383"]}}}
 {"better":1,"matchers":[{"string":"Gain #% of Physical Damage as Extra Fire Damage"}],"trade":{"ids":{"rune":["rune.stat_1936645603"]}}}
 {"better":1,"matchers":[{"string":"Gain 0% to #% increased Movement Speed at random when Hit, until Hit again"}],"trade":{"ids":{"explicit":["explicit.stat_796381300"]}}}
 {"better":1,"matchers":[{"string":"Gain 1 Dark Whisper every second there is a Cursed Enemy in your Presence"}],"trade":{"ids":{"explicit":["explicit.stat_2482970488"]}}}
@@ -2753,7 +2595,7 @@
 {"better":1,"matchers":[{"string":"Herald Skills deal #% increased Damage"},{"string":"Herald Skills deal #% reduced Damage","negate":true}],"trade":{"ids":{"explicit":["explicit.stat_21071013"],"fractured":["fractured.stat_21071013"],"desecrated":["desecrated.stat_21071013"]}}}
 {"better":1,"matchers":[{"string":"Historic"}],"trade":{"ids":{"explicit":["explicit.stat_3787436548"]}}}
 {"better":1,"matchers":[{"string":"Hits against you have #% increased Critical Hit Chance while you are Chilled"},{"string":"Hits against you have #% reduced Critical Hit Chance while you are Chilled","negate":true}],"trade":{"ids":{"explicit":["explicit.stat_3923947492"]}}}
-{"stats":[{"better":1,"matchers":[{"string":"Hits against you have #% reduced Critical Damage Bonus"},{"string":"Hits against you have #% increased Critical Damage Bonus","negate":true}],"trade":{"ids":{"explicit":["explicit.stat_3855016469"],"implicit":["implicit.stat_3855016469"],"fractured":["fractured.stat_3855016469"],"crafted":["crafted.stat_3855016469"],"rune":["rune.stat_3855016469"],"desecrated":["desecrated.stat_3855016469"]}}},{"better":1,"matchers":[{"string":"Hits against you have #% reduced Critical Damage Bonus"},{"string":"Hits against you have #% increased Critical Damage Bonus","negate":true}],"trade":{"ids":{"explicit":["sanctum.stat_2948404493"]}}}]}
+{"stats":[{"better":1,"matchers":[{"string":"Hits against you have #% reduced Critical Damage Bonus"},{"string":"Hits against you have #% increased Critical Damage Bonus","negate":true}],"trade":{"ids":{"explicit":["explicit.stat_3855016469"],"implicit":["implicit.stat_3855016469"],"fractured":["fractured.stat_3855016469"],"crafted":["crafted.stat_3855016469"],"rune":["rune.stat_3855016469"],"desecrated":["desecrated.stat_3855016469"]}}}]}
 {"better":1,"matchers":[{"string":"Hits against you have #% reduced Critical Damage Bonus per Socket filled"},{"string":"Hits against you have #% increased Critical Damage Bonus per Socket filled","negate":true}],"trade":{"ids":{"explicit":["explicit.stat_701923421"]}}}
 {"better":1,"matchers":[{"string":"Hits against you have no Critical Damage Bonus while on Consecrated Ground"}],"trade":{"ids":{"rune":["rune.stat_1800433827"]}}}
 {"better":1,"matchers":[{"string":"Hits Break # Armour"}],"trade":{"ids":{"explicit":["explicit.stat_289086688"]}}}
@@ -2767,7 +2609,6 @@
 {"better":0,"matchers":[{"string":"Hollow Palm Technique"}],"trade":{"ids":{"explicit":["explicit.stat_3831171903|27"]}}}
 {"better":1,"matchers":[{"string":"Ice Crystals have #% increased maximum Life per 5% Cold Resistance you have"},{"string":"Ice Crystals have #% reduced maximum Life per 5% Cold Resistance you have","negate":true}],"trade":{"ids":{"explicit":["explicit.stat_740421489"]}}}
 {"better":1,"matchers":[{"string":"Idols socketed in this item gain the benefits of their Bonded modifiers"}],"trade":{"ids":{"rune":["rune.stat_726496846"]}}}
-{"better":1,"matchers":[{"string":"If Map was not previously Irradiated, completing Map adds Irradiation instead"}],"trade":{"ids":{"explicit":["explicit.stat_2371108370"]}}}
 {"better":1,"matchers":[{"string":"If you would gain a Frenzy Charge, Allies in your Presence gain that Charge instead"}],"trade":{"ids":{"rune":["rune.stat_2211478554"]}}}
 {"better":1,"matchers":[{"string":"If you would gain a Power Charge, Allies in your Presence gain that Charge instead"}],"trade":{"ids":{"rune":["rune.stat_4226127445"]}}}
 {"better":1,"matchers":[{"string":"If you would gain an Endurance Charge, Allies in your Presence gain that Charge instead"}],"trade":{"ids":{"rune":["rune.stat_1881314095"]}}}
@@ -2791,7 +2632,6 @@
 {"better":1,"matchers":[{"string":"Infinite Parry Range"}],"trade":{"ids":{"explicit":["explicit.stat_1076031760"]}}}
 {"better":1,"matchers":[{"string":"Inflict Abyssal Wasting on Hit"}],"trade":{"ids":{"explicit":["explicit.stat_2646093132"],"implicit":["implicit.stat_2646093132"]}}}
 {"better":1,"matchers":[{"string":"Inflict Anaemia on Hit\nAnaemia allows # Corrupted Blood debuffs to be inflicted on enemies"}],"trade":{"ids":{"explicit":["explicit.stat_971590056"],"fractured":["fractured.stat_971590056"],"crafted":["crafted.stat_971590056"],"desecrated":["desecrated.stat_971590056"]}}}
-{"better":-1,"matchers":[{"string":"Inflict Cold Exposure on Hit, lowering Total Cold Resistance by #%"},{"string":"Inflict Cold Exposure on Hit","value":10}],"trade":{"ids":{"explicit":["explicit.stat_3005701891"]}}}
 {"better":1,"matchers":[{"string":"Inflict Cold Exposure on Igniting an Enemy"}],"trade":{"ids":{"explicit":["explicit.stat_3314536008"]}}}
 {"better":1,"matchers":[{"string":"Inflict Corrupted Blood for # second on Block, dealing #% of\nyour maximum Life as Physical damage per second"},{"string":"Inflict Corrupted Blood for # seconds on Block, dealing #% of\nyour maximum Life as Physical damage per second"},{"string":"Inflict # Corrupted Blood Debuffs for # second on Block, dealing #% of\nyour maximum Life as Physical damage per second"},{"string":"Inflict # Corrupted Blood Debuffs for # seconds on Block, dealing #% of\nyour maximum Life as Physical damage per second"}],"trade":{"ids":{"explicit":["explicit.stat_1695767482"]}}}
 {"better":1,"matchers":[{"string":"Inflict Elemental Exposure on Hit, lowering Total Elemental Resistances by #%"},{"string":"Inflict Elemental Exposure on Hit","value":40}],"trade":{"ids":{"explicit":["explicit.stat_533542952"]}}}
@@ -2876,46 +2716,13 @@
 {"better":1,"matchers":[{"string":"Mana Recovery from Regeneration is also applied to Runic Ward"}],"trade":{"ids":{"rune":["rune.stat_3145796865"]}}}
 {"better":1,"matchers":[{"string":"Mana Recovery other than Regeneration cannot Recover Mana"}],"trade":{"ids":{"explicit":["explicit.stat_3593063598"]}}}
 {"better":1,"matchers":[{"string":"Manifested Dancing Dervishes die when Rampage ends"}],"trade":{"ids":{"explicit":["explicit.stat_1414945937"]}}}
-{"better":1,"matchers":[{"string":"Map also counts as a Desert Map"}],"trade":{"ids":{"explicit":["explicit.stat_3517228691"]}}}
-{"better":1,"matchers":[{"string":"Map also counts as a Forest Map"}],"trade":{"ids":{"explicit":["explicit.stat_864099561"]}}}
-{"better":1,"matchers":[{"string":"Map also counts as a Grass Map"}],"trade":{"ids":{"explicit":["explicit.stat_3160511599"]}}}
-{"better":1,"matchers":[{"string":"Map also counts as a Mountain Map"}],"trade":{"ids":{"explicit":["explicit.stat_1583884108"]}}}
-{"better":1,"matchers":[{"string":"Map also counts as a Swamp Map"}],"trade":{"ids":{"explicit":["explicit.stat_3755999954"]}}}
-{"better":1,"matchers":[{"string":"Map also counts as a Water Map"}],"trade":{"ids":{"explicit":["explicit.stat_3271982291"]}}}
-{"better":1,"matchers":[{"string":"Map Boss has #% chance to drop a Waystone of the current tier or higher"}],"trade":{"ids":{"explicit":["explicit.stat_1314787770"]}}}
-{"better":1,"matchers":[{"string":"Map Bosses are Hunted by Azmeri Spirits"}],"trade":{"ids":{"explicit":["explicit.stat_2588474575"]}}}
-{"better":1,"matchers":[{"string":"Map Bosses grant #% increased Experience"},{"string":"Map Bosses grant #% reduced Experience","negate":true}],"trade":{"ids":{"explicit":["explicit.stat_3860150265"]}}}
-{"better":1,"matchers":[{"string":"Map Bosses have # additional Modifier"},{"string":"Map Bosses have # additional Modifiers"}],"trade":{"ids":{"explicit":["explicit.stat_1458461453"]}}}
-{"stats":[{"better":1,"matchers":[{"string":"Map contains # additional Abysses"},{"string":"Map contains an additional Abyss","value":1}],"trade":{"ids":{"explicit":["explicit.stat_3490187949"],"desecrated":["desecrated.stat_3490187949"]}}},{"better":1,"matchers":[{"string":"Map contains # additional Abysses"},{"string":"Map contains an additional Abyss","value":1}],"trade":{"ids":{"explicit":["explicit.stat_1070816711"]}}}]}
-{"stats":[{"better":1,"matchers":[{"string":"Map contains # additional Azmeri Spirit"},{"string":"Map contains # additional Azmeri Spirits"}],"trade":{"ids":{"explicit":["explicit.stat_358129101"]}}},{"better":1,"matchers":[{"string":"Map contains # additional Azmeri Spirits"},{"string":"Map contains an additional Azmeri Spirit","value":1}],"trade":{"ids":{"explicit":["explicit.stat_775597083"]}}}]}
-{"stats":[{"better":1,"matchers":[{"string":"Map contains # additional Strongboxes"},{"string":"Map contains an additional Strongbox","value":1}],"trade":{"ids":{"explicit":["explicit.stat_3240183538"]}}},{"better":1,"matchers":[{"string":"Map contains # additional Strongboxes"},{"string":"Map contains an additional Strongbox","value":1}],"trade":{"ids":{"explicit":["explicit.stat_3040603554"]}}}]}
-{"better":1,"matchers":[{"string":"Map contains #% increased number of Runic Monster Markers"},{"string":"Map contains #% reduced number of Runic Monster Markers"}],"trade":{"ids":{"explicit":["explicit.stat_1640965354"],"implicit":["implicit.stat_1640965354"]}}}
-{"stats":[{"better":1,"matchers":[{"string":"Map contains # additional Essences"},{"string":"Map contains an additional Essence","value":1}],"trade":{"ids":{"explicit":["explicit.stat_395808938"]}}},{"better":1,"matchers":[{"string":"Map contains # additional Essences"},{"string":"Map contains an additional Essence","value":1}],"trade":{"ids":{"explicit":["explicit.stat_2162684861"]}}}]}
-{"better":1,"matchers":[{"string":"Map contains # additional Rare Chests"},{"string":"Map contains an additional Rare Chest","value":1}],"trade":{"ids":{"explicit":["explicit.stat_231864447"]}}}
-{"stats":[{"better":1,"matchers":[{"string":"Map contains # additional Shrines"},{"string":"Map contains an additional Shrine","value":1}],"trade":{"ids":{"explicit":["explicit.stat_1468737867"]}}},{"better":1,"matchers":[{"string":"Map contains # additional Shrines"},{"string":"Map contains an additional Shrine","value":1}],"trade":{"ids":{"explicit":["explicit.stat_3042527515"]}}}]}
 {"better":1,"matchers":[{"string":"Map contains # additional Summoning Circles"},{"string":"Map contains an additional Summoning Circle","value":1}],"trade":{"ids":{"explicit":["explicit.stat_2839545956"]}}}
-{"better":1,"matchers":[{"string":"Map has # additional random Modifier"},{"string":"Map has # additional random Modifiers"}],"trade":{"ids":{"explicit":["explicit.stat_588512487"]}}}
-{"better":1,"matchers":[{"string":"Map has #% chance to contain an additional Breach"},{"string":"Map contains an additional Breach","value":100}],"trade":{"ids":{"explicit":["explicit.stat_3049505189"]}}}
-{"better":1,"matchers":[{"string":"Map has #% chance to contain four additional Abysses"},{"string":"Map contains four additional Abysses","value":100}],"trade":{"ids":{"explicit":["explicit.stat_2890355696"]}}}
-{"better":1,"matchers":[{"string":"Map has #% chance to contain three additional Breaches"},{"string":"Map contains three additional Breaches","value":100}],"trade":{"ids":{"explicit":["explicit.stat_2440265466"]}}}
-{"better":1,"matchers":[{"string":"Map has #% increased chance to contain a Summoning Circle"},{"string":"Map has #% reduced chance to contain a Summoning Circle","negate":true}],"trade":{"ids":{"explicit":["explicit.stat_267210597"]}}}
-{"better":1,"matchers":[{"string":"Map has #% increased chance to contain Azmeri Spirits"},{"string":"Map has #% reduced chance to contain Azmeri Spirits","negate":true}],"trade":{"ids":{"explicit":["explicit.stat_3815617979"]}}}
-{"better":1,"matchers":[{"string":"Map has #% increased chance to contain Essences"},{"string":"Map has #% reduced chance to contain Essences","negate":true}],"trade":{"ids":{"explicit":["explicit.stat_1825943485"]}}}
-{"better":1,"matchers":[{"string":"Map has #% increased chance to contain Rogue Exiles"},{"string":"Map has #% reduced chance to contain Rogue Exiles","negate":true}],"trade":{"ids":{"explicit":["explicit.stat_1352729973"]}}}
-{"better":1,"matchers":[{"string":"Map has #% increased chance to contain Shrines"},{"string":"Map has #% reduced chance to contain Shrines","negate":true}],"trade":{"ids":{"explicit":["explicit.stat_689816330"]}}}
-{"better":1,"matchers":[{"string":"Map has #% increased chance to contain Strongboxes"},{"string":"Map has #% reduced chance to contain Strongboxes","negate":true}],"trade":{"ids":{"explicit":["explicit.stat_4279535856"]}}}
-{"better":1,"matchers":[{"string":"Map has #% increased Magic Monsters"}],"trade":{"ids":{"explicit":["explicit.stat_3873704640"],"fractured":["fractured.stat_3873704640"],"enchant":["enchant.stat_3873704640"],"desecrated":["desecrated.stat_3873704640"]}}}
-{"better":1,"matchers":[{"string":"Map has #% increased Monster Rarity"}],"trade":{"ids":{"explicit":["explicit.stat_4142653832"]}}}
-{"better":1,"matchers":[{"string":"Map has #% increased number of Rare Monsters"}],"trade":{"ids":{"explicit":["explicit.stat_3793155082"],"fractured":["fractured.stat_3793155082"],"enchant":["enchant.stat_3793155082"],"desecrated":["desecrated.stat_3793155082"]}}}
-{"better":1,"matchers":[{"string":"Map is inhabited by # additional Rogue Exile"},{"string":"Map is inhabited by # additional Rogue Exiles"}],"trade":{"ids":{"explicit":["explicit.stat_3550168289"]}}}
-{"better":1,"matchers":[{"string":"Map is overrun by the Abyssal"}],"trade":{"ids":{"explicit":["explicit.stat_2741291867"],"desecrated":["desecrated.stat_2741291867"]}}}
 {"better":1,"matchers":[{"string":"Mark Skills have #% increased Skill Effect Duration"},{"string":"Mark Skills have #% reduced Skill Effect Duration","negate":true}],"trade":{"ids":{"explicit":["explicit.stat_2594634307"],"fractured":["fractured.stat_2594634307"],"desecrated":["desecrated.stat_2594634307"]}}}
 {"better":1,"matchers":[{"string":"Mark Skills have #% increased Use Speed"},{"string":"Mark Skills have #% reduced Use Speed","negate":true}],"trade":{"ids":{"explicit":["explicit.stat_1714971114"],"fractured":["fractured.stat_1714971114"],"desecrated":["desecrated.stat_1714971114"]}}}
 {"better":1,"matchers":[{"string":"Maximum # Fragile Regrowth"}],"trade":{"ids":{"explicit":["explicit.stat_1173537953"]}}}
 {"better":1,"matchers":[{"string":"Maximum amount of Guard is based on maximum Energy Shield instead"}],"trade":{"ids":{"explicit":["explicit.stat_1338406168"]}}}
 {"better":1,"matchers":[{"string":"Maximum Chance to Evade is 50%"}],"trade":{"ids":{"explicit":["explicit.stat_1500744699"]}}}
 {"better":1,"matchers":[{"string":"Maximum Energy Shield cannot be Converted"}],"trade":{"ids":{"explicit":["explicit.stat_2104359366"]}}}
-{"better":1,"matchers":[{"string":"Maximum Honour is 1"}],"trade":{"ids":{"explicit":["sanctum.stat_4191312223"]}}}
 {"better":1,"matchers":[{"string":"Maximum Physical Damage Reduction is 50%"}],"trade":{"ids":{"explicit":["explicit.stat_3960211755"]}}}
 {"better":1,"matchers":[{"string":"Maximum Quality is #%"}],"trade":{"ids":{"explicit":["explicit.stat_275498888"],"implicit":["implicit.stat_275498888"],"rune":["rune.stat_275498888"]}}}
 {"better":1,"matchers":[{"string":"Melee Attack Skills have # to maximum number of Summoned Totems"}],"trade":{"ids":{"explicit":["explicit.stat_2013356568"],"desecrated":["desecrated.stat_2013356568"]}}}
@@ -2954,45 +2761,7 @@
 {"better":1,"matchers":[{"string":"Minions' Strikes have Melee Splash"}],"trade":{"ids":{"explicit":["explicit.stat_3249412463"],"fractured":["fractured.stat_3249412463"],"crafted":["crafted.stat_3249412463"],"desecrated":["desecrated.stat_3249412463"]}}}
 {"better":1,"matchers":[{"string":"Modifiers to Maximum Block Chance instead apply to Maximum Resistances"}],"trade":{"ids":{"explicit":["explicit.stat_3679696791"]}}}
 {"better":1,"matchers":[{"string":"Modifiers to Stun Buildup apply to Freeze Buildup instead for Parry"}],"trade":{"ids":{"explicit":["explicit.stat_3201111383"]}}}
-{"better":1,"matchers":[{"string":"Monster Damage Penetrates #% Elemental Resistances"}],"trade":{"ids":{"explicit":["explicit.stat_1898978455"],"fractured":["fractured.stat_1898978455"],"desecrated":["desecrated.stat_1898978455"]}}}
-{"better":1,"matchers":[{"string":"Monster Damage penetrates #% of Cold Resistance"}],"trade":{"ids":{"explicit":["explicit.stat_1138708335"]}}}
-{"better":1,"matchers":[{"string":"Monster Damage penetrates #% of Fire Resistance"}],"trade":{"ids":{"explicit":["explicit.stat_3588388638"]}}}
-{"better":1,"matchers":[{"string":"Monster Damage penetrates #% of Lightning Resistance"}],"trade":{"ids":{"explicit":["explicit.stat_3093465148"]}}}
-{"better":1,"matchers":[{"string":"Monster have #% increased Elemental Ailment Application"},{"string":"Monster have #% reduced Elemental Ailment Application","negate":true}],"trade":{"ids":{"explicit":["explicit.stat_3877264671"],"fractured":["fractured.stat_3877264671"],"desecrated":["desecrated.stat_3877264671"]}}}
-{"better":1,"matchers":[{"string":"Monsters are Armoured"}],"trade":{"ids":{"explicit":["explicit.stat_2539290279"],"fractured":["fractured.stat_2539290279"],"desecrated":["desecrated.stat_2539290279"]}}}
-{"better":1,"matchers":[{"string":"Monsters are Evasive"}],"trade":{"ids":{"explicit":["explicit.stat_2570249991"],"fractured":["fractured.stat_2570249991"],"desecrated":["desecrated.stat_2570249991"]}}}
-{"better":1,"matchers":[{"string":"Monsters Break Armour equal to #% of Physical Damage dealt"}],"trade":{"ids":{"explicit":["explicit.stat_1879340377"],"fractured":["fractured.stat_1879340377"],"desecrated":["desecrated.stat_1879340377"]}}}
-{"better":1,"matchers":[{"string":"Monsters deal #% of Damage as Extra Chaos"}],"trade":{"ids":{"explicit":["explicit.stat_2200661314"],"fractured":["fractured.stat_2200661314"],"desecrated":["desecrated.stat_2200661314"]}}}
-{"better":1,"matchers":[{"string":"Monsters deal #% of Damage as Extra Cold"}],"trade":{"ids":{"explicit":["explicit.stat_211727"],"fractured":["fractured.stat_211727"],"desecrated":["desecrated.stat_211727"]}}}
-{"better":1,"matchers":[{"string":"Monsters deal #% of Damage as Extra Fire"}],"trade":{"ids":{"explicit":["explicit.stat_92381065"],"fractured":["fractured.stat_92381065"],"desecrated":["desecrated.stat_92381065"]}}}
-{"better":1,"matchers":[{"string":"Monsters deal #% of Damage as Extra Lightning"}],"trade":{"ids":{"explicit":["explicit.stat_512071314"],"fractured":["fractured.stat_512071314"],"desecrated":["desecrated.stat_512071314"]}}}
-{"better":1,"matchers":[{"string":"Monsters fire # additional Projectiles"},{"string":"Players and Monsters fire # additional Projectiles"},{"string":"Players fire # additional Projectiles"}],"trade":{"ids":{"explicit":["explicit.stat_1309819744"],"desecrated":["desecrated.stat_1309819744"]}}}
-{"better":1,"matchers":[{"string":"Monsters from Verisium Remnants drop #% increased Verisium"}],"trade":{"ids":{"explicit":["explicit.stat_3520418269"]}}}
-{"better":1,"matchers":[{"string":"Monsters gain #% of maximum Life as Extra maximum Energy Shield"}],"trade":{"ids":{"explicit":["explicit.stat_2887760183"],"fractured":["fractured.stat_2887760183"],"desecrated":["desecrated.stat_2887760183"]}}}
-{"better":1,"matchers":[{"string":"Monsters have #% chance to drop double Sacred Water"}],"trade":{"ids":{"explicit":["sanctum.stat_231205265"]}}}
-{"better":1,"matchers":[{"string":"Monsters have #% chance to inflict Bleeding on Hit"}],"trade":{"ids":{"explicit":["explicit.stat_2506820610"],"fractured":["fractured.stat_2506820610"],"desecrated":["desecrated.stat_2506820610"]}}}
-{"better":1,"matchers":[{"string":"Monsters have #% chance to Poison on Hit"}],"trade":{"ids":{"explicit":["explicit.stat_95221307"],"fractured":["fractured.stat_95221307"],"desecrated":["desecrated.stat_95221307"]}}}
-{"better":1,"matchers":[{"string":"Monsters have #% chance to steal Power, Frenzy and Endurance charges on Hit"},{"string":"Monsters steal Power, Frenzy and Endurance charges on Hit","value":100}],"trade":{"ids":{"explicit":["explicit.stat_3222482040"],"fractured":["fractured.stat_3222482040"],"desecrated":["desecrated.stat_3222482040"]}}}
-{"better":1,"matchers":[{"string":"Monsters have #% increased Accuracy Rating"},{"string":"Monsters have #% reduced Accuracy Rating","negate":true}],"trade":{"ids":{"explicit":["explicit.stat_1588049749"],"fractured":["fractured.stat_1588049749"],"desecrated":["desecrated.stat_1588049749"]}}}
-{"better":1,"matchers":[{"string":"Monsters have #% increased Ailment Threshold"}],"trade":{"ids":{"explicit":["explicit.stat_1994551050"],"fractured":["fractured.stat_1994551050"],"desecrated":["desecrated.stat_1994551050"]}}}
-{"better":1,"matchers":[{"string":"Monsters have #% increased Area of Effect"},{"string":"Monsters have #% reduced Area of Effect","negate":true}],"trade":{"ids":{"explicit":["explicit.stat_1708461270"]}}}
-{"better":1,"matchers":[{"string":"Monsters have #% increased Armour, Evasion and Energy Shield"},{"string":"Monsters have #% reduced Armour, Evasion and Energy Shield","negate":true}],"trade":{"ids":{"explicit":["explicit.stat_3906866585"]}}}
-{"better":1,"matchers":[{"string":"Monsters have #% increased Attack, Cast and Movement Speed"},{"string":"Monsters have #% reduced Attack, Cast and Movement Speed","negate":true}],"trade":{"ids":{"explicit":["explicit.stat_3909654181","sanctum.stat_3909654181"],"fractured":["fractured.stat_3909654181"],"desecrated":["desecrated.stat_3909654181"]}}}
-{"better":1,"matchers":[{"string":"Monsters have #% increased Critical Hit Chance"},{"string":"Monsters have #% reduced Critical Hit Chance","negate":true}],"trade":{"ids":{"explicit":["explicit.stat_2753083623"],"fractured":["fractured.stat_2753083623"],"desecrated":["desecrated.stat_2753083623"]}}}
-{"better":1,"matchers":[{"string":"Monsters have #% increased Effectiveness"},{"string":"Monsters have #% reduced Effectiveness","negate":true}],"trade":{"ids":{"explicit":["explicit.stat_2065500219"]}}}
-{"better":1,"matchers":[{"string":"Monsters have #% increased Freeze Buildup"}],"trade":{"ids":{"explicit":["explicit.stat_3998863698"],"fractured":["fractured.stat_3998863698"],"desecrated":["desecrated.stat_3998863698"]}}}
-{"better":1,"matchers":[{"string":"Monsters have #% increased Shock Chance"}],"trade":{"ids":{"explicit":["explicit.stat_1984618452"],"fractured":["fractured.stat_1984618452"],"desecrated":["desecrated.stat_1984618452"]}}}
-{"better":1,"matchers":[{"string":"Monsters have #% increased Stun Buildup"}],"trade":{"ids":{"explicit":["explicit.stat_115425161"],"fractured":["fractured.stat_115425161"],"desecrated":["desecrated.stat_115425161"]}}}
-{"better":1,"matchers":[{"string":"Monsters have #% increased Stun Threshold"}],"trade":{"ids":{"explicit":["explicit.stat_4101943684"],"fractured":["fractured.stat_4101943684"],"desecrated":["desecrated.stat_4101943684"]}}}
-{"better":1,"matchers":[{"string":"Monsters have #% Critical Damage Bonus"}],"trade":{"ids":{"explicit":["explicit.stat_57326096"],"fractured":["fractured.stat_57326096"],"desecrated":["desecrated.stat_57326096"]}}}
-{"better":1,"matchers":[{"string":"Monsters inflict # Grasping Vine on Hit"},{"string":"Monsters inflict # Grasping Vines on Hit"}],"trade":{"ids":{"explicit":["explicit.stat_1751584857"],"desecrated":["desecrated.stat_1751584857"]}}}
-{"better":1,"matchers":[{"string":"Monsters inflict #% increased Flammability Magnitude"}],"trade":{"ids":{"explicit":["explicit.stat_2508044078"],"fractured":["fractured.stat_2508044078"],"desecrated":["desecrated.stat_2508044078"]}}}
-{"better":1,"matchers":[{"string":"Monsters Sacrificed at Ritual Altars in Map grant #% increased Tribute"},{"string":"Monsters Sacrificed at Ritual Altars in Map grant #% reduced Tribute","negate":true}],"trade":{"ids":{"explicit":["explicit.stat_159726667"]}}}
-{"better":1,"matchers":[{"string":"Monsters take #% increased Damage"},{"string":"Monsters take #% reduced Damage","negate":true}],"trade":{"ids":{"explicit":["sanctum.stat_3114474137"]}}}
-{"better":1,"matchers":[{"string":"Monsters take #% reduced Extra Damage from Critical Hits"},{"string":"Monsters take #% increased Extra Damage from Critical Hits","negate":true}],"trade":{"ids":{"explicit":["explicit.stat_337935900"],"fractured":["fractured.stat_337935900"],"desecrated":["desecrated.stat_337935900"]}}}
 {"better":1,"matchers":[{"string":"Moving while Bleeding doesn't cause you to take extra damage"}],"trade":{"ids":{"explicit":["explicit.stat_4112450013"]}}}
-{"better":1,"matchers":[{"string":"Natural Rare Monsters in Area Eat the Souls of slain Monsters in their Presence"}],"trade":{"ids":{"explicit":["explicit.stat_1266185101"],"desecrated":["desecrated.stat_1266185101"]}}}
-{"better":1,"matchers":[{"string":"Natural Rare Monsters in Area have # extra Abyssal Modifier"},{"string":"Natural Rare Monsters in Area have # extra Abyssal Modifiers"}],"trade":{"ids":{"explicit":["explicit.stat_1168851547"],"desecrated":["desecrated.stat_1168851547"]}}}
 {"better":0,"matchers":[{"string":"Necromantic Talisman"}],"trade":{"ids":{"explicit":["explicit.stat_3831171903|12"]}}}
 {"better":1,"matchers":[{"string":"No Inherent loss of Rage"}],"trade":{"ids":{"explicit":["explicit.stat_4163076972"]}}}
 {"better":1,"matchers":[{"string":"No Inherent loss of Rage during effect"}],"trade":{"ids":{"explicit":["explicit.stat_3464644319"]}}}
@@ -3175,23 +2944,6 @@
 {"better":1,"matchers":[{"string":"Physical Damage of Enemies Hitting you is Unlucky","value":-1},{"string":"Physical Damage of Enemies Hitting you is Lucky","value":1}],"trade":{"ids":{"explicit":["explicit.stat_2424163939"]}}}
 {"better":1,"matchers":[{"string":"Pin Enemies which are Primed for Pinning"}],"trade":{"ids":{"explicit":["explicit.stat_3063814459"]}}}
 {"better":1,"matchers":[{"string":"Plants have a #% chance to immediately Overgrow when they enter your Presence for the first time"}],"trade":{"ids":{"rune":["rune.stat_2681952497"]}}}
-{"better":1,"matchers":[{"string":"Players and their Minions deal no damage for 3 out of every 10 seconds"}],"trade":{"ids":{"explicit":["explicit.stat_2408625104"],"desecrated":["desecrated.stat_2408625104"]}}}
-{"better":1,"matchers":[{"string":"Players are Cursed with Elemental Weakness"}],"trade":{"ids":{"explicit":["explicit.stat_558910024"]}}}
-{"better":1,"matchers":[{"string":"Players are Cursed with Enfeeble"}],"trade":{"ids":{"explicit":["explicit.stat_4103440490"]}}}
-{"better":1,"matchers":[{"string":"Players are Cursed with Temporal Chains"}],"trade":{"ids":{"explicit":["explicit.stat_2326202293"]}}}
-{"better":1,"matchers":[{"string":"Players are Marked for Death for # seconds\nafter killing a Rare or Unique monster"},{"string":"Players are Marked for Death for # second\nafter killing a Rare or Unique monster"}],"trade":{"ids":{"explicit":["explicit.stat_436406826"],"desecrated":["desecrated.stat_436406826"]}}}
-{"better":1,"matchers":[{"string":"Players are periodically Cursed with Elemental Weakness"}],"trade":{"ids":{"explicit":["explicit.stat_554690751"],"fractured":["fractured.stat_554690751"],"desecrated":["desecrated.stat_554690751"]}}}
-{"better":1,"matchers":[{"string":"Players are periodically Cursed with Enfeeble"}],"trade":{"ids":{"explicit":["explicit.stat_2029171424"],"fractured":["fractured.stat_2029171424"],"desecrated":["desecrated.stat_2029171424"]}}}
-{"better":1,"matchers":[{"string":"Players are periodically Cursed with Temporal Chains"}],"trade":{"ids":{"explicit":["explicit.stat_1629357380"],"fractured":["fractured.stat_1629357380"],"desecrated":["desecrated.stat_1629357380"]}}}
-{"better":-1,"matchers":[{"string":"Players gain #% increased Flask Charges"},{"string":"Players gain #% reduced Flask Charges","negate":true}],"trade":{"ids":{"explicit":["explicit.stat_2549889921"],"fractured":["fractured.stat_2549889921"],"desecrated":["desecrated.stat_2549889921"]},"inverted":true}}
-{"better":-1,"matchers":[{"string":"Players have #% more Recovery Rate of Life and Energy Shield"},{"string":"Players have #% less Recovery Rate of Life and Energy Shield","negate":true}],"trade":{"ids":{"explicit":["explicit.stat_4181072906"],"fractured":["fractured.stat_4181072906"],"desecrated":["desecrated.stat_4181072906"]},"inverted":true}}
-{"better":1,"matchers":[{"string":"Players have #% more Armour, Evasion and Energy Shield"},{"string":"Players have #% less Armour, Evasion and Energy Shield","negate":true}],"trade":{"ids":{"explicit":["explicit.stat_3510648768"]}}}
-{"better":1,"matchers":[{"string":"Players have #% more Cooldown Recovery Rate"},{"string":"Players have #% less Cooldown Recovery Rate","negate":true}],"trade":{"ids":{"explicit":["explicit.stat_941368244"],"fractured":["fractured.stat_941368244"],"desecrated":["desecrated.stat_941368244"]}}}
-{"better":1,"matchers":[{"string":"Players have #% more maximum Life and Energy Shield"},{"string":"Players have #% less maximum Life and Energy Shield","negate":true}],"trade":{"ids":{"explicit":["explicit.stat_3119282240"]}}}
-{"better":1,"matchers":[{"string":"Players have #% more Movement and Skill Speed for each time they've used a Skill Recently"},{"string":"Players have #% less Movement and Skill Speed for each time they've used a Skill Recently","negate":true}],"trade":{"ids":{"explicit":["explicit.stat_4274247770"],"desecrated":["desecrated.stat_4274247770"]}}}
-{"better":1,"matchers":[{"string":"Players have #% more Recovery Rate of Life, Mana and Energy Shield"},{"string":"Players have #% less Recovery Rate of Life, Mana and Energy Shield","negate":true}],"trade":{"ids":{"explicit":["explicit.stat_1310597900"]}}}
-{"better":1,"matchers":[{"string":"Players in Area are #% Delirious"}],"trade":{"ids":{"enchant":["enchant.stat_1715784068"]}}}
-{"better":1,"matchers":[{"string":"Players steal the Eaten Souls of Slain Rare Monsters in Area"}],"trade":{"ids":{"explicit":["explicit.stat_1365079333"],"desecrated":["desecrated.stat_1365079333"]}}}
 {"better":1,"matchers":[{"string":"Possessed by Spirit Of The Bear for # seconds on use"}],"trade":{"ids":{"explicit":["explicit.stat_3403424702"]}}}
 {"better":1,"matchers":[{"string":"Possessed by Spirit Of The Boar for # seconds on use"}],"trade":{"ids":{"explicit":["explicit.stat_1685559578"]}}}
 {"better":1,"matchers":[{"string":"Possessed by Spirit Of The Cat for # seconds on use"}],"trade":{"ids":{"explicit":["explicit.stat_2839557359"]}}}
@@ -3221,10 +2973,6 @@
 {"better":1,"matchers":[{"string":"Projectiles have #% increased Critical Hit chance for each time they have Pierced"}],"trade":{"ids":{"explicit":["explicit.stat_1163615092"]}}}
 {"better":1,"matchers":[{"string":"Projectiles Pierce all Ignited enemies"}],"trade":{"ids":{"explicit":["explicit.stat_2214228141"]}}}
 {"better":1,"matchers":[{"string":"Projectiles Split towards # targets"}],"trade":{"ids":{"explicit":["explicit.stat_3464380325"]}}}
-{"better":1,"matchers":[{"string":"Rare Monsters deal #% increased Damage"},{"string":"Rare Monsters deal #% reduced Damage","negate":true}],"trade":{"ids":{"explicit":["sanctum.stat_199414195"]}}}
-{"better":1,"matchers":[{"string":"Rare Monsters have # additional Modifier"},{"string":"Rare Monsters have # additional Modifiers"}],"trade":{"ids":{"explicit":["explicit.stat_2550456553"],"fractured":["fractured.stat_2550456553"],"desecrated":["desecrated.stat_2550456553"]}}}
-{"better":1,"matchers":[{"string":"Rare Monsters in Map have a #% Surpassing chance to have an additional Modifier"}],"trade":{"ids":{"explicit":["explicit.stat_3732878551"],"enchant":["enchant.stat_3732878551"]}}}
-{"better":1,"matchers":[{"string":"Rare Monsters take #% increased Damage"},{"string":"Rare Monsters take #% reduced Damage","negate":true}],"trade":{"ids":{"explicit":["sanctum.stat_408585189"]}}}
 {"better":1,"matchers":[{"string":"Raven-Touched"}],"trade":{"ids":{"explicit":["explicit.stat_3198163869"],"rune":["rune.stat_3198163869"]}}}
 {"better":1,"matchers":[{"string":"Recover # Life when Used"}],"trade":{"ids":{"explicit":["explicit.stat_2365392475"]}}}
 {"better":1,"matchers":[{"string":"Recover # Life when you Block"}],"trade":{"ids":{"rune":["rune.stat_1678831767"]}}}
@@ -3234,7 +2982,6 @@
 {"better":1,"matchers":[{"string":"Recover #% of maximum Life for each Endurance Charge consumed"}],"trade":{"ids":{"explicit":["explicit.stat_939832726"],"rune":["rune.stat_939832726"]}}}
 {"better":1,"matchers":[{"string":"Recover #% of maximum Life on Kill"},{"string":"Lose #% of maximum Life on Kill","negate":true}],"trade":{"ids":{"explicit":["explicit.stat_2023107756"],"fractured":["fractured.stat_2023107756"],"crafted":["crafted.stat_2023107756"],"rune":["rune.stat_2023107756"],"desecrated":["desecrated.stat_2023107756"]}}}
 {"better":1,"matchers":[{"string":"Recover #% of maximum Life on Killing a Poisoned Enemy"}],"trade":{"ids":{"explicit":["explicit.stat_1781372024"],"desecrated":["desecrated.stat_1781372024"]}}}
-{"better":1,"matchers":[{"string":"Recover #% of maximum Life over 2 Seconds when you use a Command Skill"}],"trade":{"ids":{"rune":["rune.stat_1914815166"]}}}
 {"better":1,"matchers":[{"string":"Recover #% of maximum Life per Poison affecting Enemies you Kill"}],"trade":{"ids":{"explicit":["explicit.stat_2535713562"]}}}
 {"better":1,"matchers":[{"string":"Recover #% of maximum Life when you Block"},{"string":"Lose #% of maximum Life when you Block","negate":true}],"trade":{"ids":{"explicit":["explicit.stat_2442647190"]}}}
 {"better":1,"matchers":[{"string":"Recover #% of Maximum Life when you expend at least 10 Combo"}],"trade":{"ids":{"explicit":["explicit.stat_4033618138"],"desecrated":["desecrated.stat_4033618138"]}}}
@@ -3266,7 +3013,6 @@
 {"better":1,"matchers":[{"string":"Remembrancing # songworthy deeds by the line of Olroth\nPassives in radius are Conquered by the Kalguur"}],"trade":{"ids":{"explicit":["explicit.stat_3418580811|23"]}}}
 {"better":1,"matchers":[{"string":"Remembrancing # songworthy deeds by the line of Vorana\nPassives in radius are Conquered by the Kalguur"}],"trade":{"ids":{"explicit":["explicit.stat_3418580811|21"]}}}
 {"better":1,"matchers":[{"string":"Remnants can be collected from #% further away"}],"trade":{"ids":{"explicit":["explicit.stat_3482326075"],"fractured":["fractured.stat_3482326075"],"crafted":["crafted.stat_3482326075"],"rune":["rune.stat_3482326075"],"desecrated":["desecrated.stat_3482326075"]}}}
-{"better":1,"matchers":[{"string":"Remnants have #% chance to have an additional Suffix Modifier"}],"trade":{"ids":{"implicit":["implicit.stat_1871805225"]}}}
 {"better":1,"matchers":[{"string":"Remnants you create affect Allies in your Presence as well as you when collected"}],"trade":{"ids":{"explicit":["explicit.stat_315717203"]}}}
 {"better":1,"matchers":[{"string":"Remnants you create have #% increased effect"},{"string":"Remnants you create have #% reduced effect","negate":true}],"trade":{"ids":{"explicit":["explicit.stat_1999910726"],"rune":["rune.stat_1999910726"],"desecrated":["desecrated.stat_1999910726"]}}}
 {"better":1,"matchers":[{"string":"Remove a Damaging Ailment when you use a Command Skill"}],"trade":{"ids":{"rune":["rune.stat_594547430"]}}}
@@ -3275,27 +3021,14 @@
 {"better":1,"matchers":[{"string":"Removes #% of Mana Recovered from Life when used"}],"trade":{"ids":{"explicit":["explicit.stat_959641748"]}}}
 {"better":1,"matchers":[{"string":"Repeatable Attacks with this Bow Repeat # time if no enemies are in your Presence"},{"string":"Repeatable Attacks with this Bow Repeat # times if no enemies are in your Presence"}],"trade":{"ids":{"explicit":["explicit.stat_2306588612"]}}}
 {"better":1,"matchers":[{"string":"Require # additional enemies to be Surrounded"},{"string":"Require # fewer enemies to be Surrounded","negate":true}],"trade":{"ids":{"explicit":["explicit.stat_2267564181"]}}}
-{"better":1,"matchers":[{"string":"Rerolling Favours at Ritual Altars in Map costs #% increased Tribute"},{"string":"Rerolling Favours at Ritual Altars in Map costs #% reduced Tribute","negate":true}],"trade":{"ids":{"explicit":["explicit.stat_2282052746"]}}}
 {"better":0,"matchers":[{"string":"Resolute Technique"}],"trade":{"ids":{"explicit":["explicit.stat_3831171903|6"]}}}
-{"better":1,"matchers":[{"string":"Resolve Aegis Recovers #% faster while not losing Resolve"},{"string":"Resolve Aegis Recovers #% slower while not losing Resolve","negate":true}],"trade":{"ids":{"explicit":["sanctum.stat_3889616543"]}}}
-{"better":1,"matchers":[{"string":"Resolve Mitigation from Enemy Hits is based on #% of Armour"}],"trade":{"ids":{"explicit":["sanctum.stat_3621177126"]}}}
 {"better":0,"matchers":[{"string":"Resonance"}],"trade":{"ids":{"explicit":["explicit.stat_3831171903|14"]}}}
-{"better":1,"matchers":[{"string":"Restore # Honour on killing a Boss"}],"trade":{"ids":{"explicit":["sanctum.stat_3865020351"]}}}
-{"better":1,"matchers":[{"string":"Restore # Honour on picking up a Key"}],"trade":{"ids":{"explicit":["sanctum.stat_521869848"]}}}
-{"better":1,"matchers":[{"string":"Restore # Honour on room completion"}],"trade":{"ids":{"explicit":["sanctum.stat_2114314842"]}}}
-{"better":1,"matchers":[{"string":"Restore # Honour on venerating a Maraketh Shrine"}],"trade":{"ids":{"explicit":["sanctum.stat_2492340460"]}}}
 {"better":1,"matchers":[{"string":"Reveal Weaknesses against Rare and Unique enemies"}],"trade":{"ids":{"explicit":["explicit.stat_110659965"]}}}
-{"better":1,"matchers":[{"string":"Revived Monsters from Ritual Altars in Map have #% increased chance to be Magic"},{"string":"Revived Monsters from Ritual Altars in Map have #% reduced chance to be Magic","negate":true}],"trade":{"ids":{"explicit":["explicit.stat_1031644647"]}}}
-{"better":1,"matchers":[{"string":"Revived Monsters from Ritual Altars in Map have #% increased chance to be Rare"},{"string":"Revived Monsters from Ritual Altars in Map have #% reduced chance to be Rare","negate":true}],"trade":{"ids":{"explicit":["explicit.stat_3979184174"]}}}
 {"better":1,"matchers":[{"string":"Right ring slot: Projectiles from Spells cannot Fork"}],"trade":{"ids":{"explicit":["explicit.stat_2933024469"]}}}
 {"better":1,"matchers":[{"string":"Right ring slot: Projectiles from Spells Chain # times"}],"trade":{"ids":{"explicit":["explicit.stat_1555918911"]}}}
-{"better":1,"matchers":[{"string":"Ritual Altars in Map allow rerolling Favours # additional times"},{"string":"Ritual Altars in Map allow rerolling Favours an additional time","value":1}],"trade":{"ids":{"explicit":["explicit.stat_120737942"]}}}
 {"better":0,"matchers":[{"string":"Ritual Cadence"}],"trade":{"ids":{"explicit":["explicit.stat_3831171903|29"]}}}
-{"better":1,"matchers":[{"string":"Ritual Favours in Map have #% increased chance to be Omens"},{"string":"Ritual Favours in Map have #% reduced chance to be Omens","negate":true}],"trade":{"ids":{"explicit":["explicit.stat_4219853180"]}}}
 {"better":1,"matchers":[{"string":"Rolls only the minimum or maximum Damage value for each Damage Type"}],"trade":{"ids":{"explicit":["explicit.stat_3108672983"]}}}
 {"better":1,"matchers":[{"string":"Rolls only the minimum or maximum Damage value for Physical Damage"}],"trade":{"ids":{"rune":["rune.stat_103706408"]}}}
-{"better":1,"matchers":[{"string":"Rooms are unknown on the Trial Map"}],"trade":{"ids":{"explicit":["sanctum.stat_3237367570"]}}}
-{"better":1,"matchers":[{"string":"Runic Monsters in your Maps are Duplicated"}],"trade":{"ids":{"explicit":["explicit.stat_2816104578"]}}}
 {"better":1,"matchers":[{"string":"Runic Ward recovery can Overflow maximum Runic Ward"}],"trade":{"ids":{"implicit":["implicit.stat_3408607858"]}}}
 {"better":1,"matchers":[{"string":"Runic Ward Regeneration Rate is doubled"}],"trade":{"ids":{"rune":["rune.stat_2579974553"]}}}
 {"better":1,"matchers":[{"string":"Sacrifice # Life to not consume the last bolt when firing"}],"trade":{"ids":{"explicit":["explicit.stat_76982026"]}}}
@@ -3340,13 +3073,11 @@
 {"better":1,"matchers":[{"string":"Skills have #% longer Perfect Timing window during effect"}],"trade":{"ids":{"explicit":["explicit.stat_3982604001"]}}}
 {"better":1,"matchers":[{"string":"Skills have # seconds to Cooldown"}],"trade":{"ids":{"explicit":["explicit.stat_396200591"]}}}
 {"better":1,"matchers":[{"string":"Skills have # to Limit"}],"trade":{"ids":{"explicit":["explicit.stat_2942704390"]}}}
-{"better":1,"matchers":[{"string":"Skills have a #% chance to not consume Glory"}],"trade":{"ids":{"explicit":["explicit.stat_3200877707"],"desecrated":["desecrated.stat_3200877707"]}}}
 {"better":1,"matchers":[{"string":"Skills have a #% longer Perfect Timing window"},{"string":"Skills have a #% shorter Perfect Timing window","negate":true}],"trade":{"ids":{"explicit":["explicit.stat_1373370443"]}}}
 {"better":1,"matchers":[{"string":"Skills reserve 50% less Spirit"}],"trade":{"ids":{"explicit":["explicit.stat_2838161567"]}}}
 {"better":1,"matchers":[{"string":"Skills which create Fissures have a #% chance to create an additional Fissure"}],"trade":{"ids":{"explicit":["explicit.stat_2544540062"],"implicit":["implicit.stat_2544540062"],"desecrated":["desecrated.stat_2544540062"]}}}
 {"better":1,"matchers":[{"string":"Skills which Empower an Attack have #% chance to not count that Attack"}],"trade":{"ids":{"explicit":["explicit.stat_2538411280"]}}}
 {"better":1,"matchers":[{"string":"Skills which require Glory generate # Glory every 2 seconds"}],"trade":{"ids":{"explicit":["explicit.stat_2480962043"]}}}
-{"better":1,"matchers":[{"string":"Slaying Rare Monsters in Map pauses the Delirium Mirror Timer for # seconds"},{"string":"Slaying Rare Monsters in Map pauses the Delirium Mirror Timer for 1 second","value":1}],"trade":{"ids":{"explicit":["explicit.stat_2323782229"]}}}
 {"better":1,"matchers":[{"string":"Small Passive Skills in Radius also grant # to maximum Life"}],"trade":{"ids":{"explicit":["explicit.stat_1316656343"]}}}
 {"better":1,"matchers":[{"string":"Small Passive Skills in Radius also grant # to maximum Mana"}],"trade":{"ids":{"explicit":["explicit.stat_1294464552"]}}}
 {"better":1,"matchers":[{"string":"Small Passive Skills in Radius also grant #% chance to Blind Enemies on Hit with Attacks"}],"trade":{"ids":{"explicit":["explicit.stat_2610562860"],"fractured":["fractured.stat_2610562860"],"desecrated":["desecrated.stat_2610562860"]}}}
@@ -3467,9 +3198,6 @@
 {"better":1,"matchers":[{"string":"The Bodach haunts your Presence"}],"trade":{"ids":{"explicit":["explicit.stat_3783473032"]}}}
 {"better":1,"matchers":[{"string":"The Effect of Blind on you is reversed"}],"trade":{"ids":{"explicit":["explicit.stat_1010703902"]}}}
 {"better":1,"matchers":[{"string":"The Effect of Chill on you is reversed"}],"trade":{"ids":{"explicit":["explicit.stat_2955966707"]}}}
-{"better":1,"matchers":[{"string":"The first # unearthed Runic Monsters will be Rare Monsters in Map"},{"string":"The first unearthed Runic Monster will be a Rare Monster in Map","value":1}],"trade":{"ids":{"explicit":["explicit.stat_3963944561"]}}}
-{"better":1,"matchers":[{"string":"The Herald of the Scourge drops # additional Invocations"},{"string":"The Herald of the Scourge drops an additional Invocation","value":1}],"trade":{"ids":{"explicit":["sanctum.stat_1175354969"]}}}
-{"better":1,"matchers":[{"string":"The Merchant has # additional Choices"},{"string":"The Merchant has an additional Choice","value":1}],"trade":{"ids":{"explicit":["sanctum.stat_290775436"]}}}
 {"better":1,"matchers":[{"string":"This Flask cannot be Used but applies its Effect constantly"}],"trade":{"ids":{"explicit":["explicit.stat_2980117882"]}}}
 {"better":1,"matchers":[{"string":"This item gains bonuses from Socketed Items as though it was a Body Armour"}],"trade":{"ids":{"explicit":["explicit.stat_1087787187"]}}}
 {"better":1,"matchers":[{"string":"This item gains bonuses from Socketed Items as though it was a Helmet"}],"trade":{"ids":{"explicit":["explicit.stat_1458343515"],"implicit":["implicit.stat_1458343515"]}}}
@@ -3480,14 +3208,12 @@
 {"better":1,"matchers":[{"string":"This item gains bonuses from Socketed Soul Cores as though it was also a Shield"}],"trade":{"ids":{"explicit":["explicit.stat_231726304"]}}}
 {"better":1,"matchers":[{"string":"This item gains bonuses from Socketed Soul Cores as though it was also Boots"}],"trade":{"ids":{"explicit":["explicit.stat_150590298"]}}}
 {"better":1,"matchers":[{"string":"This item gains bonuses from Socketed Soul Cores as though it was also Gloves"}],"trade":{"ids":{"explicit":["explicit.stat_3915618954"]}}}
-{"better":1,"matchers":[{"string":"This item is destroyed when applied to a Trial"}],"trade":{"ids":{"explicit":["sanctum.stat_3182333322"]}}}
 {"better":1,"matchers":[{"string":"This Weapon's Critical Hit Chance is #%"}],"trade":{"ids":{"explicit":["explicit.stat_3384885789"]}}}
 {"better":1,"matchers":[{"string":"Thorns can Retaliate against all Hits"}],"trade":{"ids":{"explicit":["explicit.stat_3414243317"]}}}
 {"better":1,"matchers":[{"string":"Thorns Damage is Lucky against targets with Fully Broken Armour"}],"trade":{"ids":{"rune":["rune.stat_1871622140"]}}}
 {"better":1,"matchers":[{"string":"Transforms all Cold and Lightning modifiers on the item into equivalent Fire modifiers"}],"trade":{"ids":{"rune":["rune.stat_602344904"]}}}
 {"better":1,"matchers":[{"string":"Transforms all Fire and Cold modifiers on the item into equivalent Lightning modifiers"}],"trade":{"ids":{"rune":["rune.stat_1433896639"]}}}
 {"better":1,"matchers":[{"string":"Transforms all Fire, Cold and Lightning modifiers on the item into equivalent Chaos modifiers"}],"trade":{"ids":{"rune":["rune.stat_1624833382"]}}}
-{"better":1,"matchers":[{"string":"Traps deal #% increased Damage"},{"string":"Traps deal #% reduced Damage","negate":true}],"trade":{"ids":{"explicit":["sanctum.stat_3554921410"]}}}
 {"better":1,"matchers":[{"string":"Trigger Decompose every 1.2 metres travelled"}],"trade":{"ids":{"explicit":["explicit.stat_3371943724"]}}}
 {"better":1,"matchers":[{"string":"Trigger Ember Fusillade Skill on casting a Spell"}],"trade":{"ids":{"explicit":["explicit.stat_826162720"]}}}
 {"better":1,"matchers":[{"string":"Trigger Lightning Bolt Skill on Critical Hit"}],"trade":{"ids":{"explicit":["explicit.stat_704919631"]}}}
@@ -3496,11 +3222,6 @@
 {"better":1,"matchers":[{"string":"Triggers Level # Manifest Dancing Dervishes on Rampage"}],"trade":{"ids":{"explicit":["explicit.stat_4007938693"]}}}
 {"better":0,"matchers":[{"string":"Trusted Kinship"}],"trade":{"ids":{"explicit":["explicit.stat_3831171903|25"]}}}
 {"better":1,"matchers":[{"string":"Unblockable"}],"trade":{"ids":{"implicit":["implicit.stat_1137147997"]}}}
-{"better":-1,"matchers":[{"string":"Undead Minions have #% increased Reservation"},{"string":"Undead Minions have #% reduced Reservation","negate":true}],"trade":{"ids":{"explicit":["explicit.stat_1176947534"]},"inverted":true}}
-{"better":1,"matchers":[{"string":"Unique Monsters have # additional Rare Modifier"},{"string":"Unique Monsters have # additional Rare Modifiers"}],"trade":{"ids":{"explicit":["explicit.stat_3371085671"],"enchant":["enchant.stat_3371085671"]}}}
-{"better":1,"matchers":[{"string":"Unstable Breaches in Map have #% increased chance to contain Vruun, Marshal of Xesht"}],"trade":{"ids":{"explicit":["explicit.stat_2433436306"]}}}
-{"better":1,"matchers":[{"string":"Unstable Breaches in Map spawn # additional Rare Monsters when Stabilised"},{"string":"Unstable Breaches in Map spawn an additional Rare Monster when Stabilised","value":1}],"trade":{"ids":{"explicit":["explicit.stat_3762913035"]}}}
-{"better":1,"matchers":[{"string":"Unstable Breaches in Map take # additional seconds to collapse after timer is filled"},{"string":"Unstable Breaches in Map take an additional second to collapse after timer is filled","value":1}],"trade":{"ids":{"explicit":["explicit.stat_4104094246"]}}}
 {"stats":[{"better":1,"matchers":[{"string":"Unwavering Stance"}],"trade":{"ids":{"explicit":["explicit.stat_1683578560"],"rune":["rune.stat_1683578560"]}}},{"better":0,"matchers":[{"string":"Unwavering Stance"}],"trade":{"ids":{"explicit":["explicit.stat_3831171903|3"]}}}]}
 {"better":0,"matchers":[{"string":"Upgrades Radius to Large"}],"trade":{"ids":{"explicit":["explicit.stat_3891355829|2"],"fractured":["fractured.stat_3891355829|2"],"desecrated":["desecrated.stat_3891355829|2"]}}}
 {"better":0,"matchers":[{"string":"Upgrades Radius to Medium"}],"trade":{"ids":{"explicit":["explicit.stat_3891355829|1"],"fractured":["fractured.stat_3891355829|1"],"desecrated":["desecrated.stat_3891355829|1"]}}}
@@ -3520,7 +3241,6 @@
 {"better":1,"matchers":[{"string":"Used when you take Lightning damage from a Hit"}],"trade":{"ids":{"implicit":["implicit.stat_2016937536"]}}}
 {"better":1,"matchers":[{"string":"Using a Mana Flask grants Guard equal to #% of Flask's recovery amount for 4 seconds"}],"trade":{"ids":{"explicit":["explicit.stat_2777675751"]}}}
 {"stats":[{"better":1,"matchers":[{"string":"Vaal Pact"}],"trade":{"ids":{"explicit":["explicit.stat_2257118425"]}}},{"better":0,"matchers":[{"string":"Vaal Pact"}],"trade":{"ids":{"explicit":["explicit.stat_3831171903|20"]}}}]}
-{"better":1,"matchers":[{"string":"Verisium Remnants have #% chance to add an additional Runic Modifier in Map"}],"trade":{"ids":{"explicit":["explicit.stat_3871299443"]}}}
 {"better":1,"matchers":[{"string":"Virtuous"}],"trade":{"ids":{"explicit":["explicit.stat_1132041585"]}}}
 {"better":1,"matchers":[{"string":"Warcries Empower # additional Attacks"},{"string":"Warcries Empower an additional Attack","value":1}],"trade":{"ids":{"explicit":["explicit.stat_1434716233"],"implicit":["implicit.stat_1434716233"],"desecrated":["desecrated.stat_1434716233"]}}}
 {"better":1,"matchers":[{"string":"Warcries Explode Corpses dealing #% of their Life as Physical Damage"}],"trade":{"ids":{"explicit":["explicit.stat_11014011"],"rune":["rune.stat_11014011"]}}}
@@ -3528,10 +3248,6 @@
 {"better":1,"matchers":[{"string":"When a Party Member in your Presence Casts a Spell, you\nSacrifice #% of Mana and they Leech that Mana"}],"trade":{"ids":{"explicit":["explicit.stat_603021645"]}}}
 {"better":1,"matchers":[{"string":"When socketed, transforms all Fire and Lightning modifiers to equivalent Cold modifiers"}],"trade":{"ids":{"rune":["rune.stat_2390027291"]}}}
 {"better":1,"matchers":[{"string":"When you Consume a Charge Trigger Chaotic Surge to gain # Chaos Surge"},{"string":"When you Consume a Charge Trigger Chaotic Surge to gain # Chaos Surges"}],"trade":{"ids":{"explicit":["explicit.stat_447757144"]}}}
-{"better":1,"matchers":[{"string":"When you gain a Key #% chance to gain another"},{"string":"When you gain a Key gain another","value":100}],"trade":{"ids":{"explicit":["sanctum.stat_3170238729"]}}}
-{"better":1,"matchers":[{"string":"When you generate a Frenzy Charge, Allies in your Presence generate that Charge instead"}],"trade":{"ids":{"rune":["rune.stat_3353733343"]}}}
-{"better":1,"matchers":[{"string":"When you generate a Power Charge, Allies in your Presence generate that Charge instead"}],"trade":{"ids":{"rune":["rune.stat_1323701627"]}}}
-{"better":1,"matchers":[{"string":"When you generate an Endurance Charge, Allies in your Presence generate that Charge instead"}],"trade":{"ids":{"rune":["rune.stat_3257561708"]}}}
 {"better":1,"matchers":[{"string":"When you kill a Rare monster, you gain its Modifiers for 60 seconds"}],"trade":{"ids":{"explicit":["explicit.stat_2913235441"]}}}
 {"better":1,"matchers":[{"string":"When you reload, triggers Gemini Surge to alternately\ngain # Cold Surge or # Fire Surge"},{"string":"When you reload, triggers Gemini Surge to alternately\ngain # Cold Surge or # Fire Surges"},{"string":"When you reload, triggers Gemini Surge to alternately\ngain # Cold Surges or # Fire Surge"},{"string":"When you reload, triggers Gemini Surge to alternately\ngain # Cold Surges or # Fire Surges"}],"trade":{"ids":{"explicit":["explicit.stat_331648983"]}}}
 {"better":1,"matchers":[{"string":"When you stop Sprinting, gain Guard equal to #% of maximum Life per second spent Sprinting, up to a maximum of 20%, for 4 seconds"}],"trade":{"ids":{"rune":["rune.stat_293832783"]}}}
@@ -3542,7 +3258,6 @@
 {"better":1,"matchers":[{"string":"Withered does not expire on Enemies Ignited by you"}],"trade":{"ids":{"explicit":["explicit.stat_279110104"]}}}
 {"better":1,"matchers":[{"string":"Withered you inflict also increases Fire Damage taken"}],"trade":{"ids":{"explicit":["explicit.stat_1910297038"]}}}
 {"better":1,"matchers":[{"string":"Withered you inflict has infinite Duration"}],"trade":{"ids":{"explicit":["explicit.stat_1354656031"]}}}
-{"better":1,"matchers":[{"string":"Wombgifts have #% chance to drop one Level higher in Map"}],"trade":{"ids":{"explicit":["explicit.stat_2889272422"]}}}
 {"better":1,"matchers":[{"string":"You and Allies in your Presence have #% increased Accuracy Rating"},{"string":"You and Allies in your Presence have #% reduced Accuracy Rating","negate":true}],"trade":{"ids":{"explicit":["explicit.stat_3429986699"]}}}
 {"better":1,"matchers":[{"string":"You and Allies in your Presence have #% increased Attack Speed"},{"string":"You and Allies in your Presence have #% reduced Attack Speed","negate":true}],"trade":{"ids":{"explicit":["explicit.stat_3408222535"]}}}
 {"better":1,"matchers":[{"string":"You and Allies in your Presence have #% increased Cast Speed"},{"string":"You and Allies in your Presence have #% reduced Cast Speed","negate":true}],"trade":{"ids":{"explicit":["explicit.stat_281990982"]}}}
@@ -3583,7 +3298,6 @@
 {"better":1,"matchers":[{"string":"You take #% of damage from Blocked Hits"}],"trade":{"ids":{"explicit":["explicit.stat_2905515354"],"rune":["rune.stat_2905515354"]}}}
 {"better":1,"matchers":[{"string":"You take #% of damage from Blocked Hits with a raised Shield"}],"trade":{"ids":{"explicit":["explicit.stat_3694078435"],"desecrated":["desecrated.stat_3694078435"]}}}
 {"better":1,"matchers":[{"string":"You take Fire Damage instead of Physical Damage from Bleeding"}],"trade":{"ids":{"explicit":["explicit.stat_2022332470"]}}}
-{"better":1,"matchers":[{"string":"Your Armour, Evasion and Energy Shield are zero"}],"trade":{"ids":{"explicit":["sanctum.stat_698936647"]}}}
 {"better":1,"matchers":[{"string":"Your base Energy Shield Recharge Delay is # second"},{"string":"Your base Energy Shield Recharge Delay is # seconds"}],"trade":{"ids":{"explicit":["explicit.stat_3091132047"]}}}
 {"better":1,"matchers":[{"string":"Your Critical Damage Bonus is 250%"}],"trade":{"ids":{"explicit":["explicit.stat_2516303866"]}}}
 {"better":1,"matchers":[{"string":"Your Critical Hit Chance cannot be Rerolled"}],"trade":{"ids":{"explicit":["explicit.stat_4159551976"]}}}
@@ -3596,14 +3310,6 @@
 {"better":1,"matchers":[{"string":"Your Minions are Gigantic if they have Revived Recently"}],"trade":{"ids":{"explicit":["explicit.stat_1265767008"],"fractured":["fractured.stat_1265767008"],"crafted":["crafted.stat_1265767008"],"desecrated":["desecrated.stat_1265767008"]}}}
 {"better":1,"matchers":[{"string":"Your speed is unaffected by Slows"}],"trade":{"ids":{"explicit":["explicit.stat_50721145"],"rune":["rune.stat_50721145"]}}}
 {"better":1,"matchers":[{"string":"Your speed is Unaffected by Slows while Sprinting"}],"trade":{"ids":{"explicit":["explicit.stat_3128773415"],"rune":["rune.stat_3128773415"]}}}
-{"better":1,"matchers":[{"string":"Zarokh, the Temporal deals #% more Damage"},{"string":"Zarokh, the Temporal deals #% less Damage","negate":true}],"trade":{"ids":{"explicit":["sanctum.stat_2149490821"]}}}
-{"better":1,"matchers":[{"string":"Zarokh, the Temporal drops Against the Darkness"}],"trade":{"ids":{"explicit":["sanctum.stat_3840591093"]}}}
-{"better":1,"matchers":[{"string":"Zarokh, the Temporal drops # additional Baryas"},{"string":"Zarokh, the Temporal drops an additional Barya","value":1}],"trade":{"ids":{"explicit":["sanctum.stat_3878191575"]}}}
-{"better":1,"matchers":[{"string":"Zarokh, the Temporal drops Blessed Bonds"}],"trade":{"ids":{"explicit":["sanctum.stat_767926824"]}}}
-{"better":1,"matchers":[{"string":"Zarokh, the Temporal drops Sandstorm Visage"}],"trade":{"ids":{"explicit":["sanctum.stat_3059754769"]}}}
-{"better":1,"matchers":[{"string":"Zarokh, the Temporal drops Sekhema's Resolve"}],"trade":{"ids":{"explicit":["sanctum.stat_2821715641"]}}}
-{"better":1,"matchers":[{"string":"Zarokh, the Temporal drops Temporalis"}],"trade":{"ids":{"explicit":["sanctum.stat_2469854926"]}}}
-{"better":1,"matchers":[{"string":"Zarokh, the Temporal takes #% more Damage"},{"string":"Zarokh, the Temporal takes #% less Damage","negate":true}],"trade":{"ids":{"explicit":["sanctum.stat_2226900052"]}}}
 {"stats":[{"better":1,"matchers":[{"string":"Zealot's Oath"}],"trade":{"ids":{"explicit":["explicit.stat_1315418254"]}}},{"better":0,"matchers":[{"string":"Zealot's Oath"}],"trade":{"ids":{"explicit":["explicit.stat_3831171903|33"]}}}]}
 {"unique":"Ab Aeterno","fixed":["stat_1016362888","stat_1416455556","stat_2148576938","stat_2250533757","stat_3128773415","stat_3156445245","stat_3518087336","stat_3523867985"],"multiBase":true}
 {"unique":"Adonia's Ego","fixed":["stat_1050105434","stat_124131830","stat_227523295","stat_2593644209","stat_2891184298"]}
