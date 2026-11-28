@@ -113,6 +113,16 @@ On a new PoE1 patch: in dat-mcp run `npm run stats -- poe1 <patch>` and `npm run
 `cp ~/www/poehubdev/dat-mcp/data/poe1-<patch>-pools.json public/pob-pools.json`, then `pnpm test`, and commit the
 regenerated files (snapshot changes are expected only where the new patch changed stat texts, ids or Mod Pools).
 
+**Two games.** The decoded Build Code's root element (`PathOfBuilding` / `PathOfBuilding2`) tells the game
+(`Build.game`, a Game Version); Trade locations and the Folder carry it. Each game has its own files, and the
+background loads only those of the imported code's game (`buildGame`), on its first import of that game.
+`toExportString` selects the game's data (`selectStats` / `selectPools`) for the rest of the module; tests load both
+games through `test-utils.ts` and leave PoE 1 selected. PoE 2 so far: `public/pob-stats-poe2.ndjson` (no unique lines;
+`pnpm pob-stats poe2 ~/www/poehubdev/dat-mcp/data/poe2-<patch>-stats.ndjson`), no Mod Pools (imports unchecked), and
+the base table `services/pob/bases-poe2.json` from Path of Building 2's `src/Data/Bases/*.lua` by
+`pnpm pob-bases poe2` (fetch and fast-forward `~/www/PathOfBuilding-PoE2` first; `pnpm pob-bases poe1` regenerates
+PoE 1's `bases.json` the same way). PoE 2 fixtures sit in `services/pob/fixtures/poe2/`, tested in `poe2.test.ts`.
+
 **Storybook**: stories run the real contexts and services; `.storybook/chrome-storage-mock.ts` is an in-memory
 `chrome.storage.local`, and `.storybook/mock-providers.tsx` has mock providers (`MockTradeHistoryProvider`, …) for
 seeding context state.

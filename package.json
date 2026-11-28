@@ -21,6 +21,7 @@
     "lint:fix": "eslint . --fix",
     "postinstall": "wxt prepare",
     "prepare": "husky",
+    "pob-bases": "node scripts/pob-bases.ts",
     "pob-stats": "node scripts/pob-stats.ts",
     "release": "scripts/release.sh",
     "pob-uniques": "node scripts/pob-uniques-sync.ts",

@@ -1,7 +1,10 @@
 import { toExportString } from '@/services/pob';
+import { buildGame } from '@/services/pob/build';
 import { loadStats } from '@/services/pob/mods';
 import { loadPools } from '@/services/pob/pools';
 import type { ImportOptions } from '@/services/pob';
+import type { TradeSiteVersion } from '@/types/trade-location';
+import type { PublicPath } from 'wxt/browser';
 
 interface PoeNinjaMessage {
   query: 'poe-ninja';
@@ -38,29 +41,43 @@ const handlePoeNinjaRequest = async (resource: string): Promise<unknown> => {
   }
 };
 
-// Stat data and Mod Pools, loaded on the first import only; a failed load is retried on the next one
-let pobStats: Promise<void> | undefined;
+// Each game's data files; PoE 2 has no Mod Pools yet
+const POB_DATA: Record<TradeSiteVersion, { stats: PublicPath; pools?: PublicPath }> = {
+  '1': { stats: '/pob-stats.ndjson', pools: '/pob-pools.json' },
+  '2': { stats: '/pob-stats-poe2.ndjson' },
+};
+// A game's stat data and Mod Pools, loaded on its first import only; a failed load is retried on the next one
+const pobData = new Map<TradeSiteVersion, Promise<void>>();
+
+const loadPobData = (game: TradeSiteVersion) => {
+  const { stats, pools } = POB_DATA[game];
+  const loading =
+    pobData.get(game) ??
+    Promise.all([
+      fetch(browser.runtime.getURL(stats))
+        .then(response => response.text())
+        .then(ndjson => loadStats(ndjson, game)),
+      // Without Mod Pools the import still works, unchecked
+      pools &&
+        fetch(browser.runtime.getURL(pools))
+          .then(response => response.json())
+          .then(json => loadPools(json, game))
+          .catch(error => console.warn('[pob-import] Mod Pools not loaded', error)),
+    ])
+      .then(() => {})
+      .catch(error => {
+        pobData.delete(game);
+        throw error;
+      });
+  pobData.set(game, loading);
+  return loading;
+};
 
 /** Path of Building Build Code to Export Strings, one per Folder; null when the code is not a build */
 const handlePobImport = async (buildCode: string, options?: ImportOptions): Promise<string[] | null> => {
-  pobStats ??= Promise.all([
-    fetch(browser.runtime.getURL('/pob-stats.ndjson'))
-      .then(response => response.text())
-      .then(loadStats),
-    // Without Mod Pools the import still works, unchecked
-    fetch(browser.runtime.getURL('/pob-pools.json'))
-      .then(response => response.json())
-      .then(loadPools)
-      .catch(error => console.warn('[pob-import] Mod Pools not loaded', error)),
-  ])
-    .then(() => {})
-    .catch(error => {
-      pobStats = undefined;
-      throw error;
-    });
-
   try {
-    await pobStats;
+    // Only the files of the Build Code's game are loaded
+    await loadPobData(await buildGame(buildCode));
     return (await toExportString(buildCode, options)).exportStrings;
   } catch (error) {
     console.error('[pob-import] Conversion error:', error);

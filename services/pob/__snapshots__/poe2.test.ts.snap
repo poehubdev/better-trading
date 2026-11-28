@@ -1,0 +1,199 @@
+// Vitest Snapshot v1, https://vitest.dev/guide/snapshot.html
+
+exports[`twister-gemling-legionnaire-0.55.txt > has one Trade per distinct Build Item 1`] = `
+[
+  "Hour 12 (lvl 43) — Weapon 1 — Dread Edge",
+  "Hour 12 (lvl 43) — Weapon 1 Swap — Frosted Barbed Spear of Renown",
+  "Hour 12 (lvl 43) — Weapon 2 — Onslaught Sanctuary",
+  "Hour 12 (lvl 43) — Helmet — Plague Dome",
+  "Hour 12 (lvl 43) — Body Armour — Dusk Salvation",
+  "Hour 12 (lvl 43) — Gloves — Doom Clutches",
+  "Hour 12 (lvl 43) — Boots — Morbid Road",
+  "Hour 12 (lvl 43) — Amulet — Lady's Lunar Amulet of the Lynx",
+  "Hour 12 (lvl 43) — Ring 1 — Buzzing Topaz Ring of the Drake",
+  "Hour 12 (lvl 43) — Ring 2 — Vengeance Knot",
+  "Hour 12 (lvl 43) — Unique Belt — Midnight Braid",
+  "Hour 12 (lvl 43) — Flask 1 — Summoner's Gargantuan Life Flask",
+  "Hour 12 (lvl 43) — Flask 2 — Fermented Gargantuan Mana Flask",
+  "Hour 12 (lvl 43) — Charm 1 — Thawing Charm of the Wide",
+  "Hour 12 (lvl 43) — Charm 2 — Silver Charm",
+  "Hour 12 (lvl 43) — Jewel — Viper Heart",
+  "Day 1 (lvl 70) — Weapon 1 — Torment Edge",
+  "Day 1 (lvl 70) — Weapon 1 Swap — Hate Edge",
+  "Day 1 (lvl 70) — Weapon 2 — Armageddon Grinder",
+  "Day 1 (lvl 70) — Unique Helmet — Heatshiver",
+  "Day 1 (lvl 70) — Body Armour — Fate Shelter",
+  "Day 1 (lvl 70) — Gloves — Corpse Caress",
+  "Day 1 (lvl 70) — Unique Boots — Atziri's Step",
+  "Day 1 (lvl 70) — Amulet — Armageddon Collar",
+  "Day 1 (lvl 70) — Unique Ring — The Taming",
+  "Day 1 (lvl 70) — Ring 2 — Blight Eye",
+  "Day 1 (lvl 70) — Unique Belt — Headhunter",
+  "Day 1 (lvl 70) — Flask 1 — Seething Ultimate Life Flask of the Brewer",
+  "Day 1 (lvl 70) — Unique Flask — Lavianga's Spirits",
+  "Day 1 (lvl 70) — Charm 1 — Clinician's Silver Charm of the Bottomless",
+  "Day 1 (lvl 70) — Charm 2 — Vibrant Stone Charm of the Brewer",
+  "Day 1 (lvl 70) — Unique Charm — Nascent Hope",
+  "Day 1 (lvl 70) — Jewel — Oblivion Sliver",
+  "Day 1 (lvl 70) — Jewel — Blight Creed",
+  "Day 5 (lvl 93) — Weapon 1 — Hypnotic Edge",
+  "Day 5 (lvl 93) — Unique Weapon 1 Swap — The Ordained",
+  "Day 5 (lvl 93) — Unique Weapon 2 Swap — Sacred Flame",
+  "Day 5 (lvl 93) — Helmet — Blight Shelter",
+  "Day 5 (lvl 93) — Unique Body Armour — Morior Invictus",
+  "Day 5 (lvl 93) — Gloves — Soul Paw",
+  "Day 5 (lvl 93) — Boots — Behemoth Slippers",
+  "Day 5 (lvl 93) — Amulet — Onslaught Idol",
+  "Day 5 (lvl 93) — Ring 2 — Viper Grip",
+  "Day 5 (lvl 93) — Unique Belt — Mageblood",
+  "Day 5 (lvl 93) — Unique Charm — Sanguis Heroum",
+  "Day 5 (lvl 93) — Unique Charm — Beira's Anguish",
+  "Day 5 (lvl 93) — Unique Charm — Rite of Passage",
+  "Day 5 (lvl 93) — Unique Jewel — From Nothing",
+  "Day 5 (lvl 93) — Unique Jewel — Megalomaniac",
+  "Day 5 (lvl 93) — Jewel — Carrion Shard",
+  "Day 5 (lvl 93) — Jewel — Cataclysm Sliver",
+  "Day 5 (lvl 93) — Jewel — Spirit Shard",
+  "Day 5 (lvl 93) — Jewel — Eagle Delirium",
+  "Day 5 (lvl 93) — Jewel — Empyrean Delirium",
+  "Day 5 (lvl 93) — Unique Jewel — Heart of the Well",
+  "Day 5 (lvl 93) — Unique Jewel — Voices",
+  "Week 1 (lvl 98) — Helmet — Blight Shelter",
+  "Week 2 (lvl 99) — Helmet — Blight Shelter",
+  "Week 2 (lvl 99) — Gloves — Soul Paw",
+  "Week 2 (lvl 99) — Boots — Behemoth Slippers",
+  "Week 2 (lvl 99) — Ring 2 — Viper Grip",
+  "Week 2 (lvl 99) — Jewel — Viper Shine",
+  "Week 3 (lvl 99) — Gloves — Victory Fist",
+  "Week 3 (lvl 99) — Boots — Behemoth Slippers",
+  "Week 3 (lvl 99) — Ring 2 — Apocalypse Nail",
+  "Week 3 (lvl 99) — Charm 2 — Sunburst Staunching Charm of the Ample",
+  "Week 3 (lvl 99) — Charm 3 — Sunburst Dousing Charm of the Eternal",
+  "Week 3 (lvl 99) — Jewel — Empyrean Delirium",
+  "Week 3 (lvl 99) — Jewel — Spirit Shard",
+  "Week 4 (lvl 100) — Weapon 1 — Beast Edge",
+  "Week 4 (lvl 100) — Charm 3 — Raindancer's Dousing Charm of the Ample",
+]
+`;
+
+exports[`twister-gemling-legionnaire-0.55.txt > matches mod lines to PoE 2 trade stats 1`] = `
+{
+  "filters": {
+    "armour_filters": {
+      "disabled": true,
+      "filters": {
+        "ev": {
+          "min": 145,
+        },
+      },
+    },
+    "misc_filters": {
+      "disabled": true,
+      "filters": {
+        "ilvl": {
+          "min": 27,
+        },
+      },
+    },
+    "type_filters": {
+      "filters": {
+        "category": {
+          "option": "armour.shield",
+        },
+      },
+    },
+  },
+  "stats": [
+    {
+      "filters": [
+        {
+          "id": "explicit.stat_2144192055",
+          "value": {
+            "weight": 1,
+          },
+        },
+        {
+          "id": "fractured.stat_2144192055",
+          "value": {
+            "weight": 1,
+          },
+        },
+        {
+          "id": "explicit.stat_53045048",
+          "value": {
+            "weight": 1,
+          },
+        },
+        {
+          "id": "fractured.stat_53045048",
+          "value": {
+            "weight": 1,
+          },
+        },
+        {
+          "id": "pseudo.pseudo_total_life",
+          "value": {
+            "weight": 1,
+          },
+        },
+        {
+          "id": "pseudo.pseudo_total_elemental_resistance",
+          "value": {
+            "weight": 1,
+          },
+        },
+      ],
+      "type": "weight",
+      "value": {
+        "min": 108.8,
+      },
+    },
+  ],
+  "status": {
+    "option": "securable",
+  },
+  "type": "Spiked Buckler",
+}
+`;
+
+exports[`twister-gemling-legionnaire-0.55.txt > reports the mod lines it could not match 1`] = `
+[
+  "Hour 12 (lvl 43) — Weapon 1 — Dread Edge: Bonded: 20% increased effect of Fully Broken Armour",
+  "Hour 12 (lvl 43) — Weapon 1 — Dread Edge: Grants Skill: Spear Throw",
+  "Hour 12 (lvl 43) — Weapon 1 Swap — Frosted Barbed Spear of Renown: Grants Skill: Spear Throw",
+  "Hour 12 (lvl 43) — Weapon 2 — Onslaught Sanctuary: Grants Skill: Parry",
+  "Day 1 (lvl 70) — Weapon 1 — Torment Edge: Bonded: 20% increased effect of Fully Broken Armour",
+  "Day 1 (lvl 70) — Weapon 1 — Torment Edge: Grants Skill: Spear Throw",
+  "Day 1 (lvl 70) — Weapon 1 Swap — Hate Edge: Grants Skill: Spear Throw",
+  "Day 1 (lvl 70) — Weapon 2 — Armageddon Grinder: Grants Skill: Level 18 Discipline",
+  "Day 1 (lvl 70) — Body Armour — Fate Shelter: Bonded: +40 to maximum Life",
+  "Day 1 (lvl 70) — Body Armour — Fate Shelter: Bonded: +40 to maximum Mana",
+  "Day 5 (lvl 93) — Weapon 1 — Hypnotic Edge: Bonded: +6% to all Elemental Resistances",
+  "Day 5 (lvl 93) — Weapon 1 — Hypnotic Edge: Can roll Destruction modifiers",
+  "Day 5 (lvl 93) — Weapon 1 — Hypnotic Edge: Grants Skill: Spear Throw",
+  "Day 5 (lvl 93) — Helmet — Blight Shelter: +40% of Armour also applies to Cold Damage",
+  "Day 5 (lvl 93) — Gloves — Soul Paw: Bonded: 20% increased Projectile Damage",
+  "Day 5 (lvl 93) — Gloves — Soul Paw: +40% of Armour also applies to Fire Damage",
+  "Day 5 (lvl 93) — Gloves — Soul Paw: Can roll Marksman modifiers",
+  "Day 5 (lvl 93) — Boots — Behemoth Slippers: Bonded: 10% increased Cooldown Recovery Rate",
+  "Day 5 (lvl 93) — Boots — Behemoth Slippers: Can roll Chronomancy modifiers",
+  "Day 5 (lvl 93) — Amulet — Onslaught Idol: Grants Skill: Level 18 Eternal Rage",
+  "Week 1 (lvl 98) — Helmet — Blight Shelter: +40% of Armour also applies to Cold Damage",
+  "Week 2 (lvl 99) — Helmet — Blight Shelter: +40% of Armour also applies to Cold Damage",
+  "Week 2 (lvl 99) — Gloves — Soul Paw: Bonded: 20% increased Projectile Damage",
+  "Week 2 (lvl 99) — Gloves — Soul Paw: +40% of Armour also applies to Fire Damage",
+  "Week 2 (lvl 99) — Gloves — Soul Paw: Can roll Marksman modifiers",
+  "Week 2 (lvl 99) — Boots — Behemoth Slippers: Bonded: 10% increased Cooldown Recovery Rate",
+  "Week 2 (lvl 99) — Boots — Behemoth Slippers: Can roll Chronomancy modifiers",
+  "Week 3 (lvl 99) — Gloves — Victory Fist: Bonded: 20% increased Projectile Damage",
+  "Week 3 (lvl 99) — Gloves — Victory Fist: +40% of Armour also applies to Fire Damage",
+  "Week 3 (lvl 99) — Gloves — Victory Fist: Can roll Marksman modifiers",
+  "Week 3 (lvl 99) — Boots — Behemoth Slippers: Bonded: 5% increased Movement Speed",
+  "Week 3 (lvl 99) — Boots — Behemoth Slippers: Bonded: 10% increased Cooldown Recovery Rate",
+  "Week 3 (lvl 99) — Boots — Behemoth Slippers: Can roll Chronomancy modifiers",
+  "Week 4 (lvl 100) — Weapon 1 — Beast Edge: Bonded: +6% to all Elemental Resistances",
+  "Week 4 (lvl 100) — Weapon 1 — Beast Edge: Can roll Destruction modifiers",
+  "Week 4 (lvl 100) — Weapon 1 — Beast Edge: Grants Skill: Spear Throw",
+  "Week 4 (lvl 100) — Weapon 1 — Beast Edge: Twice Corrupted",
+]
+`;

@@ -1,11 +1,12 @@
 // Ported from pob2bt (src/index.ts): Build Code to a BT Export String. Skill Gem Trades (`--gems`) are left out
 import { decodeBuild } from './build';
-import { matchedMods, matchTimeless, uniqueInfo } from './mods';
-import { affixesOf, inPool, modPool, tiers } from './pools';
+import { matchedMods, matchTimeless, selectStats, uniqueInfo } from './mods';
+import { affixesOf, inPool, modPool, selectPools, tiers } from './pools';
 import { Base64 } from 'js-base64';
 import type { BuildItem, Influence, Item, Mod } from './build';
 import type { MatchedMod } from './mods';
 import type { ModPool } from './pools';
+import type { TradeSiteVersion } from '@/types/trade-location';
 
 /** How far below the build item's roll a filter's minimum sits: the roll itself, a percentage of it, or no minimum */
 type RollFloor = { kind: 'exact' } | { kind: 'percent'; percent: number } | { kind: 'none' };
@@ -597,15 +598,19 @@ const dedupe = <T extends { query: Record<string, unknown> }>(trades: T[]) => {
   });
 };
 
-/** The trade-site location slug: BT joins it to `/trade/search/<league>/`, and the site reads `?q=` as a query */
-const trade = (tit: string, query: object) => ({
+/**
+ * The trade-site location on the game's site: BT joins the slug to `/trade/search/<league>/` (`/trade2/` for PoE 2),
+ * and the site reads `?q=` as a query
+ */
+const trade = (game: TradeSiteVersion, tit: string, query: object) => ({
   tit,
-  loc: `1:search:?q=${encodeURIComponent(JSON.stringify({ query }))}`,
+  loc: `${game}:search:?q=${encodeURIComponent(JSON.stringify({ query }))}`,
 });
 
 /**
  * Build Code to BT Export Strings (format 3), in progression order: one Folder with the Trades of every Loadout, each
- * Trade title then starting with its Loadout's, or a Folder per Loadout with Trades. The stats must be loaded first
+ * Trade title then starting with its Loadout's, or a Folder per Loadout with Trades, under the Build Code's game. That
+ * game's stats must be loaded first (its Mod Pools are optional)
  */
 const toExportString = async (
   buildCode: string,
@@ -618,8 +623,13 @@ const toExportString = async (
 ): Promise<Result> => {
   const floors = floorsOf(rollFloor);
   const build = await decodeBuild(buildCode);
+  const { game } = build;
+  // Nothing below awaits: an import of the other game running alongside can't switch the data mid-import
+  selectStats(game);
+  selectPools(game);
   const name = build.ascendancy ?? build.className;
-  const icon = name.toLowerCase();
+  // ponytail: BT has PoE 1 ascendancy icons only
+  const icon = game === '1' && ICONS.has(name.toLowerCase()) ? name.toLowerCase() : null;
   const skill = build.mainSkill || name;
 
   const unmatched: string[] = [];
@@ -656,12 +666,12 @@ const toExportString = async (
     // A skipped Trade's lines were reported with the Trade it repeats
     const trs = trades.map(({ tit, query, lines }) => {
       unmatched.push(...lines);
-      return trade(tit, query);
+      return trade(game, tit, query);
     });
     return { tit: `${skill} — ${title}`, trs };
   });
   const folderOf = (tit: string, trs: ReturnType<typeof trade>[]) =>
-    `3:${Base64.encode(JSON.stringify({ icn: ICONS.has(icon) ? icon : null, tit, ver: '1', trs }))}`;
+    `3:${Base64.encode(JSON.stringify({ icn: icon, tit, ver: game, trs }))}`;
   const perLoadout =
     several && folders === 'perLoadout'
       ? loadouts.filter(({ trs }) => trs.length).map(({ tit, trs }) => folderOf(tit, trs))

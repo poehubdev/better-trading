@@ -6,14 +6,15 @@
 // say which mods a unique has, so PoB's hand-kept definitions are the source. Uniques PoB builds in code
 // (Special/: Skin of the Lords, Forbidden Shako, Watcher's Eye) are not here; their lines come from APT.
 // eslint-disable-next-line no-restricted-imports -- node runs this script as is, without the @/ alias
-import { loadStats, matchedMods } from '../services/pob/mods.ts';
+import { loadStats, matchedMods, selectStats } from '../services/pob/mods.ts';
 import { readFile, readdir, writeFile } from 'node:fs/promises';
 import { homedir } from 'node:os';
 import { join } from 'node:path';
 
 const pob = process.argv[2] ?? join(homedir(), 'www/PathOfBuilding');
 const dir = join(pob, 'src/Data/Uniques');
-loadStats(await readFile(join(import.meta.dirname, '../public/pob-stats.ndjson'), 'utf8'));
+loadStats(await readFile(join(import.meta.dirname, '../public/pob-stats.ndjson'), 'utf8'), '1');
+selectStats('1');
 
 /** Stat numbers of a definition's explicit lines: those after its implicits, or after its spec lines without any */
 const fixedStats = (lines: string[]) => {

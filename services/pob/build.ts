@@ -1,7 +1,9 @@
 // Ported from pob2bt (src/build.ts): inflate runs on DecompressionStream, so it works in a service worker
+import poe2Bases from './bases-poe2.json';
 import bases from './bases.json';
 import { XMLParser } from 'fast-xml-parser';
 import { Base64 } from 'js-base64';
+import type { TradeSiteVersion } from '@/types/trade-location';
 
 /** Relics are POB's foil uniques */
 type Rarity = 'NORMAL' | 'MAGIC' | 'RARE' | 'UNIQUE' | 'RELIC';
@@ -68,6 +70,8 @@ interface Loadout {
 }
 
 interface Build {
+  /** Path of Building writes PoE 1 builds, Path of Building 2 PoE 2 ones */
+  game: TradeSiteVersion;
   className: string;
   ascendancy: string | undefined;
   /** Active gem of POB's main skill group, the build's DPS skill; undefined when POB has none */
@@ -78,19 +82,23 @@ interface Build {
 
 type Attrs = Record<string, string | undefined>;
 type PobSkill = Attrs & { Gem?: Attrs[] };
-interface PobXml {
-  PathOfBuilding?: {
-    Build?: Attrs;
-    Items?: Attrs & {
-      Item?: (Attrs & { '#text': string })[];
-      ItemSet?: { id?: string; title?: string; Slot?: Attrs[] }[];
-    };
-    Tree?: Attrs & { Spec?: { title?: string; nodes?: string; Sockets?: { Socket?: Attrs[] } }[] };
-    Skills?: Attrs & { SkillSet?: (Attrs & { Skill?: PobSkill[] })[]; Skill?: PobSkill[] };
+interface PobRoot {
+  Build?: Attrs;
+  Items?: Attrs & {
+    Item?: (Attrs & { '#text': string })[];
+    ItemSet?: { id?: string; title?: string; Slot?: Attrs[] }[];
   };
+  Tree?: Attrs & { Spec?: { title?: string; nodes?: string; Sockets?: { Socket?: Attrs[] } }[] };
+  Skills?: Attrs & { SkillSet?: (Attrs & { Skill?: PobSkill[] })[]; Skill?: PobSkill[] };
+}
+/** The root element tells the game */
+interface PobXml {
+  PathOfBuilding?: PobRoot;
+  PathOfBuilding2?: PobRoot;
 }
 
-const baseTypes: Record<string, string> = bases;
+/** Base name to POB item type, per game (pnpm pob-bases) */
+const BASE_TYPES: Record<TradeSiteVersion, Record<string, string>> = { '1': bases, '2': poe2Bases };
 const parser = new XMLParser({
   ignoreAttributes: false,
   attributeNamePrefix: '',
@@ -159,7 +167,7 @@ const parseMods = (lines: string[], selected: Set<number>): Mod[] => {
 };
 
 /** A magic item's name holds its base between affixes: take the longest known base inside it */
-const magicBase = (name: string): string | undefined => {
+const magicBase = (name: string, baseTypes: Record<string, string>): string | undefined => {
   let best: string | undefined;
   let bestLength = 0;
   for (const base in baseTypes) {
@@ -168,8 +176,8 @@ const magicBase = (name: string): string | undefined => {
   return best;
 };
 
-/** POB item text to Item */
-const parseItem = (text: string): Item | undefined => {
+/** POB item text to Item, its base looked up in the game's base table */
+const parseItem = (text: string, baseTypes: Record<string, string>): Item | undefined => {
   const lines = text
     .split('\n')
     .map(line => line.trim())
@@ -183,7 +191,7 @@ const parseItem = (text: string): Item | undefined => {
 
   let base: string | undefined;
   if (rarity === 'RARE' || rarity === 'UNIQUE' || rarity === 'RELIC') base = lines[start + 2] ?? name;
-  else if (rarity === 'MAGIC') base = magicBase(name);
+  else if (rarity === 'MAGIC') base = magicBase(name, baseTypes);
   else base = name.replace(/^Superior /, '');
 
   const property = (label: string) => lines.find(line => line.startsWith(`${label}: `))?.slice(label.length + 2);
@@ -214,12 +222,24 @@ const inflate = async (bytes: Uint8Array): Promise<string> => {
   return await new Response(stream).text();
 };
 
+/** Build Code (base64url, zlib) to its XML */
+// js-base64 accepts the url-safe alphabet too
+const buildXml = (buildCode: string) => inflate(Base64.toUint8Array(buildCode.trim()));
+
+/**
+ * The game of a Build Code, to load that game's data before decoding it. Only the root element can read
+ * `<PathOfBuilding2`: XML text escapes its `<`
+ */
+const buildGame = async (buildCode: string): Promise<TradeSiteVersion> =>
+  /<PathOfBuilding2[\s/>]/.test(await buildXml(buildCode)) ? '2' : '1';
+
 /** Build Code (base64url, zlib, XML) to Build */
 const decodeBuild = async (buildCode: string): Promise<Build> => {
-  // js-base64 accepts the url-safe alphabet too
-  const xml = await inflate(Base64.toUint8Array(buildCode.trim()));
-  const { PathOfBuilding: pob } = parser.parse(xml) as PobXml;
+  const xml = parser.parse(await buildXml(buildCode)) as PobXml;
+  const game = xml.PathOfBuilding2 ? '2' : '1';
+  const pob = xml.PathOfBuilding2 ?? xml.PathOfBuilding;
   if (!pob?.Build) throw new Error('Not a Path of Building Build Code');
+  const baseTypes = BASE_TYPES[game];
 
   const itemsById = new Map((pob.Items?.Item ?? []).map(node => [node.id, node['#text']]));
   const specs = pob.Tree?.Spec ?? [];
@@ -239,7 +259,7 @@ const decodeBuild = async (buildCode: string): Promise<Build> => {
     const items: BuildItem[] = [];
     const add = (slot: string, itemId: string | undefined) => {
       const text = itemId && itemId !== '0' ? itemsById.get(itemId) : undefined;
-      const item = text && parseItem(text);
+      const item = text && parseItem(text, baseTypes);
       if (item) items.push({ slot, item });
     };
     const slots = (set.Slot ?? []).filter(({ name }) => name);
@@ -270,6 +290,7 @@ const decodeBuild = async (buildCode: string): Promise<Build> => {
 
   const { className = '', ascendClassName } = pob.Build;
   return {
+    game,
     className,
     ascendancy: ascendClassName && ascendClassName !== 'None' ? ascendClassName : undefined,
     mainSkill,
@@ -278,4 +299,4 @@ const decodeBuild = async (buildCode: string): Promise<Build> => {
 };
 
 export type { BuildItem, Influence, Item, Loadout, Mod };
-export { decodeBuild };
+export { buildGame, decodeBuild };
