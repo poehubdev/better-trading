@@ -109,14 +109,17 @@ pnpm storybook     # build UI components in isolation on :6006
 | `pnpm test`                     | Unit tests (vitest)                        |
 | `pnpm compile`                  | Type check                                 |
 | `pnpm lint` / `pnpm format`     | ESLint / Prettier                          |
-| `pnpm pob-stats [stats.ndjson]` | Regenerate the PoB import's stat data      |
-| `pnpm pob-uniques [apt sha]`    | Sync the PoB import's unique list with APT |
+| `pnpm pob-stats [poe2] [stats]` | Regenerate a game's PoB import stat data   |
+| `pnpm pob-uniques [poe2] [sha]` | Sync a game's PoB import unique list       |
 
-The Path of Building import reads `public/pob-stats.ndjson`, which is committed. Its stat lines are generated from
-the game files by [dat-mcp](https://github.com/poehubdev/dat-mcp): on a new patch, run
-`npm run stats -- poe1 <patch>` there and `pnpm pob-stats <dat-mcp>/data/poe1-<patch>-stats.ndjson` here (pruned to
-Character Stats and gzipped by the build, [ADR 0004](docs/adr/0004-per-game-compressed-pob-data.md)). Its unique
-lines come from [Awakened PoE Trade](https://github.com/SnosMe/awakened-poe-trade): a weekly workflow opens a PR when
+The Path of Building import reads committed data per game (`public/pob-stats.ndjson` and `public/pob-pools.json` for
+PoE 1, the `-poe2` files for PoE 2) and loads only the imported Build Code's game. The stat lines and Mod Pools are
+generated from the game files by [dat-mcp](https://github.com/poehubdev/dat-mcp): on a new patch, run
+`npm run stats -- <poe1|poe2> <patch>` and `npm run pools -- <poe1|poe2> <patch>` there and regenerate here (the
+recipe is in `AGENTS.md`). The data is pruned to Character Stats and gzipped by the build
+([ADR 0004](docs/adr/0004-per-game-compressed-pob-data.md)). The unique lines come from
+[Awakened PoE Trade](https://github.com/SnosMe/awakened-poe-trade) (PoE 1) and
+[Exiled Exchange 2](https://github.com/Kvan7/Exiled-Exchange-2) (PoE 2): a weekly workflow opens a PR per game when
 they change there. Details in `AGENTS.md` and [ADR 0002](docs/adr/0002-pob-stat-data-from-dat-mcp.md).
 
 Architecture, conventions and the release process are in [`AGENTS.md`](AGENTS.md); domain terms (Folder, Trade,
