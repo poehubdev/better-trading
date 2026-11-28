@@ -46,6 +46,10 @@ _Avoid_: stage, layout, tree (for the whole stage)
 Every trade stat, per modifier type (explicit, implicit, fractured, crafted, enchant, corruption, Synthesis implicit), that an item of a given base can carry, from any source (base, influences, crafting, essences, ...). A search filter outside the item's Mod Pool can never match.
 _Avoid_: mod list, possible mods
 
+**Character Stat**:
+A trade stat that can appear on something a character carries or has socketed: gear, jewels, flasks, charms, runes and the like. Stats of currency, maps, monsters and areas are not Character Stats; the PoB import never needs them.
+_Avoid_: item stat, gear stat
+
 **Tier**:
 One value range of a modifier, unlocked from a minimum item level. A roll falls into exactly one Tier.
 
