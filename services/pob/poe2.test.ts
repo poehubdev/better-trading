@@ -31,10 +31,10 @@ const idsOf = (query: any): string[] =>
   (query.stats ?? []).flatMap((group: any) => group.filters.map((filter: any) => filter.id));
 
 describe(TWISTER, () => {
-  it('builds one PoE 2 Folder, without an icon, of Trades on the PoE 2 trade site', async () => {
+  it('builds one PoE 2 Folder, with the ascendancy icon, of Trades on the PoE 2 trade site', async () => {
     // decodeExportString checks that every Trade's location has the Folder's Game Version
     const { title, icon, version, trades } = (await importOf(TWISTER)).folder;
-    expect({ title, icon, version }).toEqual({ title: 'Twister', icon: null, version: '2' });
+    expect({ title, icon, version }).toEqual({ title: 'Twister', icon: 'poe2-gemling-legionnaire', version: '2' });
     expect(trades.length).toBeGreaterThan(0);
   });
 
@@ -79,6 +79,31 @@ describe.each(FIXTURES)('%s', name => {
   it('searches no "Grants Skill" line', async () => {
     const { trades } = (await importOf(name)).folder;
     expect(JSON.stringify(trades)).not.toContain('Grants Skill');
+  });
+});
+
+describe('PoE 2 Folder icon', () => {
+  const iconOf = async (build: string) => {
+    const xml = `<PathOfBuilding2>${build}<Items activeItemSet="1"><ItemSet id="1"/></Items></PathOfBuilding2>`;
+    return decodeExportString((await toExportString(deflateSync(xml).toString('base64url'))).exportStrings[0]!).icon;
+  };
+
+  it.each([
+    [COMET, 'poe2-oracle'],
+    [ICE_SHOT, 'poe2-deadeye'],
+  ])('is the ascendancy of %s', async (name, icon) => {
+    expect((await importOf(name)).folder.icon).toBe(icon);
+  });
+
+  it('matches the ascendancy name whatever its spacing', async () => {
+    expect(await iconOf('<Build className="Mercenary" ascendClassName="Witchhunter" level="90"/>')).toBe(
+      'poe2-witch-hunter',
+    );
+  });
+
+  it('is none without an ascendancy, or for one with no icon', async () => {
+    expect(await iconOf('<Build className="Witch" ascendClassName="None" level="1"/>')).toBeNull();
+    expect(await iconOf('<Build className="Witch" ascendClassName="Necromancer" level="90"/>')).toBeNull();
   });
 });
 

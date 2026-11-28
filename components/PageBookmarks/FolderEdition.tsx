@@ -14,14 +14,9 @@ import {
   BookmarksFolderAscendancyRangerIcon,
   BookmarksFolderAscendancyTemplarIcon,
   BookmarksFolderAscendancyScionIcon,
-  BookmarksFolderAscendancyPoE2WarriorIcon,
-  BookmarksFolderAscendancyPoE2WitchIcon,
-  BookmarksFolderAscendancyPoE2RangerIcon,
-  BookmarksFolderAscendancyPoE2SorceressIcon,
-  BookmarksFolderAscendancyPoE2MercenaryIcon,
-  BookmarksFolderAscendancyPoE2MonkIcon,
   BookmarksFolderPoE1ItemIcon,
   BookmarksFolderPoE2ItemIcon,
+  poe2AscendancyIconGroups,
 } from '@/types/bookmarks';
 import { useState } from 'react';
 import type { BookmarksFolderStruct, BookmarksFolderIcon as BookmarkFolderIconType } from '@/types/bookmarks';
@@ -36,15 +31,6 @@ const POE1_ASCENDANCY_ICONS = [
   Object.values(BookmarksFolderAscendancyRangerIcon),
   Object.values(BookmarksFolderAscendancyTemplarIcon),
   Object.values(BookmarksFolderAscendancyScionIcon),
-];
-
-const POE2_ASCENDANCY_ICONS = [
-  Object.values(BookmarksFolderAscendancyPoE2WarriorIcon),
-  Object.values(BookmarksFolderAscendancyPoE2WitchIcon),
-  Object.values(BookmarksFolderAscendancyPoE2RangerIcon),
-  Object.values(BookmarksFolderAscendancyPoE2SorceressIcon),
-  Object.values(BookmarksFolderAscendancyPoE2MercenaryIcon),
-  Object.values(BookmarksFolderAscendancyPoE2MonkIcon),
 ];
 
 interface FolderEditionProps {
@@ -79,7 +65,7 @@ const FolderEdition: React.FC<FolderEditionProps> = ({
       : initialFolder,
   );
 
-  const iconAscendancyOptions = version === '2' ? POE2_ASCENDANCY_ICONS : POE1_ASCENDANCY_ICONS;
+  const iconAscendancyOptions = version === '2' ? poe2AscendancyIconGroups : POE1_ASCENDANCY_ICONS;
   const iconItemOptions = Object.values(version === '2' ? BookmarksFolderPoE2ItemIcon : BookmarksFolderPoE1ItemIcon);
 
   const canSubmit = Boolean(folder.title);

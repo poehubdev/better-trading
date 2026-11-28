@@ -2,12 +2,7 @@ import BookmarkFolderIcon from './index.tsx';
 import {
   BookmarksFolderAscendancyDuelistIcon,
   BookmarksFolderAscendancyMarauderIcon,
-  BookmarksFolderAscendancyPoE2MercenaryIcon,
-  BookmarksFolderAscendancyPoE2MonkIcon,
-  BookmarksFolderAscendancyPoE2RangerIcon,
   BookmarksFolderAscendancyPoE2SorceressIcon,
-  BookmarksFolderAscendancyPoE2WarriorIcon,
-  BookmarksFolderAscendancyPoE2WitchIcon,
   BookmarksFolderAscendancyRangerIcon,
   BookmarksFolderAscendancyScionIcon,
   BookmarksFolderAscendancyShadowIcon,
@@ -15,6 +10,7 @@ import {
   BookmarksFolderAscendancyWitchIcon,
   BookmarksFolderPoE1ItemIcon,
   BookmarksFolderPoE2ItemIcon,
+  poe2AscendancyIconGroups,
 } from '@/types/bookmarks';
 import type { BookmarksFolderIcon as BookmarkFolderIconType } from '@/types/bookmarks';
 import type { Meta, StoryObj } from '@storybook/react-vite';
@@ -31,14 +27,7 @@ const POE1_ASCENDANCY_OPTIONS = [
   ...Object.values(BookmarksFolderAscendancyTemplarIcon),
   ...Object.values(BookmarksFolderAscendancyScionIcon),
 ];
-const POE2_ASCENDANCY_OPTIONS = [
-  ...Object.values(BookmarksFolderAscendancyPoE2WarriorIcon),
-  ...Object.values(BookmarksFolderAscendancyPoE2WitchIcon),
-  ...Object.values(BookmarksFolderAscendancyPoE2RangerIcon),
-  ...Object.values(BookmarksFolderAscendancyPoE2SorceressIcon),
-  ...Object.values(BookmarksFolderAscendancyPoE2MercenaryIcon),
-  ...Object.values(BookmarksFolderAscendancyPoE2MonkIcon),
-];
+const POE2_ASCENDANCY_OPTIONS = poe2AscendancyIconGroups.flat();
 
 // Full combined list (items + ascendancies, PoE1 + PoE2) for a playground story
 const ALL_ICON_OPTIONS = [

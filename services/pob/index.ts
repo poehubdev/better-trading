@@ -2,6 +2,7 @@
 import { decodeBuild } from './build';
 import { matchedMods, matchTimeless, selectStats, uniqueInfo } from './mods';
 import { affixesOf, inPool, modPool, selectPools, tiers } from './pools';
+import { poe2AscendancyIconGroups } from '@/types/bookmarks';
 import { Base64 } from 'js-base64';
 import type { BuildItem, Influence, Item, Mod } from './build';
 import type { MatchedMod } from './mods';
@@ -45,7 +46,7 @@ interface StatGroup {
   filters: StatFilter[];
 }
 
-// BT's PoE 1 ascendancy folder icons
+// BT's PoE 1 ascendancy folder icons, by lowercase ascendancy name
 const ICONS = new Set([
   'slayer',
   'gladiator',
@@ -70,6 +71,12 @@ const ICONS = new Set([
   'reliquarian',
   'luminary',
 ]);
+
+// BT's PoE 2 ascendancy folder icons, by ascendancy name in lowercase letters only (POB 2 writes "Witchhunter")
+const ascendancyKey = (name: string) => name.toLowerCase().replace(/[^a-z]/g, '');
+const POE2_ICONS = new Map(
+  poe2AscendancyIconGroups.flat().map(icon => [ascendancyKey(icon.replace(/^poe2-/, '')), icon]),
+);
 
 const PAIRED_UNIQUES = new Set(['Forbidden Flame', 'Forbidden Flesh']);
 // Agnerod staves get their Vinktar Square mods by item level from these brackets (poewiki: The Vinktar Square)
@@ -705,8 +712,8 @@ const toExportString = async (
   selectStats(game);
   selectPools(game);
   const name = build.ascendancy ?? build.className;
-  // ponytail: BT has PoE 1 ascendancy icons only
-  const icon = game === '1' && ICONS.has(name.toLowerCase()) ? name.toLowerCase() : null;
+  const poe1Icon = ICONS.has(name.toLowerCase()) ? name.toLowerCase() : null;
+  const icon = game === '2' ? (POE2_ICONS.get(ascendancyKey(build.ascendancy ?? '')) ?? null) : poe1Icon;
   const skill = build.mainSkill || name;
 
   const unmatched: string[] = [];

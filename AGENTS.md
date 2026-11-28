@@ -127,6 +127,14 @@ the base table `services/pob/bases-poe2.json` from Path of Building 2's `src/Dat
 `pnpm pob-bases poe2` (fetch and fast-forward `~/www/PathOfBuilding-PoE2` first; `pnpm pob-bases poe1` regenerates
 PoE 1's `bases.json` the same way). PoE 2 fixtures sit in `services/pob/fixtures/poe2/`, tested in `poe2.test.ts`.
 
+**PoE 2 ascendancy icons** (`public/assets/images/bookmark-folder/poe2/ascendancy/`, source and licence in the README's
+Credits) are the game's character select portraits (`common/icon*_<Ascendancy.Id>.dds`), cropped to 90x70 by dat-mcp:
+`node --no-warnings scripts/ascendancy-icons.mjs <this dir>` there (`npm run ascendancy-icons --`; needs a poe2 dump
+and `magick`). It writes `<kebab-case name>.png` for every playable ascendancy and lists those without a portrait. A
+new ascendancy also needs its value in the class's `BookmarksFolderAscendancyPoE2*Icon` enum (`types/bookmarks.ts`); the
+import finds the icon by ascendancy name. Witchhunter keeps its icon `poe2-witch-hunter` (`FILE_NAMES` in
+`BookmarkFolderIcon`).
+
 **Storybook**: stories run the real contexts and services; `.storybook/chrome-storage-mock.ts` is an in-memory
 `chrome.storage.local`, and `.storybook/mock-providers.tsx` has mock providers (`MockTradeHistoryProvider`, …) for
 seeding context state.

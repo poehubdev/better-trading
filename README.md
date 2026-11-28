@@ -135,3 +135,8 @@ Export String, …) in [`GLOSSARY.md`](GLOSSARY.md). Contributions welcome: pick
 Originally created by **InfaMc** ([@pboutin](https://github.com/pboutin)) and maintained by **brosmike**
 ([@dbjorge](https://github.com/dbjorge)). The Path of Building import's unique data comes from
 [Awakened PoE Trade](https://github.com/SnosMe/awakened-poe-trade) by [@SnosMe](https://github.com/SnosMe).
+
+Folder icons are Path of Exile game art, © Grinding Gear Games, used without a licence of their own (GGG grants none
+for its art); they are not covered by anything else in this repository. The PoE 2 ascendancy icons are the game's
+character select portraits of patch 0.5.5.10, extracted from the PoE 2 patch CDN by [dat-mcp](https://github.com/poehubdev/dat-mcp)'s
+`ascendancy-icons` script.
