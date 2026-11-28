@@ -1,11 +1,13 @@
 // Ported from pob2bt (src/index.ts): Build Code to a BT Export String. Skill Gem Trades (`--gems`) are left out
 import { decodeBuild } from './build';
-import { matchedMods, matchTimeless, uniqueInfo } from './mods';
-import { affixesOf, inPool, modPool, tiers } from './pools';
+import { matchedMods, matchTimeless, selectStats, uniqueInfo } from './mods';
+import { affixesOf, inPool, modPool, selectPools, tiers } from './pools';
+import { poe2AscendancyIconGroups } from '@/types/bookmarks';
 import { Base64 } from 'js-base64';
 import type { BuildItem, Influence, Item, Mod } from './build';
 import type { MatchedMod } from './mods';
 import type { ModPool } from './pools';
+import type { TradeSiteVersion } from '@/types/trade-location';
 
 /** How far below the build item's roll a filter's minimum sits: the roll itself, a percentage of it, or no minimum */
 type RollFloor = { kind: 'exact' } | { kind: 'percent'; percent: number } | { kind: 'none' };
@@ -44,7 +46,7 @@ interface StatGroup {
   filters: StatFilter[];
 }
 
-// BT's PoE 1 ascendancy folder icons
+// BT's PoE 1 ascendancy folder icons, by lowercase ascendancy name
 const ICONS = new Set([
   'slayer',
   'gladiator',
@@ -69,6 +71,12 @@ const ICONS = new Set([
   'reliquarian',
   'luminary',
 ]);
+
+// BT's PoE 2 ascendancy folder icons, by ascendancy name in lowercase letters only (POB 2 writes "Witchhunter")
+const ascendancyKey = (name: string) => name.toLowerCase().replace(/[^a-z]/g, '');
+const POE2_ICONS = new Map(
+  poe2AscendancyIconGroups.flat().map(icon => [ascendancyKey(icon.replace(/^poe2-/, '')), icon]),
+);
 
 const PAIRED_UNIQUES = new Set(['Forbidden Flame', 'Forbidden Flesh']);
 // Agnerod staves get their Vinktar Square mods by item level from these brackets (poewiki: The Vinktar Square)
@@ -137,6 +145,36 @@ const WEAPON_CATEGORIES: Record<string, string> = {
   Wand: 'weapon.wand',
   Dagger: 'weapon.dagger',
   Claw: 'weapon.claw',
+};
+
+// From POB 2's TradeHelpers.getTradeCategory, checked against the PoE 2 trade site's /api/trade2/data/filters; the
+// base table splits bucklers, warstaves and the two flasks from their PoB type (scripts/pob-bases.ts)
+const POE2_TYPE_CATEGORIES: Record<string, string> = {
+  Shield: 'armour.shield',
+  Buckler: 'armour.buckler',
+  Focus: 'armour.focus',
+  Quiver: 'armour.quiver',
+  Bow: 'weapon.bow',
+  Crossbow: 'weapon.crossbow',
+  Talisman: 'weapon.talisman',
+  Warstaff: 'weapon.warstaff',
+  Staff: 'weapon.staff',
+  'Two Hand Sword': 'weapon.twosword',
+  'Two Hand Axe': 'weapon.twoaxe',
+  'Two Hand Mace': 'weapon.twomace',
+  Spear: 'weapon.spear',
+  Flail: 'weapon.flail',
+  'One Hand Sword': 'weapon.onesword',
+  'One Hand Axe': 'weapon.oneaxe',
+  'One Hand Mace': 'weapon.onemace',
+  Sceptre: 'weapon.sceptre',
+  Wand: 'weapon.wand',
+  Dagger: 'weapon.dagger',
+  Claw: 'weapon.claw',
+  'Fishing Rod': 'weapon.rod',
+  'Life Flask': 'flask.life',
+  'Mana Flask': 'flask.mana',
+  Charm: 'flask.charm',
 };
 
 const SLOT_CATEGORIES: Record<string, string> = {
@@ -270,12 +308,17 @@ const rareStatGroups = (
   // Keyed by id: two lines of one stat must not weigh it twice
   const weighted = new Map<string, StatFilter>();
   let weightSum = 0;
-  for (const { match, implicit, enchant: tagged, crafted, fractured, text } of matchedMods(mods, reportUnmatched)) {
+  for (const { match, implicit, enchant: tagged, crafted, fractured, rune, desecrated, text } of matchedMods(
+    mods,
+    reportUnmatched,
+  )) {
     // An enchant is never rolled: the exact value is what the jewel is worth
     const enchant = (cluster && implicit) || tagged;
-    // A jewel has no crafted mods: its implicit block holds enchants (cluster) or a corrupted implicit
-    const typed =
-      jewel || enchant || crafted || fractured
+    // A jewel has no crafted mods: its implicit block holds enchants (cluster) or a corrupted implicit. A rune's stat is
+    // the rune's, which the site searches apart from the item's own mods; any other mod is never one
+    const typed = rune
+      ? onlyTypes(match.ids, ['rune'])
+      : jewel || enchant || implicit || crafted || fractured || desecrated
         ? onlyTypes(
             match.ids,
             enchant
@@ -284,11 +327,22 @@ const rareStatGroups = (
                 ? ['implicit']
                 : crafted
                   ? ['explicit', 'fractured', 'crafted']
-                  : ['explicit', 'fractured'],
+                  : desecrated
+                    ? ['explicit', 'desecrated']
+                    : ['explicit', 'fractured'],
           )
-        : match.ids;
+        : match.ids.filter(id => !id.startsWith('rune.'));
+    // The line's text is a trade stat, just not of the line's type (a rune line whose stat no rune gives)
+    if (!typed.length) {
+      reportUnmatched(text);
+      continue;
+    }
     const ids = possible(typed, pool);
-    if (!ids.length) continue;
+    if (!ids.length) {
+      // A real item carries only what its base can: the Mod Pools miss a source of this mod
+      console.warn(`The Mod Pool of ${base} has no ${typed.join(', ')} for "${text}"`);
+      continue;
+    }
     const value = match.value;
     // ponytail: negative rolls have no value and stay single-mod groups, so a total may overshoot such an item
     const stat = ids[0]!.split('|')[0]!.split('.')[1]!;
@@ -307,7 +361,7 @@ const rareStatGroups = (
       continue;
     }
     if (weightedSum && value !== undefined && value > 0 && !ids.some(id => id.includes('|'))) {
-      const weight = weightOf([base], statsOf(ids), implicit && !crafted ? 'implicit' : 'explicit');
+      const weight = weightOf([base], statsOf(ids), rune ? 'rune' : implicit && !crafted ? 'implicit' : 'explicit');
       for (const id of ids) weighted.set(id, { id, value: { weight } });
       weightSum += weight * value;
       continue;
@@ -367,7 +421,9 @@ const itemLevel = (mods: Mod[], base: string | undefined) => {
   if (!base) return undefined;
   const cluster = base.endsWith('Cluster Jewel');
   let min = 0;
-  for (const { match, implicit, enchant, crafted } of matchedMods(mods, () => {})) {
+  for (const { match, implicit, enchant, crafted, rune, desecrated } of matchedMods(mods, () => {})) {
+    // A rune rolls the same on any item
+    if (rune) continue;
     const types =
       enchant || (cluster && implicit)
         ? ['enchant']
@@ -375,7 +431,9 @@ const itemLevel = (mods: Mod[], base: string | undefined) => {
           ? ['implicit', 'corruption', 'synthesis']
           : crafted
             ? ['crafted']
-            : ['explicit'];
+            : desecrated
+              ? ['desecrated']
+              : ['explicit'];
     const stats = new Set(match.ids.map(id => id.split('|')[0]!.split('.')[1]!));
     // ponytail: Tiers only know their largest roll, and a stat's Tiers from different mods overlap (essence, Incursion,
     // hybrid): a roll falls into the tightest Tier that reaches it. A roll above every Tier (a pure and a hybrid mod
@@ -389,6 +447,29 @@ const itemLevel = (mods: Mod[], base: string | undefined) => {
   if (!min) return undefined;
   const unlocks = cluster ? tiers(base, 'explicit').filter(([level]) => level > min) : [];
   return unlocks.length ? { min, max: Math.min(...unlocks.map(([level]) => level)) - 1 } : { min };
+};
+
+const disabledGroups = (groups: Record<string, Record<string, unknown>>) =>
+  Object.fromEntries(
+    Object.entries(groups)
+      .filter(([, filters]) => Object.keys(filters).length)
+      .map(([group, filters]) => [group, { disabled: true, filters }]),
+  );
+
+/** PoE 2's Disabled Filters: its site has no links, and counts rune sockets ("S") among its equipment filters */
+// ponytail: no item level: the site keeps it in type_filters with the category, which a disabled group would switch off
+// too; add it as an enabled filter once PoE 2 Mod Pools (#35) give a Tier-based minimum
+const poe2PropertyFilters = (item: Item) => {
+  const equipment: Record<string, unknown> = {};
+  if (item.armour) equipment.ar = { min: item.armour };
+  if (item.evasion) equipment.ev = { min: item.evasion };
+  if (item.energyShield) equipment.es = { min: item.energyShield };
+  const runeSockets = item.sockets?.match(/S/g)?.length;
+  if (runeSockets) equipment.rune_sockets = { min: runeSockets };
+  return disabledGroups({
+    misc_filters: item.corrupted ? { corrupted: { option: 'true' } } : {},
+    equipment_filters: equipment,
+  });
 };
 
 /** Disabled Filters for what POB knows about an item beyond its mods */
@@ -417,15 +498,17 @@ const propertyFilters = (item: Item) => {
   if (item.evasion) armour.ev = { min: item.evasion };
   if (item.energyShield) armour.es = { min: item.energyShield };
 
-  return Object.fromEntries(
-    Object.entries({ misc_filters: misc, socket_filters: socket, armour_filters: armour })
-      .filter(([, filters]) => Object.keys(filters).length)
-      .map(([group, filters]) => [group, { disabled: true, filters }]),
-  );
+  return disabledGroups({ misc_filters: misc, socket_filters: socket, armour_filters: armour });
 };
 
 /** Port of POB's TradeHelpers.getTradeCategory */
-const tradeCategory = (slot: string, type: string | undefined): string | undefined => {
+const tradeCategory = (slot: string, type: string | undefined, game: TradeSiteVersion): string | undefined => {
+  if (game === '2') {
+    if (slot.startsWith('Ring')) return 'accessory.ring';
+    if (slot.includes('Jewel')) return 'jewel';
+    if (type && POE2_TYPE_CATEGORIES[type]) return POE2_TYPE_CATEGORIES[type];
+    return slot.startsWith('Weapon') ? 'weapon' : SLOT_CATEGORIES[slot];
+  }
   if (/^Weapon \d/.test(slot) && !slot.includes('Abyssal')) {
     if (!type) return 'weapon.one';
     const exact = WEAPON_CATEGORIES[type];
@@ -441,7 +524,13 @@ const tradeCategory = (slot: string, type: string | undefined): string | undefin
   return SLOT_CATEGORIES[slot];
 };
 
-const searchQuery = ({ slot, item }: BuildItem, reportUnmatched: Report, weightedSum: boolean, floors: Floors) => {
+const searchQuery = (
+  { slot, item }: BuildItem,
+  game: TradeSiteVersion,
+  reportUnmatched: Report,
+  weightedSum: boolean,
+  floors: Floors,
+) => {
   const query: Record<string, unknown> = { status: { option: 'securable' } };
   if (item.rarity === 'UNIQUE' || item.rarity === 'RELIC') {
     const name = item.name.replace(/^Foulborn /, '');
@@ -498,9 +587,9 @@ const searchQuery = ({ slot, item }: BuildItem, reportUnmatched: Report, weighte
   } else {
     if (item.base) query.type = item.base;
     const filters: Record<string, unknown> = {};
-    const category = tradeCategory(slot, item.type);
+    const category = tradeCategory(slot, item.type, game);
     if (category) filters.type_filters = { filters: { category: { option: category } } };
-    Object.assign(filters, propertyFilters(item));
+    Object.assign(filters, game === '2' ? poe2PropertyFilters(item) : propertyFilters(item));
     if (Object.keys(filters).length) query.filters = filters;
     const influences = item.influences.flatMap(influence => {
       const id = INFLUENCE_STATS[influence];
@@ -597,15 +686,19 @@ const dedupe = <T extends { query: Record<string, unknown> }>(trades: T[]) => {
   });
 };
 
-/** The trade-site location slug: BT joins it to `/trade/search/<league>/`, and the site reads `?q=` as a query */
-const trade = (tit: string, query: object) => ({
+/**
+ * The trade-site location on the game's site: BT joins the slug to `/trade/search/<league>/` (`/trade2/` for PoE 2),
+ * and the site reads `?q=` as a query
+ */
+const trade = (game: TradeSiteVersion, tit: string, query: object) => ({
   tit,
-  loc: `1:search:?q=${encodeURIComponent(JSON.stringify({ query }))}`,
+  loc: `${game}:search:?q=${encodeURIComponent(JSON.stringify({ query }))}`,
 });
 
 /**
  * Build Code to BT Export Strings (format 3), in progression order: one Folder with the Trades of every Loadout, each
- * Trade title then starting with its Loadout's, or a Folder per Loadout with Trades. The stats must be loaded first
+ * Trade title then starting with its Loadout's, or a Folder per Loadout with Trades, under the Build Code's game. That
+ * game's stats must be loaded first (its Mod Pools are optional)
  */
 const toExportString = async (
   buildCode: string,
@@ -618,8 +711,13 @@ const toExportString = async (
 ): Promise<Result> => {
   const floors = floorsOf(rollFloor);
   const build = await decodeBuild(buildCode);
+  const { game } = build;
+  // Nothing below awaits: an import of the other game running alongside can't switch the data mid-import
+  selectStats(game);
+  selectPools(game);
   const name = build.ascendancy ?? build.className;
-  const icon = name.toLowerCase();
+  const poe1Icon = ICONS.has(name.toLowerCase()) ? name.toLowerCase() : null;
+  const icon = game === '2' ? (POE2_ICONS.get(ascendancyKey(build.ascendancy ?? '')) ?? null) : poe1Icon;
   const skill = build.mainSkill || name;
 
   const unmatched: string[] = [];
@@ -638,7 +736,7 @@ const toExportString = async (
         const lines: string[] = [];
         return {
           tit,
-          query: searchQuery(buildItem, line => lines.push(`${tit}: ${line}`), weightedSum, floors),
+          query: searchQuery(buildItem, game, line => lines.push(`${tit}: ${line}`), weightedSum, floors),
           lines,
         };
       }),
@@ -656,12 +754,12 @@ const toExportString = async (
     // A skipped Trade's lines were reported with the Trade it repeats
     const trs = trades.map(({ tit, query, lines }) => {
       unmatched.push(...lines);
-      return trade(tit, query);
+      return trade(game, tit, query);
     });
     return { tit: `${skill} — ${title}`, trs };
   });
   const folderOf = (tit: string, trs: ReturnType<typeof trade>[]) =>
-    `3:${Base64.encode(JSON.stringify({ icn: ICONS.has(icon) ? icon : null, tit, ver: '1', trs }))}`;
+    `3:${Base64.encode(JSON.stringify({ icn: icon, tit, ver: game, trs }))}`;
   const perLoadout =
     several && folders === 'perLoadout'
       ? loadouts.filter(({ trs }) => trs.length).map(({ tit, trs }) => folderOf(tit, trs))

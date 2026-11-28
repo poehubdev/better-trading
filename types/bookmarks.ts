@@ -80,11 +80,14 @@ export enum BookmarksFolderAscendancyScionIcon {
 export enum BookmarksFolderAscendancyPoE2WarriorIcon {
   TITAN = 'poe2-titan',
   WARBRINGER = 'poe2-warbringer',
+  SMITH_OF_KITAVA = 'poe2-smith-of-kitava',
 }
 
 export enum BookmarksFolderAscendancyPoE2WitchIcon {
   INFERNALIST = 'poe2-infernalist',
   BLOOD_MAGE = 'poe2-blood-mage',
+  LICH = 'poe2-lich',
+  ABYSSAL_LICH = 'poe2-abyssal-lich',
 }
 
 export enum BookmarksFolderAscendancyPoE2RangerIcon {
@@ -92,19 +95,33 @@ export enum BookmarksFolderAscendancyPoE2RangerIcon {
   PATHFINDER = 'poe2-pathfinder',
 }
 
+export enum BookmarksFolderAscendancyPoE2HuntressIcon {
+  AMAZON = 'poe2-amazon',
+  SPIRIT_WALKER = 'poe2-spirit-walker',
+  RITUALIST = 'poe2-ritualist',
+}
+
 export enum BookmarksFolderAscendancyPoE2SorceressIcon {
   CHRONOMANCER = 'poe2-chronomancer',
   STORMWEAVER = 'poe2-stormweaver',
+  DISCIPLE_OF_VARASHTA = 'poe2-disciple-of-varashta',
 }
 
 export enum BookmarksFolderAscendancyPoE2MercenaryIcon {
+  TACTICIAN = 'poe2-tactician',
   WITCH_HUNTER = 'poe2-witch-hunter',
   GEMLING_LEGIONNAIRE = 'poe2-gemling-legionnaire',
 }
 
 export enum BookmarksFolderAscendancyPoE2MonkIcon {
+  MARTIAL_ARTIST = 'poe2-martial-artist',
   INVOKER = 'poe2-invoker',
   ACOLYTE_OF_CHAYULA = 'poe2-acolyte-of-chayula',
+}
+
+export enum BookmarksFolderAscendancyPoE2DruidIcon {
+  ORACLE = 'poe2-oracle',
+  SHAMAN = 'poe2-shaman',
 }
 
 export type BookmarksFolderPoE1AscendancyIcon =
@@ -120,9 +137,11 @@ export type BookmarksFolderPoE2AscendancyIcon =
   | BookmarksFolderAscendancyPoE2WarriorIcon
   | BookmarksFolderAscendancyPoE2WitchIcon
   | BookmarksFolderAscendancyPoE2RangerIcon
+  | BookmarksFolderAscendancyPoE2HuntressIcon
   | BookmarksFolderAscendancyPoE2SorceressIcon
   | BookmarksFolderAscendancyPoE2MercenaryIcon
-  | BookmarksFolderAscendancyPoE2MonkIcon;
+  | BookmarksFolderAscendancyPoE2MonkIcon
+  | BookmarksFolderAscendancyPoE2DruidIcon;
 
 export enum BookmarksFolderPoE1ItemIcon {
   ALCHEMY = 'alchemy',
@@ -157,6 +176,18 @@ export enum BookmarksFolderPoE2ItemIcon {
   WAYSTONE = 'poe2-waystone',
   WISDOM = 'poe2-wisdom',
 }
+
+// PoE 2 ascendancy icons by class, as the icon picker shows them (images: dat-mcp's `ascendancy-icons` script)
+export const poe2AscendancyIconGroups: BookmarksFolderPoE2AscendancyIcon[][] = [
+  Object.values(BookmarksFolderAscendancyPoE2WarriorIcon),
+  Object.values(BookmarksFolderAscendancyPoE2WitchIcon),
+  Object.values(BookmarksFolderAscendancyPoE2RangerIcon),
+  Object.values(BookmarksFolderAscendancyPoE2HuntressIcon),
+  Object.values(BookmarksFolderAscendancyPoE2SorceressIcon),
+  Object.values(BookmarksFolderAscendancyPoE2MercenaryIcon),
+  Object.values(BookmarksFolderAscendancyPoE2MonkIcon),
+  Object.values(BookmarksFolderAscendancyPoE2DruidIcon),
+];
 
 // Set of all item icons (PoE1 + PoE2) for quick classification
 export const bookmarkFolderItemIcons = new Set<string>([

@@ -15,6 +15,11 @@ import classnames from 'classnames';
 import type { BookmarksFolderIcon as BookmarkFolderIconType } from '@/types/bookmarks';
 import type { ImgHTMLAttributes, FC } from 'react';
 
+const FILE_NAMES: Partial<Record<BookmarkFolderIconType, string>> = {
+  raider: 'warden',
+  'poe2-witch-hunter': 'witchhunter',
+};
+
 type BookmarkFolderIconName = BookmarkFolderIconType;
 
 interface BookmarkFolderIconProps extends ImgHTMLAttributes<HTMLImageElement> {
@@ -29,9 +34,10 @@ const BookmarkFolderIcon: FC<BookmarkFolderIconProps> = ({ icon, className, ...i
   const isPoE2 = icon.startsWith('poe2-');
   const isItem = bookmarkFolderItemIcons.has(icon);
 
-  // Remove poe2- prefix from filename for PoE2 icons
-  // Raider was replaced by Warden in 3.25; folders saved with 'raider' show the Warden image
-  const filename = isPoE2 ? icon.replace(/^poe2-/, '') : icon === 'raider' ? 'warden' : icon;
+  // The file is the icon without its poe2- prefix, but for
+  // - Raider, replaced by Warden in 3.25: folders saved with 'raider' show the Warden image
+  // - Witch Hunter, whose image the extraction names after the game's spelling, Witchhunter
+  const filename = FILE_NAMES[icon] ?? icon.replace(/^poe2-/, '');
 
   // Build the path based on game version and icon type
   const gameVersion = isPoE2 ? 'poe2' : 'poe1';

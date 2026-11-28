@@ -4,3 +4,4 @@ dist
 .idea
 pnpm-lock.yaml
 public/pob-pools.json
+scripts/pob-item-stats*.json

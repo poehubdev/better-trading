@@ -1,5 +1,6 @@
 // Ported from pob2bt (src/mods.ts): stats come in as text instead of being read from disk
 import type { Mod } from './build';
+import type { TradeSiteVersion } from '@/types/trade-location';
 
 /** A mod line matched to trade stats */
 interface ModMatch {
@@ -32,18 +33,46 @@ interface UniqueInfo {
   multiBase?: true;
 }
 
-const TYPES = ['explicit', 'implicit', 'fractured', 'enchant', 'crafted'];
+// PoE 2 adds rune (augments socketed in the item) and desecrated stats
+const TYPES = ['explicit', 'implicit', 'fractured', 'enchant', 'crafted', 'rune', 'desecrated'];
 const NUMBER = /[+-]?\d+(?:\.\d+)?/g;
 
-const byText = new Map<string, { stats: Stat[]; matcher: Matcher }>();
-const uniques = new Map<string, UniqueInfo>();
-// Timeless jewel seed stats, one per conqueror; a jewel's conquerors share the "Passives ... Conquered by" line
-const conquerorIds = new Map<string, string[]>();
-const seedTexts = new Map<string, string>();
+/** The stat data of one game, indexed */
+interface StatIndex {
+  byText: Map<string, { stats: Stat[]; matcher: Matcher }>;
+  uniques: Map<string, UniqueInfo>;
+  // Timeless jewel seed stats, one per conqueror; a jewel's conquerors share the "Passives ... Conquered by" line
+  conquerorIds: Map<string, string[]>;
+  seedTexts: Map<string, string>;
+}
 
-/** Indexes pob-stats.ndjson (APT's stats.ndjson format): one stat per line, or `{ stats }` for stats sharing a text. Runs once */
-const loadStats = (ndjson: string) => {
-  if (byText.size) return;
+const indexes = new Map<TradeSiteVersion, StatIndex>();
+// The selected game's index, which every matcher reads
+const emptyIndex = (): StatIndex => ({
+  byText: new Map(),
+  uniques: new Map(),
+  conquerorIds: new Map(),
+  seedTexts: new Map(),
+});
+let { byText, uniques, conquerorIds, seedTexts } = emptyIndex();
+
+/** Makes the matchers read the stat data of a game; throws when it is not loaded */
+// ponytail: one selected game for the whole module; toExportString selects it in the synchronous part after decoding,
+// so concurrent imports of both games don't mix. Pass the index around if matching ever awaits
+const selectStats = (game: TradeSiteVersion) => {
+  const index = indexes.get(game);
+  if (!index) throw new Error(`Stat data of PoE ${game} not loaded`);
+  ({ byText, uniques, conquerorIds, seedTexts } = index);
+};
+
+/**
+ * Indexes a game's pob-stats.ndjson (APT's stats.ndjson format): one stat per line, or `{ stats }` for stats sharing a
+ * text. Runs once per game
+ */
+const loadStats = (ndjson: string, game: TradeSiteVersion) => {
+  if (indexes.has(game)) return;
+  const index = emptyIndex();
+  const { byText, uniques, conquerorIds, seedTexts } = index;
   for (const line of ndjson.split('\n')) {
     if (!line) continue;
     const entry = JSON.parse(line) as (Stat & { stats?: Stat[] }) | UniqueInfo;
@@ -70,6 +99,7 @@ const loadStats = (ndjson: string) => {
     seedTexts.set(matcher.string, conquered);
     conquerorIds.set(conquered, [...(conquerorIds.get(conquered) ?? []), id]);
   }
+  indexes.set(game, index);
 };
 
 const uniqueInfo = (name: string): UniqueInfo | undefined => uniques.get(name);
@@ -134,6 +164,9 @@ const REWRITES: [RegExp, string][] = [
   // "Grants Level 30 Aspect of the Cat Skill" is the stat "Grants Level # Aspect of the Cat". The few granted skills
   // whose stat ends in "Skill" (Anger, Hatred) match as they are, before this
   [/^(Grants Level \d+ .+) Skill$/, '$1'],
+  // A PoE 2 Bonded rune stat has no "reduced" matcher ("Bonded: 20% reduced Slowing Potency of Debuffs on You"); the
+  // negative value matches it on presence. ponytail: drop once dat-mcp writes the negated matcher for Bonded stats
+  [/^Bonded: (\d+(?:\.\d+)?)% reduced /, 'Bonded: -$1% increased '],
   // The stat data has "increased Rarity of Items found" as a pseudo stat only; the explicit reads "to Item Rarity"
   [/^(\d+)% increased Rarity of Items found$/, '+$1% to Item Rarity'],
 ];
@@ -178,4 +211,4 @@ const matchedMods = function* (mods: Mod[], reportUnmatched: (line: string) => v
 };
 
 export type { MatchedMod, ModMatch, UniqueInfo };
-export { loadStats, matchedMods, matchMod, matchTimeless, uniqueInfo };
+export { loadStats, matchedMods, matchMod, matchTimeless, selectStats, uniqueInfo };

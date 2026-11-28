@@ -2,6 +2,7 @@ import { transformCode } from '@code-inspector/core';
 import { defineConfig } from 'wxt';
 import fs from 'node:fs';
 import path from 'node:path';
+import zlib from 'node:zlib';
 import type { Plugin } from 'vite';
 import type { UserConfig } from 'wxt';
 
@@ -49,6 +50,19 @@ const config: UserConfig = {
     chromiumArgs: ['https://www.pathofexile.com/trade'],
   },
   hooks: {
+    // The PoB import's data (public/pob-*.ndjson and .json) ships gzipped and is inflated by the background script
+    // (ADR 0004); the readable files stay in git only
+    'build:done': (wxt, output) => {
+      for (const asset of output.publicAssets.filter(({ fileName }) => /^pob-.+\.(ndjson|json)$/.test(fileName))) {
+        const file = path.join(wxt.config.outDir, asset.fileName);
+        // A dev rebuild lists assets it did not copy again
+        if (!fs.existsSync(file)) continue;
+        fs.writeFileSync(`${file}.gz`, zlib.gzipSync(fs.readFileSync(file), { level: 9 }));
+        fs.rmSync(file);
+        // The build report lists it by its new name
+        asset.fileName += '.gz';
+      }
+    },
     // WXT picks what to rebuild from the bundle's module ids, and Sass partials pulled in with @use aren't modules,
     // so saving styles/globals/_base.scss etc. was a silent no-op in dev. Touch the entry stylesheet instead.
     'server:started': (_, server) => {

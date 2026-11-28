@@ -1,4 +1,5 @@
 // Mod Pools (ADR 0003): what each base can carry, per modifier type, from public/pob-pools.json (dat-mcp `pools`)
+import type { TradeSiteVersion } from '@/types/trade-location';
 
 /** dat-mcp's pools asset; source masks are not read yet */
 interface PoolsAsset {
@@ -11,13 +12,24 @@ interface PoolsAsset {
 /** A base's Mod Pool: the trade stat numbers (`stat_123`) it can carry, by modifier type */
 type ModPool = Record<string, Set<string>>;
 
+const assets = new Map<TradeSiteVersion, { asset: PoolsAsset; cache: Map<string, ModPool> }>();
+// The selected game's asset (see selectStats); undefined when that game has none loaded: its imports are unchecked
 let asset: PoolsAsset | undefined;
-const cache = new Map<string, ModPool>();
+let cache = new Map<string, ModPool>();
 const warned = new Set<string>();
+// "Allocates #", the trade stat of an anoint
+const ANOINT = 'stat_2954116742';
 
-/** Takes the parsed pools asset. Runs once */
-const loadPools = (json: PoolsAsset) => {
-  asset ??= json;
+/** Takes a game's parsed pools asset. Runs once per game */
+const loadPools = (json: PoolsAsset, game: TradeSiteVersion) => {
+  if (!assets.has(game)) assets.set(game, { asset: json, cache: new Map() });
+};
+
+/** Makes the pool lookups read the Mod Pools of a game */
+const selectPools = (game: TradeSiteVersion) => {
+  const loaded = assets.get(game);
+  asset = loaded?.asset;
+  cache = loaded?.cache ?? new Map();
 };
 
 /** The asset's pool key of a base; PoB names some bases with a variant (`Two-Stone Ring (Fire/Lightning)`) */
@@ -30,7 +42,8 @@ const poolKey = (base: string) =>
 const modPool = (base: string): ModPool | undefined => {
   const key = poolKey(base);
   if (!key) {
-    if (!warned.has(base)) console.warn(`[pob-import] No Mod Pool for "${base}": its filters are not checked`);
+    // Without an asset there is nothing to warn about per base: the background warned once that none was loaded
+    if (asset && !warned.has(base)) console.warn(`[pob-import] No Mod Pool for "${base}": its filters are not checked`);
     warned.add(base);
     return undefined;
   }
@@ -47,14 +60,19 @@ const modPool = (base: string): ModPool | undefined => {
 
 /**
  * Whether a trade ID (`implicit.stat_123`, option stats `<id>|<option>`) can appear on an item of this pool at any item
- * level. Corruptions and Synthesis implicits are searched as implicits. IDs that are not `stat_<n>` (pseudo stats) are
- * not in any pool: kept
+ * level. PoE 1 searches corruptions and Synthesis implicits as implicits. IDs that are not `stat_<n>` (pseudo stats)
+ * are not in any pool: kept
  */
 const inPool = (pool: ModPool, id: string) => {
   const [type, stat] = id.split('|')[0]!.split('.') as [string, string];
   if (!stat.startsWith('stat_')) return true;
   return (
-    !!pool[type]?.has(stat) || (type === 'implicit' && !!(pool.corruption?.has(stat) || pool.synthesis?.has(stat)))
+    !!pool[type]?.has(stat) ||
+    (type === 'implicit' && !!(pool.corruption?.has(stat) || pool.synthesis?.has(stat))) ||
+    // PoE 2's Mod Pools have neither crafted mods nor enchants: a crafted mod is one of the explicit mods, the site
+    // searches corruptions as enchants, and anoints are not modelled
+    (type === 'crafted' && !asset?.parts.crafted && !!pool.explicit?.has(stat)) ||
+    (type === 'enchant' && !asset?.parts.enchant && (stat === ANOINT || !!pool.corruption?.has(stat)))
   );
 };
 
@@ -90,4 +108,4 @@ const tiers = (base: string, type: string, stat?: string): [number, number][] =>
 };
 
 export type { ModPool, PoolsAsset };
-export { affixesOf, inPool, loadPools, modPool, tiers };
+export { affixesOf, inPool, loadPools, modPool, selectPools, tiers };
