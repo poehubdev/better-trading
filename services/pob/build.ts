@@ -122,7 +122,8 @@ const SLOT_ORDER = [
   'Ring',
   'Belt',
   'Flask',
-  // PoE 2; its limbs ("Arm 1", "Leg 1") go last with the other unknown slots, as PoE 1's Arm and Leg do
+  // PoE 2. The Arm and Leg slots (POB 2 numbers them) hold the Wickerman's parts, a temporary PoE 1 league mechanic
+  // POB 2 carries; they go last with the other unknown slots
   'Charm',
 ];
 /** Item state lines that follow the mods */
@@ -285,7 +286,8 @@ const decodeBuild = async (buildCode: string): Promise<Build> => {
     const add = (slot: string, itemId: string | undefined) => {
       const text = itemId && itemId !== '0' ? itemsById.get(itemId) : undefined;
       const item = text && parseItem(text, baseTypes);
-      // The PoE 2 trade site lists no Transcendent limbs (Gemling arms and legs): nothing to search them by
+      // Transcendent limbs are the Wickerman's parts, a temporary PoE 1 league mechanic POB 2 carries in its Arm and Leg
+      // slots: no PoE 2 item, and the PoE 2 trade site doesn't list them
       if (item && item.type !== 'Transcendent Limb') items.push({ slot, item });
     };
     const slots = (set.Slot ?? []).filter(({ name }) => name);

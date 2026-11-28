@@ -100,7 +100,7 @@ describe('PoE 2 slots', () => {
     expect(categoryOf(await tradeOf(TWISTER, 'Flask 2 — Fermented Gargantuan Mana Flask'))).toBe('flask.mana');
   });
 
-  it('skips arms and legs, which the PoE 2 trade site does not list', async () => {
+  it('skips arms and legs: Wickerman parts of a PoE 1 league, which the PoE 2 trade site does not list', async () => {
     // COMET has a Caster Arm in "Arm 1" and limbs in every Arm and Leg slot
     const titles = (await importOf(COMET, { skipEarlierLoadouts: false })).folder.trades.map(trade => trade.title);
     expect(titles.filter(title => / — (Arm|Leg) \d — /.test(` — ${title}`))).toEqual([]);
