@@ -1,6 +1,8 @@
-// Generates scripts/pob-unique-mods.ndjson from Path of Building's unique definitions (src/Data/Uniques/*.lua):
-//   pnpm pob-unique-mods [PoB checkout, default ~/www/PathOfBuilding]
-// then pnpm pob-stats, pnpm test, and commit both files. Run it when PoB adds or changes uniques.
+// Generates a game's unique mods from Path of Building's unique definitions (src/Data/Uniques/*.lua):
+//   pnpm pob-unique-mods [poe1] [PoB checkout, default ~/www/PathOfBuilding]      → scripts/pob-unique-mods.ndjson
+//   pnpm pob-unique-mods poe2 [PoB 2 checkout, default ~/www/PathOfBuilding-PoE2] → scripts/pob-unique-mods-poe2.ndjson
+// Fetch and fast-forward the checkout first, then pnpm pob-stats [poe2], pnpm test, and commit both files. Run it when
+// PoB adds or changes uniques.
 // One `{ unique, fixed }` line per unique: the trade stat numbers of every explicit line in its definition, in any
 // variant. A mod a copy has beyond those (Paradoxica's crafted rolls) is searched as random. The game files don't
 // say which mods a unique has, so PoB's hand-kept definitions are the source. Uniques PoB builds in code
@@ -11,10 +13,22 @@ import { readFile, readdir, writeFile } from 'node:fs/promises';
 import { homedir } from 'node:os';
 import { join } from 'node:path';
 
-const pob = process.argv[2] ?? join(homedir(), 'www/PathOfBuilding');
-const dir = join(pob, 'src/Data/Uniques');
-loadStats(await readFile(join(import.meta.dirname, '../public/pob-stats.ndjson'), 'utf8'), '1');
-selectStats('1');
+const GAMES = {
+  poe1: { version: '1', checkout: 'www/PathOfBuilding', stats: 'pob-stats.ndjson', out: 'pob-unique-mods.ndjson' },
+  poe2: {
+    version: '2',
+    checkout: 'www/PathOfBuilding-PoE2',
+    stats: 'pob-stats-poe2.ndjson',
+    out: 'pob-unique-mods-poe2.ndjson',
+  },
+} as const;
+
+const args = process.argv.slice(2);
+const game = args[0] === 'poe1' || args[0] === 'poe2' ? args.shift()! : 'poe1';
+const { version, checkout, stats, out: outFile } = GAMES[game as keyof typeof GAMES];
+const dir = join(args[0] ?? join(homedir(), checkout), 'src/Data/Uniques');
+loadStats(await readFile(join(import.meta.dirname, '../public', stats), 'utf8'), version);
+selectStats(version);
 
 /** Stat numbers of a definition's explicit lines: those after its implicits, or after its spec lines without any */
 const fixedStats = (lines: string[]) => {
@@ -55,7 +69,7 @@ for (const file of (await readdir(dir)).filter(name => name.endsWith('.lua')).so
   }
 }
 
-const out = join(import.meta.dirname, 'pob-unique-mods.ndjson');
+const out = join(import.meta.dirname, outFile);
 const lines = [...fixed]
   .sort(([a], [b]) => a.localeCompare(b))
   .map(([unique, ids]) => JSON.stringify({ unique, fixed: [...ids].sort() }));

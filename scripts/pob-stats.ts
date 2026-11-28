@@ -7,7 +7,8 @@
 // The input is in Awakened PoE Trade's stats.ndjson format. Only the fields services/pob/mods.ts reads are kept, and
 // the unique lines are appended (see UniqueInfo in services/pob/mods.ts). Game data can't produce those: they come from
 // scripts/pob-unique-mods.ndjson (PoB's unique definitions, pnpm pob-unique-mods) overlaid field by field with
-// scripts/pob-uniques.ndjson (APT's lines and our hand edits), which wins. PoE 2 has no unique lines yet.
+// scripts/pob-uniques.ndjson (APT's lines and our hand edits, pnpm pob-uniques), which wins; for PoE 2 their -poe2
+// twins (PoB 2's definitions, Exiled Exchange 2's lines).
 import { readFile, writeFile } from 'node:fs/promises';
 import { join } from 'node:path';
 
@@ -42,7 +43,9 @@ const uniqueLines = async (file: string) =>
     .split('\n')
     .flatMap(line => (line ? [JSON.parse(line) as { unique: string }] : []));
 const merged = new Map<string, { unique: string }>();
-const uniqueFiles = poe2 ? [] : ['pob-unique-mods.ndjson', 'pob-uniques.ndjson'];
+const uniqueFiles = poe2
+  ? ['pob-unique-mods-poe2.ndjson', 'pob-uniques-poe2.ndjson']
+  : ['pob-unique-mods.ndjson', 'pob-uniques.ndjson'];
 for (const line of (await Promise.all(uniqueFiles.map(uniqueLines))).flat()) {
   merged.set(line.unique, { ...merged.get(line.unique), ...line });
 }

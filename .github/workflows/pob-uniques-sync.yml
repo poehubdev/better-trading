@@ -1,6 +1,7 @@
-name: Sync PoB unique lines with APT
+name: Sync PoB unique lines with APT and EE2
 
-# Weekly: applies Awakened PoE Trade's changes to scripts/pob-uniques.ndjson and opens a PR that lists them
+# Weekly, per game: applies the source's changes (Awakened PoE Trade for PoE 1, Exiled Exchange 2 for PoE 2) to the
+# game's unique list (scripts/pob-uniques*.ndjson) and opens a PR that lists them
 on:
   schedule:
     - cron: '0 6 * * 1'
@@ -13,6 +14,14 @@ permissions:
 jobs:
   sync:
     runs-on: ubuntu-latest
+    strategy:
+      fail-fast: false
+      matrix:
+        include:
+          - game: poe1
+            sha-file: scripts/pob-uniques.apt-sha
+          - game: poe2
+            sha-file: scripts/pob-uniques-poe2.ee2-sha
     env:
       CI: true
       GH_TOKEN: ${{ github.token }}
@@ -26,17 +35,17 @@ jobs:
           node-version-file: .nvmrc
           cache: pnpm
       - run: pnpm install --frozen-lockfile
-      - run: node scripts/pob-uniques-sync.ts --message "$RUNNER_TEMP/message"
-      - name: Open a PR when APT moved
+      - run: node scripts/pob-uniques-sync.ts ${{ matrix.game }} --message "$RUNNER_TEMP/message"
+      - name: Open a PR when the source moved
         run: |
           [ -f "$RUNNER_TEMP/message" ] || exit 0
-          branch="pob-uniques-sync/$(cat scripts/pob-uniques.apt-sha | cut -c1-7)"
+          branch="pob-uniques-sync/${{ matrix.game }}-$(cut -c1-7 ${{ matrix.sha-file }})"
           git ls-remote --exit-code origin "refs/heads/$branch" >/dev/null && exit 0
-          node scripts/pob-stats.ts
+          node scripts/pob-stats.ts ${{ matrix.game }}
           git config user.name 'github-actions[bot]'
           git config user.email '41898282+github-actions[bot]@users.noreply.github.com'
           git switch -c "$branch"
-          git add scripts/pob-uniques.ndjson scripts/pob-uniques.apt-sha public/pob-stats.ndjson
+          git add scripts/pob-uniques*.ndjson ${{ matrix.sha-file }} public/pob-stats*.ndjson
           git commit -F "$RUNNER_TEMP/message"
           git push origin "$branch"
           tests=$(pnpm test 2>&1 | tail -5)

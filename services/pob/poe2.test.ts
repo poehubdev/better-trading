@@ -23,6 +23,15 @@ describe(TWISTER, () => {
     expect(trades.find(trade => trade.title.endsWith('Weapon 1 — Dread Edge'))?.query.type).toBe('Forked Spear');
   });
 
+  it('searches a unique by its name, with its base type when several bases share the name', async () => {
+    const { trades } = (await importOf(TWISTER)).folder;
+    const query = (title: string) => trades.find(trade => trade.title.endsWith(title))?.query;
+    // Atziri's Step is also sold on Runemastered Cinched Boots; Headhunter on Heavy Belt only
+    expect(query("Unique Boots — Atziri's Step")).toMatchObject({ name: "Atziri's Step", type: 'Cinched Boots' });
+    expect(query('Unique Belt — Headhunter')).toMatchObject({ name: 'Headhunter' });
+    expect(query('Unique Belt — Headhunter')).not.toHaveProperty('type');
+  });
+
   it('matches mod lines to PoE 2 trade stats', async () => {
     const { trades } = (await importOf(TWISTER)).folder;
     const shield = trades.find(trade => trade.title.endsWith('Weapon 2 — Onslaught Sanctuary'));

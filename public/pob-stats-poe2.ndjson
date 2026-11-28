@@ -3605,3 +3605,447 @@
 {"better":1,"matchers":[{"string":"Zarokh, the Temporal drops Temporalis"}],"trade":{"ids":{"explicit":["sanctum.stat_2469854926"]}}}
 {"better":1,"matchers":[{"string":"Zarokh, the Temporal takes #% more Damage"},{"string":"Zarokh, the Temporal takes #% less Damage","negate":true}],"trade":{"ids":{"explicit":["sanctum.stat_2226900052"]}}}
 {"stats":[{"better":1,"matchers":[{"string":"Zealot's Oath"}],"trade":{"ids":{"explicit":["explicit.stat_1315418254"]}}},{"better":0,"matchers":[{"string":"Zealot's Oath"}],"trade":{"ids":{"explicit":["explicit.stat_3831171903|33"]}}}]}
+{"unique":"Ab Aeterno","fixed":["stat_1016362888","stat_1416455556","stat_2148576938","stat_2250533757","stat_3128773415","stat_3156445245","stat_3518087336","stat_3523867985"],"multiBase":true}
+{"unique":"Adonia's Ego","fixed":["stat_1050105434","stat_124131830","stat_227523295","stat_2593644209","stat_2891184298"]}
+{"unique":"Aerisvane's Wings","fixed":["stat_210067635","stat_2451402625","stat_328541901","stat_3872034802","stat_681332047"],"multiBase":true}
+{"unique":"Alkem Eira","fixed":["stat_1050105434","stat_2481353198","stat_2875218423","stat_3321629045","stat_4147897060"],"multiBase":true}
+{"unique":"Alpha's Howl","fixed":["stat_124859000","stat_1810907437","stat_2106365538","stat_2704225257","stat_3981240776","stat_4220027924"],"multiBase":true}
+{"unique":"Amor Mandragora","fixed":["stat_1273508088","stat_1940865751","stat_2890401248","stat_328541901","stat_3377888098"],"multiBase":true}
+{"unique":"Andvarius","fixed":["stat_2901986750","stat_3261801346","stat_3917489142"]}
+{"unique":"Apep's Supremacy","fixed":["stat_1175213674","stat_1493211587","stat_1782086450","stat_2339757871","stat_4015621042","stat_4250009622"],"multiBase":true}
+{"unique":"Apron of Emiran","fixed":["stat_1692879867","stat_1999113824","stat_3261801346","stat_841429130"],"multiBase":true}
+{"unique":"Arakaali's Gift","fixed":["stat_2716923832","stat_3891350097"]}
+{"unique":"Arvil's Wheel","fixed":["stat_1030153674","stat_1050105434","stat_1604736568","stat_2023107756","stat_2451402625","stat_2481353198","stat_3299347043","stat_3377888098","stat_4147897060"],"multiBase":true}
+{"unique":"Ashrend","fixed":["stat_3299347043","stat_331731406","stat_3372524247","stat_3441651621","stat_4080418644"],"multiBase":true}
+{"unique":"Asphyxia's Wrath","fixed":["stat_1484500028","stat_1816894864","stat_210067635","stat_4067062424","stat_4220027924","stat_681332047"]}
+{"unique":"Assailum","fixed":["stat_1373370443","stat_2451402625","stat_587431675","stat_691932474","stat_803737631"]}
+{"unique":"Astramentis","fixed":["stat_1379411836","stat_2897413282","stat_3441651621"]}
+{"unique":"Atsak's Sight","fixed":["stat_1999113824","stat_3261801346","stat_328541901","stat_587431675","stat_62849030"],"multiBase":true}
+{"unique":"Atziri's Acuity","fixed":["stat_1062208444","stat_2257118425","stat_2557965901","stat_2866361420","stat_328541901","stat_3299347043","stat_3389184522","stat_3831171903|20","stat_587431675","stat_70760090"],"multiBase":true}
+{"unique":"Atziri's Contempt","fixed":["stat_101878827","stat_1509134228","stat_210067635","stat_3336890334","stat_4106787208","stat_681332047","stat_709508406"]}
+{"unique":"Atziri's Disdain","fixed":["stat_1050105434","stat_1228337241","stat_2448633171","stat_3917489142"],"multiBase":true}
+{"unique":"Atziri's Rule","fixed":["stat_1088082880","stat_1200789871","stat_2061237517","stat_2891184298","stat_328541901","stat_983749596"]}
+{"unique":"Atziri's Splendour","fixed":["stat_1016362888","stat_1062208444","stat_124859000","stat_150590298","stat_1999113824","stat_2035336006","stat_2106365538","stat_231726304","stat_2451402625","stat_250458861","stat_2739148464","stat_2866361420","stat_2901986750","stat_3321629045","stat_3523867985","stat_3773763721","stat_3915618954","stat_4015621042"],"multiBase":true}
+{"unique":"Atziri's Step","fixed":["stat_124859000","stat_1416455556","stat_2106365538","stat_2250533757","stat_2252419505","stat_3033371881","stat_3299347043","stat_3552135623"],"multiBase":true}
+{"unique":"Aurseize","fixed":["stat_2023107756","stat_2451402625","stat_3917489142"],"multiBase":true}
+{"unique":"Beacon of Azis","fixed":["stat_1050105434","stat_1094937621","stat_1263695895","stat_2704225257","stat_3981240776"]}
+{"unique":"Beetlebite","fixed":["stat_1315743832","stat_1416455556","stat_1999113824","stat_2250533757","stat_874646180"],"multiBase":true}
+{"unique":"Beira's Anguish","fixed":["stat_39209842","stat_828533480"]}
+{"unique":"Belly of the Beast","fixed":["stat_2451402625","stat_2881298780","stat_3299347043","stat_720388959","stat_915769802"],"multiBase":true}
+{"unique":"Berek's Grip","fixed":["stat_2300185227","stat_3923947492","stat_4277795662"]}
+{"unique":"Berek's Pass","fixed":["stat_1535626285","stat_2626360934","stat_2915988346","stat_302024054"]}
+{"unique":"Berek's Respite","fixed":["stat_2408983956","stat_3441501978","stat_538848803"]}
+{"unique":"Beyond Reach","fixed":["stat_210067635","stat_2315177528","stat_261503687","stat_2973498992","stat_681332047"]}
+{"unique":"Bijouborne","fixed":["stat_1050105434","stat_1389754388","stat_2582079000","stat_3261801346","stat_3585532255","stat_554899692"]}
+{"unique":"Birth of Fury","fixed":["stat_1416455556","stat_2250533757","stat_2356156926","stat_3299347043","stat_3372524247"],"multiBase":true}
+{"unique":"Birthright Buckle","fixed":["stat_1200347828","stat_1836676211","stat_1839832419","stat_3484657501","stat_644456512","stat_809229260"]}
+{"unique":"Bitterbloom","fixed":["stat_1050105434","stat_2339757871","stat_2402413437","stat_4015621042"],"multiBase":true}
+{"unique":"Black Sun Crest","fixed":["stat_1062208444","stat_1263695895","stat_2866361420","stat_4139681126","stat_656461285","stat_734614379"],"multiBase":true}
+{"unique":"Blackbraid","fixed":["stat_2901986750","stat_328541901","stat_3362812763","stat_3484657501","stat_4080418644","stat_809229260","stat_915769802"],"multiBase":true}
+{"unique":"Blackflame","fixed":["stat_1086147743","stat_1910297038","stat_279110104","stat_3791899485","stat_789117908","stat_983582600"]}
+{"unique":"Blackgleam","fixed":["stat_1049080093","stat_1050105434","stat_1573130764","stat_2214228141","stat_2968503605"]}
+{"unique":"Blackheart","fixed":["stat_3325883026","stat_3972229254","stat_674553446","stat_78985352"]}
+{"unique":"Blessed Bonds","fixed":["stat_1368271171","stat_1538879632","stat_2144192055","stat_2665488635","stat_3314536008","stat_3489782002","stat_4052037485","stat_53045048"]}
+{"unique":"Blistering Bond","fixed":["stat_1016759424","stat_1221641885","stat_2022332470","stat_3299347043","stat_3372524247","stat_4220027924"]}
+{"unique":"Blood of the Warrior","fixed":["stat_1256719186","stat_1726753705","stat_2541588185","stat_2932359713","stat_3464644319","stat_3598623697","stat_555311715"]}
+{"unique":"Blood Price","fixed":["stat_101878827","stat_1062208444","stat_1953536251","stat_2866361420","stat_3325883026","stat_915769802"],"multiBase":true}
+{"unique":"Bloodbarrier","fixed":["stat_1695767482","stat_2481353198","stat_2923486259","stat_3325883026","stat_4147897060"],"multiBase":true}
+{"unique":"Blueflame Bracers","fixed":["stat_328541901","stat_3372524247","stat_3489782002","stat_3503160529","stat_4052037485","stat_4220027924"],"multiBase":true}
+{"unique":"Bones of Ullr","fixed":["stat_1050105434","stat_1416455556","stat_2250533757","stat_2308632835","stat_3299347043","stat_4015621042"],"multiBase":true}
+{"unique":"Brain Rattler","fixed":["stat_1910743684","stat_1940865751","stat_210067635","stat_3336890334","stat_681332047"],"multiBase":true}
+{"unique":"Bramblejack","fixed":["stat_1092987622","stat_2002533190","stat_3299347043","stat_474452755","stat_915769802"],"multiBase":true}
+{"unique":"Breath of the Mountains","fixed":["stat_2566921799","stat_388617051"]}
+{"unique":"Briarpatch","fixed":["stat_1416455556","stat_2250533757","stat_2715190555","stat_2881298780","stat_3299347043","stat_915769802"],"multiBase":true}
+{"unique":"Briskwrap","fixed":["stat_124859000","stat_1412217137","stat_2106365538","stat_3033371881","stat_3261801346","stat_4220027924","stat_51994685"],"multiBase":true}
+{"unique":"Bristleboar","fixed":["stat_124859000","stat_1466716929","stat_2106365538","stat_3292710273","stat_3299347043","stat_3325883026"],"multiBase":true}
+{"unique":"Bronzebeard","fixed":["stat_1269971728","stat_1416455556","stat_1478653032","stat_2250533757","stat_3299347043","stat_3321629045","stat_3801067695"],"multiBase":true}
+{"unique":"Brutus' Lead Sprinkler","fixed":["stat_1509134228","stat_1867725690","stat_210067635","stat_4080418644","stat_4186798932","stat_681332047"],"multiBase":true}
+{"unique":"Brynhand's Mark","fixed":["stat_1940865751","stat_210067635","stat_4080418644","stat_681332047","stat_691932474","stat_769129523","stat_803737631"],"multiBase":true}
+{"unique":"Bursting Decay","fixed":["stat_1661347488","stat_2723294374","stat_2923486259","stat_3917489142"]}
+{"unique":"Bushwhack","fixed":["stat_124859000","stat_1416455556","stat_2041668411","stat_2106365538","stat_2250533757","stat_3261801346"],"multiBase":true}
+{"unique":"Byrnabas","fixed":["stat_1050105434","stat_1671376347","stat_3325883026","stat_491899612"]}
+{"unique":"Cadiro's Gambit","fixed":["stat_3891922348"]}
+{"unique":"Calgyra's Arc","fixed":["stat_1050105434","stat_1076031760","stat_124859000","stat_2106365538","stat_328541901","stat_3401186585"],"multiBase":true}
+{"unique":"Call of the Brotherhood","fixed":["stat_328541901","stat_3627052716","stat_473429811","stat_789117908"]}
+{"unique":"Candlemaker","fixed":["stat_1540254896","stat_3291658075","stat_3372524247","stat_3962278098","stat_4015621042","stat_4220027924"],"multiBase":true}
+{"unique":"Carnage Heart","fixed":["stat_1200789871","stat_1379411836","stat_2112395885","stat_2897413282","stat_2901986750","stat_310246444","stat_983749596"]}
+{"unique":"Carrion Call","fixed":["stat_1589917703","stat_3045072899","stat_3489782002","stat_4052037485","stat_770672621","stat_789117908"],"multiBase":true}
+{"unique":"Cat O' Nine Tails","fixed":["stat_2163764037","stat_2201614328","stat_3240073117","stat_3299347043","stat_451403019"]}
+{"unique":"Chainsting","fixed":["stat_1940865751","stat_210067635","stat_4142786792","stat_535217483","stat_681332047","stat_691932474","stat_803737631"],"multiBase":true}
+{"unique":"Chernobog's Pillar","fixed":["stat_1062208444","stat_2771095426","stat_2866361420","stat_2923486259","stat_3372524247","stat_915769802"],"multiBase":true}
+{"unique":"Chober Chaber","fixed":["stat_1050105434","stat_1509134228","stat_1631928082","stat_1940865751","stat_2153364323","stat_2162097452","stat_2704225257","stat_3981240776","stat_518292764"],"multiBase":true}
+{"unique":"Choir of the Storm","fixed":["stat_1289045485","stat_1671376347","stat_704919631"]}
+{"unique":"Cloak of Defiance","fixed":["stat_1050105434","stat_4015621042","stat_458438597","stat_789117908"],"multiBase":true}
+{"unique":"Cloak of Flame","fixed":["stat_1004468512","stat_1993950627","stat_3372524247","stat_3489782002","stat_4052037485","stat_986397080"],"multiBase":true}
+{"unique":"Coat of Red","fixed":["stat_2451402625","stat_3299347043","stat_3423694372","stat_915769802"],"multiBase":true}
+{"unique":"Collapsing Horizon","fixed":["stat_2901213448","stat_3141070085","stat_518292764","stat_599320227"]}
+{"unique":"Constricting Command","fixed":["stat_1379411836","stat_2267564181","stat_2897413282","stat_3063814459","stat_3299347043","stat_3325883026"],"multiBase":true}
+{"unique":"Controlled Metamorphosis","fixed":["stat_2901986750","stat_2923486259","stat_3642528642|1","stat_3642528642|2","stat_3642528642|3","stat_3642528642|4","stat_3642528642|5","stat_3642528642|6","stat_3642528642|7","stat_3642528642|8","stat_4077035099"]}
+{"unique":"Cornathaum","fixed":["stat_1263695895","stat_328541901","stat_3666934677","stat_3917489142"],"multiBase":true}
+{"unique":"Corona of the Red Sun","fixed":["stat_1263695895","stat_3299347043","stat_3372524247","stat_3605721598","stat_691932474","stat_803737631"],"multiBase":true}
+{"unique":"Corpsewade","fixed":["stat_1062208444","stat_1416455556","stat_2250533757","stat_2866361420","stat_3371943724","stat_4080418644"],"multiBase":true}
+{"unique":"Cospri's Will","fixed":["stat_1354656031","stat_1367119630","stat_1999113824","stat_2609822974","stat_2923486259"],"multiBase":true}
+{"unique":"Couture of Crimson","fixed":["stat_1200789871","stat_1692879867","stat_2714890129","stat_3321629045","stat_983749596"],"multiBase":true}
+{"unique":"Coward's Legacy","fixed":["stat_2310741722","stat_3261801346","stat_356835700","stat_4080418644"]}
+{"unique":"Cracklecreep","fixed":["stat_3314057862","stat_3325883026","stat_3962278098","stat_789117908"]}
+{"unique":"Crest of Ardura","fixed":["stat_1004011302","stat_328541901","stat_3321629045","stat_789117908"],"multiBase":true}
+{"unique":"Crown of Eyes","fixed":["stat_1379411836","stat_2897413282","stat_3372524247","stat_3811649872","stat_4015621042","stat_691932474","stat_803737631"],"multiBase":true}
+{"unique":"Crown of the Pale King","fixed":["stat_2881298780","stat_3299347043","stat_3321629045","stat_3414243317","stat_3917489142"],"multiBase":true}
+{"unique":"Crown of the Victor","fixed":["stat_1368271171","stat_3695891184","stat_3917489142","stat_4283407333"],"multiBase":true}
+{"unique":"Crown of Thorns","fixed":["stat_1902409192","stat_2881298780","stat_3489782002","stat_3831171903|7","stat_4052037485","stat_98977150"],"multiBase":true}
+{"unique":"Cursecarver","fixed":["stat_2974417149","stat_2891184298","stat_789117908"]}
+{"unique":"Daevata's Wind","fixed":["stat_1940865751","stat_210067635","stat_2144192055","stat_3028809864","stat_3596695232","stat_53045048","stat_681332047"],"multiBase":true}
+{"unique":"Darkness Enthroned","fixed":["stat_1416292992"]}
+{"unique":"Darkray Vectors","fixed":["stat_1263695895","stat_1541516339","stat_1671376347","stat_2451402625","stat_4078695"],"multiBase":true}
+{"unique":"Death Articulated","fixed":["stat_1661347488","stat_210067635","stat_2451402625","stat_2853314994","stat_2923486259","stat_4163076972","stat_681332047"]}
+{"unique":"Death Rush","fixed":["stat_1195849808","stat_2144192055","stat_2557965901","stat_53045048","stat_691932474","stat_803737631"]}
+{"unique":"Death's Harp","fixed":["stat_1368271171","stat_2463230181","stat_2694482655","stat_3695891184","stat_3885405204"],"multiBase":true}
+{"unique":"Deathblow","fixed":["stat_1368271171","stat_1574531783","stat_210067635","stat_2451402625","stat_2524254339","stat_3695891184","stat_681332047"],"multiBase":true}
+{"unique":"Deathrattle","fixed":["stat_1618482990","stat_2974417149","stat_328541901","stat_3489782002","stat_4052037485"],"multiBase":true}
+{"unique":"Decree of Acuity","fixed":["stat_1010703902","stat_1546604934","stat_2451402625","stat_3261801346","stat_3774577097"],"multiBase":true}
+{"unique":"Decree of Flight","fixed":["stat_1338406168","stat_1416455556","stat_2250533757","stat_2971398565","stat_3321629045","stat_469006068","stat_504054855"],"multiBase":true}
+{"unique":"Decree of Loyalty","fixed":["stat_1301765461","stat_1535626285","stat_1539671749","stat_2886108529","stat_3321629045","stat_4274637468"],"multiBase":true}
+{"unique":"Defiance of Destiny","fixed":["stat_1200789871","stat_1990472846","stat_4080418644","stat_789117908","stat_983749596"]}
+{"unique":"Deidbell","fixed":["stat_1062208444","stat_11014011","stat_1316278494","stat_2567751411","stat_2866361420","stat_4080418644"],"multiBase":true}
+{"unique":"Demon Stitcher","fixed":["stat_2891184298","stat_3299347043","stat_3489782002","stat_4052037485","stat_613752285"],"multiBase":true}
+{"unique":"Dionadair","fixed":["stat_1062208444","stat_2866361420","stat_3325883026","stat_3686997387","stat_4080418644","stat_680068163"],"multiBase":true}
+{"unique":"Doedre's Damning","fixed":["stat_1368271171","stat_2901986750","stat_30642521"]}
+{"unique":"Doedre's Tenure","fixed":["stat_2891184298","stat_2974417149","stat_328541901","stat_3489782002","stat_4052037485"],"multiBase":true}
+{"unique":"Doomfletch","fixed":["stat_1940865751","stat_3261801346","stat_3620731914","stat_789117908"],"multiBase":true}
+{"unique":"Doomgate","fixed":["stat_1062208444","stat_2481353198","stat_2866361420","stat_2905515354","stat_2923486259","stat_381470861","stat_4147897060"],"multiBase":true}
+{"unique":"Doryani's Prototype","fixed":["stat_1546580830","stat_2134207902","stat_2451402625","stat_3299347043","stat_3999959974"],"multiBase":true}
+{"unique":"Double Vision","fixed":["stat_1940865751","stat_331648983","stat_518292764","stat_710476746"],"multiBase":true}
+{"unique":"Dreadfist","fixed":["stat_1062208444","stat_2866361420","stat_2881298780","stat_3058238353","stat_3414998042","stat_3556824919"],"multiBase":true}
+{"unique":"Dream Fragments","fixed":["stat_2748665614","stat_2996245527","stat_789117908"]}
+{"unique":"Drillneck","fixed":["stat_1163615092","stat_210067635","stat_2720781168","stat_3033371881","stat_3299347043","stat_681332047","stat_883169830"]}
+{"unique":"Duality","fixed":["stat_1509134228","stat_210067635","stat_2443032293","stat_2694482655","stat_4010198893","stat_681332047"],"multiBase":true}
+{"unique":"Dunkelhalt","fixed":["stat_2144192055","stat_2481353198","stat_2905515354","stat_4147897060","stat_53045048","stat_818877178"],"multiBase":true}
+{"unique":"Dusk Vigil","fixed":["stat_2974417149","stat_3015669065","stat_3695891184","stat_789117908","stat_826162720"]}
+{"unique":"Dustbloom","fixed":["stat_1173537953","stat_124859000","stat_1306791873","stat_2106365538","stat_3175722882","stat_344174146","stat_3841984913","stat_4220027924"],"multiBase":true}
+{"unique":"Earthbound","fixed":["stat_2231156303","stat_2891184298","stat_293638271","stat_2974417149","stat_789117908","stat_811217923"]}
+{"unique":"Edyrn's Tusks","fixed":["stat_1062208444","stat_2174054121","stat_2866361420","stat_2881298780","stat_924253255","stat_978111083"],"multiBase":true}
+{"unique":"Effigy of Cruelty","fixed":["stat_1550131834","stat_2923486259","stat_2974417149","stat_328541901","stat_3489782002","stat_4052037485"],"multiBase":true}
+{"unique":"Elevore","fixed":["stat_124859000","stat_185580205","stat_2106365538","stat_2582079000","stat_3261801346","stat_554899692"],"multiBase":true}
+{"unique":"Empire's Grasp","fixed":["stat_1062208444","stat_1310194496","stat_281201999","stat_2866361420","stat_3695891184","stat_4080418644"],"multiBase":true}
+{"unique":"Enezun's Charge","fixed":["stat_1368271171","stat_2974417149","stat_737908626","stat_965913123"]}
+{"unique":"Enfolding Dawn","fixed":["stat_2704225257","stat_2901986750","stat_3321629045","stat_3981240776","stat_4187571952"],"multiBase":true}
+{"unique":"Erian's Cobble","fixed":["stat_1050105434","stat_1671376347","stat_2144192055","stat_3261801346","stat_328541901","stat_3299347043","stat_3325883026","stat_3372524247","stat_3484657501","stat_3489782002","stat_3917489142","stat_4052037485","stat_4080418644","stat_4220027924","stat_53045048","stat_587431675","stat_691932474","stat_803737631","stat_809229260"],"multiBase":true}
+{"unique":"Eshtera's Path","fixed":["stat_1379411836","stat_21302430","stat_2897413282","stat_3917489142","stat_4032948616","stat_4207433208"]}
+{"unique":"Essentia Sanguis","fixed":["stat_1671376347","stat_1754445556","stat_1999113824","stat_328541901","stat_3314050176"],"multiBase":true}
+{"unique":"Eventide Petals","fixed":["stat_1263695895","stat_328541901","stat_587431675","stat_740421489"],"multiBase":true}
+{"unique":"Evergrasping Ring","fixed":["stat_1050105434","stat_1224838456","stat_4258251165"]}
+{"unique":"Eye of Chayula","fixed":["stat_1000739259","stat_1200789871","stat_1379411836","stat_2897413282","stat_915769802","stat_983749596"]}
+{"unique":"Eyes of the Runefather","fixed":["stat_2451402625","stat_3430033313","stat_343703314","stat_4220027924","stat_774222208"],"multiBase":true}
+{"unique":"Ezomyte Peak","fixed":["stat_1062208444","stat_1683578560","stat_280731498","stat_2866361420","stat_3299347043","stat_3325883026","stat_3831171903|3"],"multiBase":true}
+{"unique":"Facebreaker","fixed":["stat_1291132817","stat_1955786041","stat_239367161","stat_3273962791","stat_3452816629","stat_627896047"],"multiBase":true}
+{"unique":"Fairgraves' Curse","fixed":["stat_2968503605","stat_321765853","stat_3240073117","stat_33298888","stat_3791899485","stat_709508406"]}
+{"unique":"Feathered Fortress","fixed":["stat_3261801346","stat_3372524247","stat_4080418644","stat_4220027924","stat_585231074"],"multiBase":true}
+{"unique":"Fireflower","fixed":["stat_2518598473","stat_3917489142","stat_599749213","stat_789117908"]}
+{"unique":"Fixation of Yix","fixed":["stat_101878827","stat_1250712710","stat_1998951374","stat_289128254","stat_3057012405","stat_3299347043"]}
+{"unique":"Font of Power","fixed":["stat_1050105434","stat_1416406066","stat_3984865854","stat_603021645","stat_789117908"]}
+{"unique":"For Utopia","fixed":["stat_3138344128"]}
+{"unique":"Forbidden Gaze","fixed":["stat_1263695895","stat_3676141501","stat_4015621042","stat_4220027924"]}
+{"unique":"Forgotten Warden","fixed":["stat_1207006772","stat_1805182458","stat_1999113824","stat_3261801346","stat_3918757604"],"multiBase":true}
+{"unique":"Forsaken Bangle","fixed":["stat_1256719186","stat_2541588185","stat_2678930256"]}
+{"unique":"Foxshade","fixed":["stat_2144192055","stat_3261801346","stat_3393547195","stat_53045048","stat_88817332"],"multiBase":true}
+{"unique":"Frostbreath","fixed":["stat_1037193709","stat_1158324489","stat_1940865751","stat_3761294489","stat_518292764"],"multiBase":true}
+{"unique":"Fury of the King","fixed":["stat_210067635","stat_2480962043","stat_4080418644","stat_4287372938","stat_681332047","stat_709508406","stat_724806967"]}
+{"unique":"Gamblesprint","fixed":["stat_124859000","stat_1671376347","stat_2106365538","stat_3261801346","stat_3917489142","stat_796381300"],"multiBase":true}
+{"unique":"Geofri's Sanctuary","fixed":["stat_1062208444","stat_1312381104","stat_1315418254","stat_2104359366","stat_2866361420","stat_2901986750","stat_3831171903|33","stat_758226825"]}
+{"unique":"Ghostmarch","fixed":["stat_1050105434","stat_1298316550","stat_1416455556","stat_1999113824","stat_2250533757","stat_2923486259"],"multiBase":true}
+{"unique":"Ghostwrithe","fixed":["stat_2458962764","stat_2923486259","stat_3489782002","stat_4052037485"],"multiBase":true}
+{"unique":"Gifts from Above","fixed":["stat_1263695895","stat_1736538865","stat_21824003","stat_587431675"]}
+{"unique":"Glimpse of Chaos","fixed":["stat_1050105434","stat_1161337167","stat_1671376347","stat_2439129490","stat_3299347043","stat_3372524247","stat_4220027924"],"multiBase":true}
+{"unique":"Gloamgown","fixed":["stat_2339757871","stat_2704225257","stat_3091132047","stat_3981240776","stat_4015621042","stat_4220027924"],"multiBase":true}
+{"unique":"Gloomform","fixed":["stat_124859000","stat_1263695895","stat_2106365538","stat_2592455368","stat_3261801346","stat_3372524247"],"multiBase":true}
+{"unique":"Glowswarm","fixed":["stat_1050105434","stat_1412217137","stat_2200293569","stat_2777675751"]}
+{"unique":"Goldrim","fixed":["stat_2144192055","stat_2901986750","stat_3917489142","stat_53045048"],"multiBase":true}
+{"unique":"Goregirdle","fixed":["stat_3325883026","stat_3387008487","stat_3960211755","stat_4080418644"]}
+{"unique":"Grand Spectrum","fixed":["stat_1430165758","stat_242161915","stat_332217711"],"multiBase":true}
+{"unique":"Gravebind","fixed":["stat_1368271171","stat_1576794517","stat_3321629045","stat_3695891184","stat_3917489142","stat_4220027924"],"multiBase":true}
+{"unique":"Greed's Embrace","fixed":["stat_1062208444","stat_1416455556","stat_2250533757","stat_2866361420","stat_295075366","stat_3372524247","stat_3917489142"],"multiBase":true}
+{"unique":"Greymake","fixed":["stat_2333085568","stat_3261801346","stat_328541901","stat_4080418644"],"multiBase":true}
+{"unique":"Grip of Winter","fixed":["stat_124859000","stat_2106365538","stat_4067062424","stat_4220027924","stat_473429811","stat_828179689"],"multiBase":true}
+{"unique":"Guiding Palm","fixed":["stat_1263695895","stat_1379411836","stat_2347036682","stat_2854751904","stat_2897413282","stat_4287671144","stat_849987426"]}
+{"unique":"Guiding Palm of the Eye","fixed":["stat_1263695895","stat_234657505","stat_2347036682","stat_2505884597","stat_328541901","stat_4287671144"]}
+{"unique":"Guiding Palm of the Heart","fixed":["stat_1263695895","stat_3015669065","stat_3917429943","stat_4080418644","stat_4287671144","stat_849987426"]}
+{"unique":"Guiding Palm of the Mind","fixed":["stat_1263695895","stat_2800412928","stat_2854751904","stat_3261801346","stat_3278136794","stat_4287671144"]}
+{"unique":"Hand of Wisdom and Action","fixed":["stat_3111921451","stat_3261801346","stat_328541901","stat_720908147"],"multiBase":true}
+{"unique":"Hateforge","fixed":["stat_1062208444","stat_2258007247","stat_2284588585","stat_2866361420","stat_3851480592"],"multiBase":true}
+{"unique":"Headhunter","fixed":["stat_2913235441","stat_3261801346","stat_3299347043","stat_4080418644"]}
+{"unique":"Heartbound Loop","fixed":["stat_2639966148","stat_3325883026","stat_4176970656","stat_770672621","stat_789117908"]}
+{"unique":"Heatshiver","fixed":["stat_1050105434","stat_124859000","stat_2106365538","stat_2469544361","stat_3372524247","stat_4220027924"],"multiBase":true}
+{"unique":"Heroic Tragedy","fixed":["stat_3787436548"]}
+{"unique":"Hinekora's Sight","fixed":["stat_1436284579","stat_2144192055","stat_53045048","stat_691932474","stat_803737631"]}
+{"unique":"Hoghunt","fixed":["stat_1509134228","stat_1940865751","stat_210067635","stat_2895144208","stat_4080418644","stat_518292764","stat_681332047"],"multiBase":true}
+{"unique":"Horns of Bynden","fixed":["stat_2709367754","stat_2995914769","stat_3484657501","stat_3917489142","stat_4080418644","stat_809229260"],"multiBase":true}
+{"unique":"Horror's Flight","fixed":["stat_124859000","stat_210067635","stat_2106365538","stat_3198163869","stat_3261801346","stat_3775736880","stat_674553446","stat_681332047"]}
+{"unique":"Hrimnor's Hymn","fixed":["stat_1509134228","stat_2045949233","stat_3695891184","stat_4080418644"],"multiBase":true}
+{"unique":"Hyrri's Ire","fixed":["stat_1073942215","stat_124859000","stat_1272938854","stat_2106365538","stat_2505884597","stat_3261801346","stat_3485067555","stat_4067062424"],"multiBase":true}
+{"unique":"Hysseg's Claw","fixed":["stat_1416455556","stat_1509134228","stat_2250533757","stat_328541901","stat_3399499561","stat_4080418644"],"multiBase":true}
+{"unique":"Icefang Orbit","fixed":["stat_1291285202","stat_1375667591","stat_2487305362","stat_3032590688","stat_3261801346","stat_795138349"]}
+{"unique":"Icetomb","fixed":["stat_1435496528","stat_328541901","stat_4080418644","stat_4220027924"],"multiBase":true}
+{"unique":"Idle Hands","fixed":["stat_124859000","stat_2106365538","stat_328541901","stat_4145314483","stat_423304126","stat_691932474","stat_803737631"],"multiBase":true}
+{"unique":"Idol of Uldurn","fixed":["stat_101878827","stat_1416406066","stat_2942704390","stat_3261801346","stat_3299347043","stat_3984865854"]}
+{"unique":"Igniferis","fixed":["stat_1263695895","stat_1457411584","stat_3372524247","stat_3947672598","stat_789117908"]}
+{"unique":"Immaculate Adherence","fixed":["stat_2189090852","stat_2896801635","stat_410952253","stat_458438597","stat_467146530","stat_878697053"]}
+{"unique":"Indigon","fixed":["stat_1050105434","stat_2650053239","stat_347220474","stat_3593063598","stat_4015621042"],"multiBase":true}
+{"unique":"Infernoclasp","fixed":["stat_3372524247","stat_3484657501","stat_4080418644","stat_4095671657","stat_809229260"]}
+{"unique":"Ingenuity","fixed":["stat_1570770415","stat_2582079000","stat_2793222406","stat_3585532255","stat_3885501357","stat_513747733","stat_554899692"]}
+{"unique":"Innsmouth","fixed":["stat_2144192055","stat_2748665614","stat_2923486259","stat_4220027924","stat_53045048","stat_789117908"],"multiBase":true}
+{"unique":"Ironbound","fixed":["stat_1243721142","stat_1702195217","stat_2036307261","stat_210067635","stat_2531622767","stat_3484657501","stat_681332047","stat_809229260"],"multiBase":true}
+{"unique":"Irongrasp","fixed":["stat_2451402625","stat_281311123","stat_3528245713","stat_4080418644","stat_915769802"],"multiBase":true}
+{"unique":"Ironride","fixed":["stat_1050105434","stat_1671376347","stat_2451402625","stat_3070990531","stat_3299347043"],"multiBase":true}
+{"unique":"Jarngreipr","fixed":["stat_210067635","stat_2230687504","stat_2451402625","stat_3032590688","stat_3299347043","stat_681332047"],"multiBase":true}
+{"unique":"Kalandra's Touch","fixed":["stat_746505085"]}
+{"unique":"Kaltenhalt","fixed":["stat_124859000","stat_1515531208","stat_2089152298","stat_2106365538","stat_3201111383","stat_3676141501","stat_4220027924"],"multiBase":true}
+{"unique":"Kaom's Heart","fixed":["stat_3148264775","stat_3299347043"],"multiBase":true}
+{"unique":"Keelhaul","fixed":["stat_1102738251","stat_1412217137","stat_2200293569","stat_51994685"]}
+{"unique":"Keeper of the Arc","fixed":["stat_258955603","stat_3321629045","stat_3325883026","stat_789117908"],"multiBase":true}
+{"unique":"Killjoy","fixed":["stat_1999113824","stat_259470957","stat_265717301","stat_3299347043","stat_3556824919"],"multiBase":true}
+{"unique":"Kingsguard","fixed":["stat_1050105434","stat_1170174456","stat_2901986750","stat_3299347043","stat_939832726"],"multiBase":true}
+{"unique":"Kitoko's Current","fixed":["stat_1017648537","stat_2672805335","stat_3261801346","stat_4015621042"],"multiBase":true}
+{"unique":"Lavianga's Spirits","fixed":["stat_2980117882","stat_700317374"]}
+{"unique":"Leer Cast","fixed":["stat_1050105434","stat_1798257884","stat_2154246560","stat_3261801346","stat_3299347043"],"multiBase":true}
+{"unique":"Legionstride","fixed":["stat_1062208444","stat_1702195217","stat_2866361420","stat_3484657501","stat_3612407781","stat_809229260","stat_915769802"],"multiBase":true}
+{"unique":"Leopold's Applause","fixed":["stat_1050105434","stat_2101383955","stat_2890792988","stat_3917489142","stat_4015621042"],"multiBase":true}
+{"unique":"Levinstone","fixed":["stat_1050105434","stat_1147690586","stat_2527686725","stat_293638271","stat_4123841473"]}
+{"unique":"Lifesprig","fixed":["stat_1050105434","stat_124131830","stat_2891184298","stat_335699483"]}
+{"unique":"Lightning Coil","fixed":["stat_1671376347","stat_2451402625","stat_3261801346","stat_3299347043","stat_425242359"],"multiBase":true}
+{"unique":"Ligurium Talisman","fixed":["stat_2704225257","stat_328541901","stat_3489782002","stat_3981240776","stat_4052037485","stat_632761194"]}
+{"unique":"Liminal Coil","fixed":["stat_1548338404","stat_1793470535","stat_2653175601","stat_2891184298","stat_2939415499","stat_2974417149"]}
+{"unique":"Lioneye's Glare","fixed":["stat_1509134228","stat_210067635","stat_2306588612","stat_3261801346","stat_3350232544","stat_57896763","stat_681332047","stat_691932474","stat_803737631"]}
+{"unique":"Lochtonial Caress","fixed":["stat_2535267021","stat_2748665614","stat_3299347043","stat_3484657501","stat_809229260","stat_970213192"],"multiBase":true}
+{"unique":"Luminous Pace","fixed":["stat_1416455556","stat_1782086450","stat_2250533757","stat_2339757871","stat_328541901","stat_3489782002","stat_4052037485"],"multiBase":true}
+{"unique":"Lycosidae","fixed":["stat_1062208444","stat_2161347476","stat_2481353198","stat_2866361420","stat_4147897060","stat_4195198267"],"multiBase":true}
+{"unique":"Mageblood","fixed":["stat_264262054|1","stat_264262054|10","stat_264262054|11","stat_264262054|12","stat_264262054|13","stat_264262054|14","stat_264262054|2","stat_264262054|3","stat_264262054|4","stat_264262054|5","stat_264262054|6","stat_264262054|7","stat_264262054|8","stat_264262054|9","stat_3874491706"]}
+{"unique":"Mahuxotl's Machination","fixed":["stat_145598447","stat_3321629045","stat_4065505214"]}
+{"unique":"Maligaro's Virtuosity","fixed":["stat_124859000","stat_210067635","stat_2106365538","stat_2516303866","stat_3261801346","stat_4159551976","stat_587431675","stat_681332047"],"multiBase":true}
+{"unique":"Marohi Erqi","fixed":["stat_1509134228","stat_210067635","stat_2833226514","stat_668076381","stat_681332047","stat_691932474","stat_791928121","stat_803737631"]}
+{"unique":"Mask of the Sanguimancer","fixed":["stat_2144192055","stat_2801937280","stat_328541901","stat_3489782002","stat_3831171903|5","stat_4052037485","stat_4080418644","stat_53045048","stat_737908626"],"multiBase":true}
+{"unique":"Mask of the Stitched Demon","fixed":["stat_2923486259","stat_3276271783","stat_4015621042","stat_410952253"],"multiBase":true}
+{"unique":"Matsya","fixed":["stat_1037193709","stat_210067635","stat_2838161567","stat_3336890334","stat_518292764","stat_681332047","stat_789117908"],"multiBase":true}
+{"unique":"Meginord's Girdle","fixed":["stat_1836676211","stat_4080418644","stat_4220027924","stat_644456512"]}
+{"unique":"Melting Maelstrom","fixed":["stat_1002973905","stat_1256719186","stat_1910039112","stat_2541588185","stat_3311259821","stat_3969608626"]}
+{"unique":"Merit of Service","fixed":["stat_1361645249","stat_2451402625","stat_2481353198","stat_4147897060","stat_915769802"]}
+{"unique":"Midnight Braid","fixed":["stat_1050105434","stat_2901986750","stat_472520716"]}
+{"unique":"Mind of the Council","fixed":["stat_1050105434","stat_1671376347","stat_1999113824","stat_2157692677","stat_3258071686"],"multiBase":true}
+{"unique":"Ming's Heart","fixed":["stat_1177404658","stat_1200789871","stat_3398787959","stat_983749596"]}
+{"unique":"Mist Whisper","fixed":["stat_1037193709","stat_1368271171","stat_3485067555","stat_3868118796","stat_473429811"],"multiBase":true}
+{"unique":"Mjölner","fixed":["stat_1147690586","stat_1509134228","stat_210067635","stat_2153364323","stat_2833226514","stat_681332047"],"multiBase":true}
+{"unique":"Morior Invictus","fixed":["stat_3523867985","stat_1016362888"],"multiBase":true}
+{"unique":"Murkshaft","fixed":["stat_1368271171","stat_2011656677","stat_3032590688","stat_3954735777","stat_60826109"]}
+{"unique":"Myris Uxor","fixed":["stat_1050105434","stat_124859000","stat_2106365538","stat_3563080185","stat_691932474","stat_803737631"],"multiBase":true}
+{"unique":"Nascent Hope","fixed":["stat_1056492907","stat_828533480"]}
+{"unique":"Nazir's Judgement","fixed":["stat_1509134228","stat_1940865751","stat_2677352961","stat_2933846633","stat_3146310524","stat_691932474","stat_748522257","stat_803737631"],"multiBase":true}
+{"unique":"Nebuloch","fixed":["stat_1940865751","stat_2223678961","stat_2694482655","stat_3164544692","stat_3550545679"]}
+{"unique":"Necromantle","fixed":["stat_1050105434","stat_2639966148","stat_3299347043","stat_3837707023","stat_943702197"],"multiBase":true}
+{"unique":"Ngamahu's Chosen","fixed":["stat_1366840608","stat_1509210032"]}
+{"unique":"Nightfall","fixed":["stat_1062208444","stat_2481353198","stat_2833226514","stat_2866361420","stat_3198708642","stat_4108426433","stat_4147897060","stat_4220027924"],"multiBase":true}
+{"unique":"Nightscale","fixed":["stat_1458880585","stat_1659564104","stat_328541901","stat_4015621042","stat_4220027924","stat_587431675"],"multiBase":true}
+{"unique":"Nocturne","fixed":["stat_1050105434","stat_2901986750","stat_3401186585","stat_3488640354","stat_624954515"],"multiBase":true}
+{"unique":"Northpaw","fixed":["stat_2144192055","stat_2635559734","stat_3032590688","stat_3556824919","stat_53045048"],"multiBase":true}
+{"unique":"Oaksworn","fixed":["stat_2481353198","stat_2704225257","stat_2923486259","stat_3321629045","stat_3981240776","stat_4147897060","stat_44972811"],"multiBase":true}
+{"unique":"Obern's Bastion","fixed":["stat_1874553720","stat_2160282525","stat_2451402625","stat_2511217560","stat_3325883026","stat_99927264"],"multiBase":true}
+{"unique":"Olroth's Resolve","fixed":["stat_1106321864","stat_1526933524","stat_2503377690","stat_3069759106","stat_388617051","stat_636464211"]}
+{"unique":"Olrovasara","fixed":["stat_210067635","stat_3336890334","stat_3538915253","stat_681332047","stat_691932474","stat_803737631"],"multiBase":true}
+{"unique":"Opportunity","fixed":["stat_1237409891","stat_173226756","stat_2932359713","stat_3832076641","stat_388617051","stat_3982604001","stat_700317374"]}
+{"unique":"Original Sin","fixed":["stat_2295988214","stat_2439129490","stat_2923486259"]}
+{"unique":"Painter's Servant","fixed":["stat_1158842087","stat_1671376347","stat_210092264","stat_289540902","stat_3372524247","stat_3550887155","stat_40154188","stat_4220027924","stat_701564564"],"multiBase":true}
+{"unique":"Palm of the Dreamer","fixed":["stat_1263695895","stat_1379411836","stat_262946222","stat_2897413282","stat_3377888098","stat_3398787959","stat_3742268652"]}
+{"unique":"Pariah's Embrace","fixed":["stat_1379411836","stat_2451402625","stat_2704225257","stat_2897413282","stat_3325883026","stat_3981240776","stat_4101445926","stat_474294393"],"multiBase":true}
+{"unique":"Perandus Seal","fixed":["stat_1050105434","stat_1379411836","stat_2897413282","stat_3175163625"]}
+{"unique":"Perfidy","fixed":["stat_1563503803","stat_2415497478","stat_2451402625","stat_2889664727","stat_3491722585","stat_3743375737","stat_42242677"],"multiBase":true}
+{"unique":"Periphery","fixed":["stat_1037193709","stat_210067635","stat_2678924815","stat_3336890334","stat_681332047","stat_709508406"]}
+{"unique":"Pillar of the Caged God","fixed":["stat_1791136590","stat_434750362","stat_889691035"],"multiBase":true}
+{"unique":"Plaguefinger","fixed":["stat_1999113824","stat_210067635","stat_4012215578","stat_4056809290","stat_681332047","stat_795138349"],"multiBase":true}
+{"unique":"Polcirkeln","fixed":["stat_1050105434","stat_3119292058","stat_3291658075","stat_4080418644"]}
+{"unique":"Powertread","fixed":["stat_1416455556","stat_1999113824","stat_2250533757","stat_227523295","stat_328541901","stat_4164870816"],"multiBase":true}
+{"unique":"Pragmatism","fixed":["stat_2451402625","stat_2620375641","stat_2901986750","stat_2923486259"],"multiBase":true}
+{"unique":"Prayers for Rain","fixed":["stat_1419390131","stat_1671376347","stat_1782086450","stat_328541901","stat_4015621042"],"multiBase":true}
+{"unique":"Prism Guardian","fixed":["stat_1345486764","stat_2704225257","stat_2901986750","stat_3261801346","stat_3321629045","stat_3581035970","stat_3981240776"],"multiBase":true}
+{"unique":"Prized Pain","fixed":["stat_2107791433","stat_2880019685","stat_2881298780","stat_3605834869","stat_4080418644"]}
+{"unique":"Quatl's Molt","fixed":["stat_124859000","stat_2106365538","stat_2923486259","stat_3033371881","stat_3299347043","stat_3325883026","stat_3835551335"],"multiBase":true}
+{"unique":"Quecholli","fixed":["stat_1379411836","stat_1508661598","stat_1509134228","stat_2897413282","stat_3384885789","stat_3695891184"],"multiBase":true}
+{"unique":"Queen of the Forest","fixed":["stat_124859000","stat_1671376347","stat_2106365538","stat_3372524247","stat_3881997959","stat_4220027924"],"multiBase":true}
+{"unique":"Quill Rain","fixed":["stat_1207554355","stat_210067635","stat_3261801346","stat_412462523","stat_681332047"],"multiBase":true}
+{"unique":"Radiant Grief","fixed":["stat_124859000","stat_1263695895","stat_1433051415","stat_2106365538","stat_3372524247"],"multiBase":true}
+{"unique":"Rampart Raptor","fixed":["stat_1509134228","stat_210067635","stat_681332047","stat_710476746","stat_842299438"],"multiBase":true}
+{"unique":"Rathpith Globe","fixed":["stat_1027889455","stat_170426423","stat_1920747151","stat_3299347043","stat_4015621042"],"multiBase":true}
+{"unique":"Rearguard","fixed":["stat_1702195217","stat_3032590688","stat_3484657501","stat_3759663284","stat_809229260"]}
+{"unique":"Redblade Banner","fixed":["stat_1062208444","stat_2481353198","stat_2836928993","stat_2866361420","stat_4080418644","stat_4147897060","stat_915769802"],"multiBase":true}
+{"unique":"Redemption","fixed":["stat_1004011302","stat_1508661598","stat_1509134228"]}
+{"unique":"Redflare Conduit","fixed":["stat_1050105434","stat_1453197917","stat_1671376347","stat_2135899247","stat_4256314560"],"multiBase":true}
+{"unique":"Revered Resin","fixed":["stat_1102738251","stat_3299347043","stat_51994685"]}
+{"unique":"Reverie","fixed":["stat_1836676211","stat_1972661424","stat_2923486259","stat_3321629045","stat_3372524247","stat_3749630567"]}
+{"unique":"Rise of the Phoenix","fixed":["stat_3372524247","stat_38301299","stat_3942946753","stat_4095671657","stat_836936635"],"multiBase":true}
+{"unique":"Rite of Passage","fixed":[]}
+{"unique":"Rondel de Ezo","fixed":["stat_124859000","stat_2106365538","stat_3261801346","stat_3325883026","stat_3583542124","stat_3830953767"],"multiBase":true}
+{"unique":"Rondel of Fragility","fixed":["stat_2154246560","stat_2901986750","stat_587431675","stat_970213192"]}
+{"unique":"Runeseeker's Call","fixed":["stat_704409219","stat_326412910"],"multiBase":true}
+{"unique":"Ryslatha's Coil","fixed":["stat_2423248184","stat_3299347043","stat_3735888493","stat_51994685"]}
+{"unique":"Sacred Flame","fixed":["stat_2173791158","stat_2786852525","stat_3015669065","stat_3081479811"]}
+{"unique":"Sacrosanctum","fixed":["stat_1444556985","stat_2432200638","stat_2923486259","stat_328541901","stat_3321629045","stat_4080418644"],"multiBase":true}
+{"unique":"Sadist's Mercy","fixed":["stat_1509134228","stat_1827379101","stat_210067635","stat_2526112819","stat_518292764","stat_681332047"]}
+{"unique":"Saffell's Frame","fixed":["stat_1465760952","stat_1671376347","stat_3372524247","stat_3679696791","stat_4220027924"],"multiBase":true}
+{"unique":"Safrin's Resolve","fixed":["stat_1379411836","stat_2381897042","stat_2897413282","stat_3247805335","stat_3917489142","stat_4031148736"]}
+{"unique":"Saitha's Spear","fixed":["stat_1009412152","stat_1519615863","stat_1940865751","stat_2312741059","stat_709508406"],"multiBase":true}
+{"unique":"Sands of Silk","fixed":["stat_1004011302","stat_1050105434","stat_124859000","stat_2106365538","stat_3261801346","stat_328541901","stat_3372524247"],"multiBase":true}
+{"unique":"Sandstorm Visage","fixed":["stat_1052498387","stat_1464727508","stat_2080373320","stat_3261801346","stat_3489782002","stat_4052037485"],"multiBase":true}
+{"unique":"Sanguine Diviner","fixed":["stat_2174054121","stat_2974417149","stat_3544050945","stat_3695891184"]}
+{"unique":"Sanguis Heroum","fixed":["stat_1873752457","stat_3849649145"]}
+{"unique":"Scold's Bridle","fixed":["stat_1050105434","stat_2891184298","stat_2974417149","stat_3181887481","stat_3489782002","stat_4052037485"],"multiBase":true}
+{"unique":"Sculpted Suffering","fixed":["stat_1940865751","stat_210067635","stat_3278008231","stat_681332047","stat_949573361"],"multiBase":true}
+{"unique":"Seed of Cataclysm","fixed":["stat_1133346493","stat_274716455","stat_2923486259","stat_2972244965","stat_474294393","stat_737908626"]}
+{"unique":"Seeing Stars","fixed":["stat_1037193709","stat_210067635","stat_3336890334","stat_681332047","stat_793801176"],"multiBase":true}
+{"unique":"Serle's Grit","fixed":["stat_1940865751","stat_2538411280","stat_275498888","stat_3926910174","stat_4080418644"],"multiBase":true}
+{"unique":"Serpent's Egg","fixed":["stat_1379411836","stat_1555237944","stat_2897413282","stat_2923486259","stat_789117908"]}
+{"unique":"Serpent's Lesson","fixed":["stat_1050105434","stat_1143240184","stat_3154256486","stat_3299347043"],"multiBase":true}
+{"unique":"Shackles of the Wretched","fixed":["stat_215346464","stat_2306924373","stat_3321629045","stat_3612464552","stat_4275855121","stat_947072590"],"multiBase":true}
+{"unique":"Shankgonne","fixed":["stat_1536107934","stat_1752419596","stat_2451402625","stat_3372524247","stat_3917489142","stat_915769802"],"multiBase":true}
+{"unique":"Shavronne's Satchel","fixed":["stat_1836676211","stat_2812872407","stat_328541901","stat_51994685"]}
+{"unique":"Shyaba","fixed":["stat_1133453872","stat_1263695895","stat_1509134228","stat_210067635","stat_2833226514","stat_4126210832","stat_681332047"],"multiBase":true}
+{"unique":"Sierran Inheritance","fixed":["stat_1671376347","stat_1705072014","stat_1782086450","stat_1999113824","stat_2339757871","stat_2955966707","stat_4220027924"],"multiBase":true}
+{"unique":"Silks of Veneration","fixed":["stat_2339757871","stat_2342939473","stat_2704225257","stat_2901986750","stat_328541901","stat_3981240776","stat_4015621042"],"multiBase":true}
+{"unique":"Silverthorne","fixed":["stat_124859000","stat_1569159338","stat_2104138899","stat_2106365538","stat_2901986750"],"multiBase":true}
+{"unique":"Sine Aequo","fixed":["stat_1016362888","stat_1613322341","stat_3120508478","stat_3523867985","stat_4238331303","stat_970213192"],"multiBase":true}
+{"unique":"Sire of Shards","fixed":["stat_1013492127","stat_1263695895","stat_2891184298","stat_2901986750","stat_2974417149"]}
+{"unique":"Skin of the Loyal","fixed":["stat_1000566389","stat_2147773348","stat_2901986750","stat_419098854","stat_713266390"],"multiBase":true}
+{"unique":"Skysliver","fixed":["stat_1509134228","stat_210067635","stat_293638271","stat_3108672983","stat_3336890334","stat_681332047"],"multiBase":true}
+{"unique":"Slivertongue","fixed":["stat_1940865751","stat_2138799639","stat_2421436896","stat_518292764","stat_55876295","stat_669069897"],"multiBase":true}
+{"unique":"Snakebite","fixed":["stat_124859000","stat_1755296234","stat_2106365538","stat_2923486259","stat_3325883026","stat_795138349"],"multiBase":true}
+{"unique":"Snakepit","fixed":["stat_1555918911","stat_2437476305","stat_2891184298","stat_2933024469","stat_2974417149","stat_3647242059","stat_3826125995"]}
+{"unique":"Solus Ipse","fixed":["stat_1016362888","stat_1050105434","stat_1263695895","stat_3523867985","stat_664024640","stat_752930724"],"multiBase":true}
+{"unique":"Soul Mantle","fixed":["stat_2704225257","stat_2918129907","stat_328541901","stat_3321629045","stat_3981240776","stat_4080418644","stat_429867172","stat_686254215"],"multiBase":true}
+{"unique":"Soul Tether","fixed":["stat_2350411833","stat_328541901","stat_3489782002","stat_4052037485","stat_999436592"]}
+{"unique":"Spire of Ire","fixed":["stat_210067635","stat_2223678961","stat_447757144","stat_55876295","stat_681332047","stat_825825364"]}
+{"unique":"Spiteful Floret","fixed":["stat_1509134228","stat_1519615863","stat_1895552497","stat_210067635","stat_4080418644","stat_681332047"],"multiBase":true}
+{"unique":"Splinter of Lorrata","fixed":["stat_1940865751","stat_2998305364","stat_3885634897","stat_4021234281","stat_548198834"]}
+{"unique":"Splinterheart","fixed":["stat_1509134228","stat_3464380325","stat_3759663284","stat_691932474","stat_803737631"],"multiBase":true}
+{"unique":"Split Personality","fixed":[]}
+{"unique":"Starkonja's Head","fixed":["stat_1150343007","stat_124859000","stat_2106365538","stat_2695354435","stat_3261801346","stat_587431675"],"multiBase":true}
+{"unique":"Stone of Lazhwar","fixed":["stat_1050105434","stat_2891184298","stat_3122852693"]}
+{"unique":"Strugglescream","fixed":["stat_1135194732"]}
+{"unique":"Sunsplinter","fixed":["stat_1011760251","stat_1078455967","stat_1147690586","stat_124859000","stat_2106365538","stat_3676141501","stat_4095671657","stat_599749213"],"multiBase":true}
+{"unique":"Surefooted Sigil","fixed":["stat_1040569494","stat_1040593638","stat_258119672","stat_3261801346","stat_3299347043"]}
+{"unique":"Surge of the Tide","fixed":["stat_1062208444","stat_1509134228","stat_210067635","stat_2224139044","stat_2866361420","stat_4080418644","stat_681332047"]}
+{"unique":"Svalinn","fixed":["stat_1062208444","stat_2866361420","stat_2905515354","stat_2957287092","stat_3336230913","stat_480796730","stat_774059442"],"multiBase":true}
+{"unique":"Sylvan's Effigy","fixed":["stat_1067622524","stat_1379411836","stat_1416406066","stat_2897413282","stat_3984865854","stat_4010677958","stat_603573028"]}
+{"unique":"Tabula Rasa","fixed":[],"multiBase":true}
+{"unique":"Tangletongue","fixed":["stat_1451444093","stat_1940865751","stat_2480498143","stat_328541901","stat_518292764"],"multiBase":true}
+{"unique":"Taryn's Shiver","fixed":["stat_2891184298","stat_2974417149","stat_3291658075","stat_473429811","stat_849085925"]}
+{"unique":"Temporalis","fixed":["stat_1444556985","stat_2901986750","stat_3489782002","stat_396200591","stat_4052037485","stat_472520716"],"multiBase":true}
+{"unique":"Tetzlapokal's Desire","fixed":["stat_2923486259","stat_328541901","stat_3971919056","stat_4015621042","stat_4080418644"],"multiBase":true}
+{"unique":"The Adorned","fixed":["stat_461663422"]}
+{"unique":"The Anvil","fixed":["stat_1062208444","stat_1416455556","stat_2250533757","stat_2481353198","stat_2866361420","stat_4147897060","stat_480796730","stat_970213192"]}
+{"unique":"The Auspex","fixed":["stat_124859000","stat_1675120891","stat_2106365538","stat_3198163869","stat_3299347043","stat_3628041050","stat_3639275092"],"multiBase":true}
+{"unique":"The Barrow Dweller","fixed":["stat_1689729380","stat_2451402625","stat_3372524247","stat_3753748365","stat_4220027924"],"multiBase":true}
+{"unique":"The Black Cat","fixed":["stat_1256719186","stat_2541588185","stat_3246948616"]}
+{"unique":"The Black Doubt","fixed":["stat_2894895028","stat_328541901","stat_4015621042","stat_4220027924"],"multiBase":true}
+{"unique":"The Black Insignia","fixed":["stat_124859000","stat_1671376347","stat_2106365538","stat_2459662130","stat_367897259","stat_3917489142"],"multiBase":true}
+{"unique":"The Blood Thorn","fixed":["stat_1940865751","stat_2091621414","stat_2881298780","stat_4080418644"],"multiBase":true}
+{"unique":"The Brass Dome","fixed":["stat_1062208444","stat_1978899297","stat_2866361420","stat_4294267596","stat_915769802"],"multiBase":true}
+{"unique":"The Bringer of Rain","fixed":["stat_1087787187","stat_2451402625","stat_3325883026","stat_3635316831","stat_4007482102","stat_587431675","stat_691932474","stat_803737631"],"multiBase":true}
+{"unique":"The Burden of Shadows","fixed":["stat_2480498143","stat_2891184298","stat_4117005593"]}
+{"unique":"The Burrower","fixed":["stat_1671376347","stat_4220027924","stat_4224965099","stat_789117908"]}
+{"unique":"The Coming Calamity","fixed":["stat_21071013","stat_2901986750","stat_83011992"],"multiBase":true}
+{"unique":"The Covenant","fixed":["stat_3299347043","stat_3605834869","stat_4015621042","stat_782941180"],"multiBase":true}
+{"unique":"The Dancing Mirage","fixed":["stat_1073310669","stat_1671376347","stat_1999113824","stat_67637087"],"multiBase":true}
+{"unique":"The Dark Defiler","fixed":["stat_1050105434","stat_328541901","stat_789117908","stat_997343726"]}
+{"unique":"The Deepest Tower","fixed":["stat_101878827","stat_1263695895","stat_1285684287","stat_2923486259","stat_3299347043","stat_3321629045"]}
+{"unique":"The Devouring Diadem","fixed":["stat_2923486259","stat_328541901","stat_3299347043","stat_3764198549","stat_4015621042"],"multiBase":true}
+{"unique":"The Empty Roar","fixed":["stat_1519615863","stat_1940865751","stat_1952324525","stat_2598171606","stat_55876295"],"multiBase":true}
+{"unique":"The Eternal Spark","fixed":["stat_1011760251","stat_1671376347","stat_3308030688","stat_4015621042","stat_789117908"],"multiBase":true}
+{"unique":"The Everlasting Gaze","fixed":["stat_1050105434","stat_3027830452","stat_789117908"]}
+{"unique":"The Fall of the Axe","fixed":["stat_618665892"]}
+{"unique":"The Fallen Formation","fixed":["stat_1761741119","stat_1896726125","stat_2451402625","stat_3261801346","stat_3325883026","stat_4080418644"]}
+{"unique":"The Flesh Poppet","fixed":["stat_101878827","stat_1379411836","stat_1509134228","stat_210067635","stat_2897413282","stat_681332047","stat_885925163"],"multiBase":true}
+{"unique":"The Gnashing Sash","fixed":["stat_1245896889","stat_1661347488","stat_2923486259","stat_51994685"]}
+{"unique":"The Hammer of Faith","fixed":["stat_1509134228","stat_210067635","stat_2879778895","stat_2901986750","stat_681332047","stat_789117908"]}
+{"unique":"The Hollow Mask","fixed":["stat_1350127730","stat_2901986750","stat_2923486259","stat_315717203","stat_3299347043","stat_3771516363"],"multiBase":true}
+{"unique":"The Infinite Pursuit","fixed":["stat_1062208444","stat_1416455556","stat_2250533757","stat_2866361420","stat_3299347043","stat_610276769","stat_892489594"],"multiBase":true}
+{"unique":"The Knight-errant","fixed":["stat_1416455556","stat_1488650448","stat_2250533757","stat_2451402625","stat_326965591","stat_3831171903|21","stat_915769802"],"multiBase":true}
+{"unique":"The Last Lament","fixed":["stat_1509134228","stat_210067635","stat_3823990000","stat_55876295","stat_681332047","stat_710476746","stat_76982026"]}
+{"unique":"The Lethal Draw","fixed":["stat_210067635","stat_2321178454","stat_2797971005","stat_3893788785","stat_681332047"]}
+{"unique":"The Mutable Star","fixed":["stat_1692879867","stat_2339757871","stat_3321629045","stat_3325883026","stat_679087890","stat_986397080"],"multiBase":true}
+{"unique":"The Ordained","fixed":["stat_1092555766","stat_1509134228","stat_3336890334","stat_518292764","stat_891466814"]}
+{"unique":"The Pandemonius","fixed":["stat_3417711605","stat_3450276548","stat_4220027924"]}
+{"unique":"The Prisoner's Manacles","fixed":["stat_1671376347","stat_3299347043","stat_3321629045","stat_3325883026","stat_3639275092","stat_3650992555","stat_4062529591"],"multiBase":true}
+{"unique":"The Rat Cage","fixed":["stat_124859000","stat_2106365538","stat_3205239847","stat_3299347043","stat_3639275092"],"multiBase":true}
+{"unique":"The Raven's Flock","fixed":["stat_1486714289","stat_1589917703","stat_2891184298","stat_328541901","stat_53386210"]}
+{"unique":"The Road Warrior","fixed":["stat_1062208444","stat_1379411836","stat_1671376347","stat_2866361420","stat_2897413282","stat_3325883026","stat_3372524247","stat_4112450013"]}
+{"unique":"The Searing Touch","fixed":["stat_2891184298","stat_2968503605","stat_3314057862","stat_3791899485","stat_3962278098"]}
+{"unique":"The Sentry","fixed":["stat_1263695895","stat_1509134228","stat_2968503605","stat_3372524247","stat_691932474","stat_709508406","stat_803737631"],"multiBase":true}
+{"unique":"The Smiling Knight","fixed":["stat_2438634449","stat_2451402625","stat_587431675","stat_691932474","stat_803737631"],"multiBase":true}
+{"unique":"The Sunken Vessel","fixed":["stat_2424163939","stat_2451402625","stat_3240073117","stat_3299347043","stat_3351912431","stat_3452269808"],"multiBase":true}
+{"unique":"The Surrender","fixed":["stat_1062208444","stat_2442647190","stat_2481353198","stat_2866361420","stat_4147897060","stat_915769802"],"multiBase":true}
+{"unique":"The Taming","fixed":["stat_2070837434","stat_2901986750","stat_3388405805"]}
+{"unique":"The Three Dragons","fixed":["stat_1011772129","stat_1261612903","stat_1999113824","stat_2901986750","stat_2949096603"],"multiBase":true}
+{"unique":"The Unborn Lich","fixed":["stat_586037801"]}
+{"unique":"The Unleashed","fixed":["stat_1311130924","stat_1535626285","stat_3321629045","stat_3492740640"],"multiBase":true}
+{"unique":"The Vertex","fixed":["stat_1999113824","stat_2480151124","stat_2739148464","stat_2923486259","stat_4245256219","stat_587431675","stat_752930724"],"multiBase":true}
+{"unique":"The Vile Knight","fixed":["stat_2451402625","stat_3325883026","stat_4258409981","stat_691932474","stat_803737631"],"multiBase":true}
+{"unique":"The Wailing Wall","fixed":["stat_1062208444","stat_1416455556","stat_2250533757","stat_2866361420","stat_65135897","stat_915769802"]}
+{"unique":"The Whispering Ice","fixed":["stat_2254480358","stat_2818518881","stat_2891184298","stat_533542952","stat_656461285"]}
+{"unique":"The Wicked Quill","fixed":["stat_1050105434","stat_2348696937","stat_2923486259","stat_2974417149"]}
+{"unique":"Thief's Torment","fixed":["stat_2797971005","stat_2901986750","stat_2920970371","stat_3917489142","stat_64726306","stat_820939409"]}
+{"unique":"Threaded Light","fixed":["stat_1263695895","stat_2412053423","stat_4015621042","stat_789117908"],"multiBase":true}
+{"unique":"Thrillsteel","fixed":["stat_1520059289"],"multiBase":true}
+{"unique":"Thunderfist","fixed":["stat_1671376347","stat_1999113824","stat_210067635","stat_3613173483","stat_3835522656","stat_681332047"],"multiBase":true}
+{"unique":"Thunderstep","fixed":["stat_1011760251","stat_124859000","stat_1416455556","stat_1671376347","stat_2106365538","stat_2250533757"]}
+{"unique":"Tidebreaker","fixed":["stat_1509134228","stat_2156230257","stat_328541901","stat_791928121","stat_9187492"],"multiBase":true}
+{"unique":"Titanrot Cataphract","fixed":["stat_1062208444","stat_2866361420","stat_4139681126","stat_656461285","stat_734614379","stat_854225133"],"multiBase":true}
+{"unique":"Trampletoe","fixed":["stat_1062208444","stat_1416455556","stat_2250533757","stat_2301852600","stat_2866361420","stat_3639275092"],"multiBase":true}
+{"unique":"Treefingers","fixed":["stat_1062208444","stat_1875158664","stat_210067635","stat_239367161","stat_2866361420","stat_3032590688","stat_3831171903|2","stat_4080418644","stat_681332047"],"multiBase":true}
+{"unique":"Trenchtimbre","fixed":["stat_1940865751","stat_210067635","stat_2162097452","stat_2293111154","stat_681332047"],"multiBase":true}
+{"unique":"Trephina","fixed":["stat_1940865751","stat_210067635","stat_2214130968","stat_681332047","stat_791928121"],"multiBase":true}
+{"unique":"Twisted Empyrean","fixed":["stat_1037193709","stat_1050105434","stat_1509134228","stat_1683568809","stat_458438597","stat_518292764","stat_566086661"],"multiBase":true}
+{"unique":"Tyranny's Grip","fixed":["stat_1509134228","stat_1961849903","stat_210067635","stat_3675300253","stat_3739186583","stat_4080418644","stat_681332047"],"multiBase":true}
+{"unique":"Uhtred's Chalice","fixed":["stat_1147913864","stat_1366840608","stat_173226756","stat_4100842845","stat_700317374"]}
+{"unique":"Umbilicus Immortalis","fixed":["stat_1836676211","stat_2397460217","stat_328541901","stat_3741323227","stat_4046380260","stat_770672621"]}
+{"unique":"Undying Hate","fixed":["stat_3787436548"]}
+{"unique":"Ungil's Harmony","fixed":["stat_1050105434","stat_3299347043","stat_4058681894","stat_587431675","stat_915769802"]}
+{"unique":"Valako's Roar","fixed":["stat_280890192","stat_3196823591"]}
+{"unique":"Valako's Vice","fixed":["stat_1671376347","stat_210067635","stat_2451402625","stat_2772033465","stat_3261801346","stat_4080418644","stat_681332047"],"multiBase":true}
+{"unique":"Veil of the Night","fixed":["stat_1200789871","stat_1263695895","stat_1379411836","stat_1776968075","stat_2897413282","stat_983749596"],"multiBase":true}
+{"unique":"Veilpiercer","fixed":["stat_1050105434","stat_1367119630","stat_2482970488","stat_328541901","stat_4015438188","stat_986616727"]}
+{"unique":"Venopuncture","fixed":["stat_1717295693","stat_2174054121","stat_2420248029","stat_3032590688","stat_3166958180","stat_4080418644"]}
+{"unique":"Ventor's Gamble","fixed":["stat_1671376347","stat_2704225257","stat_3299347043","stat_3372524247","stat_3917489142","stat_3981240776","stat_4220027924"]}
+{"unique":"Vestige of Darkness","fixed":["stat_1464727508","stat_1535626285","stat_2080373320","stat_3321629045","stat_3783473032","stat_905072977"],"multiBase":true}
+{"unique":"Vigilant View","fixed":["stat_1500744699","stat_2144192055","stat_3261801346","stat_3868746097","stat_3917489142","stat_53045048","stat_691932474","stat_803737631"]}
+{"unique":"Vis Mortis","fixed":["stat_1050105434","stat_3893509584","stat_4015621042","stat_770672621"],"multiBase":true}
+{"unique":"Visage of Ayah","fixed":["stat_1671376347","stat_2262736444","stat_3831171903|9","stat_3917489142","stat_4015621042","stat_587431675"],"multiBase":true}
+{"unique":"Voices","fixed":[]}
+{"unique":"Voll's Protector","fixed":["stat_2748665614","stat_2923486259","stat_3321629045","stat_3814876985"],"multiBase":true}
+{"unique":"Voltaxic Rift","fixed":["stat_210067635","stat_2109189637","stat_2418601510","stat_3336890334","stat_681332047"]}
+{"unique":"Waistgate","fixed":["stat_1050105434","stat_1412217137","stat_3299347043","stat_51994685","stat_932866937"],"multiBase":true}
+{"unique":"Wake of Destruction","fixed":["stat_1416455556","stat_1754445556","stat_2250533757","stat_3321629045","stat_65133983"],"multiBase":true}
+{"unique":"Wandering Reliquary","fixed":["stat_1050105434","stat_1062208444","stat_1374654984","stat_2866361420","stat_4080418644","stat_915769802"],"multiBase":true}
+{"unique":"Wanderlust","fixed":["stat_1416455556","stat_2250533757","stat_3261801346","stat_3489782002","stat_4052037485","stat_50721145"],"multiBase":true}
+{"unique":"Waveshaper","fixed":["stat_2704225257","stat_3372524247","stat_3407300125","stat_3489782002","stat_3981240776","stat_4052037485","stat_4220027924","stat_514290151"],"multiBase":true}
+{"unique":"Whisper of the Brotherhood","fixed":["stat_1686824704","stat_3261801346","stat_789117908","stat_970213192"]}
+{"unique":"Widow's Reign","fixed":["stat_1488650448","stat_1777740627","stat_2451402625","stat_2923486259","stat_3299347043"],"multiBase":true}
+{"unique":"Widowhail","fixed":["stat_1200678966"],"multiBase":true}
+{"unique":"Window to Paradise","fixed":["stat_1050105434","stat_1062208444","stat_223138829","stat_2866361420","stat_2901986750"],"multiBase":true}
+{"unique":"Windscream","fixed":["stat_1416455556","stat_2250533757","stat_2378065031","stat_328541901","stat_3751072557","stat_4015621042"],"multiBase":true}
+{"unique":"Wings of Caelyn","fixed":["stat_2709367754","stat_3261801346","stat_3484657501","stat_352044736","stat_3917489142","stat_809229260"],"multiBase":true}
+{"unique":"Wondertrap","fixed":["stat_1416455556","stat_2250533757","stat_2929867083","stat_3261801346","stat_328541901","stat_3489782002","stat_4052037485","stat_4080418644"],"multiBase":true}
+{"unique":"Wulfsbane","fixed":["stat_2930706364","stat_3299347043","stat_3703496511","stat_4080418644","stat_915769802"],"multiBase":true}
+{"unique":"Wylund's Stake","fixed":["stat_1940865751","stat_289086688","stat_3372524247","stat_359380213","stat_4080418644","stat_709508406"]}
+{"unique":"Xoph's Blood","fixed":["stat_1200789871","stat_3372524247","stat_983749596","stat_990363519"]}
+{"unique":"Yoke of Suffering","fixed":["stat_1062710370","stat_1509533589","stat_2901986750","stat_3141070085"]}
+{"unique":"Yriel's Fostering","fixed":["stat_124859000","stat_1692879867","stat_1888024332","stat_2106365538","stat_2704225257","stat_3299347043","stat_3301100256","stat_3981240776"],"multiBase":true}
+{"unique":"Zaida's Longevity","fixed":["stat_1379411836","stat_2897413282","stat_3598729471","stat_3631920880","stat_3753008264","stat_3917489142"]}
+{"unique":"Zerphi's Genesis","fixed":["stat_1570770415","stat_1571268546","stat_1658498488","stat_2020463573","stat_2369960685","stat_2582079000","stat_2638381947","stat_4080418644","stat_554899692"]}
+{"unique":"Zerphi's Serape","fixed":["stat_1050105434","stat_1404607671","stat_1999113824","stat_3639275092","stat_44972811","stat_789117908"],"multiBase":true}
+{"unique":"Against the Darkness","fixed":[]}
+{"unique":"Flesh Crucible","fixed":[]}
+{"unique":"From Nothing","fixed":[]}
+{"unique":"Grip of Kulemak","fixed":["stat_2646093132","stat_101878827","stat_1263695895"]}
+{"unique":"Heart of the Well","fixed":[]}
+{"unique":"INCOMPLETE","multiBase":true}
+{"unique":"Loreweave","fixed":["stat_3032590688","stat_691932474","stat_803737631","stat_3917489142","stat_2306002879","stat_3655769732","stat_2891184298","stat_798767971"],"multiBase":true}
+{"unique":"Mastered Domain","fixed":["stat_4041853756"]}
+{"unique":"Megalomaniac","fixed":[]}
+{"unique":"Prism of Belief","fixed":[]}
+{"unique":"Splinter of Loratta","multiBase":true}
