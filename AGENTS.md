@@ -107,22 +107,27 @@ downloaded at build or test time. Two kinds of lines:
   `scripts/pob-uniques-poe2.ee2-sha`. Nearly every PoE 2 unique also comes on a Runemastered base, so most of its
   lines are `multiBase`. Fetch and fast-forward the PoB checkout before generating.
 
-**Mod Pools** (ADR 0003): `public/pob-pools.json` is dat-mcp's pools asset, committed and loaded like the stat data
-(`services/pob/pools.ts`). The import drops every filter whose stat the item's base can never carry (any item level);
-a unique's explicit mods are not checked. A base missing from the asset is imported unchecked, with a console warning.
+**Mod Pools** (ADR 0003): `public/pob-pools.json` (PoE 1) and `public/pob-pools-poe2.json` (PoE 2) are dat-mcp's
+pools assets, committed and loaded like the stat data (`services/pob/pools.ts`). The import drops every filter whose
+stat the item's base can never carry (any item level); a unique's explicit mods are not checked. A base missing from
+the asset is imported unchecked, with a console warning, and so is a mod line that loses every filter (a gap in the
+pools: fix it in dat-mcp's recipe).
 
 On a new PoE1 patch: in dat-mcp run `npm run stats -- poe1 <patch>` and `npm run pools -- poe1 <patch>`, here run
 `pnpm pob-stats ~/www/poehubdev/dat-mcp/data/poe1-<patch>-stats.ndjson`, `pnpm pob-unique-mods` and `pnpm pob-stats`
 (the unique lines match against the new stat lines) and
 `cp ~/www/poehubdev/dat-mcp/data/poe1-<patch>-pools.json public/pob-pools.json`, then `pnpm test`, and commit the
 regenerated files (snapshot changes are expected only where the new patch changed stat texts, ids or Mod Pools).
+On a new PoE 2 patch: in dat-mcp `npm run stats -- poe2 <patch>` and `npm run pools -- poe2 <patch>`, here
+`pnpm pob-stats poe2 ~/www/poehubdev/dat-mcp/data/poe2-<patch>-stats.ndjson` and
+`cp ~/www/poehubdev/dat-mcp/data/poe2-<patch>-pools.json public/pob-pools-poe2.json`, then `pnpm test`.
 
 **Two games.** The decoded Build Code's root element (`PathOfBuilding` / `PathOfBuilding2`) tells the game
 (`Build.game`, a Game Version); Trade locations and the Folder carry it. Each game has its own files, and the
 background loads only those of the imported code's game (`buildGame`), on its first import of that game.
 `toExportString` selects the game's data (`selectStats` / `selectPools`) for the rest of the module; tests load both
-games through `test-utils.ts` and leave PoE 1 selected. PoE 2 so far: `public/pob-stats-poe2.ndjson` (unique lines as above;
-`pnpm pob-stats poe2 ~/www/poehubdev/dat-mcp/data/poe2-<patch>-stats.ndjson`), no Mod Pools (imports unchecked), and
+games through `test-utils.ts` and leave PoE 1 selected. PoE 2's files: `public/pob-stats-poe2.ndjson` (unique lines as above;
+`pnpm pob-stats poe2 ~/www/poehubdev/dat-mcp/data/poe2-<patch>-stats.ndjson`), `public/pob-pools-poe2.json`, and
 the base table `services/pob/bases-poe2.json` from Path of Building 2's `src/Data/Bases/*.lua` by
 `pnpm pob-bases poe2` (fetch and fast-forward `~/www/PathOfBuilding-PoE2` first; `pnpm pob-bases poe1` regenerates
 PoE 1's `bases.json` the same way). PoE 2 fixtures sit in `services/pob/fixtures/poe2/`, tested in `poe2.test.ts`.

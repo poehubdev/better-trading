@@ -338,7 +338,11 @@ const rareStatGroups = (
       continue;
     }
     const ids = possible(typed, pool);
-    if (!ids.length) continue;
+    if (!ids.length) {
+      // A real item carries only what its base can: the Mod Pools miss a source of this mod
+      console.warn(`The Mod Pool of ${base} has no ${typed.join(', ')} for "${text}"`);
+      continue;
+    }
     const value = match.value;
     // ponytail: negative rolls have no value and stay single-mod groups, so a total may overshoot such an item
     const stat = ids[0]!.split('|')[0]!.split('.')[1]!;

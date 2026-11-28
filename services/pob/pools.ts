@@ -17,6 +17,8 @@ const assets = new Map<TradeSiteVersion, { asset: PoolsAsset; cache: Map<string,
 let asset: PoolsAsset | undefined;
 let cache = new Map<string, ModPool>();
 const warned = new Set<string>();
+// "Allocates #", the trade stat of an anoint
+const ANOINT = 'stat_2954116742';
 
 /** Takes a game's parsed pools asset. Runs once per game */
 const loadPools = (json: PoolsAsset, game: TradeSiteVersion) => {
@@ -58,14 +60,19 @@ const modPool = (base: string): ModPool | undefined => {
 
 /**
  * Whether a trade ID (`implicit.stat_123`, option stats `<id>|<option>`) can appear on an item of this pool at any item
- * level. Corruptions and Synthesis implicits are searched as implicits. IDs that are not `stat_<n>` (pseudo stats) are
- * not in any pool: kept
+ * level. PoE 1 searches corruptions and Synthesis implicits as implicits. IDs that are not `stat_<n>` (pseudo stats)
+ * are not in any pool: kept
  */
 const inPool = (pool: ModPool, id: string) => {
   const [type, stat] = id.split('|')[0]!.split('.') as [string, string];
   if (!stat.startsWith('stat_')) return true;
   return (
-    !!pool[type]?.has(stat) || (type === 'implicit' && !!(pool.corruption?.has(stat) || pool.synthesis?.has(stat)))
+    !!pool[type]?.has(stat) ||
+    (type === 'implicit' && !!(pool.corruption?.has(stat) || pool.synthesis?.has(stat))) ||
+    // PoE 2's Mod Pools have neither crafted mods nor enchants: a crafted mod is one of the explicit mods, the site
+    // searches corruptions as enchants, and anoints are not modelled
+    (type === 'crafted' && !asset?.parts.crafted && !!pool.explicit?.has(stat)) ||
+    (type === 'enchant' && !asset?.parts.enchant && (stat === ANOINT || !!pool.corruption?.has(stat)))
   );
 };
 

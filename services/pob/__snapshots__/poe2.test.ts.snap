@@ -229,57 +229,33 @@ exports[`twister-gemling-legionnaire-0.55.txt > matches mod lines to PoE 2 trade
     {
       "filters": [
         {
-          "id": "explicit.stat_2144192055",
-          "value": {
-            "weight": 1,
-          },
-        },
-        {
-          "id": "fractured.stat_2144192055",
-          "value": {
-            "weight": 1,
-          },
-        },
-        {
-          "id": "desecrated.stat_2144192055",
-          "value": {
-            "weight": 1,
-          },
-        },
-        {
           "id": "explicit.stat_53045048",
           "value": {
-            "weight": 1,
+            "weight": 0.38,
           },
         },
         {
           "id": "fractured.stat_53045048",
           "value": {
-            "weight": 1,
-          },
-        },
-        {
-          "id": "desecrated.stat_53045048",
-          "value": {
-            "weight": 1,
+            "weight": 0.38,
           },
         },
         {
           "id": "pseudo.pseudo_total_life",
           "value": {
-            "weight": 1,
+            "weight": 0.53,
           },
         },
         {
           "id": "pseudo.pseudo_total_elemental_resistance",
           "value": {
-            "weight": 1,
+            "weight": 2.22,
           },
         },
       ],
       "type": "weight",
       "value": {
-        "min": 108.8,
+        "min": 79.04,
       },
     },
   ],

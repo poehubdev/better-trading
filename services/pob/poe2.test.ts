@@ -2,7 +2,7 @@
 import { toExportString } from './index';
 import { buildGame } from './build';
 import { decodeExportString, fixture } from './test-utils';
-import { describe, expect, it } from 'vitest';
+import { describe, expect, it, vi } from 'vitest';
 import { deflateSync } from 'node:zlib';
 import type { ImportOptions } from './index';
 
@@ -157,16 +157,16 @@ Doom Cord
 Heavy Belt
 Implicits: 1
 {enchant}{rune}+12% to Fire Resistance
-{desecrated}+40 to maximum Mana
-{fractured}+30 to Accuracy Rating`,
+{desecrated}20% increased Mana Regeneration Rate
+{fractured}+100 to Stun Threshold`,
       'Belt',
       { weightedSum: false },
     );
     const ids = idsOf(trades[0]!.query);
-    expect(ids).toEqual(expect.arrayContaining(['desecrated.stat_1050105434', 'explicit.stat_1050105434']));
-    expect(ids).toEqual(expect.arrayContaining(['fractured.stat_803737631', 'explicit.stat_803737631']));
-    expect(ids).not.toContain('fractured.stat_1050105434');
-    expect(ids).not.toContain('desecrated.stat_803737631');
+    expect(ids).toEqual(expect.arrayContaining(['desecrated.stat_789117908', 'explicit.stat_789117908']));
+    expect(ids).toEqual(expect.arrayContaining(['fractured.stat_915769802', 'explicit.stat_915769802']));
+    expect(ids).not.toContain('fractured.stat_789117908');
+    expect(ids).not.toContain('desecrated.stat_915769802');
   });
 
   it('searches implicit, enchant and crafted mods under their own types', async () => {
@@ -195,6 +195,42 @@ Implicits: 2
     const query = await tradeOf(ICE_SHOT, 'Weapon 1 — Sorrow Guide');
     expect(query.filters.equipment_filters).toMatchObject({ disabled: true, filters: { rune_sockets: { min: 2 } } });
     expect(query.filters.socket_filters).toBeUndefined();
+  });
+});
+
+describe('PoE 2 Mod Pools', () => {
+  it.each(FIXTURES)('know every base of %s and every mod of its items', async name => {
+    // The import warns of a base missing from the Mod Pools, and of a mod line its base's Mod Pool cannot carry
+    const warn = vi.spyOn(console, 'warn').mockImplementation(() => {});
+    await importOf(name, { skipEarlierLoadouts: false });
+    expect(warn).not.toHaveBeenCalled();
+    warn.mockRestore();
+  });
+
+  it('drops a filter the base can never carry, and warns', async () => {
+    const warn = vi.spyOn(console, 'warn').mockImplementation(() => {});
+    const { trades } = await singleItem(
+      `Rarity: RARE\nDoom Cord\nHeavy Belt\nImplicits: 0\n+100 to Stun Threshold\n20% increased Movement Speed`,
+      'Belt',
+      { weightedSum: false },
+    );
+    const ids = idsOf(trades[0]!.query);
+    expect(ids).toContain('explicit.stat_915769802');
+    expect(ids).not.toContain('explicit.stat_2250533757');
+    expect(warn).toHaveBeenCalledWith(expect.stringContaining('20% increased Movement Speed'));
+    warn.mockRestore();
+  });
+
+  it('checks nothing on a base missing from the Mod Pools, and warns', async () => {
+    const warn = vi.spyOn(console, 'warn').mockImplementation(() => {});
+    const { trades } = await singleItem(
+      `Rarity: RARE\nDoom Cord\nImaginary Belt\nImplicits: 0\n20% increased Movement Speed`,
+      'Belt',
+      { weightedSum: false },
+    );
+    expect(idsOf(trades[0]!.query)).toContain('explicit.stat_2250533757');
+    expect(warn).toHaveBeenCalledWith(expect.stringContaining('Imaginary Belt'));
+    warn.mockRestore();
   });
 });
 

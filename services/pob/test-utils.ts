@@ -22,8 +22,8 @@ interface DecodedFolder {
 const asset = (name: string) => readFile(new URL(`../../public/${name}`, import.meta.url), 'utf8');
 loadStats(await asset('pob-stats.ndjson'), '1');
 loadStats(await asset('pob-stats-poe2.ndjson'), '2');
-// ponytail: no PoE 2 Mod Pools yet, so PoE 2 imports are unchecked
 loadPools(JSON.parse(await asset('pob-pools.json')), '1');
+loadPools(JSON.parse(await asset('pob-pools-poe2.json')), '2');
 selectStats('1');
 selectPools('1');
 

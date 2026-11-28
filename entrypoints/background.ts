@@ -41,10 +41,10 @@ const handlePoeNinjaRequest = async (resource: string): Promise<unknown> => {
   }
 };
 
-// Each game's data files; PoE 2 has no Mod Pools yet
-const POB_DATA: Record<TradeSiteVersion, { stats: PublicPath; pools?: PublicPath }> = {
+// Each game's data files
+const POB_DATA: Record<TradeSiteVersion, { stats: PublicPath; pools: PublicPath }> = {
   '1': { stats: '/pob-stats.ndjson', pools: '/pob-pools.json' },
-  '2': { stats: '/pob-stats-poe2.ndjson' },
+  '2': { stats: '/pob-stats-poe2.ndjson', pools: '/pob-pools-poe2.json' },
 };
 // A game's stat data and Mod Pools, loaded on its first import only; a failed load is retried on the next one
 const pobData = new Map<TradeSiteVersion, Promise<void>>();
@@ -58,11 +58,10 @@ const loadPobData = (game: TradeSiteVersion) => {
         .then(response => response.text())
         .then(ndjson => loadStats(ndjson, game)),
       // Without Mod Pools the import still works, unchecked
-      pools &&
-        fetch(browser.runtime.getURL(pools))
-          .then(response => response.json())
-          .then(json => loadPools(json, game))
-          .catch(error => console.warn('[pob-import] Mod Pools not loaded', error)),
+      fetch(browser.runtime.getURL(pools))
+        .then(response => response.json())
+        .then(json => loadPools(json, game))
+        .catch(error => console.warn('[pob-import] Mod Pools not loaded', error)),
     ])
       .then(() => {})
       .catch(error => {
