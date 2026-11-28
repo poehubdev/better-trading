@@ -33,7 +33,8 @@ interface UniqueInfo {
   multiBase?: true;
 }
 
-const TYPES = ['explicit', 'implicit', 'fractured', 'enchant', 'crafted'];
+// PoE 2 adds rune (augments socketed in the item) and desecrated stats
+const TYPES = ['explicit', 'implicit', 'fractured', 'enchant', 'crafted', 'rune', 'desecrated'];
 const NUMBER = /[+-]?\d+(?:\.\d+)?/g;
 
 /** The stat data of one game, indexed */
@@ -163,6 +164,9 @@ const REWRITES: [RegExp, string][] = [
   // "Grants Level 30 Aspect of the Cat Skill" is the stat "Grants Level # Aspect of the Cat". The few granted skills
   // whose stat ends in "Skill" (Anger, Hatred) match as they are, before this
   [/^(Grants Level \d+ .+) Skill$/, '$1'],
+  // A PoE 2 Bonded rune stat has no "reduced" matcher ("Bonded: 20% reduced Slowing Potency of Debuffs on You"); the
+  // negative value matches it on presence. ponytail: drop once dat-mcp writes the negated matcher for Bonded stats
+  [/^Bonded: (\d+(?:\.\d+)?)% reduced /, 'Bonded: -$1% increased '],
   // The stat data has "increased Rarity of Items found" as a pseudo stat only; the explicit reads "to Item Rarity"
   [/^(\d+)% increased Rarity of Items found$/, '+$1% to Item Rarity'],
 ];

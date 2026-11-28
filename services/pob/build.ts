@@ -24,8 +24,12 @@ interface Mod {
   text: string;
   /** From the implicit block, which also holds enchants */
   implicit: boolean;
-  /** An implicit tagged {crafted}: that is how POB lists an item's enchants */
+  /** An implicit tagged {crafted} (POB) or {enchant} (POB 2, not a rune): that is how POB lists an item's enchants */
   enchant: boolean;
+  /** Tagged {rune}: given by a rune, soul core or other augment socketed in the item (PoE 2) */
+  rune: boolean;
+  /** Tagged {desecrated} (PoE 2) */
+  desecrated: boolean;
   /** Tagged {mutated}: differs on a Foulborn unique from the regular unique */
   mutated: boolean;
   /** A mod outside the implicit block tagged {crafted}: made on the crafting bench */
@@ -42,7 +46,7 @@ interface Item {
   /** POB item type of the base, e.g. "One Handed Sword"; undefined when the base is unknown */
   type: string | undefined;
   itemLevel: number | undefined;
-  /** POB socket string: groups split by spaces, links by dashes, e.g. "R-G-B A" */
+  /** POB socket string: groups split by spaces, links by dashes, e.g. "R-G-B A"; POB 2 writes rune sockets as "S S" */
   sockets: string | undefined;
   /** Cluster Jewel enchant family, e.g. "affliction_trap_and_mine_damage" */
   clusterSkill: string | undefined;
@@ -118,9 +122,22 @@ const SLOT_ORDER = [
   'Ring',
   'Belt',
   'Flask',
+  // PoE 2; its limbs ("Arm 1", "Leg 1") go last with the other unknown slots, as PoE 1's Arm and Leg do
+  'Charm',
 ];
 /** Item state lines that follow the mods */
-const ITEM_FLAGS = new Set(['Corrupted', 'Mirrored', 'Split', 'Fractured Item', 'Synthesised Item', 'Unidentified']);
+const ITEM_FLAGS = new Set([
+  'Corrupted',
+  'Twice Corrupted',
+  'Sanctified',
+  'Desecrated Prefix',
+  'Desecrated Suffix',
+  'Mirrored',
+  'Split',
+  'Fractured Item',
+  'Synthesised Item',
+  'Unidentified',
+]);
 
 /** Position of a slot in POB's equipment order; abyss sockets follow their item, unknown slots go last */
 const slotRank = (slot: string) => {
@@ -152,11 +169,19 @@ const parseMods = (lines: string[], selected: Set<number>): Mod[] => {
         const tags = /^(?:\{[^}]*\})+/.exec(line)?.[0] ?? '';
         const variants = /\{variant:([\d,]+)\}/.exec(tags)?.[1]?.split(',').map(Number);
         if (variants && !variants.some(id => selected.has(id))) return [];
+        const text = line.slice(tags.length);
+        // A PoE 2 base's skill ("Grants Skill: Parry") comes with every copy of the base
+        // ponytail: rolled ones ("Grants Skill: Level 18 Discipline") are skipped too: the site searches them in its
+        // `skill` stat group, which the stat data lacks; carry it from dat-mcp if they are worth searching
+        if (text.startsWith('Grants Skill: ')) return [];
+        const rune = tags.includes('{rune}');
         return [
           {
-            text: line.slice(tags.length),
+            text,
             implicit: i < implicits,
-            enchant: i < implicits && tags.includes('{crafted}'),
+            enchant: i < implicits && !rune && (tags.includes('{crafted}') || tags.includes('{enchant}')),
+            rune,
+            desecrated: tags.includes('{desecrated}'),
             mutated: tags.includes('{mutated}'),
             crafted: i >= implicits && tags.includes('{crafted}'),
             fractured: tags.includes('{fractured}'),
@@ -208,7 +233,7 @@ const parseItem = (text: string, baseTypes: Record<string, string>): Item | unde
     sockets: property('Sockets'),
     clusterSkill: property('Cluster Jewel Skill'),
     influences: INFLUENCES.filter(influence => lines.includes(`${influence} Item`)),
-    corrupted: lines.includes('Corrupted'),
+    corrupted: lines.includes('Corrupted') || lines.includes('Twice Corrupted'),
     armour: number('Armour'),
     evasion: number('Evasion'),
     energyShield: number('Energy Shield'),
@@ -260,7 +285,8 @@ const decodeBuild = async (buildCode: string): Promise<Build> => {
     const add = (slot: string, itemId: string | undefined) => {
       const text = itemId && itemId !== '0' ? itemsById.get(itemId) : undefined;
       const item = text && parseItem(text, baseTypes);
-      if (item) items.push({ slot, item });
+      // The PoE 2 trade site lists no Transcendent limbs (Gemling arms and legs): nothing to search them by
+      if (item && item.type !== 'Transcendent Limb') items.push({ slot, item });
     };
     const slots = (set.Slot ?? []).filter(({ name }) => name);
     slots.sort((a, b) => slotRank(a.name!) - slotRank(b.name!) || a.name!.localeCompare(b.name!));

@@ -1,5 +1,133 @@
 // Vitest Snapshot v1, https://vitest.dev/guide/snapshot.html
 
+exports[`comet-oracle-0.55.txt > has one Trade per distinct Build Item 1`] = `
+[
+  "Week 1 (lvl 92) — Unique Weapon — Runeseeker's Call",
+  "Week 1 (lvl 92) — Weapon 1 Swap — Ghoul Weaver",
+  "Week 1 (lvl 92) — Unique Weapon — Rathpith Globe",
+  "Week 1 (lvl 92) — Helmet — Soul Keep",
+  "Week 1 (lvl 92) — Body Armour — Maelstrom Veil",
+  "Week 1 (lvl 92) — Gloves — Gloom Claw",
+  "Week 1 (lvl 92) — Boots — Vortex Goad",
+  "Week 1 (lvl 92) — Amulet — Empyrean Choker",
+  "Week 1 (lvl 92) — Ring 1 — Dragon Finger",
+  "Week 1 (lvl 92) — Unique Ring — Kalandra's Touch",
+  "Week 1 (lvl 92) — Unique Belt — Mageblood",
+  "Week 1 (lvl 92) — Flask 1 — Bubbling Ultimate Life Flask of the Continuous",
+  "Week 1 (lvl 92) — Unique Flask — Lavianga's Spirits",
+  "Week 1 (lvl 92) — Unique Charm — Rite of Passage",
+  "Week 1 (lvl 92) — Unique Charm — For Utopia",
+  "Week 1 (lvl 92) — Unique Charm — Nascent Hope",
+  "Week 1 (lvl 92) — Jewel — Blight Eye",
+  "Week 1 (lvl 92) — Jewel — Behemoth Desire",
+  "Week 1 (lvl 92) — Jewel — Loath Spark",
+  "Week 1 (lvl 92) — Unique Jewel — Voices",
+  "Week 1 (lvl 92) — Jewel — Empyrean Heart",
+  "Week 1 (lvl 92) — Jewel — Eagle Solace",
+  "Week 2 (lvl 97) — Helmet — Soul Keep",
+  "Week 2 (lvl 97) — Body Armour — Maelstrom Veil",
+  "Week 2 (lvl 97) — Gloves — Gloom Claw",
+  "Week 2 (lvl 97) — Boots — Rapture Dash",
+  "Week 2 (lvl 97) — Amulet — Woe Collar",
+  "Week 2 (lvl 97) — Ring 1 — Glyph Loop",
+  "Week 2 (lvl 97) — Unique Jewel — The Adorned",
+  "Week 3 (lvl 98) — Helmet — Corpse Cowl",
+  "Week 3 (lvl 98) — Body Armour — Maelstrom Veil",
+  "Week 3 (lvl 98) — Gloves — Gloom Claw",
+  "Week 3 (lvl 98) — Boots — Brimstone Span",
+  "Week 3 (lvl 98) — Ring 1 — Spirit Knuckle",
+  "Week 3 (lvl 98) — Unique Charm — Rite of Passage",
+  "Week 3 (lvl 98) — Jewel — Eagle Solace",
+  "Week 3 (lvl 98) — Unique Jewel — The Adorned",
+  "Week 3 (lvl 98) — Jewel — Bramble Bliss",
+  "Week 3 (lvl 98) — Jewel — Blight Spark",
+  "Week 4 (lvl 99) — Helmet — Dusk Star",
+  "Week 4 (lvl 99) — Gloves — Blood Grasp",
+  "Week 4 (lvl 99) — Jewel — Hypnotic Creed",
+  "Week 4 (lvl 99) — Unique Jewel — Voices",
+  "Week 4 (lvl 99) — Unique Jewel — The Adorned",
+  "Week 5 (lvl 99) — Helmet — Onslaught Crown",
+  "Week 5 (lvl 99) — Boots — Onslaught Road",
+  "Week 5 (lvl 99) — Jewel — Bramble Creed",
+  "Week 5 (lvl 99) — Jewel — Loath Hope",
+]
+`;
+
+exports[`ice-shot-deadeye-0.55.txt > has one Trade per distinct Build Item 1`] = `
+[
+  "Hour 12 (lvl 51) — Weapon 1 — Sorrow Guide",
+  "Hour 12 (lvl 51) — Unique Weapon — Asphyxia's Wrath",
+  "Hour 12 (lvl 51) — Helmet — Eagle Halo",
+  "Hour 12 (lvl 51) — Body Armour — Havoc Suit",
+  "Hour 12 (lvl 51) — Unique Gloves — Grip of Winter",
+  "Hour 12 (lvl 51) — Boots — Dread Urge",
+  "Hour 12 (lvl 51) — Amulet — Entropy Locket",
+  "Hour 12 (lvl 51) — Ring 1 — Sorrow Whorl",
+  "Hour 12 (lvl 51) — Unique Ring — Polcirkeln",
+  "Hour 12 (lvl 51) — Belt — Agony Bond",
+  "Hour 12 (lvl 51) — Flask 1 — Substantial Transcendent Life Flask of the Mixologist",
+  "Hour 12 (lvl 51) — Flask 2 — Substantial Transcendent Mana Flask of the Copious",
+  "Hour 12 (lvl 51) — Charm 1 — Blooming Thawing Charm of the Apprentice",
+  "Hour 12 (lvl 51) — Charm 2 — Analyst's Silver Charm of the Constant",
+  "Hour 12 (lvl 51) — Jewel — Damnation Spark",
+  "Hour 18 (lvl 86) — Weapon 1 — Maelstrom Volley",
+  "Hour 18 (lvl 86) — Unique Weapon — Cadiro's Gambit",
+  "Hour 18 (lvl 86) — Helmet — Eagle Halo",
+  "Hour 18 (lvl 86) — Body Armour — Victory Carapace",
+  "Hour 18 (lvl 86) — Gloves — Storm Caress",
+  "Hour 18 (lvl 86) — Boots — Nemesis Spur",
+  "Hour 18 (lvl 86) — Amulet — Bramble Locket",
+  "Hour 18 (lvl 86) — Ring 1 — Horror Circle",
+  "Hour 18 (lvl 86) — Ring 2 — Soul Eye",
+  "Hour 18 (lvl 86) — Unique Flask — Lavianga's Spirits",
+  "Hour 18 (lvl 86) — Jewel — Pandemonium Stone",
+  "Hour 18 (lvl 86) — Jewel — Vivid Bliss",
+  "Day 1 (lvl 90) — Weapon 1 — Skull Volley",
+  "Day 1 (lvl 90) — Flask 1 — Hearty Ultimate Life Flask of the Abundant",
+  "Day 1 (lvl 90) — Unique Jewel — Heart of the Well",
+  "Day 2 (lvl 94) — Weapon 1 — Skull Volley",
+  "Day 2 (lvl 94) — Helmet — Behemoth Shelter",
+  "Day 2 (lvl 94) — Body Armour — Eagle Curtain",
+  "Day 2 (lvl 94) — Gloves — Plague Grip",
+  "Day 2 (lvl 94) — Boots — Phoenix March",
+  "Day 2 (lvl 94) — Amulet — Pain Heart",
+  "Day 2 (lvl 94) — Ring 1 — Loath Turn",
+  "Day 2 (lvl 94) — Ring 2 — Pandemonium Grip",
+  "Day 2 (lvl 94) — Unique Belt — Headhunter",
+  "Day 2 (lvl 94) — Unique Charm — Nascent Hope",
+  "Day 2 (lvl 94) — Unique Charm — Rite of Passage",
+  "Day 3 (lvl 96) — Weapon 1 — Carrion Wind",
+  "Day 3 (lvl 96) — Helmet — Behemoth Shelter",
+  "Day 3 (lvl 96) — Amulet — Pain Heart",
+  "Day 3 (lvl 96) — Ring 1 — Loath Turn",
+  "Day 3 (lvl 96) — Jewel — Rapture Glisten",
+  "Day 3 (lvl 96) — Jewel — Pandemonium Essence",
+  "Day 3 (lvl 96) — Unique Jewel — Heart of the Well",
+  "Day 4 (lvl 96) — Body Armour — Eagle Pelt",
+  "Day 4 (lvl 96) — Gloves — Plague Grip",
+  "Day 4 (lvl 96) — Gloves Jewel Socket 1 — Pandemonium Bliss",
+  "Day 4 (lvl 96) — Unique Charm — The Fall of the Axe",
+  "Day 5 (lvl 97) — Weapon 1 — Woe Thunder",
+  "Day 5 (lvl 97) — Body Armour — Eagle Pelt",
+  "Day 5 (lvl 97) — Gloves — Plague Grip",
+  "Day 5 (lvl 97) — Amulet — Pain Heart",
+  "Day 5 (lvl 97) — Unique Jewel — Against the Darkness",
+  "Day 6 (lvl 97) — Ring 1 — Phoenix Grasp",
+  "Day 6 (lvl 97) — Ring 2 — Kraken Circle",
+  "Week 1 (lvl 97) — Helmet — Hate Dome",
+  "Week 1 (lvl 97) — Amulet — Pain Heart",
+  "Week 1 (lvl 97) — Ring 2 — Kraken Circle",
+  "Week 1 (lvl 97) — Jewel — Rapture Glisten",
+  "Week 2 (lvl 98) — Weapon 1 — Woe Thunder",
+  "Week 2 (lvl 98) — Helmet — Hate Dome",
+  "Week 2 (lvl 98) — Gloves — Eagle Claw",
+  "Week 2 (lvl 98) — Ring 1 — Phoenix Grasp",
+  "Week 2 (lvl 98) — Ring 2 — Kraken Circle",
+  "Week 2 (lvl 98) — Unique Charm — Rite of Passage",
+  "Week 2 (lvl 98) — Unique Jewel — Heart of the Well",
+]
+`;
+
 exports[`twister-gemling-legionnaire-0.55.txt > has one Trade per distinct Build Item 1`] = `
 [
   "Hour 12 (lvl 43) — Weapon 1 — Dread Edge",
@@ -81,7 +209,7 @@ exports[`twister-gemling-legionnaire-0.55.txt > has one Trade per distinct Build
 exports[`twister-gemling-legionnaire-0.55.txt > matches mod lines to PoE 2 trade stats 1`] = `
 {
   "filters": {
-    "armour_filters": {
+    "equipment_filters": {
       "disabled": true,
       "filters": {
         "ev": {
@@ -89,18 +217,10 @@ exports[`twister-gemling-legionnaire-0.55.txt > matches mod lines to PoE 2 trade
         },
       },
     },
-    "misc_filters": {
-      "disabled": true,
-      "filters": {
-        "ilvl": {
-          "min": 27,
-        },
-      },
-    },
     "type_filters": {
       "filters": {
         "category": {
-          "option": "armour.shield",
+          "option": "armour.buckler",
         },
       },
     },
@@ -121,6 +241,12 @@ exports[`twister-gemling-legionnaire-0.55.txt > matches mod lines to PoE 2 trade
           },
         },
         {
+          "id": "desecrated.stat_2144192055",
+          "value": {
+            "weight": 1,
+          },
+        },
+        {
           "id": "explicit.stat_53045048",
           "value": {
             "weight": 1,
@@ -128,6 +254,12 @@ exports[`twister-gemling-legionnaire-0.55.txt > matches mod lines to PoE 2 trade
         },
         {
           "id": "fractured.stat_53045048",
+          "value": {
+            "weight": 1,
+          },
+        },
+        {
+          "id": "desecrated.stat_53045048",
           "value": {
             "weight": 1,
           },
@@ -156,46 +288,4 @@ exports[`twister-gemling-legionnaire-0.55.txt > matches mod lines to PoE 2 trade
   },
   "type": "Spiked Buckler",
 }
-`;
-
-exports[`twister-gemling-legionnaire-0.55.txt > reports the mod lines it could not match 1`] = `
-[
-  "Hour 12 (lvl 43) — Weapon 1 — Dread Edge: Bonded: 20% increased effect of Fully Broken Armour",
-  "Hour 12 (lvl 43) — Weapon 1 — Dread Edge: Grants Skill: Spear Throw",
-  "Hour 12 (lvl 43) — Weapon 1 Swap — Frosted Barbed Spear of Renown: Grants Skill: Spear Throw",
-  "Hour 12 (lvl 43) — Weapon 2 — Onslaught Sanctuary: Grants Skill: Parry",
-  "Day 1 (lvl 70) — Weapon 1 — Torment Edge: Bonded: 20% increased effect of Fully Broken Armour",
-  "Day 1 (lvl 70) — Weapon 1 — Torment Edge: Grants Skill: Spear Throw",
-  "Day 1 (lvl 70) — Weapon 1 Swap — Hate Edge: Grants Skill: Spear Throw",
-  "Day 1 (lvl 70) — Weapon 2 — Armageddon Grinder: Grants Skill: Level 18 Discipline",
-  "Day 1 (lvl 70) — Body Armour — Fate Shelter: Bonded: +40 to maximum Life",
-  "Day 1 (lvl 70) — Body Armour — Fate Shelter: Bonded: +40 to maximum Mana",
-  "Day 5 (lvl 93) — Weapon 1 — Hypnotic Edge: Bonded: +6% to all Elemental Resistances",
-  "Day 5 (lvl 93) — Weapon 1 — Hypnotic Edge: Can roll Destruction modifiers",
-  "Day 5 (lvl 93) — Weapon 1 — Hypnotic Edge: Grants Skill: Spear Throw",
-  "Day 5 (lvl 93) — Helmet — Blight Shelter: +40% of Armour also applies to Cold Damage",
-  "Day 5 (lvl 93) — Gloves — Soul Paw: Bonded: 20% increased Projectile Damage",
-  "Day 5 (lvl 93) — Gloves — Soul Paw: +40% of Armour also applies to Fire Damage",
-  "Day 5 (lvl 93) — Gloves — Soul Paw: Can roll Marksman modifiers",
-  "Day 5 (lvl 93) — Boots — Behemoth Slippers: Bonded: 10% increased Cooldown Recovery Rate",
-  "Day 5 (lvl 93) — Boots — Behemoth Slippers: Can roll Chronomancy modifiers",
-  "Day 5 (lvl 93) — Amulet — Onslaught Idol: Grants Skill: Level 18 Eternal Rage",
-  "Week 1 (lvl 98) — Helmet — Blight Shelter: +40% of Armour also applies to Cold Damage",
-  "Week 2 (lvl 99) — Helmet — Blight Shelter: +40% of Armour also applies to Cold Damage",
-  "Week 2 (lvl 99) — Gloves — Soul Paw: Bonded: 20% increased Projectile Damage",
-  "Week 2 (lvl 99) — Gloves — Soul Paw: +40% of Armour also applies to Fire Damage",
-  "Week 2 (lvl 99) — Gloves — Soul Paw: Can roll Marksman modifiers",
-  "Week 2 (lvl 99) — Boots — Behemoth Slippers: Bonded: 10% increased Cooldown Recovery Rate",
-  "Week 2 (lvl 99) — Boots — Behemoth Slippers: Can roll Chronomancy modifiers",
-  "Week 3 (lvl 99) — Gloves — Victory Fist: Bonded: 20% increased Projectile Damage",
-  "Week 3 (lvl 99) — Gloves — Victory Fist: +40% of Armour also applies to Fire Damage",
-  "Week 3 (lvl 99) — Gloves — Victory Fist: Can roll Marksman modifiers",
-  "Week 3 (lvl 99) — Boots — Behemoth Slippers: Bonded: 5% increased Movement Speed",
-  "Week 3 (lvl 99) — Boots — Behemoth Slippers: Bonded: 10% increased Cooldown Recovery Rate",
-  "Week 3 (lvl 99) — Boots — Behemoth Slippers: Can roll Chronomancy modifiers",
-  "Week 4 (lvl 100) — Weapon 1 — Beast Edge: Bonded: +6% to all Elemental Resistances",
-  "Week 4 (lvl 100) — Weapon 1 — Beast Edge: Can roll Destruction modifiers",
-  "Week 4 (lvl 100) — Weapon 1 — Beast Edge: Grants Skill: Spear Throw",
-  "Week 4 (lvl 100) — Weapon 1 — Beast Edge: Twice Corrupted",
-]
 `;
